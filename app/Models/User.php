@@ -21,16 +21,17 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable =
     [
         'name',
+        'filter',
         'email',
         'password',
         'email_verified_at',
-        'con_usuario_1',
-        'con_usuario_2',
-        'dn_usuario',
-        'orientacao_sexual_id',
-        'setor_id',
-        'cargo_id',
-        'unidade_id'
+        'contact_1',
+        'contact_2',
+        'birthday',
+        'sexual_orientation_id',
+        'company_id',
+        'cbo_id',
+        'establishment_id',
     ];
 
     /**
@@ -54,19 +55,19 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     public function SexualOrientations(){
-        return $this->belongsTo(UserSexualOrientationsModel::class,'orientacao_sexual_id','id');
+        return $this->belongsTo(UserSexualOrientationsModel::class,'sexual_orientation_id','id');
     }
 
     public function CompanyOrganizational(){
-        return $this->belongsTo(CompanyOrganizationalModel::class,'setor_id','id');
+        return $this->belongsTo(CompanyOrganizationalModel::class,'company_id','id');
     }
 
     public function CompanyOccupations(){
-        return $this->belongsTo(CompanyOccupationsModel::class,'cargo_id','id');
+        return $this->belongsTo(CompanyOccupationsModel::class,'cbo_id','id');
     }
 
     public function CompanyEstablishments(){
-        return $this->belongsTo(CompanyEstablishmentsModel::class,'unidade_id','id');
+        return $this->belongsTo(CompanyEstablishmentsModel::class,'establishment_id','id');
     }
 
 }

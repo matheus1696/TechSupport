@@ -16,9 +16,9 @@ return new class extends Migration
             $table->text('title');
             $table->string('filter');
             $table->text('description');
-            $table->string('process')->unique()->nullable();
-            $table->string('auction')->unique()->nullable();
-            $table->string('contract')->unique()->nullable();
+            $table->string('code_process')->unique()->nullable();
+            $table->string('code_auction')->unique()->nullable();
+            $table->string('code_contract')->unique()->nullable();
             $table->date('start_date')->nullable();
             $table->date('due_date')->nullable();
             $table->integer('validity')->nullable();

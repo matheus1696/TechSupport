@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User\UserSexualOrientationsModel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\UserSexualOrientationsModel;
 
 class UserSexualOrientationsSeed extends Seeder
 {

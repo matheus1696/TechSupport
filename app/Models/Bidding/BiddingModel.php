@@ -12,15 +12,15 @@ class BiddingModel extends Model
     protected $table = 'bidding_process';
 
     protected $fillable = [
-        'cod_processo',
-        'cod_pregao',
-        'cod_contrato',
-        'no_processo',
-        'ft_processo',
-        'desc_processo',
-        'data_inicio',
-        'data_vencimento',
-        'tempo_vigencia',
-        'st_processo'
+        'code_process',
+        'code_auction',
+        'code_contract',
+        'title',
+        'filter',
+        'description',
+        'start_date',
+        'due_date',
+        'validity',
+        'status'
     ];
 }

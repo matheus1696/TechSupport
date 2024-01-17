@@ -14,29 +14,29 @@ class BiddingItensModel extends Model
     protected $table = 'bidding_process_itens';
 
     protected $fillable =[
-        'processo_id',
-        'produto_id',
-        'quant_adm',
-        'quant_atb',
-        'quant_mac',
-        'quant_vsan',
-        'quant_vepd',
-        'unidade_medida_id',
-        'garantia',
-        'modelo_referencia_1',
-        'modelo_referencia_2',
-        'modelo_referencia_3',
+        'process_id',
+        'product_id',
+        'amount_adm',
+        'amount_atb',
+        'amount_mac',
+        'amount_vsan',
+        'amount_vepd',
+        'units_id',
+        'warranty',
+        'reference_model_1',
+        'reference_model_2',
+        'reference_model_3',
     ];
 
     public function Bidding(){
-        return $this->belongsTo(BiddingModel::class,'processo_id','id');
+        return $this->belongsTo(BiddingModel::class,'process_id','id');
     }
 
     public function Product(){
-        return $this->belongsTo(ProductModel::class,'produto_id','id');
+        return $this->belongsTo(ProductModel::class,'product_id','id');
     }
 
     public function ProductUnit(){
-        return $this->belongsTo(ProductUnitModel::class,'unidade_medida_id','id');
+        return $this->belongsTo(ProductUnitModel::class,'units_id','id');
     }
 }

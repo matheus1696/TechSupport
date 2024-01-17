@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company\CompanyEstablishmentContactsModel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-use App\Models\CompanyEstablishmentContactsModel;
 
 class CompanyEstablishmentContactsSeed extends Seeder
 {

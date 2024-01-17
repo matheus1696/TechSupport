@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company\CompanyOrganizationalModel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-use App\Models\CompanyOrganizationalModel;
 
 class CompanyOrganizationalSeed extends Seeder
 {

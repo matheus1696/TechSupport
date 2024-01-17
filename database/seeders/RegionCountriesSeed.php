@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Region\RegionCountriesModel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\RegionCountriesModel;
 
 class RegionCountriesSeed extends Seeder
 {

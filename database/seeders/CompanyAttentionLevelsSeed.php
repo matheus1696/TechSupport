@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company\CompanyAttentionLevelsModel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\CompanyAttentionLevelsModel;
 
 class CompanyAttentionLevelsSeed extends Seeder
 {

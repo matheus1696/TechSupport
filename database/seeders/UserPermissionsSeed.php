@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User\UserPermissionsModel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-use App\Models\UserPermissionsModel;
 
 class UserPermissionsSeed extends Seeder
 {
