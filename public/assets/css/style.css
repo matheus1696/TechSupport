@@ -1,0 +1,29 @@
+/* Definições do Body */
+body{
+    margin: 0;
+    padding: 0;
+}
+
+/* Definições do Papel de Parede */
+main{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Estilos para o vídeo de plano de fundo */
+video {
+    margin: 0;
+    padding: 0;
+    z-index: -99;
+    position: fixed;
+    top: -200px;
+    height: calc(100vh + 200px);
+}
+
+/* Estilos para seções do conteúdo */
+section {
+    padding: 2em;
+}
