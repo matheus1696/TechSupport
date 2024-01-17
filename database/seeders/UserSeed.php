@@ -15,6 +15,7 @@ class UserSeed extends Seeder
     {
         User::create([
             'name'=>'Administrador de Sistema',
+            'filter'=>strtolower('Administrador de Sistema'),
             'email'=>'sysadmin@gest360.com.br',
             'email_verified_at'=>now(),
             'password'=> Hash::make('sysadmin'),
@@ -22,6 +23,7 @@ class UserSeed extends Seeder
 
         User::create([
             'name'=>'Administrador',
+            'filter'=>strtolower('Administrador'),
             'email'=>'admin@gest360.com.br',
             'email_verified_at'=>now(),
             'password'=> Hash::make('admin'),
@@ -29,6 +31,7 @@ class UserSeed extends Seeder
 
         User::create([
             'name'=>'Usuário',
+            'filter'=>strtolower('Usuário'),
             'email'=>'user@gest360.com.br',
             'email_verified_at'=>now(),
             'password'=> Hash::make('user'),
@@ -36,12 +39,14 @@ class UserSeed extends Seeder
 
         User::create([
             'name'=>'Verificar Email',
+            'filter'=>strtolower('Verificar Email'),
             'email'=>'ve@gest360.com.br',
             'password'=> Hash::make('verificar'),
         ])->givePermissionTo('user');
 
         User::create([
             'name'=>'Processos Licitatórios',
+            'filter'=>strtolower('Processos Licitatórios'),
             'email'=>'bidding@gest360.com.br',
             'email_verified_at'=>now(),
             'password'=> Hash::make('bidding'),

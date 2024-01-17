@@ -15,28 +15,28 @@ class ProductUnitsSeed extends Seeder
     {
         //
         ProductUnitModel::create([
-            'no_unidade_medida' => 'Unidade',
-            'ft_unidade_medida' => 'unidade',
+            'title' => 'Unidade',
+            'filter' => 'unidade',
         ]);
         ProductUnitModel::create([
-            'no_unidade_medida' => 'Cartelas com 10 unidades',
-            'ft_unidade_medida' => 'Cartelas com 10 unidades',
+            'title' => 'Cartelas com 10 unidades',
+            'filter' => 'Cartelas com 10 unidades',
         ]);
         ProductUnitModel::create([
-            'no_unidade_medida' => 'Pacote com 100 unidades',
-            'ft_unidade_medida' => 'pacote com 100 unidades',
+            'title' => 'Pacote com 100 unidades',
+            'filter' => 'pacote com 100 unidades',
         ]);
         ProductUnitModel::create([
-            'no_unidade_medida' => 'Pacote com 500 unidades',
-            'ft_unidade_medida' => 'pacote com 500 unidades',
+            'title' => 'Pacote com 500 unidades',
+            'filter' => 'pacote com 500 unidades',
         ]);
         ProductUnitModel::create([
-            'no_unidade_medida' => 'Caixa com 100 unidades',
-            'ft_unidade_medida' => 'caixa com 100 unidades',
+            'title' => 'Caixa com 100 unidades',
+            'filter' => 'caixa com 100 unidades',
         ]);
         ProductUnitModel::create([
-            'no_unidade_medida' => 'Caixa com 500 unidades',
-            'ft_unidade_medida' => 'caixa com 500 unidades',
+            'title' => 'Caixa com 500 unidades',
+            'filter' => 'caixa com 500 unidades',
         ]);
     }
 }

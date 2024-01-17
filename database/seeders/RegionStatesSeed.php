@@ -16,246 +16,246 @@ class RegionStatesSeed extends Seeder
         //
         RegionStatesModel::create([
             'id'=>26,
-            'sg_estado'=>'PE',
-            'no_estado'=>'Pernambuco',
-            'ft_estado'=>'pernambuco',
-            'cod_estado_uf'=>'26',
-            'cod_ddd_estado'=>'81',
-            'pais_id'=>74,
+            'acronym'=>'PE',
+            'state'=>'Pernambuco',
+            'filter'=>'pernambuco',
+            'code_uf'=>'26',
+            'code_ddd'=>'81',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>12,
-            'sg_estado'=>'AC',
-            'no_estado'=>'Acre',
-            'ft_estado'=>'acre',
-            'cod_estado_uf'=>'12',
-            'pais_id'=>74,
+            'acronym'=>'AC',
+            'state'=>'Acre',
+            'filter'=>'acre',
+            'code_uf'=>'12',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>27,
-            'sg_estado'=>'AL',
-            'no_estado'=>'Alagoas',
-            'ft_estado'=>'alagoas',
-            'cod_estado_uf'=>'27',
-            'pais_id'=>74,
+            'acronym'=>'AL',
+            'state'=>'Alagoas',
+            'filter'=>'alagoas',
+            'code_uf'=>'27',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>16,
-            'sg_estado'=>'AP',
-            'no_estado'=>'Amapá',
-            'ft_estado'=>'amapá',
-            'cod_estado_uf'=>'16',
-            'pais_id'=>74,
+            'acronym'=>'AP',
+            'state'=>'Amapá',
+            'filter'=>'amapá',
+            'code_uf'=>'16',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>13,
-            'sg_estado'=>'AM',
-            'no_estado'=>'Amazonas',
-            'ft_estado'=>'amazonas',
-            'cod_estado_uf'=>'13',
-            'pais_id'=>74,
+            'acronym'=>'AM',
+            'state'=>'Amazonas',
+            'filter'=>'amazonas',
+            'code_uf'=>'13',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>29,
-            'sg_estado'=>'BA',
-            'no_estado'=>'Bahia',
-            'ft_estado'=>'bahia',
-            'cod_estado_uf'=>'29',
-            'pais_id'=>74,
+            'acronym'=>'BA',
+            'state'=>'Bahia',
+            'filter'=>'bahia',
+            'code_uf'=>'29',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>23,
-            'sg_estado'=>'CE',
-            'no_estado'=>'Ceará',
-            'ft_estado'=>'ceára',
-            'cod_estado_uf'=>'23',
-            'pais_id'=>74,
+            'acronym'=>'CE',
+            'state'=>'Ceará',
+            'filter'=>'ceára',
+            'code_uf'=>'23',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>32,
-            'sg_estado'=>'ES',
-            'no_estado'=>'Espirito Santo',
-            'ft_estado'=>'espirito santo',
-            'cod_estado_uf'=>'32',
-            'pais_id'=>74,
+            'acronym'=>'ES',
+            'state'=>'Espirito Santo',
+            'filter'=>'espirito santo',
+            'code_uf'=>'32',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>52,
-            'sg_estado'=>'GO',
-            'no_estado'=>'Goías',
-            'ft_estado'=>'goías',
-            'cod_estado_uf'=>'52',
-            'pais_id'=>74,
+            'acronym'=>'GO',
+            'state'=>'Goías',
+            'filter'=>'goías',
+            'code_uf'=>'52',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>21,
-            'sg_estado'=>'MA',
-            'no_estado'=>'Maranhão',
-            'ft_estado'=>'marahão',
-            'cod_estado_uf'=>'21',
-            'pais_id'=>74,
+            'acronym'=>'MA',
+            'state'=>'Maranhão',
+            'filter'=>'marahão',
+            'code_uf'=>'21',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>51,
-            'sg_estado'=>'MT',
-            'no_estado'=>'Mato Grosso',
-            'ft_estado'=>'Mato Grosso',
-            'cod_estado_uf'=>'51',
-            'pais_id'=>74,
+            'acronym'=>'MT',
+            'state'=>'Mato Grosso',
+            'filter'=>'Mato Grosso',
+            'code_uf'=>'51',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>50,
-            'sg_estado'=>'MS',
-            'no_estado'=>'Mato Grosso do Sul',
-            'ft_estado'=>'mato grosso do sul',
-            'cod_estado_uf'=>'50',
-            'pais_id'=>74,
+            'acronym'=>'MS',
+            'state'=>'Mato Grosso do Sul',
+            'filter'=>'mato grosso do sul',
+            'code_uf'=>'50',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>31,
-            'sg_estado'=>'MG',
-            'no_estado'=>'Minas Gerais',
-            'ft_estado'=>'minas gerais',
-            'cod_estado_uf'=>'31',
-            'pais_id'=>74,
+            'acronym'=>'MG',
+            'state'=>'Minas Gerais',
+            'filter'=>'minas gerais',
+            'code_uf'=>'31',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>15,
-            'sg_estado'=>'PA',
-            'no_estado'=>'Pará',
-            'ft_estado'=>'pará',
-            'cod_estado_uf'=>'15',
-            'pais_id'=>74,
+            'acronym'=>'PA',
+            'state'=>'Pará',
+            'filter'=>'pará',
+            'code_uf'=>'15',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>25,
-            'sg_estado'=>'PB',
-            'no_estado'=>'Paraíba',
-            'ft_estado'=>'paraíba',
-            'cod_estado_uf'=>'25',
-            'pais_id'=>74,
+            'acronym'=>'PB',
+            'state'=>'Paraíba',
+            'filter'=>'paraíba',
+            'code_uf'=>'25',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>41,
-            'sg_estado'=>'PR',
-            'no_estado'=>'Paraná',
-            'ft_estado'=>'paraná',
-            'cod_estado_uf'=>'41',
-            'pais_id'=>74,
+            'acronym'=>'PR',
+            'state'=>'Paraná',
+            'filter'=>'paraná',
+            'code_uf'=>'41',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>22,
-            'sg_estado'=>'PI',
-            'no_estado'=>'Piauí',
-            'ft_estado'=>'piauí',
-            'cod_estado_uf'=>'22',
-            'pais_id'=>74,
+            'acronym'=>'PI',
+            'state'=>'Piauí',
+            'filter'=>'piauí',
+            'code_uf'=>'22',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>33,
-            'sg_estado'=>'RJ',
-            'no_estado'=>'Rio de Janeiro',
-            'ft_estado'=>'Rio de Janeiro',
-            'cod_estado_uf'=>'33',
-            'pais_id'=>74,
+            'acronym'=>'RJ',
+            'state'=>'Rio de Janeiro',
+            'filter'=>'Rio de Janeiro',
+            'code_uf'=>'33',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>24,
-            'sg_estado'=>'RN',
-            'no_estado'=>'Rio Grande do Norte',
-            'ft_estado'=>'rio grande do norte',
-            'cod_estado_uf'=>'24',
-            'pais_id'=>74,
+            'acronym'=>'RN',
+            'state'=>'Rio Grande do Norte',
+            'filter'=>'rio grande do norte',
+            'code_uf'=>'24',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>43,
-            'sg_estado'=>'RS',
-            'no_estado'=>'Rio Grande do Sul',
-            'ft_estado'=>'rio grande do sul',
-            'cod_estado_uf'=>'43',
-            'pais_id'=>74,
+            'acronym'=>'RS',
+            'state'=>'Rio Grande do Sul',
+            'filter'=>'rio grande do sul',
+            'code_uf'=>'43',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>11,
-            'sg_estado'=>'RO',
-            'no_estado'=>'Rondônia',
-            'ft_estado'=>'rondônia',
-            'cod_estado_uf'=>'11',
-            'pais_id'=>74,
+            'acronym'=>'RO',
+            'state'=>'Rondônia',
+            'filter'=>'rondônia',
+            'code_uf'=>'11',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>14,
-            'sg_estado'=>'RR',
-            'no_estado'=>'Roraima',
-            'ft_estado'=>'roraima',
-            'cod_estado_uf'=>'14',
-            'pais_id'=>74,
+            'acronym'=>'RR',
+            'state'=>'Roraima',
+            'filter'=>'roraima',
+            'code_uf'=>'14',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>42,
-            'sg_estado'=>'SC',
-            'no_estado'=>'Santa Catarina',
-            'ft_estado'=>'santa catarina',
-            'cod_estado_uf'=>'42',
-            'pais_id'=>74,
+            'acronym'=>'SC',
+            'state'=>'Santa Catarina',
+            'filter'=>'santa catarina',
+            'code_uf'=>'42',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>35,
-            'sg_estado'=>'SP',
-            'no_estado'=>'São Paulo',
-            'ft_estado'=>'são paulo',
-            'cod_estado_uf'=>'35',
-            'pais_id'=>74,
+            'acronym'=>'SP',
+            'state'=>'São Paulo',
+            'filter'=>'são paulo',
+            'code_uf'=>'35',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>28,
-            'sg_estado'=>'SE',
-            'no_estado'=>'Sergipe',
-            'ft_estado'=>'sergipe',
-            'cod_estado_uf'=>'28',
-            'pais_id'=>74,
+            'acronym'=>'SE',
+            'state'=>'Sergipe',
+            'filter'=>'sergipe',
+            'code_uf'=>'28',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>17,
-            'sg_estado'=>'TO',
-            'no_estado'=>'Tocantins',
-            'ft_estado'=>'tocantins',
-            'cod_estado_uf'=>'17',
-            'pais_id'=>74,
+            'acronym'=>'TO',
+            'state'=>'Tocantins',
+            'filter'=>'tocantins',
+            'code_uf'=>'17',
+            'country_id'=>74,
         ]);
 
         RegionStatesModel::create([
             'id'=>53,
-            'sg_estado'=>'DF',
-            'no_estado'=>'Distrito Federal',
-            'ft_estado'=>'distrito federal',
-            'cod_estado_uf'=>'53',
-            'pais_id'=>74,
+            'acronym'=>'DF',
+            'state'=>'Distrito Federal',
+            'filter'=>'distrito federal',
+            'code_uf'=>'53',
+            'country_id'=>74,
         ]);
     }
 }
