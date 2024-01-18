@@ -1,15 +1,4 @@
-@extends('adminlte::page', ['options.auto_show_new_tab	' => 'false'])
 
-@section('title', $header['title'])
-
-@section('content_header')
-    <!-- Inicio de Componentização do Header -->
-    <x-header title="{{$header['title']}}"/>
-@stop
-
-@section('content')
-
-    <!-- Inicio de Componentização Page Index -->
     <x-pages.index paginate="{{$dbEstablishments->links()}}">
         @slot('body')
             <x-conteiner>
@@ -26,7 +15,7 @@
                         <tr>
                             <th>Unidade</th>
                             <th class="d-none d-lg-table-cell">Nivel de Atenção</th>
-                            <th class="col-6 col-md-4 col-lg-2 text-center">Contato</th>
+                            <th class="text-center col-6 col-md-4 col-lg-2">Contato</th>
                             <th class="text-center">Ramais</th>
                         </tr>
                     @endslot
@@ -34,8 +23,8 @@
                     @slot('tbody')
                         @foreach ($dbEstablishments as $item)
                             <tr>
-                                <td>{{$item->no_unidade}}</td>
-                                <td class="d-none d-lg-table-cell">{{$item->AttentionLevels->no_nivel_atencao}}</td>
+                                <td>{{$item->establishment}}</td>
+                                <td class="d-none d-lg-table-cell">{{$item->AttentionLevels->attention_level}}</td>
                                 <td class="text-center">
                                     @foreach ($dbLists as $dbList)
                                         @if ($dbList->estabelecimento_id == $item->id)
@@ -48,16 +37,16 @@
                                     @endforeach
                                 </td>
                                 <td class="text-center">
-                                    <x-button.minButtonModal id="EstablishmentsModel{{$item->id}}" title="{{$item->no_unidade}}">
+                                    <x-button.minButtonModal id="EstablishmentsModel{{$item->id}}" title="{{$item->establishment}}">
                                         <div>
                                             <p class="text-center"><strong>Lista de Contatos</strong></p>
                                             <div class="mt-3">
                                                 <x-table.table>
                                                     @slot('thead')
                                                         <tr class="text-center">
-                                                            <th class="col-3 text-center">Departamento</th>
-                                                            <th class="col-4 text-center">Telefone</th>
-                                                            <th class="col-2 text-center">Ramal</th>
+                                                            <th class="text-center col-3">Departamento</th>
+                                                            <th class="text-center col-4">Telefone</th>
+                                                            <th class="text-center col-2">Ramal</th>
                                                         </tr>
                                                     @endslot
                                                     @slot('tbody')
@@ -84,4 +73,3 @@
             </x-conteiner>
         @endslot
     </x-pages.index>
-@stop

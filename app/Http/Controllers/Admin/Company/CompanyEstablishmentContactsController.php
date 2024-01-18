@@ -21,16 +21,10 @@ class CompanyEstablishmentContactsController extends Controller
             ->get();
         $dbEstablishments = CompanyEstablishmentsModel::find($id);
 
-        //Header
-        $header = [
-            'title'=>"Lista Telefônica " . $dbEstablishments->no_unidade,
-        ];
-
         //Log do Sistema
-        Logger::create($header['title']);
+        Logger::create();
 
         return view('admin.company.establishments.contact.establishmentContact_create',[
-            'header'=>$header,
             'dbLists'=>$dbLists,
             'dbEstablishments'=>$dbEstablishments,
         ]);

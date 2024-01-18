@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Public;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\CompanyEstablishmentsModel;
-use App\Models\CompanyEstablishmentContactsModel;
+use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Company\CompanyEstablishmentContactsModel;
 
 class ContactListsController extends Controller
 {
@@ -16,26 +16,20 @@ class ContactListsController extends Controller
      */
     public function index(Request $request)
     {
-        //Header
-        $header =[
-            'title' => 'Lista Telefônica',
-        ];
-
-        $dbEstablishments = CompanyEstablishmentsModel::where('st_unidade',true)
-            ->orderBy('no_unidade')->paginate(20);
+        $dbEstablishments = CompanyEstablishmentsModel::where('status',true)
+            ->orderBy('establishment')->paginate(20);
         $dbLists = CompanyEstablishmentContactsModel::all();
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName'])) {
-            $dbEstablishments = CompanyEstablishmentsModel::where('st_unidade',true)
+            $dbEstablishments = CompanyEstablishmentsModel::where('status',true)
                 ->where('ft_unidade','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('no_unidade')
+                ->orderBy('establishment')
                 ->paginate(20);
         }
 
         return view('public.contact',[
-            'header'=>$header,
             'search'=>$search,
             'dbEstablishments'=>$dbEstablishments,
             'dbLists'=>$dbLists
