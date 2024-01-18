@@ -36,16 +36,10 @@ class BiddingItensController extends Controller
     {
         //Listando Dados
         $dbBidding = BiddingModel::find($id);
-        $dbProducts = ProductModel::where('st_produto',true)->orderBy('no_produto')->get();
+        $dbProducts = ProductModel::where('status',true)->orderBy('product')->get();
         $dbUnits = ProductUnitModel::all();
 
-        //Header
-        $header = [
-            'title'=>'Adicionar Item',
-        ];
-
         return view('bidding.bidding_itens.biddings_itens_create',[
-            'header'=>$header,
             'dbBidding'=>$dbBidding,
             'dbProducts'=>$dbProducts,
             'dbUnits'=>$dbUnits,
@@ -80,19 +74,13 @@ class BiddingItensController extends Controller
      */
     public function edit(string $id)
     {
-        //Header
-        $header = [
-            'title'=>'Alterar Item',
-        ];
-
         //Listagem de Dados
         $db = BiddingItensModel::find($id);
-        $dbBidding = BiddingModel::find($db['processo_id']);
+        $dbBidding = BiddingModel::find($db['process_id']);
         $dbProducts = ProductModel::all();
         $dbUnits = ProductUnitModel::all();
 
         return view('bidding.bidding_itens.biddings_itens_edit',[
-            'header'=>$header,
             'db'=>$db,
             'dbBidding'=>$dbBidding,
             'dbProducts'=>$dbProducts,
@@ -111,7 +99,6 @@ class BiddingItensController extends Controller
         //Salvando Dados
         $db = BiddingItensModel::find($id);
         $db->update($data);
-        $db->save();
 
         return redirect(route('biddings.show',['bidding'=>$data['processo_id']]))
             ->with('success','Cadastro salvo com sucesso');
@@ -129,7 +116,7 @@ class BiddingItensController extends Controller
             $db->delete();
 
             //Log do Sistema
-            Logger::destroy($db->Product->no_produto);
+            Logger::destroy();
 
             return redirect(route('biddings.show',['bidding'=>$db['processo_id']]))
                 ->with('success','Item excluido com sucesso');

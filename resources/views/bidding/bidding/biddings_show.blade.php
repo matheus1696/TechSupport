@@ -1,14 +1,4 @@
-@extends('adminlte::page')
 
-@section('title', $header['title'])
-
-@section('content_header')
-    <!-- Inicio de Componentização do Header -->
-    <x-header title="{{$header['title']}}"/>
-@stop
-
-@section('content')
-    <!-- Inicio de Componentização Page Show -->
     <x-pages.index>
         @slot('body')
             <x-conteiner>
@@ -18,7 +8,7 @@
                     <p class="col-lg"><strong>Nº do Pregão: </strong>{{$db->cod_pregao ?? ""}}</p>
                     <p class="col-lg"><strong>Nº do Contrato: </strong>{{$db->cod_contrato ?? ""}}</p>
                     <p class="col-lg-12"><strong>Titulo: </strong>{{$db->no_processo ?? ""}}</p>
-                    <div class="col-lg-12 mb-3"><strong>Objetivo: </strong>{!!$db->desc_processo ?? ""!!}</div>
+                    <div class="mb-3 col-lg-12"><strong>Objetivo: </strong>{!!$db->desc_processo ?? ""!!}</div>
                     <p class="col-lg"><strong>Data Inicio: </strong>{{$db->data_inicio == NULL ? "" : date('d/m/Y',strtotime($db->data_inicio))}}</p>
                     <p class="col-lg">
                         <strong>Data de Venc.: </strong>{{$db->data_inicio == NULL ? "" : date('d/m/Y',strtotime($db->data_vencimento))}}
@@ -33,13 +23,13 @@
 
                 <div class="row justify-content-center py-lg-3">
                     <a href="{{route('biddingItens.create',['bidding'=>$db->id])}}" class="btn btn-app bg-success">
-                        <i class="fas fa-plus text-sm mb-1"></i> Cad. Item
+                        <i class="mb-1 text-sm fas fa-plus"></i> Cad. Item
                     </a>
                     <a href="{{route('biddings.edit',['bidding'=>$db->id])}}" class="btn btn-app bg-warning">
-                        <i class="fas fa-pen text-sm mb-1"></i> Editar
+                        <i class="mb-1 text-sm fas fa-pen"></i> Editar
                     </a>
                     <a href="{{route('biddings.index')}}" class="btn btn-app bg-secondary">
-                        <i class="fas fa-reply text-sm mb-1"></i> Voltar
+                        <i class="mb-1 text-sm fas fa-reply"></i> Voltar
                     </a>
                 </div>
 
@@ -58,16 +48,16 @@
                 <x-table.table>
                     @slot('thead')
                         <tr>
-                            <td class="col-lg-2 text-sm text-center">Produto</td>
-                            <td class="col-lg-1 text-sm text-center">Qt. ADM</td>
-                            <td class="col-lg-1 text-sm text-center">Qt. ATB</td>
-                            <td class="col-lg-1 text-sm text-center">Qt. MAC</td>
-                            <td class="col-lg-1 text-sm text-center">Qt. V. EPD</td>
-                            <td class="col-lg-1 text-sm text-center">Qt. V. SAN</td>
-                            <td class="col-lg-1 text-sm text-center">Total</td>
-                            <td class="col-lg-1 text-sm text-center">Un. Medida</td>
-                            <td class="col-lg-1 text-sm text-center">Garantia</td>
-                            <td class="col-lg-2 text-sm text-center">Ações</td>
+                            <td class="text-sm text-center col-lg-2">Produto</td>
+                            <td class="text-sm text-center col-lg-1">Qt. ADM</td>
+                            <td class="text-sm text-center col-lg-1">Qt. ATB</td>
+                            <td class="text-sm text-center col-lg-1">Qt. MAC</td>
+                            <td class="text-sm text-center col-lg-1">Qt. V. EPD</td>
+                            <td class="text-sm text-center col-lg-1">Qt. V. SAN</td>
+                            <td class="text-sm text-center col-lg-1">Total</td>
+                            <td class="text-sm text-center col-lg-1">Un. Medida</td>
+                            <td class="text-sm text-center col-lg-1">Garantia</td>
+                            <td class="text-sm text-center col-lg-2">Ações</td>
                         </tr>
                     @endslot
 
@@ -105,6 +95,5 @@
             </x-conteiner>
         @endslot
     </x-pages.index>
-@stop
 
 

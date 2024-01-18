@@ -9,7 +9,7 @@ class BiddingModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'bidding_process';
+    protected $table = 'bidding_processes';
 
     protected $fillable = [
         'code_process',

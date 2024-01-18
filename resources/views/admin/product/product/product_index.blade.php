@@ -1,13 +1,4 @@
-@extends('adminlte::page')
 
-@section('title', $header['title'])
-
-@section('content_header')
-    <!-- Inicio de Componentização do Header -->
-    <x-header title="{{$header['title']}}" route="{{$header['route']}}"/>
-@stop
-
-@section('content')
     <!-- Inicio de Componentização Page Index -->
     <x-pages.index paginate="{{$db->links()}}">
         @slot('body')
@@ -24,11 +15,11 @@
                 <x-table.table>
                     @slot('thead')
                         <tr>
-                            <th class="col-2 text-center">Código</th>
+                            <th class="text-center col-2">Código</th>
                             <th>Produto</th>
-                            <th class="col-1 text-center">Tipo</th>
-                            <th class="col-1 text-center">Status</th>
-                            <th class="col-1 text-center"></th>
+                            <th class="text-center col-1">Tipo</th>
+                            <th class="text-center col-1">Status</th>
+                            <th class="text-center col-1"></th>
                         </tr>
                     @endslot
 
@@ -52,4 +43,3 @@
             </x-conteiner>
         @endslot
     </x-pages.index>
-@stop

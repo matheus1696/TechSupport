@@ -1,14 +1,4 @@
-@extends('adminlte::page')
 
-@section('title', $header['title'])
-
-@section('content_header')
-    <!-- Inicio de Componentização do Header -->
-    <x-header title="{{$header['title']}}" route="{{$header['route']}}"/>
-@stop
-
-@section('content')
-    <!-- Inicio de Componentização Page Index -->
     <x-pages.index paginate="{{$db->links()}}">
         @slot('body')
             <x-conteiner>
@@ -24,14 +14,14 @@
                 <x-table.table>
                     @slot('thead')
                         <tr>
-                            <th class="col-1 text-center text-xs">Nº Processo</th>
-                            <th class="col-1 text-center text-xs">Nº Pregão</th>
-                            <th class="col-1 text-center text-xs">Nº Contrato</th>
-                            <th class="text-center text-xs">Titulo do Processo</th>
-                            <th class="col-1 text-center text-xs">Data Início</th>
-                            <th class="col-1 text-center text-xs">Data Venc.</th>
-                            <th class="col-1 text-center text-xs">Status</th>
-                            <th class="col-2 text-center text-xs"></th>
+                            <th class="text-xs text-center col-1">Nº Processo</th>
+                            <th class="text-xs text-center col-1">Nº Pregão</th>
+                            <th class="text-xs text-center col-1">Nº Contrato</th>
+                            <th class="text-xs text-center">Titulo do Processo</th>
+                            <th class="text-xs text-center col-1">Data Início</th>
+                            <th class="text-xs text-center col-1">Data Venc.</th>
+                            <th class="text-xs text-center col-1">Status</th>
+                            <th class="text-xs text-center col-2"></th>
                         </tr>
                     @endslot
 
@@ -63,22 +53,22 @@
                                             @endif
                                         >
                                             <div class="row justify-content-center ">
-                                                <div class="col-lg-4 my-2"><strong>Nº do Processo</strong> {{$item->cod_processo}}</div>
-                                                <div class="col-lg-4 my-2"><strong>Nº do Pregão:</strong> {{$item->cod_pregao}}</div>
-                                                <div class="col-lg-4 my-2"><strong>Nº do Contrato:</strong> {{$item->cod_contrato}}</div>
-                                                <div class="col-lg-12 my-2"><strong>Título:</strong> {{$item->no_processo}}</div>
+                                                <div class="my-2 col-lg-4"><strong>Nº do Processo</strong> {{$item->cod_processo}}</div>
+                                                <div class="my-2 col-lg-4"><strong>Nº do Pregão:</strong> {{$item->cod_pregao}}</div>
+                                                <div class="my-2 col-lg-4"><strong>Nº do Contrato:</strong> {{$item->cod_contrato}}</div>
+                                                <div class="my-2 col-lg-12"><strong>Título:</strong> {{$item->no_processo}}</div>
                                                 <div class="col-lg-12"><strong>Objetivo:</strong>{!!$item->desc_processo!!}</div>
-                                                <div class="col-lg-4 my-2"><strong>Início:</strong> {{$item->data_inicio == NULL ? "" : date('d/m/Y',strtotime($item->data_inicio))}}</div>
-                                                <div class="col-lg-4 my-2"><strong>Vencimento:</strong> {{$item->data_vencimento == NULL ? "" : date('d/m/Y',strtotime($item->data_vencimento))}}</div>
-                                                <div class="col-lg-4 my-2"><strong>Vigência:</strong> {{$item->tempo_vigencia}} meses</div>
-                                                <h6 class="col-12 text-center my-2">Lista de Itens</h6>
-                                                <div class="col-12 my-2">
+                                                <div class="my-2 col-lg-4"><strong>Início:</strong> {{$item->data_inicio == NULL ? "" : date('d/m/Y',strtotime($item->data_inicio))}}</div>
+                                                <div class="my-2 col-lg-4"><strong>Vencimento:</strong> {{$item->data_vencimento == NULL ? "" : date('d/m/Y',strtotime($item->data_vencimento))}}</div>
+                                                <div class="my-2 col-lg-4"><strong>Vigência:</strong> {{$item->tempo_vigencia}} meses</div>
+                                                <h6 class="my-2 text-center col-12">Lista de Itens</h6>
+                                                <div class="my-2 col-12">
                                                     <x-table.table>
                                                             @slot('thead')
                                                                 <tr>
-                                                                    <td class="col-3 text-center">Cód.</td>
-                                                                    <td class="col-7 text-center">Nome Produto</td>
-                                                                    <td class="col-2 text-center">Quant. Total</td>
+                                                                    <td class="text-center col-3">Cód.</td>
+                                                                    <td class="text-center col-7">Nome Produto</td>
+                                                                    <td class="text-center col-2">Quant. Total</td>
                                                                 </tr>
                                                             @endslot
                                                         @foreach ($dbBiddigItens as $dbBiddigItem)
@@ -108,6 +98,5 @@
             </x-conteiner>
         @endslot
     </x-pages.index>
-@stop
 
 

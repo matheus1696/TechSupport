@@ -25,29 +25,22 @@ class BiddingController extends Controller
      */
     public function index(Request $request)
     {
-        //Header
-        $header = [
-            'title'=>'Processos Licitatórios',
-            'route'=>route('biddings.create'),
-        ];
-
         $db = BiddingModel::paginate(20);
         $dbBiddigItens = BiddingItensModel::all();
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchCod']) || isset($search['searchName'])) {
-            $db = BiddingModel::where('cod_processo','LIKE','%'.strtolower($search['searchCod']).'%')
-                ->where('ft_processo','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('no_processo')
+            $db = BiddingModel::where('code_process','LIKE','%'.strtolower($search['searchCod']).'%')
+                ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('process')
                 ->paginate(20);
         }
 
         //Logs
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('bidding.bidding.biddings_index',[
-            'header'=>$header,
             'search'=>$search,
             'db'=>$db,
             'dbBiddigItens'=>$dbBiddigItens,
@@ -59,17 +52,10 @@ class BiddingController extends Controller
      */
     public function create()
     {
-        //Header
-        $header = [
-            'title'=>'Adicionar Processo Licitatório',
-        ];
-
         //Logs
-        Logger::create($header['title']);
+        Logger::create();
 
-        return view('bidding.bidding.biddings_create',[
-            'header'=>$header,
-        ]);
+        return view('bidding.bidding.biddings_create');
     }
 
     /**
@@ -79,13 +65,13 @@ class BiddingController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['ft_processo'] = StrtoLower($data['no_processo']);
+        $data['filter'] = StrtoLower($data['process']);
 
         //Salvando Dados
         BiddingModel::create($data);
 
         //Logs
-        Logger::store($data['no_processo']);
+        Logger::store();
 
         return redirect(route('biddings.index'))->with('success','Cadastro salvo com sucesso');
     }
@@ -97,18 +83,12 @@ class BiddingController extends Controller
     {
         //Listagem de Dados
         $db = BiddingModel::find($id);
-        $dbBiddigItens = BiddingItensModel::where('processo_id', $id)->get();
-
-        //Header
-        $header = [
-            'title'=>'Processo Licitatório',
-        ];
+        $dbBiddigItens = BiddingItensModel::where('process_id', $id)->get();
 
         //Logs
-        Logger::show($db->no_processo);
+        Logger::show();
 
         return view('bidding.bidding.biddings_show',[
-            'header'=>$header,
             'db'=>$db,
             'dbBiddingItens'=>$dbBiddigItens,
         ]);
@@ -119,19 +99,13 @@ class BiddingController extends Controller
      */
     public function edit(string $id)
     {
-        //Header
-        $header = [
-            'title'=>'Alterar Dados Processo Licitatório',
-        ];
-
         //Listagem de Dados
         $db = BiddingModel::find($id);
 
         //Logs
-        Logger::edit($id);
+        Logger::edit();
 
         return view('bidding.bidding.biddings_edit',[
-            'header'=>$header,
             'db'=>$db,
         ]);
     }
@@ -143,16 +117,15 @@ class BiddingController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['ft_processo'] = StrtoLower($data['no_processo']);
-        $data['tempo_vigencia'] = floor((strtotime($data['data_vencimento']) - strtotime($data['data_inicio'])) / (60 * 60 * 24 ) / 30);;
+        $data['filter'] = StrtoLower($data['process']);
+        $data['validity'] = floor((strtotime($data['due_date']) - strtotime($data['start_date'])) / (60 * 60 * 24 ) / 30);;
 
         //Salvando Dados
         $db = BiddingModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Logs
-        Logger::update($id);
+        Logger::update();
 
         return redirect(route('biddings.show',['bidding'=>$id]))->with('success','Cadastro atualizado com sucesso');
     }
@@ -171,15 +144,14 @@ class BiddingController extends Controller
     public function status(Request $request, string $id)
     {
         //Dados dos Formulários
-        $data = $request->only('st_processo');
+        $data = $request->only('status');
 
         //Salvando Dados
         $db = BiddingModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Logs
-        Logger::status($id,$data['st_processo']);
+        Logger::status();
 
         return redirect(route('biddings.index'))->with('success','Status alterado com sucesso.');
     }
