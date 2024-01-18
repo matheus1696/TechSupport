@@ -13,15 +13,16 @@ class RegionCitiesModel extends Model
 
     protected $fillable =
     [
-        'cod_municipio_ibge',
-        'sg_municipio',
-        'no_municipio',
-        'st_municipio',
-        'estado_id',
+        'code',
+        'city',
+        'filter',
+        'code_cep',
+        'status',
+        'state_id',
     ];
 
     public function RegionStates(){
-        return $this->belongsTo(RegionStatesModel::class,'estado_id','id');
+        return $this->belongsTo(RegionStatesModel::class,'state_id','id');
     }
 }
 

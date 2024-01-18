@@ -15,7 +15,7 @@ return new class extends Migration
             //
             $table->unsignedBigInteger('cbo_id')->after('birthday')->nullable();
 
-            $table->foreign('cbo_id')->references('id')->on('company_occupations');
+            $table->foreign('cbo_id','fk_company_occupations')->references('id')->on('company_occupations');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropForeign('cargo_id');
+            $table->dropForeign('fk_company_occupations');
         });
     }
 };

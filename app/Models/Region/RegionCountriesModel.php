@@ -13,11 +13,16 @@ class RegionCountriesModel extends Model
 
     protected $fillable =
     [
-        'cod_pais',
-        'sg_pais',
-        'no_pais',
-        'no_pais_ingles',
-        'st_pais',
+        'code',
+        'acronym_2',
+        'acronym_3',        
+        'country',
+        'filter',
+        'country_ing',
+        'filter_country_ing',
+        'code_iso',
+        'code_ddi',
+        'status',
     ];
 }
 

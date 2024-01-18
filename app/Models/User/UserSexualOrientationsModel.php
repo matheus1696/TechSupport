@@ -13,8 +13,8 @@ class UserSexualOrientationsModel extends Model
 
     protected $fillable =
     [
-        'no_orientacao_sexual',
-        'st_orientacao_sexual'
+        'sexual_orientation',
+        'status'
     ];
 }
 

@@ -13,12 +13,12 @@ class CompanyTypeEstablishmentsModel extends Model
 
     protected $fillable =
     [
-        'no_tipo_estabelecimento',
-        'st_tipo_estabelecimento',
+        'type_establishment',
+        'status',
     ];
 
     public function Establishments(){
-        return $this->belongsTo(CompanyEstablishmentsModel::class,'id','tipo_estabelecimento_id');
+        return $this->belongsTo(CompanyEstablishmentsModel::class,'id','type_establishment_id');
     }
 }
 

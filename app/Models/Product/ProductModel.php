@@ -12,11 +12,11 @@ class ProductModel extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'cod_produto',
-        'no_produto',
-        'ft_produto',
-        'desc_produto',
-        'tp_produto',
-        'st_produto',
+        'code',
+        'product',
+        'filter',
+        'description',
+        'type',
+        'status',
     ];
 }

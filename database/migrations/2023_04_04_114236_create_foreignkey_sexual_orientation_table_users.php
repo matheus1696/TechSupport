@@ -15,7 +15,7 @@ return new class extends Migration
             //
             $table->unsignedBigInteger('sexual_orientation_id')->after('birthday')->nullable();
 
-            $table->foreign('sexual_orientation_id')->references('id')->on('users_sexual_orientations');
+            $table->foreign('sexual_orientation_id','fk_users_sexual_orientations')->references('id')->on('users_sexual_orientations');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropForeign('orientacao_sexual_id');
+            $table->dropForeign('fk_users_sexual_orientations');
         });
     }
 };

@@ -15,7 +15,7 @@ return new class extends Migration
             //
             $table->unsignedBigInteger('company_id')->after('birthday')->nullable();
 
-            $table->foreign('company_id')->references('id')->on('company_organizational');
+            $table->foreign('company_id','fk_company_organizational')->references('id')->on('company_organizational');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropForeign('setor_id');
+            $table->dropForeign('fk_company_organizational');
         });
     }
 };

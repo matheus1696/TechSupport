@@ -13,10 +13,10 @@ class CompanyOccupationsModel extends Model
 
     protected $fillable =
     [
-        'cod_cbo',
-        'no_cbo',
-        'ft_cbo',
-        'st_cbo',
+        'code',
+        'occupation',
+        'filter',
+        'status',
     ];
 }
 

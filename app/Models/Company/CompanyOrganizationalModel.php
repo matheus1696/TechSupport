@@ -13,13 +13,13 @@ class CompanyOrganizationalModel extends Model
 
     protected $fillable =
     [
-        'no_setor',
-        'sg_setor',
-        'ft_setor',
-        'des_setor',
-        'st_setor',
-        'ord_setor',
-        'hie_setor',
+        'title',
+        'acronym',
+        'filter',
+        'description',
+        'status',
+        'order',
+        'hierarchy',
     ];
 }
 

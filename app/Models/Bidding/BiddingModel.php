@@ -15,7 +15,7 @@ class BiddingModel extends Model
         'code_process',
         'code_auction',
         'code_contract',
-        'title',
+        'bidding_process',
         'filter',
         'description',
         'start_date',

@@ -13,9 +13,9 @@ class CompanyAttentionLevelsModel extends Model
 
     protected $fillable =
     [
-        'no_nivel_atencao',
-        'cor_nivel_atencao',
-        'st_nivel_atencao',
+        'attention_level',
+        'color',
+        'status',
     ];
 }
 

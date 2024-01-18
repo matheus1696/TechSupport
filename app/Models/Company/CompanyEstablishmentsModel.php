@@ -14,33 +14,30 @@ class CompanyEstablishmentsModel extends Model
 
     protected $fillable =
     [
-        'cod_unidade_cnes',
-        'no_unidade',
-        'ft_unidade',
-        'end_logradouro',
-        'end_numero',
-        'end_bairro',
-        'cidade_id',
-        'end_latidude',
-        'end_longitude',
-        'tipo_estabelecimento_id',
-        'nivel_atencao_id',
-        'con_unidade_1',
-        'con_unidade_2',
-        'con_unidade_3',
-        'st_unidade',
+        'code',
+        'establishment',
+        'filter',
+        'address',
+        'number',
+        'district',
+        'city_id',
+        'latidude',
+        'longitude',
+        'type_establishment_id',
+        'attention_level_id',
+        'status',
     ];
 
     public function RegionCities(){
-        return $this->belongsTo(RegionCitiesModel::class,'cidade_id','id');
+        return $this->belongsTo(RegionCitiesModel::class,'city_id','id');
     }
 
     public function TypeEstablishments(){
-        return $this->belongsTo(CompanyTypeEstablishmentsModel::class,'tipo_estabelecimento_id','id');
+        return $this->belongsTo(CompanyTypeEstablishmentsModel::class,'type_establishment_id','id');
     }
 
     public function AttentionLevels(){
-        return $this->belongsTo(CompanyAttentionLevelsModel::class,'nivel_atencao_id','id');
+        return $this->belongsTo(CompanyAttentionLevelsModel::class,'attention_level_id','id');
     }
 }
 

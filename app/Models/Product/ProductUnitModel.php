@@ -12,8 +12,8 @@ class ProductUnitModel extends Model
     protected $table = 'product_units';
 
     protected $fillable = [
-        'no_unidade_medida',
-        'ft_unidade_medida',
-        'st_unidade_medida'
+        'unit',
+        'filter',
+        'status'
     ];
 }

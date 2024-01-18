@@ -13,15 +13,18 @@ class RegionStatesModel extends Model
 
     protected $fillable =
     [
-        'cod_estado',
-        'sg_estado',
-        'no_estado',
-        'st_estado',
-        'pais_id',
+        'acronym',
+        'code_uf',
+        'code_ddd',
+        'state',
+        'filter',
+        'status',
+        'code_ddd',
+        'country_id',
     ];
 
     public function RegionCountries(){
-        return $this->belongsTo(RegionCountriesModel::class,'pais_id','id');
+        return $this->belongsTo(RegionCountriesModel::class,'country_id','id');
     }
 }
 
