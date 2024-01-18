@@ -1,3 +1,3 @@
-<div class="row justify-content-center">
+<div class="mt-3 text-sm row justify-content-center">
     {{$slot}}
 </div>

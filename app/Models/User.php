@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Company\CompanyOccupationsModel;
+use App\Models\Company\CompanyOrganizationalModel;
+use App\Models\User\UserSexualOrientationsModel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;

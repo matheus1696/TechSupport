@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
-use App\Models\UserSexualOrientationsModel;
+use App\Models\User\UserSexualOrientationsModel;
 use App\Services\Logger;
 
 class ProfileController extends Controller
@@ -70,7 +70,7 @@ class ProfileController extends Controller
 
         //Listando Dados
         $dbUser = User::find($id);
-        $dbUserSexualOrientations = UserSexualOrientationsModel::where('st_orientacao_sexual',true)->get();
+        $dbUserSexualOrientations = UserSexualOrientationsModel::where('status',true)->get();
 
         if ($dbUser && $dbUser->id === Auth::user()->id) {
             //Log do Sistema
@@ -98,7 +98,7 @@ class ProfileController extends Controller
         $dbUser = User::find($id);
 
         //Alterando Dados do Usuário
-        $data = $request->only('name','con_usuario_1','con_usuario_2','dn_usuario','orientacao_sexual_id','setor_id','cargo_id','unidade_id');
+        $data = $request->all();
         $dbUser->update($data);
         $dbUser->save();
 

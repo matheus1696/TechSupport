@@ -1,5 +1,5 @@
-<div class="w-100 h-100 my-3 {{$class ?? ""}}">
-    <div class="card mx-3 p-3">
+<div class="w-100 h-100 mt-3 {{$class ?? ""}}">
+    <div class="p-4 card">
         {{$slot}}
     </div>
 </div>

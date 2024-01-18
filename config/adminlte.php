@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => 'Tech<b>Support</b>',
+    'logo' => '<b>Tech</b>Support',
     'logo_img' => 'assets/img/gest360Logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
