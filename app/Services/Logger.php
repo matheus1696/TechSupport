@@ -44,67 +44,67 @@ class Logger
         ]);
     }
 
-    public static function access($header){
-        self::Logs(1100,"Acesso a listagem de dados: ". $header);
+    public static function access(){
+        self::Logs(1100,"Acesso a listagem de dados.");
     }
 
-    public static function show($data){
-        self::Logs(1101,"Acesso detalhado ao dado: ". $data);
+    public static function show(){
+        self::Logs(1101,"Acesso detalhado ao dado.");
     }
 
-    public static function create($header){
-        self::Logs(1200,"Formulário de criação ". $header);
+    public static function create(){
+        self::Logs(1200,"Formulário de criação.");
     }
 
-    public static function edit($data){
-        self::Logs(1300,"Formulário de edição: ".$data);
+    public static function edit(){
+        self::Logs(1300,"Formulário de edição.");
     }
 
-    public static function store($data){
-        self::Logs(2100,"Cadastro de informação: ".$data);
+    public static function store(){
+        self::Logs(2100,"Cadastro de informação.");
     }
 
-    public static function update($data){
-        self::Logs(2200,"Alteração de cadastro: ".$data);
+    public static function update(){
+        self::Logs(2200,"Alteração de cadastro.");
     }
 
-    public static function destroy($data){
-        self::Logs(2300,"Exclusão de dados: ".$data);
+    public static function destroy(){
+        self::Logs(2300,"Exclusão de dados.");
     }
 
-    public static function status($data, $status){
-        self::Logs(2400,"Alteração de status: ".$data." para ". $status);
+    public static function status(){
+        self::Logs(2400,"Alteração de status.");
     }
 
-    public static function link($message){
-        self::Logs(3100,"Vinculando dado: ".$message);
+    public static function link(){
+        self::Logs(3100,"Vinculando dado.");
     }
 
     //Update Profile
 
-    public static function updateProfileData($dataProfile){
-        self::Logs(8991,"Edição do perfil do usuário: ".$dataProfile);
+    public static function updateProfileData(){
+        self::Logs(8991,"Edição do perfil do usuário.");
     }
 
-    public static function updateProfilePassword($dataProfile){
-        self::Logs(8992,"Alteração do perfil do usuário: ".$dataProfile);
+    public static function updateProfilePassword(){
+        self::Logs(8992,"Alteração do perfil do usuário.");
     }
 
-    public static function updateProfileDestroy($dataProfile){
-        self::Logs(8993,"Exclusão do usuário: ".$dataProfile);
+    public static function updateProfileDestroy(){
+        self::Logs(8993,"Exclusão do usuário.");
     }
 
     //Update Admin User
 
-    public static function updateUserPermission($dataUser){
-        self::Logs(8994,"Alterando permissão do usuário: ".$dataUser);
+    public static function updateUserPermission(){
+        self::Logs(8994,"Alterando permissão do usuário.");
     }
 
-    public static function updateUserVerify($dataUser){
-        self::Logs(8995,"Encaminhado verificação de conta do usuário: ".$dataUser);
+    public static function updateUserVerify(){
+        self::Logs(8995,"Encaminhado verificação de conta do usuário.");
     }
 
-    public static function error($message){
-        self::Logs(9000,"Erro: ".$message);
+    public static function error(){
+        self::Logs(9000,"Erro");
     }
 }

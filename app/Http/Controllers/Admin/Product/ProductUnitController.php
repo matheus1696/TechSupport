@@ -24,30 +24,23 @@ class ProductUnitController extends Controller
      */
     public function index(Request $request)
     {
-        //Header
-        $header = [
-            'title'=>'Unidade de Medida',
-            'route'=> route('units.create'),
-        ];
-
         //Listando Dados
         $db = ProductUnitModel::select()
-            ->orderBy('st_unidade_medida','desc')
-            ->orderBy('no_unidade_medida')
+            ->orderBy('status','desc')
+            ->orderBy('unit')
             ->paginate();
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName'])) {
-            $db = ProductUnitModel::where('ft_unidade_medida','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('no_unidade_medida')
+            $db = ProductUnitModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('unit')
                 ->paginate(20);
         }
 
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('admin.product.unit.unit_index',[
-            'header'=>$header,
             'search'=>$search,
             'db'=>$db,
         ]);
@@ -58,16 +51,9 @@ class ProductUnitController extends Controller
      */
     public function create()
     {
-        //Header
-        $header = [
-            'title'=>'Cadastrar de Unidade de Medida',
-        ];
+        Logger::create();
 
-        return view('admin.product.unit.unit_create',[
-            'header'=>$header,
-        ]);
-
-        Logger::create($header['title']);
+        return view('admin.product.unit.unit_create');
     }
 
     /**
@@ -77,12 +63,12 @@ class ProductUnitController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['ft_unidade_medida'] = StrtoLower($data['no_unidade_medida']);
+        $data['filter'] = StrtoLower($data['unit']);
 
         //Salvando Dados
-        ProductUnitModel::create($data);
+        ProductUnitModel::create();
 
-        Logger::store($data['id']);
+        Logger::store();
 
         return redirect(route('units.index'))
             ->with('success','Cadastro salvo com sucesso');
@@ -101,18 +87,12 @@ class ProductUnitController extends Controller
      */
     public function edit(string $id)
     {
-        //Header
-        $header = [
-            'title'=>'Alterar Unidade de Medida',
-        ];
-
         //Listagem de Dados
         $db = ProductUnitModel::find($id);
 
-        Logger::edit($id);
+        Logger::edit();
 
         return view('admin.product.unit.unit_edit',[
-            'header'=>$header,
             'db'=>$db,
         ]);
     }
@@ -128,9 +108,8 @@ class ProductUnitController extends Controller
         //Salvando Dados
         $db = ProductUnitModel::find($id);
         $db->update($data);
-        $db->save();
 
-        Logger::update($id);
+        Logger::update();
 
         return redirect(route('units.index'))
             ->with('success','Atualização realizada com sucesso.');
@@ -150,14 +129,13 @@ class ProductUnitController extends Controller
     public function status(Request $request, string $id)
     {
         //Dados dos Formulários
-        $data = $request->only('st_unidate_medida');
+        $data = $request->only('status');
 
         //Salvando Dados
         $db = ProductUnitModel::find($id);
         $db->update($data);
-        $db->save();
 
-        Logger::status($id,$data['st_unidate_medida']);
+        Logger::status();
 
         return redirect(route('units.index'))->with('success','Status alterado com sucesso.');
     }

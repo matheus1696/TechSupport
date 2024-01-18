@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin\Users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\CompanyEstablishmentsModel;
-use App\Models\CompanyOccupationsModel;
-use App\Models\CompanyOrganizationalModel;
+use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Company\CompanyOccupationsModel;
+use App\Models\Company\CompanyOrganizationalModel;
 use App\Models\User;
 use App\Models\User\UserHasPermissionsModel;
 use App\Models\User\UserPermissionsModel;
@@ -27,36 +27,36 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        //Informações da Página
-        $header = [
-            'title'=>'Lista de Usuários',
-        ];
 
         //Listando Dados
-        $db = User::orderBy('name')->get();
+        $db = User::orderBy('name')->with('SexualOrientations')->paginate(20);
         $dbPermissions= UserPermissionsModel::all();
         $dbHasPermissions = UserHasPermissionsModel::all();
         $dbCompanyOrganizational = CompanyOrganizationalModel::where('status',true)->orderBy('hierarchy')->get();
         $dbCompanyOccupations = CompanyOccupationsModel::where('status',true)->orderBy('code')->get();
-        $dbEstablishments = CompanyEstablishmentsModel::where('status',true)->orderBy('title')->get();
+        $dbEstablishments = CompanyEstablishmentsModel::where('status',true)->orderBy('establishment')->get();
 
         //Pesquisar Dados
-        $search=$request->all();
-        if (isset($search['searchName']) || isset($search['searchEmail'])) {
-            $db = User::where('name','LIKE','%'.$search['searchName'].'%')
+        $search = $request->all();
+
+        if (isset($search['searchName']) && isset($search['searchEmail'])) {
+            $db = User::where('filter','LIKE','%'.$search['searchName'].'%')
+                ->orWhere('email','LIKE','%'.$search['searchEmail'].'%')
+                ->orderBy('name')
+                ->with('SexualOrientations')
+                ->paginate(20);
+        } elseif (isset($search['searchName']) || isset($search['searchEmail'])) {
+            $db = User::where('filter','LIKE','%'.$search['searchName'].'%')
                 ->where('email','LIKE','%'.$search['searchEmail'].'%')
                 ->orderBy('name')
+                ->with('SexualOrientations')
                 ->paginate(20);
-
-                //Log do Sistema
-                Logger::access($header['title']. ' com filtros aplicados.'. $search['searchName']);
-        }
+        }       
 
         //Log do Sistema
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('admin.users.users_index',[
-            'header'=>$header,
             'search'=>$search,
             'db'=>$db,
             'dbPermissions'=>$dbPermissions,
@@ -110,12 +110,11 @@ class UsersController extends Controller
         $db = User::find($id);
 
         //Alterando Dados do Usuário
-        $data = $request->only('setor_id','cargo_id','unidade_id');
+        $data = $request->only('company_id','occupation_id','establishment_id');
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::updateProfileData('Atualização dos Dados do Perfil do Usuário '.$db->name);
+        Logger::updateProfileData();
 
         //Alterando Permissão do Usuário
             //Listando Permissões
@@ -144,7 +143,7 @@ class UsersController extends Controller
                     $data->save();
 
                     //Log do Sistema
-                    Logger::updateUserPermission($db->email.' para acesso a '.$Permission->name);
+                    Logger::updateUserPermission();
                 }
             }
 
@@ -168,9 +167,9 @@ class UsersController extends Controller
         $db->save();
 
         //Log do Sistema
-        Logger::updateUserVerify($db->name);
+        Logger::updateUserVerify();
 
         return redirect(route('users.index'))
-            ->with('success',`Usuário $db->name deve realizar verificação no próximo acesso.`);
+            ->with('success','Atualização realizada com sucesso.');
     }
 }

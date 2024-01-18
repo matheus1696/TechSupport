@@ -22,34 +22,24 @@ class RegionCountriesController extends Controller
      */
     public function index(Request $request)
     {
-        //Header
-        $header =[
-            'title' => 'Paises',
-            'route' => route('countries.create'),
-        ];
-
         //Listando Dados
         $db = RegionCountriesModel::select()
-            ->orderBy('st_pais','DESC')
-            ->orderBy('no_pais')
+            ->orderBy('status','DESC')
+            ->orderBy('country')
             ->paginate(20);
 
         //Pesquisar Dados
         $search=$request->all();
         if (isset($search['searchName'])) {
-            $db = RegionCountriesModel::where('ft_pais','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('no_pais')
+            $db = RegionCountriesModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('country')
                 ->paginate(20);
-
-            //Log do Sistema
-            Logger::access($header['title']. 'com filtros.'. $search['searchName']);
         }
 
         //Log do Sistema
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('admin.region.countries.countries_index',[
-            'header'=>$header,
             'search'=>$search,
             'db'=>$db,
         ]);
@@ -114,10 +104,9 @@ class RegionCountriesController extends Controller
         //Salvando Dados
         $db = RegionCountriesModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::status($db->no_pais,$db->st_pais);
+        Logger::status();
 
         return redirect(route('countries.index'));
     }

@@ -22,22 +22,16 @@ class UserSexualOrientationsController extends Controller
      */
     public function index()
     {
-        //Header
-        $header = [
-            'title'=>'Orientações Sexuais'
-        ];
-
         //Listando Dados
         $db = UserSexualOrientationsModel::select()
-            ->orderBy('st_orientacao_sexual','desc')
-            ->orderBy('no_orientacao_sexual')
+            ->orderBy('status','desc')
+            ->orderBy('sexual_orientation')
             ->get();
 
         //Log do Sistema
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('admin.users.sexualOrientations.sexualOrientation_index',[
-            'header'=>$header,
             'db'=>$db,
         ]);
     }
@@ -85,10 +79,9 @@ class UserSexualOrientationsController extends Controller
         //Salvando Dados
         $db = UserSexualOrientationsModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::update('Orientação Sexual '.$db->no_orientacao_sexual);
+        Logger::update();
 
         return redirect(route('sexualorientations.index'))
             ->with('success','Atualização realizada com sucesso.');

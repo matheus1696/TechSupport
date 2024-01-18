@@ -1,7 +1,5 @@
 @extends('adminlte::page')
 
-@section('title', $title ?? "")
-
 @section('content_header')
     {{$header ?? ""}}
 @stop

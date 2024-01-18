@@ -22,34 +22,24 @@ class RegionStatesController extends Controller
      */
     public function index(Request $request)
     {
-        //Header
-        $header =[
-            'title' => 'Estados',
-            'route' => route('states.create'),
-        ];
-
         //Listando Dados
         $db = RegionStatesModel::select()
-            ->orderBy('st_estado','DESC')
-            ->orderBy('no_estado')
+            ->orderBy('status','DESC')
+            ->orderBy('state')
             ->paginate(20);
 
         //Pesquisar Dados
         $search=$request->all();
         if (isset($search['searchName'])) {
-            $db = RegionStatesModel::where('ft_estado','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('no_estado')
+            $db = RegionStatesModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('state')
                 ->paginate(20);
-
-            //Log do Sistema
-            Logger::access($header['title']. 'com filtros '. $search['searchName']);
         }
 
         //Log do Sistema
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('admin.region.states.states_index',[
-            'header'=>$header,
             'search'=>$search,
             'db'=>$db,
         ]);

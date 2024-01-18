@@ -23,26 +23,19 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function index()
     {
-        //Header
-        $header = [
-            'title'=>'Tipo de Estabelecimento',
-            'route'=>route('type_establishments.create'),
-        ];
-
         //Listagem de Dados
         $db = CompanyTypeEstablishmentsModel::select()
-            ->orderBy('st_tipo_estabelecimento','DESC')
-            ->orderBy('no_tipo_estabelecimento')
+            ->orderBy('status','DESC')
+            ->orderBy('type_establishment')
             ->paginate(20);
         $dbEstablishments = CompanyEstablishmentsModel::select()
-            ->orderBy('no_unidade')
+            ->orderBy('establishment')
             ->get();
 
         //Log do Sistema
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('admin.company.type_establishments.type_establishments_index',[
-            'header'=>$header,
             'db'=>$db,
             'dbEstablishments'=>$dbEstablishments,
         ]);
@@ -53,17 +46,10 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function create()
     {
-        //Header
-        $header = [
-            'title'=>'Cadastrar Tipo de Estabelecimento',
-        ];
-
         //Log do Sistema
-        Logger::create($header['title']);
+        Logger::create();
 
-        return view('admin.company.type_establishments.type_establishments_create',[
-            'header'=>$header,
-        ]);
+        return view('admin.company.type_establishments.type_establishments_create');
     }
 
     /**
@@ -78,7 +64,7 @@ class CompanyTypeEstablishmentsController extends Controller
         CompanyTypeEstablishmentsModel::create($data);
 
         //Log do Sistema
-        Logger::store($data['no_tipo_estabelecimento']);
+        Logger::store();
 
         return redirect(route('type_establishments.index'))
             ->with('success','Cadastro realizado com sucesso');
@@ -97,18 +83,12 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function edit(string $id)
     {
-        //Header
-        $header = [
-            'title'=>'Alterar Cadastro do Tipo de Estabelecimento',
-        ];
-
         $db = CompanyTypeEstablishmentsModel::find($id);
 
         //Log do Sistema
-        Logger::edit($db->no_tipo_estabelecimento);
+        Logger::edit();
 
         return view('admin.company.type_establishments.type_establishments_edit',[
-            'header'=>$header,
             'db'=>$db,
         ]);
     }
@@ -124,7 +104,6 @@ class CompanyTypeEstablishmentsController extends Controller
         //Salvando Dados
         $db = CompanyTypeEstablishmentsModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
         Logger::update($db->no_tipo_estabelecimento);
@@ -140,19 +119,19 @@ class CompanyTypeEstablishmentsController extends Controller
     {
         //Verificando Dados
         $db = CompanyTypeEstablishmentsModel::find($id);
-        $dbEstablishments = CompanyEstablishmentsModel::where('tipo_estabelecimento_id',$id)->count();
+        $dbEstablishments = CompanyEstablishmentsModel::where('type_establishment_id',$id)->count();
 
         if ($dbEstablishments == 0) {
             $db->delete();
 
             //Log do Sistema
-            Logger::destroy($db->no_tipo_estabelecimento);
+            Logger::destroy();
 
             return redirect(route('type_establishments.index'))
                 ->with('success','Exclusão realizada com sucesso.');
         }else {
             //Log do Sistema
-            Logger::error('Exclusão não realizada, existe unidades cadastradas neste tipo de estabelecimento '.$db->no_tipo_estabelecimento);
+            Logger::error();
 
             return redirect(route('type_establishments.index'))
                 ->with('errors','Existe unidades cadastradas neste tipo de estabelecimento.');

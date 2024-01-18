@@ -28,16 +28,14 @@ class CompanyEstablishmentsController extends Controller
      */
     public function index(Request $request)
     {
-        //Header
-        $header = [
-            'title'=>'Estabelecimentos',
-            'route'=>route('establishments.create'),
-        ];
-
         //Listagem de Dados
         $db = CompanyEstablishmentsModel::select()
             ->orderBy('status','DESC')
-            ->orderBy('title')
+            ->orderBy('establishment')
+            ->with('AttentionLevels')
+            ->with('TypeEstablishments')
+            ->with('RegionCities')            
+            ->with('RegionCities')
             ->paginate(20);
 
         $dbLists= CompanyEstablishmentContactsModel::all();
@@ -47,15 +45,14 @@ class CompanyEstablishmentsController extends Controller
         if (isset($search['searchName']) || isset($search['searchCod'])) {
             $db = CompanyEstablishmentsModel::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('title')
+                ->orderBy('establishment')
                 ->paginate(20);
         }
 
         //Log do Sistema
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('admin.company.establishments.establishments_index',[
-            'header'=>$header,
             'search'=>$search,
             'db'=>$db,
             'dbLists'=>$dbLists,
@@ -74,8 +71,8 @@ class CompanyEstablishmentsController extends Controller
 
         //Listagem de Dados
         $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
-        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
-        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('title')->get();
+        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('type_establishment')->get();
+        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('attention_level')->get();
 
 
         //Log do Sistema
@@ -128,8 +125,8 @@ class CompanyEstablishmentsController extends Controller
         //Listagem de Dados
         $db = CompanyEstablishmentsModel::find($id);
         $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
-        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
-        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('title')->get();
+        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('type_establishment')->get();
+        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('attention_level')->get();
 
         //Log do Sistema
         Logger::edit($db->no_unidade);

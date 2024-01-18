@@ -22,31 +22,25 @@ class CompanyOccupationController extends Controller
      */
     public function index(Request $request)
     {
-        //Header
-        $header = [
-            'title' => 'Ocupações (CBO)',
-        ];
-
         //Listando Dados
         $db = CompanyOccupationsModel::select()
-            ->orderBy('st_cbo','DESC')
-            ->orderBy('no_cbo')
+            ->orderBy('status','DESC')
+            ->orderBy('occupation')
             ->paginate(20);
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName']) || isset($search['searchCod'])) {
-            $db = CompanyOccupationsModel::where('cod_cbo','LIKE','%'.strtolower($search['searchCod']).'%')
-                ->where('ft_cbo','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('cod_cbo')
+            $db = CompanyOccupationsModel::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
+                ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('code')
                 ->paginate(20);
         }
 
         //Log do Sistema
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('admin.company.occupations.occupations_index', [
-            'header'=>$header,
             'search'=>$search,
             'db'=>$db,
         ]);
@@ -97,10 +91,9 @@ class CompanyOccupationController extends Controller
 
         //Atualizando Dados
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::status($db->no_cbo,$data['st_cbo']);
+        Logger::status();
 
         return redirect(route('occupations.index'));
     }

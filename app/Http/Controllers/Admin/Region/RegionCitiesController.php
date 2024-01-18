@@ -22,34 +22,24 @@ class RegionCitiesController extends Controller
      */
     public function index(Request $request)
     {
-        //Header
-        $header =[
-            'title' => 'Cidades',
-            'route' => route('cities.create'),
-        ];
-
         //Listando Dados
         $db = RegionCitiesModel::select()
-            ->orderBy('st_municipio','DESC')
-            ->orderBy('no_municipio')
+            ->orderBy('status','DESC')
+            ->orderBy('city')
             ->paginate(20);
 
         //Pesquisar Dados
         $search=$request->all();
         if (isset($search['searchName'])) {
-            $db = RegionCitiesModel::where('ft_municipio','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('no_municipio')
+            $db = RegionCitiesModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('city')
                 ->paginate(20);
 
             //Log do Sistema
-            Logger::access($header['title']. 'com filtros.'. $search['searchName']);
+            Logger::access();
         }
 
-        //Log do Sistema
-        Logger::access($header['title']);
-
         return view('admin.region.cities.cities_index',[
-            'header'=>$header,
             'search'=>$search,
             'db'=>$db,
         ]);

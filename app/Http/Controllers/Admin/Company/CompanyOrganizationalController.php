@@ -24,20 +24,13 @@ class CompanyOrganizationalController extends Controller
      */
     public function index()
     {
-        //Informações da Página
-        $header = [
-            'title' => 'Organograma',
-            'route' => route('organizational.create'),
-        ];
-
         //Listando Dados
-        $db = CompanyOrganizationalModel::select()->orderBy('ord_setor')->get();
+        $db = CompanyOrganizationalModel::select()->orderBy('order')->get();
 
         //Log do Sistema
-        Logger::access($header['title']);
+        Logger::access();
 
-        return view('admin.company.organizational.organizational_index', [
-            'header' => $header,
+        return view('admin.company.organizational.organizational_index',[
             'db' => $db,
         ]);
     }
@@ -47,19 +40,13 @@ class CompanyOrganizationalController extends Controller
      */
     public function create()
     {
-        //Header
-        $header = [
-            'title' => 'Cadastrar Departamento',
-        ];
-
         //Listando Dados
-        $db = CompanyOrganizationalModel::select()->orderBy('ord_setor')->get();
+        $db = CompanyOrganizationalModel::select()->orderBy('order')->get();
 
         //Log do Sistema
-        Logger::create($header['title']);
+        Logger::create();
 
         return view('admin.company.organizational.organizational_create', [
-            'header' => $header,
             'db' => $db,
         ]);
     }
@@ -71,13 +58,13 @@ class CompanyOrganizationalController extends Controller
     {
         //Dados do Formulário
         $data = $request->all();
-        $data['ft_setor'] = strtolower($request['no_setor']);
+        $data['filter'] = strtolower($request['occupation']);
 
         //Salvando Dados
         CompanyOrganizationalModel::create($data);
 
         //Log do Sistema
-        Logger::store($data['no_setor']);
+        Logger::store();
 
         return redirect(route('organizational.organize'));
     }
@@ -95,20 +82,14 @@ class CompanyOrganizationalController extends Controller
      */
     public function edit(string $id)
     {
-        //Header
-        $header = [
-            'title' => 'Alterar Cadastro do Departamento',
-        ];
-
         //Listando Dados
         $db = CompanyOrganizationalModel::find($id);
-        $dbSector = CompanyOrganizationalModel::select()->orderBy('ord_setor')->get();
+        $dbSector = CompanyOrganizationalModel::select()->orderBy('order')->get();
 
         //Log do Sistema
-        Logger::edit($db->no_setor);
+        Logger::edit();
 
         return view('admin.company.organizational.organizational_edit', [
-            'header' => $header,
             'dbSector' => $dbSector,
             'db' => $db,
         ]);
@@ -124,14 +105,13 @@ class CompanyOrganizationalController extends Controller
 
         //Dados do Formulário
         $data = $request->all();
-        $data['ft_setor'] = strtolower($request['no_setor']);
+        $data['filter'] = strtolower($request['order']);
 
         //Salvando Dados
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::update($db->no_setor);
+        Logger::update();
 
         return redirect(route('organizational.organize'));
     }
@@ -143,14 +123,14 @@ class CompanyOrganizationalController extends Controller
     {
         //Listando Dados
         $db = CompanyOrganizationalModel::find($id);
-        $dbCount = CompanyOrganizationalModel::where('hie_setor',$id)->count();
+        $dbCount = CompanyOrganizationalModel::where('hierarchy',$id)->count();
 
         //Verificação
         if ($dbCount == 0) {
             $db->delete();
 
             //Log do Sistema
-            Logger::destroy($db->no_setor);
+            Logger::destroy();
 
             return redirect(route('organizational.index'))
                 ->with('success','Exclusão realizada com sucesso.');
@@ -158,7 +138,7 @@ class CompanyOrganizationalController extends Controller
             $db = CompanyOrganizationalModel::find($id);
 
             //Log do Sistema
-            Logger::error('Exclusão não realizada, existe setores vinculados a '.$db->no_setor);
+            Logger::error();
 
             return redirect(route('organizational.index'))
                 ->with('errors','Existe setores vinculados a '.$db->no_setor);
@@ -172,23 +152,23 @@ class CompanyOrganizationalController extends Controller
     {
         //Reordenando Setores
             //Listando Setores
-                $db = CompanyOrganizationalModel::select()->orderBy('hie_setor')->get();
+                $db = CompanyOrganizationalModel::select()->orderBy('hierarchy')->get();
 
             foreach ($db as $sectorValue) {
 
                 //Atribuindo Hierariquia Principal
-                if ($sectorValue['hie_setor'] == 0) {
+                if ($sectorValue['hierarchy'] == 0) {
                     $db = CompanyOrganizationalModel::find($sectorValue['id']);
-                    $db->ord_setor = "0" . $sectorValue['sg_setor'];
+                    $db->ord_setor = "0" . $sectorValue['acronym'];
                     $db->save();
                 }
 
                 //Listando Setores para Ordenação Hierarquica
-                    $antecessor = CompanyOrganizationalModel::select()->where('id', $sectorValue['hie_setor'])->get();
+                    $antecessor = CompanyOrganizationalModel::select()->where('id', $sectorValue['hierarchy'])->get();
 
                 foreach ($antecessor as $valueantecessor) {
                     $db = CompanyOrganizationalModel::find($sectorValue['id']);
-                    $db->ord_setor = $valueantecessor['ord_setor'] . $sectorValue['id'] . $sectorValue['sg_setor'];
+                    $db->ord_setor = $valueantecessor['order'] . $sectorValue['id'] . $sectorValue['acronym'];
                     $db->save();
                 }
             }
@@ -212,7 +192,7 @@ class CompanyOrganizationalController extends Controller
         $db->save();
 
         //Log do Sistema
-        Logger::status($db->no_setor,$data['st_setor']);
+        Logger::status($db->no_setor,$data['status']);
 
         return redirect(route('organizational.organize'));
     }

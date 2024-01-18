@@ -22,22 +22,15 @@ class CompanyAttentionLevelsController extends Controller
      */
     public function index()
     {
-        //Header
-        $header = [
-            'title'=>"Níveis de Atenção/Blocos",
-            'route'=>route('attentions.create'),
-        ];
-
         //Listagem de Dados
         $db = CompanyAttentionLevelsModel::select()
-            ->orderBy('no_nivel_atencao')
+            ->orderBy('attention_level')
             ->get();
 
         //Log do Sistema
-        Logger::access($header['title']);
+        Logger::access();
 
         return view('admin.company.attentions.attentions_index',[
-            'header'=>$header,
             'db'=>$db,
         ]);
     }
@@ -47,17 +40,10 @@ class CompanyAttentionLevelsController extends Controller
      */
     public function create()
     {
-        //Header
-        $header = [
-            'title'=>'Cadastro de Níveis de Atenção/Blocos',
-        ];
-
         //Log do Sistema
-        Logger::create($header['title']);
+        Logger::create();
 
-        return view('admin.company.attentions.attentions_create',[
-            'header'=>$header,
-        ]);
+        return view('admin.company.attentions.attentions_create');
     }
 
     /**
@@ -72,9 +58,10 @@ class CompanyAttentionLevelsController extends Controller
         CompanyAttentionLevelsModel::create($data);
 
         //Log do Sistema
-        Logger::store($data['no_nivel_atencao']);
+        Logger::store();
 
-        return redirect(route('attentions.index'))->with('success','Cadastro salvo com sucesso');
+        return redirect(route('attentions.index'))
+            ->with('success','Cadastro salvo com sucesso');
     }
 
     /**
@@ -90,19 +77,13 @@ class CompanyAttentionLevelsController extends Controller
      */
     public function edit(string $id)
     {
-        //Header
-        $header = [
-            'title'=>'Alterando Níveis de Atenção/Blocos',
-        ];
-
         //Listando Dados
         $db = CompanyAttentionLevelsModel::find($id);
 
         //Log do Sistema
-        Logger::edit($db->no_nivel_atencao);
+        Logger::edit();
 
         return view('admin.company.attentions.attentions_edit',[
-            'header'=>$header,
             'db'=>$db,
         ]);
     }
@@ -118,12 +99,12 @@ class CompanyAttentionLevelsController extends Controller
         //Atualizando dados
         $db = CompanyAttentionLevelsModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::update($db->no_nivel_atencao);
+        Logger::update();
 
-        return redirect(route('attentions.index'))->with('success','Cadastro alterado com sucesso');
+        return redirect(route('attentions.index'))
+            ->with('success','Cadastro alterado com sucesso');
     }
 
     /**

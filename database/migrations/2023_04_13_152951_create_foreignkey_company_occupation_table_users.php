@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('cbo_id')->after('birthday')->nullable();
+            $table->unsignedBigInteger('occupation_id')->after('birthday')->nullable();
 
-            $table->foreign('cbo_id','fk_company_occupations')->references('id')->on('company_occupations');
+            $table->foreign('occupation_id','fk_company_occupations')->references('id')->on('company_occupations');
         });
     }
 
