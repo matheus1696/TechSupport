@@ -15,27 +15,27 @@ class ProductUnitsSeed extends Seeder
     {
         //
         ProductUnitModel::create([
-            'title' => 'Unidade',
+            'unit' => 'Unidade',
             'filter' => 'unidade',
         ]);
         ProductUnitModel::create([
-            'title' => 'Cartelas com 10 unidades',
+            'unit' => 'Cartelas com 10 unidades',
             'filter' => 'Cartelas com 10 unidades',
         ]);
         ProductUnitModel::create([
-            'title' => 'Pacote com 100 unidades',
+            'unit' => 'Pacote com 100 unidades',
             'filter' => 'pacote com 100 unidades',
         ]);
         ProductUnitModel::create([
-            'title' => 'Pacote com 500 unidades',
+            'unit' => 'Pacote com 500 unidades',
             'filter' => 'pacote com 500 unidades',
         ]);
         ProductUnitModel::create([
-            'title' => 'Caixa com 100 unidades',
+            'unit' => 'Caixa com 100 unidades',
             'filter' => 'caixa com 100 unidades',
         ]);
         ProductUnitModel::create([
-            'title' => 'Caixa com 500 unidades',
+            'unit' => 'Caixa com 500 unidades',
             'filter' => 'caixa com 500 unidades',
         ]);
     }

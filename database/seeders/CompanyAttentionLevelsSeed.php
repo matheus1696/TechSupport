@@ -15,19 +15,19 @@ class CompanyAttentionLevelsSeed extends Seeder
     {
         //
         CompanyAttentionLevelsModel::create([
-            'title'=>'Administração',
+            'attention_level'=>'Administração',
         ]);
 
         CompanyAttentionLevelsModel::create([
-            'title'=>'Atenção Especializada',
+            'attention_level'=>'Atenção Especializada',
         ]);
 
         CompanyAttentionLevelsModel::create([
-            'title'=>'Atenção Básica',
+            'attention_level'=>'Atenção Básica',
         ]);
 
         CompanyAttentionLevelsModel::create([
-            'title'=>'Vigilância em Saúde',
+            'attention_level'=>'Vigilância em Saúde',
         ]);
     }
 }

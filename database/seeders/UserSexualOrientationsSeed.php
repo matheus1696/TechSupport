@@ -14,17 +14,17 @@ class UserSexualOrientationsSeed extends Seeder
     public function run(): void
     {
         UserSexualOrientationsModel::create([
-            'title'=>'Masculino',
+            'sexual_orientation'=>'Masculino',
             'status'=>true,
         ]);
 
         UserSexualOrientationsModel::create([
-            'title'=>'Feminino',
+            'sexual_orientation'=>'Feminino',
             'status'=>true,
         ]);
 
         UserSexualOrientationsModel::create([
-            'title'=>'Não Definido',
+            'sexual_orientation'=>'Não Definido',
             'status'=>true,
         ]);
     }

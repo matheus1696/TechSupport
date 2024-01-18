@@ -23,16 +23,16 @@ class DatabaseSeeder extends Seeder
             UserPermissionsSeed::class,
             UserSexualOrientationsSeed::class,
             UserSeed::class,
-            CompanyOrganizationalSeed::class,
-            CompanyOccupationsSeed::class,
             RegionCountriesSeed::class,
             RegionStatesSeed::class,
             RegionCitiesSeed::class,
+            CompanyOrganizationalSeed::class,
+            CompanyOccupationsSeed::class,
             CompanyTypeEstablishmentsSeed::class,
             CompanyAttentionLevelsSeed::class,
             CompanyEstablishmentsSeed::class,
-            ProductUnitsSeed::class,
             CompanyEstablishmentContactsSeed::class,
+            ProductUnitsSeed::class,
         ]);
     }
 }
