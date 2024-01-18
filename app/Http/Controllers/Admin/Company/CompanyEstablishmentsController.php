@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyEstablishmentsStoreRequest;
 use App\Http\Requests\CompanyEstablishmentsUpdateRequest;
-use App\Models\CompanyAttentionLevelsModel;
-use App\Models\CompanyEstablishmentsModel;
-use App\Models\CompanyEstablishmentContactsModel;
-use App\Models\CompanyTypeEstablishmentsModel;
-use App\Models\RegionCitiesModel;
+use App\Models\Company\CompanyAttentionLevelsModel;
+use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Company\CompanyEstablishmentContactsModel;
+use App\Models\Company\CompanyTypeEstablishmentsModel;
+use App\Models\Region\RegionCitiesModel;
 use App\Services\Logger;
 
 class CompanyEstablishmentsController extends Controller
@@ -36,8 +36,8 @@ class CompanyEstablishmentsController extends Controller
 
         //Listagem de Dados
         $db = CompanyEstablishmentsModel::select()
-            ->orderBy('st_unidade','DESC')
-            ->orderBy('no_unidade')
+            ->orderBy('status','DESC')
+            ->orderBy('title')
             ->paginate(20);
 
         $dbLists= CompanyEstablishmentContactsModel::all();
@@ -45,9 +45,9 @@ class CompanyEstablishmentsController extends Controller
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName']) || isset($search['searchCod'])) {
-            $db = CompanyEstablishmentsModel::where('cod_unidade_cnes','LIKE','%'.strtolower($search['searchCod']).'%')
-                ->where('ft_unidade','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('no_unidade')
+            $db = CompanyEstablishmentsModel::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
+                ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('title')
                 ->paginate(20);
         }
 
@@ -73,9 +73,9 @@ class CompanyEstablishmentsController extends Controller
         ];
 
         //Listagem de Dados
-        $dbRegionCities = RegionCitiesModel::where('st_municipio',true)->orderBy('no_municipio')->get();
-        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('st_tipo_estabelecimento',true)->orderBy('no_tipo_estabelecimento')->get();
-        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('st_nivel_atencao',true)->orderBy('no_nivel_atencao')->get();
+        $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
+        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
+        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('title')->get();
 
 
         //Log do Sistema
@@ -96,13 +96,13 @@ class CompanyEstablishmentsController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['ft_unidade'] = StrtoLower($data['no_unidade']);
+        $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
         CompanyEstablishmentsModel::create($data);
 
         //Log do Sistema
-        Logger::store($data['no_unidade']);
+        Logger::store($data['title']);
 
         return redirect(route('establishments.index'))->with('success','Cadastro salvo com sucesso');
     }
@@ -127,9 +127,9 @@ class CompanyEstablishmentsController extends Controller
 
         //Listagem de Dados
         $db = CompanyEstablishmentsModel::find($id);
-        $dbRegionCities = RegionCitiesModel::where('st_municipio',true)->orderBy('no_municipio')->get();
-        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('st_tipo_estabelecimento',true)->orderBy('no_tipo_estabelecimento')->get();
-        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('st_nivel_atencao',true)->orderBy('no_nivel_atencao')->get();
+        $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
+        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
+        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('title')->get();
 
         //Log do Sistema
         Logger::edit($db->no_unidade);
@@ -150,7 +150,7 @@ class CompanyEstablishmentsController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['ft_unidade'] = StrtoLower($data['no_unidade']);
+        $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
         $db = CompanyEstablishmentsModel::find($id);

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('company_occupations', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->string('title');
+            $table->string('occupation');
             $table->string('filter');
             $table->boolean('status')->default(false);
             $table->timestamps();

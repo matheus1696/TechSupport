@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyOrganizationalStoreRequest;
 use App\Http\Requests\CompanyOrganizationalUpdateRequest;
-use App\Models\CompanyOrganizationalModel;
+use App\Models\Company\CompanyOrganizationalModel;
 use App\Services\Logger;
 
 class CompanyOrganizationalController extends Controller

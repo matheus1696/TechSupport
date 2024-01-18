@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\UserSexualOrientationsModel;
+use App\Models\User\UserSexualOrientationsModel;
 use App\Services\Logger;
 
 class UserSexualOrientationsController extends Controller

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text('reference_model_3')->nullable();
             $table->timestamps();
 
-            $table->foreign('process_id')->references('id')->on('bidding_process');
+            $table->foreign('process_id')->references('id')->on('bidding_processes');
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('units_id')->references('id')->on('product_units');
         });

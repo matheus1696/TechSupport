@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('company_attention_levels', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('attention_level');
             $table->string('color')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

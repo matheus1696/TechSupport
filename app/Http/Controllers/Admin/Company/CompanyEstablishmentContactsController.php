@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\CompanyEstablishmentsModel;
-use App\Models\CompanyEstablishmentContactsModel;
+use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Company\CompanyEstablishmentContactsModel;
 use App\Services\Logger;
 
 class CompanyEstablishmentContactsController extends Controller

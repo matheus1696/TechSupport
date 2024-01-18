@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users_sexual_orientations', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('sexual_orientation');
             $table->boolean('status');
             $table->timestamps();
         });

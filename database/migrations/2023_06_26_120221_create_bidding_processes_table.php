@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bidding_process', function (Blueprint $table) {
+        Schema::create('bidding_processes', function (Blueprint $table) {
             $table->id();
             $table->text('title');
             $table->string('filter');

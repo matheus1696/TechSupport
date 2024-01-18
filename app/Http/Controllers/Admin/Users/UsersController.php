@@ -8,8 +8,8 @@ use App\Models\CompanyEstablishmentsModel;
 use App\Models\CompanyOccupationsModel;
 use App\Models\CompanyOrganizationalModel;
 use App\Models\User;
-use App\Models\UserHasPermissionsModel;
-use App\Models\UserPermissionsModel;
+use App\Models\User\UserHasPermissionsModel;
+use App\Models\User\UserPermissionsModel;
 use App\Services\Logger;
 
 class UsersController extends Controller
@@ -36,9 +36,9 @@ class UsersController extends Controller
         $db = User::orderBy('name')->get();
         $dbPermissions= UserPermissionsModel::all();
         $dbHasPermissions = UserHasPermissionsModel::all();
-        $dbCompanyOrganizational = CompanyOrganizationalModel::where('st_setor',true)->orderBy('ord_setor')->get();
-        $dbCompanyOccupations = CompanyOccupationsModel::where('st_cbo',true)->orderBy('cod_cbo')->get();
-        $dbEstablishments = CompanyEstablishmentsModel::where('st_unidade',true)->orderBy('no_unidade')->get();
+        $dbCompanyOrganizational = CompanyOrganizationalModel::where('status',true)->orderBy('hierarchy')->get();
+        $dbCompanyOccupations = CompanyOccupationsModel::where('status',true)->orderBy('code')->get();
+        $dbEstablishments = CompanyEstablishmentsModel::where('status',true)->orderBy('title')->get();
 
         //Pesquisar Dados
         $search=$request->all();

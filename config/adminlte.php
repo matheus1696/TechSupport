@@ -14,9 +14,9 @@ return [
     |
     */
 
-    'title' => 'Gest360',
-    'title_prefix' => 'Gest360 - ',
-    'title_postfix' => '',
+    'title' => 'TechSupport',
+    'title_prefix' => '',
+    'title_postfix' => ' - TechSupport',
 
     /*
     |--------------------------------------------------------------------------
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>Gest360</b>',
+    'logo' => 'Tech<b>Support</b>',
     'logo_img' => 'assets/img/gest360Logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Gest360',
+    'logo_img_alt' => 'TechSupport',
 
     /*
     |--------------------------------------------------------------------------
@@ -131,7 +131,7 @@ return [
 
     'usermenu_enabled' => true,
     'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
+    'usermenu_header_class' => 'bg-success',
     'usermenu_image' => false,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
@@ -167,12 +167,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary elevation-3',
+    'classes_auth_card' => 'card-outline card-success elevation-3 text-sm',
     'classes_auth_header' => '',
     'classes_auth_body' => 'text-dark',
     'classes_auth_footer' => 'text-center',
-    'classes_auth_icon' => 'text-primary',
-    'classes_auth_btn' => 'btn btn-block btn-primary elevation-3',
+    'classes_auth_icon' => 'text-success',
+    'classes_auth_btn' => 'btn btn-block btn-success elevation-1',
 
     /*
     |--------------------------------------------------------------------------

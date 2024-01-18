@@ -1,8 +1,8 @@
-# Sistema Gest360 - Sistema de Gestão Interno
+# TechSupport - Sistema de Gestão
 
 ## Apresentação
 
-O Gest360 é um sistema de controle interno de gestão projetado especialmente para atender às necessidades de órgãos públicos. Composto por módulos cuidadosamente estruturados, o sistema oferece recursos avançados para gerenciar eficientemente diversos departamentos.
+O TechSupport é um sistema de controle interno de gestão projetado especialmente para atender às necessidades de órgãos públicos inicialmente para o setor de tecnologia da informação e comunicação. Composto por módulos cuidadosamente estruturados, o sistema oferece recursos avançados para gerenciar eficientemente diversos departamentos.
 
 Nossa solução utiliza tecnologia de ponta no desenvolvimento de software e conta com um gerenciador de banco de dados robusto. Isso garante segurança e estabilidade excepcionais, proporcionando uma solução de gerenciamento confiável e duradoura.
 

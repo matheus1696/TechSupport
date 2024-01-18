@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\CompanyAttentionLevelsModel;
+use App\Models\Company\CompanyAttentionLevelsModel;
 use App\Services\Logger;
 
 class CompanyAttentionLevelsController extends Controller

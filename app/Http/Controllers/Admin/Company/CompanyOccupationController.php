@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\CompanyOccupationsModel;
+use App\Models\Company\CompanyOccupationsModel;
 use App\Services\Logger;
 
 class CompanyOccupationController extends Controller

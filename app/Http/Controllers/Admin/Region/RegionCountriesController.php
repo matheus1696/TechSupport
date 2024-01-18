@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Region;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\RegionCountriesModel;
+use App\Models\Region\RegionCountriesModel;
 use App\Services\Logger;
 
 class RegionCountriesController extends Controller
