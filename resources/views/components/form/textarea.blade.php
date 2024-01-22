@@ -3,11 +3,13 @@
     <textarea
         name="{{$id}}"
         id="{{$id}}"
-        class="form-control summernote @error($id) is-invalid border border-danger @enderror"
+        class="form-control @error($id) is-invalid border border-danger @enderror summernote"
         rows="{{$rows ?? 4}}"
     >@if(empty($value)){{old($id)}}@else{!!$value!!}@endif</textarea>
 
     @error($id)
-        <span class="px-1 font-weight-bold invalid-feedback">{{ $message }}</span>
+        <x-form.errors-message>
+            {{$message}}
+        </x-form.errors-message>
     @enderror
 </div>

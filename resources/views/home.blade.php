@@ -1,12 +1,5 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1 class="text-center">{{env('APP_NAME')}}</h1>
-@stop
-
-@section('content')
+<x-pages.index>
+    @slot('body')
     <h3>Permissões</h3>
     <p>
         @can('user')
@@ -22,12 +15,5 @@
         <p>Administrador do Sistema</p>
         @endcan
     </p>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop
+    @endslot
+</x-pages.index>

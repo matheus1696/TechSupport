@@ -16,7 +16,7 @@
             <div class="row col-md-7">
                 @include('users.profile.partials.form_user_destroy')
             </div>
-
+            
         </div>
     @endslot
 </x-pages.index>

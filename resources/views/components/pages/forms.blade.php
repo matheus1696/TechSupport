@@ -32,15 +32,6 @@
 @stop
 
 @section('css')
-    <!-- Configuração do Select2 -->
-    <!-- Styles -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <!-- Configuração do Summernote -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" />
 @endsection
@@ -50,7 +41,7 @@
     <script>
         $(document).ready(function() {
                 $('.js-select').select2({
-                    theme: 'bootstrap-5'
+                    theme: 'bootstrap4'
                 });
             });
     </script>

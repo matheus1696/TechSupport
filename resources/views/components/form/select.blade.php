@@ -1,14 +1,19 @@
-<div class="form-group col-lg-{{$col ?? "6"}} text-sm">
-    <label for="{{$id}}" class="ml-1 col-form-label">{{$label ?? "Label"}}:</label>
-    <select
+<div class="form-group col-lg-{{$col ?? "6"}} text-sm mb-0">
+    
+    <x-adminlte-select2 
         name="{{$id}}"
         id="{{$id}}"
-        class="form-control @error($id) is-invalid border border-danger @enderror js-select"
+        class="form-control"
     >
         <option selected disabled>Selecione</option>
         {{$slot}}
-    </select>
+    </x-adminlte-select2>
+
     @error($id)
-        <span class="ml-1 font-weight-bold invalid-feedback">{{ $message }}</span>
+        <x-form.errors-message>
+            {{$message}}
+        </x-form.errors-message>
     @enderror
 </div>
+
+

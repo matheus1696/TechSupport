@@ -12,7 +12,7 @@
             <x-form.input col="6" label="Senha" type="password" id="password" />
             <x-form.input col="6" label="Confirmar Senha" type="password" id="password_confirmation" />
         </div>
-
+        
         <!-- Inicio de Componentização dos Botões -->
         <x-button.buttonGroup>
             <x-button.buttonSubmit action="edit" col="12" />
