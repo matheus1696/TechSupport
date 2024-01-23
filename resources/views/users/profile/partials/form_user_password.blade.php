@@ -2,13 +2,13 @@
 <x-conteiner>
     <h3 class="mb-3 text-center">Alteração de Senha</h3>
 
-    <form method="POST" action="{{route('profile.update',['profile'=>$dbUser->id])}}">
+    <form method="POST" action="{{route('profile.update',['profile'=>$db->id])}}">
         @csrf @method('PUT')
 
         <div class="form-row justify-content-center">
 
             <!-- Inicio de Componentização de Input e Select -->
-            <x-form.input col="12" label="Email" id="email" value="{{$dbUser->email}}" disabled="disabled" />
+            <x-form.input col="12" label="Email" id="email" value="{{$db->email}}" disabled="disabled" />
             <x-form.input col="6" label="Senha" type="password" id="password" />
             <x-form.input col="6" label="Confirmar Senha" type="password" id="password_confirmation" />
         </div>

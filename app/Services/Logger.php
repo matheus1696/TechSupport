@@ -7,27 +7,29 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SystemLogsModel;
 
 #Code Logger
-    ##Acessos = 1000
-        #index = Acesso a listagem de dados = 1100
-        #show = Acesso detalhado ao dado = 1101
-        #create = Formulário de criação = 1200
-        #edit = Formulário de edição = 1300
-    ##Ações = 2000
-        #store = Criação de dados = 2100
-        #update Edição de dados = 2200
-        #destroy = Exclusão de dados = 2300
-        #status = Alteração de Status = 2400
-    ##Informações/Histórico = 3000
-        #link = Vincular Cadastro = 3100
-    ##Logs Especificos - 7000 a 8999
-        ##Usuários
-            #updateProfileData = Alteração no Perfil do Usuário = 8901
-            #updateProfilePassword = Alteração na Senha do Usuário = 8902
-            #updateProfileDestroy = Exclusão do Usuário = 8903
-            #updateUserPermission = Alteração nas Permissões do Usuário = 8904
-            #updateUserVerify = Verificação da conta do Usuário = 8904
-    ##Erros
-        #error = Erros de Acesso = 9000
+	##Acessos = 1000
+		#index = Acesso a listagem de dados = 1100
+		#show = Acesso detalhado ao dado = 1101
+		#create = Formulário de criação = 1200
+		#edit = Formulário de edição = 1300
+	##Ações = 2000
+		#store = Criação de dados = 2100
+		#update Edição de dados = 2200
+		#destroy = Exclusão de dados = 2300
+		#status = Alteração de Status = 2400
+	##Informações/Histórico = 3000
+		#link = Vincular Cadastro = 3100
+	##Logs Especificos - 7000 a 8999
+		##Usuários
+			#editUserProfile = Formulário de Alteração do Perfil do Usuário = 8900
+			#updateUserProfileData = Alteração no Perfil do Usuário = 8901
+			#updateUserProfilePassword = Alteração na Senha do Usuário = 8902
+			#updateUserProfileDestroy = Exclusão do Usuário = 8903
+			#updateUserPermission = Alteração nas Permissões do Usuário = 8904
+			#updateUserVerify = Verificação da conta do Usuário = 8905
+			#errorUserNoExistent = Tentativa de acesso a o perfil do usuário inexistente = 8906
+	##Erros
+		#error = Erros de Acesso = 9000
 
 
 class Logger
@@ -72,8 +74,8 @@ class Logger
         self::Logs(2300,"Exclusão de dados.");
     }
 
-    public static function status(){
-        self::Logs(2400,"Alteração de status.");
+    public static function status($data, $status){
+        self::Logs(2400,"Alteração de status do objeto com ID " . $data . " para o status " . $status);
     }
 
     public static function link(){
@@ -81,30 +83,48 @@ class Logger
     }
 
     //Update Profile
+        public static function editUserProfile($message){
+            self::Logs(8900,"Acesso ao formulário de edição do perfil do usuário " . $message . ".");
+        }      
 
-    public static function updateProfileData(){
-        self::Logs(8991,"Edição do perfil do usuário.");
-    }
+        public static function errorUserNoExistent(){
+            self::Logs(8901,"Tentativa de acesso a o perfil do usuário inexistente");
+        }
 
-    public static function updateProfilePassword(){
-        self::Logs(8992,"Alteração do perfil do usuário.");
-    }
+        public static function updateUserProfileData($message){
+            self::Logs(8902,"Edição dos dados do usuário " . $message . ".");
+        }
 
-    public static function updateProfileDestroy(){
-        self::Logs(8993,"Exclusão do usuário.");
-    }
+        public static function updateUserProfilePassword($message){
+            self::Logs(8903,"Alteração de senha do usuário " . $message . ".");
+        }
 
-    //Update Admin User
+        public static function errorUserDiferentEdit(){
+            self::Logs(8904,"Tentativa de altualização de perfil do usuário diferente ou inexistente");
+        }
 
-    public static function updateUserPermission(){
-        self::Logs(8994,"Alterando permissão do usuário.");
-    }
+        public static function updateProfileDestroy($message){
+            self::Logs(8905,"Exclusão do usuário " . $message . ".");
+        }          
 
-    public static function updateUserVerify(){
-        self::Logs(8995,"Encaminhado verificação de conta do usuário.");
-    }
+        public static function errorUserDiferentDestroy(){
+            self::Logs(8906,"Tentativa de exclusão de perfil do usuário diferente ou inexistente");
+        }
 
-    public static function error(){
-        self::Logs(9000,"Erro");
+        public static function updateUserPermission($message){
+            self::Logs(8907,"Alterando permissão do usuário " . $message . ".");
+        }
+
+        public static function updateUserVerify($message){
+            self::Logs(8908,"Encaminhado verificação de conta do usuário " . $message . ".");
+        }
+
+    //Errors
+        public static function error(){
+            self::Logs(9000,"Erro");
+        }
+
+    public static function errorImproperAccess(){
+        self::Logs(9001,"Página não existe");
     }
 }

@@ -5,6 +5,6 @@
 
     <!-- Inicio de Componentização dos Botões -->
     <x-button.buttonGroup>
-        <x-button.buttonDelete col="12" route="{{route('profile.destroy',['profile'=>$dbUser->id])}}" />
+        <x-button.buttonDelete col="12" route="{{route('profile.destroy',['profile'=>$db->id])}}" />
     </x-button.buttonGroup>
 </x-conteiner>

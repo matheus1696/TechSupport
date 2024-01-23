@@ -104,10 +104,9 @@ class RegionStatesController extends Controller
         //Salvando Dados
         $db = RegionStatesModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::status($db->no_estado,$db->st_estado);
+        Logger::status($db->id, $db->status);
 
         return redirect(route('states.index'));
     }

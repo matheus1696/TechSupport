@@ -28,7 +28,7 @@
                 <td>{{$item->RegionStates->state}}</td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}"
-                        route="{{route('cities.status',['city'=>$item->id])}}" name="status" />
+                        route="{{route('cities.status',['city'=>$item->id])}}"/>
                 </td>
             </tr>
             @endforeach

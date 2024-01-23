@@ -27,7 +27,6 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-
         //Listando Dados
         $db = User::orderBy('name')->with('SexualOrientations')->paginate(20);
         $dbPermissions= UserPermissionsModel::all();
@@ -72,8 +71,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-
-
+        //
     }
 
     /**
@@ -89,7 +87,7 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-
+        //
     }
 
     /**
@@ -113,7 +111,7 @@ class UsersController extends Controller
         $db->update($data);
 
         //Log do Sistema
-        Logger::updateProfileData();
+        Logger::updateUserProfileData($db->name);
 
         //Alterando Permissão do Usuário
             //Listando Permissões
@@ -142,7 +140,7 @@ class UsersController extends Controller
                     $data->save();
 
                     //Log do Sistema
-                    Logger::updateUserPermission();
+                    Logger::updateUserPermission($db->name);
                 }
             }
 
@@ -166,7 +164,7 @@ class UsersController extends Controller
         $db->save();
 
         //Log do Sistema
-        Logger::updateUserVerify();
+        Logger::updateUserVerify($db->name);
 
         return redirect(route('users.index'))
             ->with('success','Atualização realizada com sucesso.');

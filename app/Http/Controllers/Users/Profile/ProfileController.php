@@ -64,20 +64,20 @@ class ProfileController extends Controller
     public function edit(string $id)
     {
         //Listando Dados
-        $dbUser = User::find($id);
+        $db = User::find($id);
         $dbUserSex = UserSexModel::where('status',true)->get();
 
-        if ($dbUser && $dbUser->id === Auth::user()->id) {
+        if ($db && $db->id === Auth::user()->id) {
             //Log do Sistema
-            Logger::edit();
+            Logger::editUserProfile($db->name);
 
             return view('users.profile.profile_index',[
-                'dbUser'=>$dbUser,
+                'db'=>$db,
                 'dbUserSex'=>$dbUserSex,
             ]);
         } else {
             //Log do Sistema
-            Logger::error('Usuário informado não existe');
+            Logger::errorUserNoExistent('Usuário informado não existe');
 
             return redirect(route('home'));
         }
@@ -89,27 +89,34 @@ class ProfileController extends Controller
     public function update(UserUpdateRequest $request, string $id)
     {
         //Listando Usuário
-        $dbUser = User::find($id);
+        $db = User::find($id);
 
-        //Alterando Dados do Usuário
-        $data = $request->all();
-        $dbUser->update($data);
-        $dbUser->save();
+        if ($db && $db->id === Auth::user()->id) {
+            //Alterando Dados do Usuário
+            $data = $request->all();
+            $db->update($data);
 
-        //Alterando Senha
-        if ($request['password']) {
-            $dbUser->password = Hash::make($request['password']);
-            $dbUser->save();
+            //Alterando Senha
+            if ($request['password']) {
+                $db->password = Hash::make($request['password']);
+                $db->save();
+
+                //Log do Sistema
+                Logger::updateUserProfilePassword($db->name);
+            }
 
             //Log do Sistema
-            Logger::updateProfilePassword('Atualização de Senha do Usuário '.$dbUser->name);
-        }
+            Logger::updateUserProfileData($db->name);
 
-        //Log do Sistema
-        Logger::updateProfileData('Atualização dos Dados do Perfil do Usuário '.$dbUser->name);
+            return redirect(route('profile.edit',['profile'=>$id]))
+                ->with('success','Alteração dos dados realizada com sucesso.');
 
-        return redirect(route('profile.edit',['profile'=>$id]))
-            ->with('success','Alteração dos dados realizada com sucesso.');
+        } else {
+            //Log do Sistema
+            Logger::errorUserDiferentDestroy();
+
+            return redirect(route('home'));
+        };
     }
 
     /**
@@ -118,20 +125,20 @@ class ProfileController extends Controller
     public function destroy(string $id)
     {
         //Listando Usuário
-        $dbUser = User::find($id);
+        $db = User::find($id);
 
         //Excluindo Usuário
-        if ($dbUser) {
-            $dbUser->delete();
+        if ($db && $db->id === Auth::user()->id) {
+            $db->delete();
 
             //Log do Sistema
-            Logger::updateProfileDestroy($dbUser->name);
+            Logger::updateProfileDestroy($db->name);
 
             Auth::logout();
             return redirect(route('login'));
         } else {
             //Log do Sistema
-            Logger::error('Usuário informado não existe');
+            Logger::errorUserDiferentDestroy();
 
             return redirect(route('home'));
         };

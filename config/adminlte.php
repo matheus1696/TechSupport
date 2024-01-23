@@ -348,13 +348,6 @@ return [
                             'icon'    => 'fas fa-users',
                             'can'     => ['sysadmin'],
                         ],
-                        [
-                            'text'    => 'Orientação Sexual',
-                            'classes' => 'btn-sm',
-                            'route'   => 'sexualorientations.index',
-                            'icon'    => 'fas fa-venus-mars',
-                            'can'     => ['sysadmin'],
-                        ],
                     ]
                 ],
                 [
