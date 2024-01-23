@@ -64,7 +64,6 @@ class UsersController extends Controller
             'dbCompanyOrganizational'=>$dbCompanyOrganizational,
             'dbCompanyOccupations'=>$dbCompanyOccupations,
             'dbEstablishments'=>$dbEstablishments,
-
         ]);
     }
 

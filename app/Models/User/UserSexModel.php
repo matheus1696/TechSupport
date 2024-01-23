@@ -5,15 +5,14 @@ namespace App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserSexualOrientationsModel extends Model
+class UserSexModel extends Model
 {
     use HasFactory;
 
-    protected $table = "users_sexual_orientations";
+    protected $table = "users_sex";
 
-    protected $fillable =
-    [
-        'sexual_orientation',
+    protected $fillable = [
+        'sex',
         'status'
     ];
 }

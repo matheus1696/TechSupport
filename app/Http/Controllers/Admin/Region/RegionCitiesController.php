@@ -34,10 +34,10 @@ class RegionCitiesController extends Controller
             $db = RegionCitiesModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('city')
                 ->paginate(20);
-
-            //Log do Sistema
-            Logger::access();
         }
+
+        //Log do Sistema
+        Logger::access();
 
         return view('admin.region.cities.cities_index',[
             'search'=>$search,
@@ -104,10 +104,9 @@ class RegionCitiesController extends Controller
         //Salvando Dados
         $db = RegionCitiesModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::status($db->no_municipio,$db->st_municipio);
+        Logger::status();
 
         return redirect(route('cities.index'));
     }

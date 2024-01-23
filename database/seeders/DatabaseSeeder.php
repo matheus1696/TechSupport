@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserPermissionsSeed::class,
-            UserSexualOrientationsSeed::class,
+            UserSexSeed::class,
             UserSeed::class,
             RegionCountriesSeed::class,
             RegionStatesSeed::class,

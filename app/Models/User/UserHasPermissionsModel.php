@@ -12,8 +12,7 @@ class UserHasPermissionsModel extends Model
     protected $table = "model_has_permissions";
     public $timestamps = false;
 
-    protected $fillable =
-    [
+    protected $fillable = [
         'permission_id',
         'model_type',
         'model_id',

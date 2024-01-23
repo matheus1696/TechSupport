@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
-use App\Models\User\UserSexualOrientationsModel;
+use App\Models\User\UserSexModel;
 use App\Services\Logger;
 
 class ProfileController extends Controller
@@ -63,23 +63,17 @@ class ProfileController extends Controller
      */
     public function edit(string $id)
     {
-        //Informações da Página
-        $header = [
-            'title'=>'Perfil do Usuário'
-        ];
-
         //Listando Dados
         $dbUser = User::find($id);
-        $dbUserSexualOrientations = UserSexualOrientationsModel::where('status',true)->get();
+        $dbUserSex = UserSexModel::where('status',true)->get();
 
         if ($dbUser && $dbUser->id === Auth::user()->id) {
             //Log do Sistema
-            Logger::edit($header['title'].' '.$dbUser->name);
+            Logger::edit();
 
             return view('users.profile.profile_index',[
-                'header'=>$header,
                 'dbUser'=>$dbUser,
-                'dbUserSexualOrientations'=>$dbUserSexualOrientations,
+                'dbUserSex'=>$dbUserSex,
             ]);
         } else {
             //Log do Sistema

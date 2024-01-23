@@ -1,4 +1,3 @@
-<!-- Inicio de Componentização da Página Index -->
 <x-pages.index paginate="{{$db->links()}}">
     @slot('body')
     <x-conteiner>

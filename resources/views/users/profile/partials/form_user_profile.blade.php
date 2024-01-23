@@ -12,9 +12,9 @@
                 max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}"/>
 
             <x-form.select col="6" label="Sexo" id="sexual_orientation_id">
-                @foreach ($dbUserSexualOrientations as $dbUserSexualOrientation)
-                <option value="{{$dbUserSexualOrientation->id}}" @if ($dbUser->sexual_orientation_id ==
-                    $dbUserSexualOrientation->id) selected @endif>{{$dbUserSexualOrientation->sexual_orientation}}
+                @foreach ($dbUserSex as $dbUserSex)
+                <option value="{{$dbUserSex->id}}" @if ($dbUser->sexual_orientation_id ==
+                    $dbUserSex->id) selected @endif>{{$dbUserSex->sex}}
                 </option>
                 @endforeach
             </x-form.select>

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_sexual_orientations', function (Blueprint $table) {
+        Schema::create('users_sex', function (Blueprint $table) {
             $table->id();
-            $table->string('sexual_orientation');
+            $table->string('sex');
             $table->boolean('status');
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_sexual_orientations');
+        Schema::dropIfExists('users_sex');
     }
 };
