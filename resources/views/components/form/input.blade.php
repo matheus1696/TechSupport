@@ -23,11 +23,3 @@
         </x-form.errors-message>
     @enderror
 </div>
-
-
-<!-- Máscara Telefone -->
-    @if (isset($type))
-        @if ($type == 'tel')
-            <script src="{{asset('assets/js/maskphone.js')}}"></script>
-        @endif
-    @endif

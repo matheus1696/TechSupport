@@ -9,7 +9,7 @@
             <x-form.input col="12" label="Nome Completo" id="name" value="{{$dbUser->name}}" required="required" />
 
             <x-form.input col="6" label="Data Nascimento" type="date" id="birthday" value="{{$dbUser->birthday}}"
-                max="{{date('Y-m-d')}}" />
+                max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}"/>
 
             <x-form.select col="6" label="Sexo" id="sexual_orientation_id">
                 @foreach ($dbUserSexualOrientations as $dbUserSexualOrientation)

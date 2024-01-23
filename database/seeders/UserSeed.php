@@ -22,7 +22,7 @@ class UserSeed extends Seeder
             'birthday'=>'2024-01-18',
             'email_verified_at'=>now(),
             'password'=> Hash::make('sysadmin'),
-        ])->givePermissionTo('user','admin','sysadmin');
+        ])->givePermissionTo('bidding','user','admin','sysadmin');
 
         User::create([
             'name'=>'Administrador',

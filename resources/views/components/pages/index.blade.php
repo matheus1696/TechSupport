@@ -7,7 +7,7 @@
 @section('content')
     <section class="pb-5">
         <!-- Alerta de Atulizações -->
-        <x-alert.alert />
+        @include('components.alert.alert')
 
         <!-- Inicio de Componentização do Conteiner -->
         {{$body ?? ""}}
@@ -18,12 +18,10 @@
     </section>
 @stop
 
+@section('css')
+    @include('components.pages.partials.css')
+@endsection
+
 @section('js')
-<script>
-    $(document).ready(function() {
-            $('.js-select').select2({
-                theme: 'bootstrap-5'
-            });
-        });
-</script>
+    @include('components.pages.partials.js')
 @endsection
