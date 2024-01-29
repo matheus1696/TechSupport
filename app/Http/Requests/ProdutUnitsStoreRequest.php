@@ -22,7 +22,7 @@ class ProdutUnitsStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'no_unidade_medida' => 'required|min:6|unique:product_units',
+            'unit' => 'required|min:6|lowercase|unique:product_units,unit',
         ];
     }
 
@@ -34,7 +34,7 @@ class ProdutUnitsStoreRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'no_unidade_medida' => 'unidade de medida',
+            'unit' => 'unidade de medida',
         ];
     }
 }

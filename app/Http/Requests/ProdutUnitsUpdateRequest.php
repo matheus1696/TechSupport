@@ -23,10 +23,11 @@ class ProdutUnitsUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'no_unidade_medida' => [
+            'unit' => [
                 'required',
                 'min:6',
-                Rule::unique('product_units')->ignore($this->unit),
+                'lowercase',
+                Rule::unique('product_units')->ignore($this->unit, 'unit'),
             ],
         ];
     }
@@ -39,7 +40,7 @@ class ProdutUnitsUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'no_unidade_medida' => 'unidade de medida',
+            'unit' => 'unidade de medida',
         ];
     }
 }

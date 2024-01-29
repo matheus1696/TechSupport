@@ -28,7 +28,7 @@ class ProductUnitController extends Controller
         $db = ProductUnitModel::select()
             ->orderBy('status','desc')
             ->orderBy('unit')
-            ->paginate();
+            ->paginate(20);
 
         //Pesquisar Dados
         $search = $request->all();
@@ -66,7 +66,7 @@ class ProductUnitController extends Controller
         $data['filter'] = StrtoLower($data['unit']);
 
         //Salvando Dados
-        ProductUnitModel::create();
+        ProductUnitModel::create($data);
 
         Logger::store();
 

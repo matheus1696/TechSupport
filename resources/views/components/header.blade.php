@@ -7,7 +7,7 @@
             </div>
             @isset($route)                
                 <div>
-                    <a href="{{ route() }}">
+                    <a href="{{$route}}">
                         <span><i class="text-xl text-success fas fa-plus-square"></i></span>
                     </a>
                 </div>
