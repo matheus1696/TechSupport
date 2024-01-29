@@ -1,4 +1,10 @@
 <x-pages.index paginate="{{$db->links()}}">
+
+    <!-- Slot Header -->
+    @slot('header')
+        <x-header title="Lista de Ocupações"/>
+    @endslot
+    
     @slot('body')
     <x-conteiner>
 

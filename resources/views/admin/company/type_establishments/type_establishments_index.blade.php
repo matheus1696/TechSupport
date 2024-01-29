@@ -1,4 +1,10 @@
 <x-pages.index paginate="{{$db->links()}}">
+
+    <!-- Slot Header -->
+    @slot('header')
+        <x-header title="Tipo de Estabelecimento"/>
+    @endslot
+    
     @slot('body')
     <x-conteiner>
         <x-table.table>

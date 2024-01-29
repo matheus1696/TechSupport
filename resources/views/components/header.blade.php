@@ -1,6 +1,17 @@
 <!-- Componente Header -->
 <div>
     @isset($title)
-        <h1 class="mt-2 text-center">{{$title}}</h1>
+        <div class="pl-3 pr-5 mt-3 row justify-content-between align-items-center">
+            <div>
+                <h1 class="text-center">{{$title}}</h1>
+            </div>
+            @isset($route)                
+                <div>
+                    <a href="{{ route() }}">
+                        <span><i class="text-xl text-success fas fa-plus-square"></i></span>
+                    </a>
+                </div>
+            @endisset
+        </div>
     @endisset
 </div>

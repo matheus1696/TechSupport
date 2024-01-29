@@ -153,7 +153,7 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-
+        //
     }
 
     public function verify(string $id)

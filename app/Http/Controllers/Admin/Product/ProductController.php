@@ -137,7 +137,7 @@ class ProductController extends Controller
         $db->update($data);
 
         //Logs
-        Logger::status();
+        Logger::status($db->id, $db->status);
 
         return redirect(route('products.index'))->with('success','Status alterado com sucesso.');
     }

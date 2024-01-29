@@ -1,7 +1,5 @@
 <!-- Inicio de Componentização da Página Index -->
 <x-pages.index>
-    @slot('title', 'Perfil Usuário')
-
     @slot('body')
         <div class="row justify-content-center">
 

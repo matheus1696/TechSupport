@@ -1,4 +1,10 @@
 <x-pages.index paginate="{{$db->links()}}">
+
+    <!-- Slot Header -->
+    @slot('header')
+        <x-header title="Processos Licitatórios"/>
+    @endslot
+    
     @slot('body')
     <x-conteiner>
 

@@ -93,7 +93,7 @@ class CompanyOccupationController extends Controller
         $db->update($data);
 
         //Log do Sistema
-        Logger::status();
+        Logger::status($db->id, $db->status);
 
         return redirect(route('occupations.index'));
     }

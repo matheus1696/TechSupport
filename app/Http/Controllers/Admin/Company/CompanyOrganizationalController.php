@@ -189,10 +189,9 @@ class CompanyOrganizationalController extends Controller
 
         //Salvando Dados
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::status($db->no_setor,$data['status']);
+        Logger::status($db->id, $db->status);
 
         return redirect(route('organizational.organize'));
     }

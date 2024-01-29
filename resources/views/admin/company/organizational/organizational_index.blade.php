@@ -1,5 +1,11 @@
 
     <x-pages.index>
+
+        <!-- Slot Header -->
+        @slot('header')
+            <x-header title="Organograma"/>
+        @endslot
+        
         @slot('body')
             <x-conteiner>
 

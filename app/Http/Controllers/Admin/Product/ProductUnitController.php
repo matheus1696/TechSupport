@@ -135,7 +135,7 @@ class ProductUnitController extends Controller
         $db = ProductUnitModel::find($id);
         $db->update($data);
 
-        Logger::status();
+        Logger::status($db->id, $db->status);
 
         return redirect(route('units.index'))->with('success','Status alterado com sucesso.');
     }

@@ -1,6 +1,12 @@
 
     <!-- Inicio de Componentização Page Index -->
     <x-pages.index paginate="{{$db->links()}}">
+
+        <!-- Slot Header -->
+        @slot('header')
+            <x-header title="Lista de Unidade de Medidas"/>
+        @endslot
+        
         @slot('body')
             <x-conteiner>
 

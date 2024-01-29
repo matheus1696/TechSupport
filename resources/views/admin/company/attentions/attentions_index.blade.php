@@ -1,4 +1,10 @@
-<x-pages.index>
+<x-pages.index>    
+
+    <!-- Slot Header -->
+    @slot('header')
+        <x-header title="Lista de Níveis de Atenção"/>
+    @endslot
+    
     @slot('body')
     <x-conteiner>
         <x-table.table>

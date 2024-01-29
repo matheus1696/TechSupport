@@ -183,7 +183,7 @@ class CompanyEstablishmentsController extends Controller
         $db->save();
 
         //Log do Sistema
-        Logger::status($db->no_unidade,$data['st_unidade']);
+        Logger::status($db->id, $db->status);
 
         return redirect(route('establishments.index'))->with('success','Status alterado com sucesso.');
     }

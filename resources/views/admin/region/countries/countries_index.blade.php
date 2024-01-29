@@ -1,5 +1,11 @@
 <!-- Inicio de Componentização da Página Index -->
 <x-pages.index paginate="{{$db->links()}}">
+
+    <!-- Slot Header -->
+    @slot('header')
+        <x-header title="Lista de Paises"/>
+    @endslot
+    
     @slot('body')
     <x-conteiner>
 
