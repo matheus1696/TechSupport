@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bidding_processes', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
+            $table->text('bidding_process');
             $table->string('filter');
             $table->text('description');
             $table->string('code_process')->unique()->nullable();

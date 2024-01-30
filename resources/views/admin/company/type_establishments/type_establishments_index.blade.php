@@ -1,10 +1,9 @@
 <x-pages.index>
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Tipo de Estabelecimento" route="{{ 'type_establishments.create' }}"/>
+        <x-header title="Tipo de Estabelecimento"/>
     @endslot
-    
-    
+        
     <!-- Slot Body -->
     @slot('body')
     <x-conteiner>

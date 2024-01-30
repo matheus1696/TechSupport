@@ -22,10 +22,10 @@ class ProdutsStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'no_produto' => 'required',
-            'cod_produto' => 'required|min:3|uppercase|unique:products',
-            'desc_produto' => 'required|min:20',
-            'tp_produto' => 'required',
+            'product' => 'required|unique:products',
+            'code' => 'required|min:3|uppercase|unique:products',
+            'description' => 'required|min:20',
+            'type' => 'required',
         ];
     }
 
@@ -37,10 +37,10 @@ class ProdutsStoreRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'no_produto' => 'nome do produto',
-            'cod_produto' => 'código do produto',
-            'desc_produto' => 'descrição do produto',
-            'tp_produto' => 'tipo do produto',
+            'product' => 'nome do produto',
+            'code' => 'código do produto',
+            'description' => 'descrição do produto',
+            'type' => 'tipo do produto',
         ];
     }
 }

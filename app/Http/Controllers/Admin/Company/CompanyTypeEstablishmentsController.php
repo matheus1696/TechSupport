@@ -46,10 +46,7 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function create()
     {
-        //Log do Sistema
-        Logger::create();
-
-        return view('admin.company.type_establishments.type_establishments_create');
+        //
     }
 
     /**
@@ -57,17 +54,7 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //Dados do Formulário
-        $data = $request->all();
-
-        //Salvando Dados
-        CompanyTypeEstablishmentsModel::create($data);
-
-        //Log do Sistema
-        Logger::store();
-
-        return redirect(route('type_establishments.index'))
-            ->with('success','Cadastro realizado com sucesso');
+        //
     }
 
     /**

@@ -23,31 +23,31 @@ class BiddingUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'no_processo' => 'required|min:6',
-            'desc_processo' => 'required|min:20',
-            'cod_processo' => [
+            'bidding_process' => 'required|min:6',
+            'description' => 'required|min:20',
+            'code_process' => [
                 'nullable',
                 'max:9',
                 'min:8',
                 'uppercase',
-                Rule::unique('bidding_process')->ignore($this->bidding),
+                Rule::unique('bidding_processes')->ignore($this->bidding_process),
             ],
-            'cod_pregao' => [
+            'code_auction' => [
                 'nullable',
                 'max:9',
                 'min:8',
                 'uppercase',
-                Rule::unique('bidding_process')->ignore($this->bidding),
+                Rule::unique('bidding_processes')->ignore($this->code_auction),
             ],
-            'cod_contrato' => [
+            'code_contract' => [
                 'nullable',
                 'max:9',
                 'min:8',
                 'uppercase',
-                Rule::unique('bidding_process')->ignore($this->bidding),
+                Rule::unique('bidding_processes')->ignore($this->code_contract),
             ],
-            'data_inicio' => 'nullable|date',
-            'data_vencimento' => 'nullable|date',
+            'strat_date' => 'nullable|date',
+            'due_date' => 'nullable|date',
         ];
     }
 
@@ -59,13 +59,13 @@ class BiddingUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'no_processo' => 'título do processo',
-            'desc_processo' => 'objetivo do processo',
-            'cod_processo' => 'código do processo',
-            'cod_pregao' => 'código do pregão',
-            'cod_contrato' => 'código do contrato',
-            'data_inicio' => 'data de inicio',
-            'data_vencimento' => 'data de vencimento',
+            'bidding_process' => 'título do processo',
+            'description' => 'objetivo do processo',
+            'code_process' => 'código do processo',
+            'code_auction' => 'código do pregão',
+            'code_contract' => 'código do contrato',
+            'start_date' => 'data de inicio',
+            'due_date' => 'data de vencimento',
         ];
     }
 }

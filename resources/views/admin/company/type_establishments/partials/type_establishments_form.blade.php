@@ -1,0 +1,1 @@
+<x-form.input col="12" label="Tipo de Estabelecimento" id="type_establishment" value="{{$db->type_establishment ?? ''}}" />

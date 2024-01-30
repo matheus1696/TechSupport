@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('product');
             $table->string('filter');
             $table->text('description');
-            $table->enum('type',['consumption','permanent']);
+            $table->enum('type',['Consumption','Permanent']);
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

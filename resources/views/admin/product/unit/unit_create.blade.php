@@ -1,4 +1,14 @@
 <!-- Inicio de Componentização Page Create -->
 <x-pages.forms method="create" route="{{route('units.store')}}" btnBack="{{route('units.index')}}">
-    <x-form.input col="12" label="Unidade de Medida" id="unit" required="required" />
+        
+    <!-- Slot Header -->
+    @slot('header')
+       <x-header title="Unidades de Medidas"/>
+    @endslot
+
+    <!-- Slot Body -->
+    @slot('body')
+        @include('admin.product.unit.partials.unit_form')
+    @endslot
+
 </x-pages.forms>

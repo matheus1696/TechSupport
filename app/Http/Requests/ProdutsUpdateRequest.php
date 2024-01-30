@@ -23,15 +23,18 @@ class ProdutsUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'no_produto' => 'required',
-            'cod_produto' => [
+            'product' => [
+                'required',
+                Rule::unique('products')->ignore($this->code, 'code'),
+            ],
+            'code' => [
                 'required',
                 'min:2',
                 'uppercase',
-                Rule::unique('products')->ignore($this->product),
+                Rule::unique('products')->ignore($this->code, 'code'),
             ],
-            'desc_produto' => 'required|min:20',
-            'tp_produto' => 'required',
+            'description' => 'required|min:20',
+            'type' => 'required',
         ];
     }
 
@@ -43,10 +46,10 @@ class ProdutsUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'no_produto' => 'nome do produto',
-            'cod_produto' => 'código do produto',
-            'desc_produto' => 'descrição do produto',
-            'tp_produto' => 'tipo do produto',
+            'product' => 'nome do produto',
+            'code' => 'código do produto',
+            'description' => 'descrição do produto',
+            'type' => 'tipo do produto',
         ];
     }
 }

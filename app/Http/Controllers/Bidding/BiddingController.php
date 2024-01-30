@@ -65,7 +65,7 @@ class BiddingController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['process']);
+        $data['filter'] = StrtoLower($data['bidding_process']);
 
         //Salvando Dados
         BiddingModel::create($data);
@@ -117,7 +117,7 @@ class BiddingController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['process']);
+        $data['filter'] = StrtoLower($data['bidding_process']);
         $data['validity'] = floor((strtotime($data['due_date']) - strtotime($data['start_date'])) / (60 * 60 * 24 ) / 30);;
 
         //Salvando Dados
@@ -151,7 +151,7 @@ class BiddingController extends Controller
         $db->update($data);
 
         //Logs
-        Logger::status();
+        Logger::status($db->id, $db->status);
 
         return redirect(route('biddings.index'))->with('success','Status alterado com sucesso.');
     }

@@ -22,8 +22,8 @@ class BiddingStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'no_processo' => 'required|min:6',
-            'desc_processo' => 'required|min:20',
+            'bidding_process' => 'required|min:6',
+            'description' => 'required|min:20',
         ];
     }
 
@@ -35,8 +35,8 @@ class BiddingStoreRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'no_processo' => 'título do processo',
-            'desc_processo' => 'objetivo do processo',
+            'bidding_process' => 'título do processo',
+            'description' => 'objetivo do processo',
         ];
     }
 }
