@@ -6,7 +6,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Public\ContactListsController;
 use App\Http\Controllers\Users\Profile\ProfileController;
 use App\Http\Controllers\Admin\Users\UsersController;
-use App\Http\Controllers\Admin\Users\UserSexualOrientationsController;
 use App\Http\Controllers\Admin\Company\CompanyAttentionLevelsController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentsController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentContactsController;
@@ -39,8 +38,6 @@ Route::middleware('auth')->group(function () {
                 //Rota - Dados dos Usuários Cadastrados
                 Route::get('users/verify/{user}',[UsersController::class,'verify'])->name('users.verify');
                 Route::resource('users',UsersController::class);
-                //Rota - Dados sobre Orientação Sexual
-                Route::resource('sexualorientations',UserSexualOrientationsController::class);
             });
 
             //Grupo de Rotas - Configurações da Organização

@@ -25,7 +25,7 @@ class CompanyAttentionLevelsController extends Controller
         //Listagem de Dados
         $db = CompanyAttentionLevelsModel::select()
             ->orderBy('attention_level')
-            ->get();
+            ->paginate(20);
 
         //Log do Sistema
         Logger::access();

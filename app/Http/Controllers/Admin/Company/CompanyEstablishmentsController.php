@@ -34,7 +34,6 @@ class CompanyEstablishmentsController extends Controller
             ->orderBy('establishment')
             ->with('AttentionLevels')
             ->with('TypeEstablishments')
-            ->with('RegionCities')            
             ->with('RegionCities')
             ->paginate(20);
 
@@ -64,22 +63,15 @@ class CompanyEstablishmentsController extends Controller
      */
     public function create()
     {
-        //Header
-        $header = [
-            'title'=>'Cadastrar de Estabelecimento',
-        ];
-
         //Listagem de Dados
         $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
         $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('type_establishment')->get();
         $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('attention_level')->get();
 
-
         //Log do Sistema
-        Logger::create($header['title']);
+        Logger::create();
 
         return view('admin.company.establishments.establishments_create',[
-            'header'=>$header,
             'dbRegionCities'=>$dbRegionCities,
             'dbCompanyTypeEstablishments'=>$dbCompanyTypeEstablishments,
             'dbCompanyAttentionLevels'=>$dbCompanyAttentionLevels,
@@ -93,13 +85,13 @@ class CompanyEstablishmentsController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['title']);
+        $data['filter'] = StrtoLower($data['establishment']);
 
         //Salvando Dados
         CompanyEstablishmentsModel::create($data);
 
         //Log do Sistema
-        Logger::store($data['title']);
+        Logger::store($data['establishment']);
 
         return redirect(route('establishments.index'))->with('success','Cadastro salvo com sucesso');
     }
@@ -117,11 +109,6 @@ class CompanyEstablishmentsController extends Controller
      */
     public function edit(string $id)
     {
-        //Header
-        $header = [
-            'title'=>'Alterar Cadastro do Estabelecimento',
-        ];
-
         //Listagem de Dados
         $db = CompanyEstablishmentsModel::find($id);
         $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
@@ -129,10 +116,9 @@ class CompanyEstablishmentsController extends Controller
         $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('attention_level')->get();
 
         //Log do Sistema
-        Logger::edit($db->no_unidade);
+        Logger::edit($db->establishment);
 
         return view('admin.company.establishments.establishments_edit',[
-            'header'=>$header,
             'db'=>$db,
             'dbRegionCities'=>$dbRegionCities,
             'dbCompanyTypeEstablishments'=>$dbCompanyTypeEstablishments,
@@ -147,15 +133,14 @@ class CompanyEstablishmentsController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['title']);
+        $data['filter'] = StrtoLower($data['establishment']);
 
         //Salvando Dados
         $db = CompanyEstablishmentsModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::update($db->no_unidade);
+        Logger::update($db->establishment);
 
         return redirect(route('establishments.index'))->with('success','Cadastro salvo com sucesso');
     }
@@ -168,19 +153,17 @@ class CompanyEstablishmentsController extends Controller
         //
     }
 
-
     /**
      * Update the status of the specified item in storage.
      */
     public function status(Request $request, string $id)
     {
         //Dados dos Formulários
-        $data = $request->only('st_unidade');
+        $data = $request->only('status');
 
         //Salvando Dados
         $db = CompanyEstablishmentsModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
         Logger::status($db->id, $db->status);

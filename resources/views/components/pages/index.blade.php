@@ -12,7 +12,7 @@
         @include('components.alert.alert')
 
         <!-- Inicio de Componentização do Conteiner -->
-        {{$body ?? ""}}
+        {{$body ?? ""}} 
     </section>
 @stop
 

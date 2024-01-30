@@ -21,7 +21,7 @@ class CompanyEstablishmentsModel extends Model
         'number',
         'district',
         'city_id',
-        'latidude',
+        'latitude',
         'longitude',
         'type_establishment_id',
         'attention_level_id',

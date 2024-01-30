@@ -157,8 +157,6 @@
                 @endslot
 
             </x-table.table>
-            
-            {{$db->appends($_GET)->links()}}
 
         </x-conteiner>
     @endslot

@@ -16,7 +16,7 @@
                 @csrf @if($method == "edit") @method('PUT') @endif
 
                 <div class="form-row justify-content-between">
-                    {{$slot}}
+                    {{$body ?? ""}}
                 </div>
 
                 <!-- Inicio de Componentização dos Botões -->

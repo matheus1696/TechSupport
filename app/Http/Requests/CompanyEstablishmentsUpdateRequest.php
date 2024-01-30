@@ -23,21 +23,21 @@ class CompanyEstablishmentsUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cod_unidade_cnes' => [
+            'code' => [
                 'required',
                 'min:6',
-                Rule::unique('company_establishments')->ignore($this->establishment),
+                Rule::unique('company_establishments')->ignore($this->code, 'code'),
             ],
-            'no_unidade' => [
+            'establishment' => [
                 'required',
-                Rule::unique('company_establishments')->ignore($this->establishment),
+                Rule::unique('company_establishments')->ignore($this->code, 'code'),
             ],
-            'end_logradouro' => 'required',
-            'end_numero' => 'required',
-            'end_bairro' => 'required',
-            'cidade_id' => 'required',
-            'tipo_estabelecimento_id' => 'required',
-            'nivel_atencao_id' => 'required',
+            'address' => 'required',
+            'number' => 'required',
+            'district' => 'required',
+            'city_id' => 'required',
+            'type_establishment_id' => 'required',
+            'attention_level_id' => 'required',
         ];
     }
 
@@ -49,14 +49,14 @@ class CompanyEstablishmentsUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'cod_unidade_cnes' => 'CNES',
-            'no_unidade' => 'estabelecimento',
-            'end_logradouro' => 'logradouro',
-            'end_numero' => 'nº',
-            'end_bairro' => 'bairro',
-            'cidade_id' => 'cidade',
-            'tipo_estabelecimento_id' => 'tipo de estabelecimento',
-            'nivel_atencao_id' => 'nivel de atenção',
+            'code' => 'CNES',
+            'establishment' => 'estabelecimento',
+            'address' => 'logradouro',
+            'number' => 'nº',
+            'district' => 'bairro',
+            'city_id' => 'cidade',
+            'type_establishment_id' => 'tipo de estabelecimento',
+            'attention_level_id' => 'nivel de atenção',
         ];
     }
 }
