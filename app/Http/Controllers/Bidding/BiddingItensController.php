@@ -36,7 +36,7 @@ class BiddingItensController extends Controller
     {
         //Listando Dados
         $dbBidding = BiddingModel::find($id);
-        $dbProducts = ProductModel::where('status',true)->orderBy('product')->get();
+        $dbProducts = ProductModel::where('status',true)->orderBy('title')->get();
         $dbUnits = ProductUnitModel::all();
 
         return view('bidding.bidding_itens.biddings_itens_create',[

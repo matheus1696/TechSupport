@@ -27,7 +27,7 @@ class ProdutUnitsUpdateRequest extends FormRequest
                 'required',
                 'min:6',
                 'lowercase',
-                Rule::unique('product_units')->ignore($this->unit, 'unit'),
+                Rule::unique('product_units')->ignore($this->unit),
             ],
         ];
     }

@@ -13,7 +13,7 @@ class CompanyAttentionLevelsModel extends Model
 
     protected $fillable =
     [
-        'attention_level',
+        'title',
         'color',
         'status',
     ];

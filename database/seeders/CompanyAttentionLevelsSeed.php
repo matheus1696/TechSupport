@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Company\CompanyAttentionLevelsModel;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CompanyAttentionLevelsSeed extends Seeder
@@ -15,19 +14,23 @@ class CompanyAttentionLevelsSeed extends Seeder
     {
         //
         CompanyAttentionLevelsModel::create([
-            'attention_level'=>'Administração',
+            'title'=>'Administração',
         ]);
 
         CompanyAttentionLevelsModel::create([
-            'attention_level'=>'Atenção Especializada',
+            'title'=>'Atenção Especializada',
         ]);
 
         CompanyAttentionLevelsModel::create([
-            'attention_level'=>'Atenção Básica',
+            'title'=>'Atenção Básica',
         ]);
 
         CompanyAttentionLevelsModel::create([
-            'attention_level'=>'Vigilância em Saúde',
+            'title'=>'Vigilância Epdemiológica',
+        ]);
+
+        CompanyAttentionLevelsModel::create([
+            'title'=>'Vigilância Sanitária',
         ]);
     }
 }

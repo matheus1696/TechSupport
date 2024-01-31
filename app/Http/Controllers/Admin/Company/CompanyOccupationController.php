@@ -25,7 +25,7 @@ class CompanyOccupationController extends Controller
         //Listando Dados
         $db = CompanyOccupationsModel::select()
             ->orderBy('status','DESC')
-            ->orderBy('occupation')
+            ->orderBy('title')
             ->paginate(20);
 
         //Pesquisar Dados

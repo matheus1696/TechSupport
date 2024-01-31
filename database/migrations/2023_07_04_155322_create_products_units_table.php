@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_units', function (Blueprint $table) {
             $table->id();
-            $table->string('unit');
+            $table->string('title');
             $table->string('filter');
             $table->boolean('status')->default(true);
             $table->timestamps();

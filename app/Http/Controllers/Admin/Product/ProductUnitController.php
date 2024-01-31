@@ -27,14 +27,14 @@ class ProductUnitController extends Controller
         //Listando Dados
         $db = ProductUnitModel::select()
             ->orderBy('status','desc')
-            ->orderBy('unit')
+            ->orderBy('title')
             ->paginate(20);
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName'])) {
             $db = ProductUnitModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('unit')
+                ->orderBy('title')
                 ->paginate(20);
         }
 
@@ -63,7 +63,7 @@ class ProductUnitController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['unit']);
+        $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
         ProductUnitModel::create($data);

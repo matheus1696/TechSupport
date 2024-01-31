@@ -33,7 +33,7 @@ class UsersController extends Controller
         $dbHasPermissions = UserHasPermissionsModel::all();
         $dbCompanyOrganizational = CompanyOrganizationalModel::where('status',true)->orderBy('hierarchy')->get();
         $dbCompanyOccupations = CompanyOccupationsModel::where('status',true)->orderBy('code')->get();
-        $dbEstablishments = CompanyEstablishmentsModel::where('status',true)->orderBy('establishment')->get();
+        $dbEstablishments = CompanyEstablishmentsModel::where('status',true)->orderBy('title')->get();
 
         //Pesquisar Dados
         $search = $request->all();

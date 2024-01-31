@@ -9,8 +9,8 @@
 
             <!-- Inicio de Componentização de Input e Select -->
             <x-form.input col="12" label="Email" id="email" value="{{$db->email}}" disabled="disabled" />
-            <x-form.input col="6" label="Senha" type="password" id="password" />
-            <x-form.input col="6" label="Confirmar Senha" type="password" id="password_confirmation" />
+            <x-form.input col="6" label="Senha" type="password" id="password" placeholder="********"/>
+            <x-form.input col="6" label="Confirmar Senha" type="password" id="password_confirmation" placeholder="********" />
         </div>
         
         <!-- Inicio de Componentização dos Botões -->

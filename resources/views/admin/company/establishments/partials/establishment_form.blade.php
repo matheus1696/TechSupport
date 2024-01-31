@@ -1,5 +1,5 @@
 <x-form.input col="2" label="CNES" id="code" required="required" value="{{$db->code ?? ''}}" />
-<x-form.input col="10" label="Nome do Estabelecimento" id="establishment" required="required" value="{{$db->establishment ?? ''}}" />
+<x-form.input col="10" label="Nome do Estabelecimento" id="title" required="required" value="{{$db->establishment ?? ''}}" />
 <x-form.input col="10" label="Logradouro" id="address" required="required" value="{{$db->address ?? ''}}" />
 <x-form.input col="2" label="Número" id="number" required="required" value="{{$db->number ?? ''}}" />
 <x-form.input col="4" label="Bairro" id="district" required="required" value="{{$db->district ?? ''}}" />

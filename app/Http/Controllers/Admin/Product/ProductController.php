@@ -31,7 +31,7 @@ class ProductController extends Controller
         if (isset($search['searchProductCod']) || isset($search['searchProdutcName'])) {
             $db = ProductModel::where('code','LIKE','%'.strtolower($search['searchProductCod']).'%')
                 ->where('filter','LIKE','%'.strtolower($search['searchProdutcName']).'%')
-                ->orderBy('product')
+                ->orderBy('title')
                 ->paginate(20);
         }
 
@@ -62,13 +62,13 @@ class ProductController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['product']);
+        $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
         ProductModel::create($data);
 
         //Logs
-        Logger::store($data['product']);
+        Logger::store($data['title']);
 
         return redirect(route('products.index'))->with('success','Cadastro salvo com sucesso');
     }
@@ -104,7 +104,7 @@ class ProductController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['ft_produto'] = StrtoLower($data['product']);
+        $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
         $db = ProductModel::find($id);

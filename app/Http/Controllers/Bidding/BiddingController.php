@@ -33,7 +33,7 @@ class BiddingController extends Controller
         if (isset($search['searchCod']) || isset($search['searchName'])) {
             $db = BiddingModel::where('code_process','LIKE','%'.strtolower($search['searchCod']).'%')
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('process')
+                ->orderBy('title')
                 ->paginate(20);
         }
 
@@ -65,7 +65,7 @@ class BiddingController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['bidding_process']);
+        $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
         BiddingModel::create($data);
@@ -117,7 +117,7 @@ class BiddingController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['bidding_process']);
+        $data['filter'] = StrtoLower($data['title']);
         $data['validity'] = floor((strtotime($data['due_date']) - strtotime($data['start_date'])) / (60 * 60 * 24 ) / 30);;
 
         //Salvando Dados

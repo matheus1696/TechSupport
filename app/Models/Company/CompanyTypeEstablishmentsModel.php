@@ -13,7 +13,7 @@ class CompanyTypeEstablishmentsModel extends Model
 
     protected $fillable =
     [
-        'type_establishment',
+        'title',
         'status',
     ];
 

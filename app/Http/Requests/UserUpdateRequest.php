@@ -23,10 +23,9 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => 'nullable|min:1|max:50',
-            'con_usuario_1' => 'nullable|celular_com_ddd',
-            'con_usuario_2' => 'nullable|celular_com_ddd',
+            'contact_1' => 'nullable|celular_com_ddd',
+            'contact_2' => 'nullable|celular_com_ddd',
             'password' => 'nullable|min:8|confirmed',
-            ''
         ];
     }
 

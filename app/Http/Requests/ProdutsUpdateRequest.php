@@ -25,13 +25,13 @@ class ProdutsUpdateRequest extends FormRequest
         return [
             'product' => [
                 'required',
-                Rule::unique('products')->ignore($this->code, 'code'),
+                Rule::unique('products')->ignore($this->product),
             ],
             'code' => [
                 'required',
                 'min:2',
                 'uppercase',
-                Rule::unique('products')->ignore($this->code, 'code'),
+                Rule::unique('products')->ignore($this->product),
             ],
             'description' => 'required|min:20',
             'type' => 'required',

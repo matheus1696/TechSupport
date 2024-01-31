@@ -31,7 +31,7 @@ class CompanyEstablishmentsController extends Controller
         //Listagem de Dados
         $db = CompanyEstablishmentsModel::select()
             ->orderBy('status','DESC')
-            ->orderBy('establishment')
+            ->orderBy('title')
             ->with('AttentionLevels')
             ->with('TypeEstablishments')
             ->with('RegionCities')
@@ -44,7 +44,7 @@ class CompanyEstablishmentsController extends Controller
         if (isset($search['searchName']) || isset($search['searchCod'])) {
             $db = CompanyEstablishmentsModel::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('establishment')
+                ->orderBy('title')
                 ->paginate(20);
         }
 
@@ -65,8 +65,8 @@ class CompanyEstablishmentsController extends Controller
     {
         //Listagem de Dados
         $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
-        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('type_establishment')->get();
-        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('attention_level')->get();
+        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
+        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('title')->get();
 
         //Log do Sistema
         Logger::create();
@@ -85,13 +85,13 @@ class CompanyEstablishmentsController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['establishment']);
+        $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
         CompanyEstablishmentsModel::create($data);
 
         //Log do Sistema
-        Logger::store($data['establishment']);
+        Logger::store($data['title']);
 
         return redirect(route('establishments.index'))->with('success','Cadastro salvo com sucesso');
     }
@@ -112,8 +112,8 @@ class CompanyEstablishmentsController extends Controller
         //Listagem de Dados
         $db = CompanyEstablishmentsModel::find($id);
         $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
-        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('type_establishment')->get();
-        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('attention_level')->get();
+        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
+        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('title')->get();
 
         //Log do Sistema
         Logger::edit($db->establishment);
@@ -133,14 +133,14 @@ class CompanyEstablishmentsController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['establishment']);
+        $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
         $db = CompanyEstablishmentsModel::find($id);
         $db->update($data);
 
         //Log do Sistema
-        Logger::update($db->establishment);
+        Logger::update($db->title);
 
         return redirect(route('establishments.index'))->with('success','Cadastro salvo com sucesso');
     }

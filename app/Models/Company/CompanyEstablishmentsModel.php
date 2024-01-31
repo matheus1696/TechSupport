@@ -15,7 +15,7 @@ class CompanyEstablishmentsModel extends Model
     protected $fillable =
     [
         'code',
-        'establishment',
+        'title',
         'filter',
         'address',
         'number',

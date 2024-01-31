@@ -22,30 +22,20 @@ class BiddingUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $codesRules = [
+            'nullable',
+            'max:9',
+            'min:8',
+            'uppercase',
+            Rule::unique('bidding_processes')->ignore($this->bidding),            
+        ];
+
         return [
             'bidding_process' => 'required|min:6',
             'description' => 'required|min:20',
-            'code_process' => [
-                'nullable',
-                'max:9',
-                'min:8',
-                'uppercase',
-                Rule::unique('bidding_processes')->ignore($this->bidding_process),
-            ],
-            'code_auction' => [
-                'nullable',
-                'max:9',
-                'min:8',
-                'uppercase',
-                Rule::unique('bidding_processes')->ignore($this->code_auction),
-            ],
-            'code_contract' => [
-                'nullable',
-                'max:9',
-                'min:8',
-                'uppercase',
-                Rule::unique('bidding_processes')->ignore($this->code_contract),
-            ],
+            'code_process' => $codesRules,
+            'code_auction' => $codesRules,
+            'code_contract' => $codesRules,
             'strat_date' => 'nullable|date',
             'due_date' => 'nullable|date',
         ];
@@ -61,9 +51,9 @@ class BiddingUpdateRequest extends FormRequest
         return [
             'bidding_process' => 'título do processo',
             'description' => 'objetivo do processo',
-            'code_process' => 'código do processo',
-            'code_auction' => 'código do pregão',
-            'code_contract' => 'código do contrato',
+            'code_process' => 'cód. do processo',
+            'code_auction' => 'cód. do pregão',
+            'code_contract' => 'cód. do contrato',
             'start_date' => 'data de inicio',
             'due_date' => 'data de vencimento',
         ];

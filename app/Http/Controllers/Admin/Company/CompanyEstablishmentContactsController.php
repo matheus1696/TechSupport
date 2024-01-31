@@ -16,8 +16,8 @@ class CompanyEstablishmentContactsController extends Controller
     public function index(string $id)
     {
         $dbLists = CompanyEstablishmentContactsModel::where('estabelecimento_id',$id)
-            ->orderBy('con_unidade')
-            ->orderBy('con_unidade_2')
+            ->orderBy('contact_1')
+            ->orderBy('contact_2')
             ->get();
         $dbEstablishments = CompanyEstablishmentsModel::find($id);
 

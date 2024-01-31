@@ -24,13 +24,8 @@ class CompanyTypeEstablishmentsController extends Controller
     public function index()
     {
         //Listagem de Dados
-        $db = CompanyTypeEstablishmentsModel::select()
-            ->orderBy('status','DESC')
-            ->orderBy('type_establishment')
-            ->paginate(20);
-        $dbEstablishments = CompanyEstablishmentsModel::select()
-            ->orderBy('establishment')
-            ->get();
+        $db = CompanyTypeEstablishmentsModel::select()->orderBy('status','DESC')->orderBy('title')->paginate(20);
+        $dbEstablishments = CompanyEstablishmentsModel::select()->orderBy('title')->get();
 
         //Log do Sistema
         Logger::access();
@@ -93,10 +88,10 @@ class CompanyTypeEstablishmentsController extends Controller
         $db->update($data);
 
         //Log do Sistema
-        Logger::update($db->no_tipo_estabelecimento);
+        Logger::update($db->title);
 
         return redirect(route('type_establishments.index'))
-                            ->with('success','Alteração realizada com sucesso');
+            ->with('success','Alteração realizada com sucesso');
     }
 
     /**

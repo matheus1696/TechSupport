@@ -14,7 +14,7 @@ class CompanyOccupationsModel extends Model
     protected $fillable =
     [
         'code',
-        'occupation',
+        'title',
         'filter',
         'status',
     ];

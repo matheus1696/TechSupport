@@ -26,11 +26,11 @@ class CompanyEstablishmentsUpdateRequest extends FormRequest
             'code' => [
                 'required',
                 'min:6',
-                Rule::unique('company_establishments')->ignore($this->code, 'code'),
+                Rule::unique('company_establishments')->ignore($this->establishment),
             ],
-            'establishment' => [
+            'title' => [
                 'required',
-                Rule::unique('company_establishments')->ignore($this->code, 'code'),
+                Rule::unique('company_establishments')->ignore($this->establishment),
             ],
             'address' => 'required',
             'number' => 'required',
@@ -50,7 +50,7 @@ class CompanyEstablishmentsUpdateRequest extends FormRequest
     {
         return [
             'code' => 'CNES',
-            'establishment' => 'estabelecimento',
+            'title' => 'estabelecimento',
             'address' => 'logradouro',
             'number' => 'nº',
             'district' => 'bairro',

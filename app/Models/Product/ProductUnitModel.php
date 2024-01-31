@@ -12,7 +12,7 @@ class ProductUnitModel extends Model
     protected $table = 'product_units';
 
     protected $fillable = [
-        'unit',
+        'title',
         'filter',
         'status'
     ];
