@@ -1,5 +1,5 @@
 <!-- Inicio de Componentização Page Index -->
-<x-pages.index paginate="{{$db->links()}}">
+<x-pages.index>
 
     <!-- Slot Header -->
     @slot('header')

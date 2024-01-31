@@ -3,7 +3,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Editar de Tipos de Estabelecimento"/>
+        <x-header title="Editar de Tipos de Estabelecimento: {{ $db->title }}"/>
     @endslot
 
     <!-- Slot Body -->

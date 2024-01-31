@@ -13,12 +13,15 @@
         @foreach ($db as $item)
             <tr>
                 <td class="text-center">{{$item->code}}</td>
-                <td>{{$item->product}}</td>
-                <td>{{$item->type}}</td>
+                <td>{{$item->title}}</td>
+                <td class="text-center">
+                    @if ($item->type === "Consumption") Consumo @endif
+                    @if ($item->type === "Permanent") Permanente @endif
+                </td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('products.status',['product'=>$item->id])}}" />
                 </td>
-                <td>
+                <td class="text-center">
                     <x-button.minButtonEdit route="{{route('products.edit',['product'=>$item->id])}}" />
                 </td>
             </tr>

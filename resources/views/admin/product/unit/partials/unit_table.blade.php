@@ -2,15 +2,15 @@
     @slot('thead')
         <tr>
             <th>Unidade de Medida</th>
-            <th class="text-center col-1">Status</th>
-            <th class="text-center col-1"></th>
+            <th class="col-1">Status</th>
+            <th class="col-1"></th>
         </tr>
     @endslot
 
     @slot('tbody')
         @foreach ($db as $item)
             <tr>
-                <td>{{$item->unit}}</td>
+                <td>{{$item->title}}</td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" name="status"
                         route="{{route('units.status',['unit'=>$item->id])}}" />

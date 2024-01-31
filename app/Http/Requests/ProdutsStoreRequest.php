@@ -22,7 +22,7 @@ class ProdutsStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product' => 'required|unique:products',
+            'title' => 'required|unique:products',
             'code' => 'required|min:3|uppercase|unique:products',
             'description' => 'required|min:20',
             'type' => 'required',
@@ -37,7 +37,7 @@ class ProdutsStoreRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'product' => 'nome do produto',
+            'title' => 'nome do produto',
             'code' => 'código do produto',
             'description' => 'descrição do produto',
             'type' => 'tipo do produto',

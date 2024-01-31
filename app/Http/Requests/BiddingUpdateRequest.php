@@ -31,7 +31,7 @@ class BiddingUpdateRequest extends FormRequest
         ];
 
         return [
-            'bidding_process' => 'required|min:6',
+            'title' => 'required|min:6',
             'description' => 'required|min:20',
             'code_process' => $codesRules,
             'code_auction' => $codesRules,
@@ -49,7 +49,7 @@ class BiddingUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'bidding_process' => 'título do processo',
+            'title' => 'título do processo',
             'description' => 'objetivo do processo',
             'code_process' => 'cód. do processo',
             'code_auction' => 'cód. do pregão',

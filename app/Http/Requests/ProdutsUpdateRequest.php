@@ -23,7 +23,7 @@ class ProdutsUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product' => [
+            'title' => [
                 'required',
                 Rule::unique('products')->ignore($this->product),
             ],
@@ -46,7 +46,7 @@ class ProdutsUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'product' => 'nome do produto',
+            'title' => 'nome do produto',
             'code' => 'código do produto',
             'description' => 'descrição do produto',
             'type' => 'tipo do produto',

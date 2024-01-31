@@ -1,5 +1,5 @@
 <x-form.input col="2" label="CNES" id="code" required="required" value="{{$db->code ?? ''}}" />
-<x-form.input col="10" label="Nome do Estabelecimento" id="title" required="required" value="{{$db->establishment ?? ''}}" />
+<x-form.input col="10" label="Nome do Estabelecimento" id="title" required="required" value="{{$db->title ?? ''}}" />
 <x-form.input col="10" label="Logradouro" id="address" required="required" value="{{$db->address ?? ''}}" />
 <x-form.input col="2" label="Número" id="number" required="required" value="{{$db->number ?? ''}}" />
 <x-form.input col="4" label="Bairro" id="district" required="required" value="{{$db->district ?? ''}}" />
@@ -18,7 +18,7 @@
 <x-form.select col="6" label="Tipo de Estabelecimento" id="type_establishment_id" required="required">
     @foreach ($dbCompanyTypeEstablishments as $item)
         <option value="{{$item->id}}" @isset($db)  @if ($db->type_establishment_id == $item->id) selected @endif @endisset>
-            {{$item->type_establishment}}
+            {{$item->title}}
         </option>
     @endforeach
 </x-form.select>
@@ -26,7 +26,7 @@
 <x-form.select col="6" label="Nível de Atenção" id="attention_level_id" required="required">
     @foreach ($dbCompanyAttentionLevels as $item)
         <option value="{{$item->id}}" @isset($db)  @if ($db->attention_level_id == $item->id) selected @endif @endisset>
-            {{$item->attention_level}}
+            {{$item->title}}
         </option>
     @endforeach
 </x-form.select>

@@ -3,7 +3,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Processos Licitatórios" route="{{ route('biddings.create') }}"/>
+        <x-header title="Processos Licitatórios: {{$db->title}}"/>
     @endslot
 
     <!-- Slot Body -->

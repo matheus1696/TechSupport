@@ -3,96 +3,20 @@
         @slot('body')
             <x-conteiner>
 
-                <div class="row px-lg-2 py-lg-2">
-                    <p class="col-lg"><strong>Nº do Processo: </strong>{{$db->cod_processo ?? ""}}</p>
-                    <p class="col-lg"><strong>Nº do Pregão: </strong>{{$db->cod_pregao ?? ""}}</p>
-                    <p class="col-lg"><strong>Nº do Contrato: </strong>{{$db->cod_contrato ?? ""}}</p>
-                    <p class="col-lg-12"><strong>Titulo: </strong>{{$db->no_processo ?? ""}}</p>
-                    <div class="mb-3 col-lg-12"><strong>Objetivo: </strong>{!!$db->desc_processo ?? ""!!}</div>
-                    <p class="col-lg"><strong>Data Inicio: </strong>{{$db->data_inicio == NULL ? "" : date('d/m/Y',strtotime($db->data_inicio))}}</p>
-                    <p class="col-lg">
-                        <strong>Data de Venc.: </strong>{{$db->data_inicio == NULL ? "" : date('d/m/Y',strtotime($db->data_vencimento))}}
-                    </p>
-                    <p class="col-lg"><strong>Tempo de Vigência:</strong>
-                        {{$db->tempo_vigencia}}
-                        @if($db->tempo_vigencia)
-                            Meses
-                        @endif
-                    </p>
-                </div>
+                @include('bidding.bidding.partials.show.bidding_show_description')
 
-                <div class="row justify-content-center py-lg-3">
-                    <a href="{{route('biddingItens.create',['bidding'=>$db->id])}}" class="btn btn-app bg-success">
-                        <i class="mb-1 text-sm fas fa-plus"></i> Cad. Item
-                    </a>
-                    <a href="{{route('biddings.edit',['bidding'=>$db->id])}}" class="btn btn-app bg-warning">
-                        <i class="mb-1 text-sm fas fa-pen"></i> Editar
-                    </a>
-                    <a href="{{route('biddings.index')}}" class="btn btn-app bg-secondary">
-                        <i class="mb-1 text-sm fas fa-reply"></i> Voltar
-                    </a>
-                </div>
+                <hr>
 
-                @if ($db->data_vencimento < Today() && $db->data_vencimento != NULL)
-                    <div class="alert alert-danger" role="alert">
-                        Processo Licitatório Vencido
-                    </div>
-                @elseif ($db->data_vencimento < date('Y-m-d', strtotime("+90 days")) && $db->data_vencimento != NULL)
-                    <div class="alert alert-warning" role="alert">
-                        Processo Licitatório Próximo do Fim da Vigência
-                    </div>
-                @endif
+                @include('bidding.bidding.partials.show.bidding_show_buttons')
+
+                @include('bidding.bidding.partials.show.bidding_show_alert')
+
+                
             </x-conteiner>
 
-            <x-conteiner>
-                <x-table.table>
-                    @slot('thead')
-                        <tr>
-                            <td class="text-sm text-center col-lg-2">Produto</td>
-                            <td class="text-sm text-center col-lg-1">Qt. ADM</td>
-                            <td class="text-sm text-center col-lg-1">Qt. ATB</td>
-                            <td class="text-sm text-center col-lg-1">Qt. MAC</td>
-                            <td class="text-sm text-center col-lg-1">Qt. V. EPD</td>
-                            <td class="text-sm text-center col-lg-1">Qt. V. SAN</td>
-                            <td class="text-sm text-center col-lg-1">Total</td>
-                            <td class="text-sm text-center col-lg-1">Un. Medida</td>
-                            <td class="text-sm text-center col-lg-1">Garantia</td>
-                            <td class="text-sm text-center col-lg-2">Ações</td>
-                        </tr>
-                    @endslot
+            @include('bidding.bidding.partials.show.bidding_show_products_table')
 
-                    @slot('tbody')
-                        @foreach ($dbBiddingItens as $item)
-                            <tr>
-                                <td class="text-center">{{$item->Product->no_produto}}</td>
-                                <td class="text-center">{{$item->quant_adm}}</td>
-                                <td class="text-center">{{$item->quant_atb}}</td>
-                                <td class="text-center">{{$item->quant_mac}}</td>
-                                <td class="text-center">{{$item->quant_vepd}}</td>
-                                <td class="text-center">{{$item->quant_vsan}}</td>
-                                <td class="text-center">{{$item->quant_adm + $item->quant_atb + $item->quant_mac + $item->quant_vepd + $item->quant_vsan}}</td>
-                                <td class="text-center">{{$item->ProductUnit->no_unidade_medida}}</td>
-                                <td class="text-center">
-                                    {{$item->garantia}} meses</td>
-                                <td class="text-center">
-                                    <x-button.minButtonModal id="BiddingItens{{$item->id}}" title="Informação do Produto">
-                                        <p><strong>Código do Produto:</strong> {{$item->Product->cod_produto}}</p>
-                                        <p><strong>Produto:</strong> {{$item->Product->no_produto}}</p>
-                                        <div>
-                                            <strong>Descrição do Produto:</strong><br/>
-                                            {!!$item->Product->desc_produto!!}
-                                        </div>
-                                        <p><strong>Tipo do Produto:</strong> {{$item->Product->tp_produto}}</p>
-                                    </x-button.minButtonModal>
-                                    <x-button.minButtonEdit route="{{route('biddingItens.edit',['biddingItem'=>$item->id])}}"/>
-                                    <x-button.minButtonDelete route="{{route('biddingItens.destroy',['biddingItem'=>$item->id])}}"/>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endslot
-                </x-table.table>
 
-            </x-conteiner>
         @endslot
     </x-pages.index>
 

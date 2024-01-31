@@ -10,7 +10,7 @@
     @slot('tbody')
         @foreach ($db as $item)
             <tr>
-                <td>{{$item->attention_level}}</td>
+                <td>{{$item->title}}</td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" route="{{route('attentions.update',['attention'=>$item->id])}}" name="status" />
                 </td>

@@ -83,7 +83,7 @@ class BiddingController extends Controller
     {
         //Listagem de Dados
         $db = BiddingModel::find($id);
-        $dbBiddigItens = BiddingItensModel::where('process_id', $id)->get();
+        $dbBiddigItens = BiddingItensModel::where('process_id', $id)->paginate(20);
 
         //Logs
         Logger::show();

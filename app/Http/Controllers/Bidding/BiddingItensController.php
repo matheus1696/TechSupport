@@ -57,7 +57,7 @@ class BiddingItensController extends Controller
         //Salvando Dados
         BiddingItensModel::create($data);
 
-        return redirect(route('biddings.show',['bidding'=>$data['processo_id']]))
+        return redirect(route('biddings.show',['bidding'=>$data['process_id']]))
             ->with('success','Cadastro salvo com sucesso');
     }
 
@@ -100,7 +100,7 @@ class BiddingItensController extends Controller
         $db = BiddingItensModel::find($id);
         $db->update($data);
 
-        return redirect(route('biddings.show',['bidding'=>$data['processo_id']]))
+        return redirect(route('biddings.show',['bidding'=>$data['process_id']]))
             ->with('success','Cadastro salvo com sucesso');
     }
 

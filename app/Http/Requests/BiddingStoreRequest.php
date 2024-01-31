@@ -22,7 +22,7 @@ class BiddingStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'bidding_process' => 'required|min:6',
+            'title' => 'required|min:6',
             'description' => 'required|min:20',
         ];
     }
@@ -35,7 +35,7 @@ class BiddingStoreRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'bidding_process' => 'título do processo',
+            'title' => 'título do processo',
             'description' => 'objetivo do processo',
         ];
     }

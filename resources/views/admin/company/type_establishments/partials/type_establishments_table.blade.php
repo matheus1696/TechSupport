@@ -10,7 +10,7 @@
     @slot('tbody')
         @foreach ($db as $item)
             <tr>
-                <td>{{$item->type_establishment}}</td>
+                <td>{{$item->title}}</td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" route="{{route('type_establishments.update',['type_establishment'=>$item->id])}}" name="status" />
                 </td>
@@ -19,7 +19,7 @@
                         <ul>
                             @foreach ($dbEstablishments as $dbEstablishment)
                                 @if ($dbEstablishment->type_establishment_id == $item->id)
-                                    <li>{{$dbEstablishment->establishment}}</li>
+                                    <li>{{$dbEstablishment->title}}</li>
                                 @endif
                             @endforeach
                         </ul>

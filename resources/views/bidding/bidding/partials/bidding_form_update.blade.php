@@ -1,4 +1,4 @@
-<x-form.input col="12" label="Título" id="bidding_process" required="required" value="{{$db->bidding_process ?? ''}}" />
+<x-form.input col="12" label="Título" id="title" required="required" value="{{$db->title ?? ''}}" />
 <x-form.textarea col="12" label="Objeto" id="description" required="required" value="{{$db->description ?? ''}}" />
 <x-form.input col="2" label="Nº Processo" id="code_process" value="{{$db->code_process ?? ''}}" />
 <x-form.input col="2" label="Nº Pregão" id="code_auction" value="{{$db->code_auction ?? ''}}" />

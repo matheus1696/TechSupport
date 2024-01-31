@@ -23,7 +23,7 @@ class CompanyEstablishmentsStoreRequest extends FormRequest
     {
         return [
             'code' => 'required|min:6|unique:company_establishments',
-            'establishment' => 'required|unique:company_establishments',
+            'title' => 'required|unique:company_establishments',
             'address' => 'required',
             'number' => 'required',
             'district' => 'required',
@@ -42,7 +42,7 @@ class CompanyEstablishmentsStoreRequest extends FormRequest
     {
         return [
             'code' => 'CNES',
-            'establishment' => 'estabelecimento',
+            'title' => 'estabelecimento',
             'address' => 'logradouro',
             'number' => 'nº',
             'district' => 'bairro',

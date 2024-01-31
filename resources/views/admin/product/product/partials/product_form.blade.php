@@ -1,5 +1,5 @@
 <x-form.input col="2" label="Código" id="code" required="required" value="{{$db->code ?? ''}}" />
-<x-form.input col="7" label="Produto" id="product" required="required" value="{{$db->product ?? ''}}" />
+<x-form.input col="7" label="Produto" id="title" required="required" value="{{$db->title ?? ''}}" />
 
 <x-form.select col="3" label="Tipo do Produto" id="type">
     <option @isset($db) @if($db->type == "Consumption") selected @endif @endisset value="Consumption">Consumo</option>

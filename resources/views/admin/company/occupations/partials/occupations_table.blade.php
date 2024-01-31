@@ -11,7 +11,7 @@
         @foreach ($db as $item)
             <tr>
                 <td>{{$item->code}}</td>
-                <td>{{$item->occupation}}</td>
+                <td>{{$item->title}}</td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}"
                         route="{{route('occupations.update',['occupation'=>$item->id])}}" name="status" />
