@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', __('adminlte::adminlte.verify') )
+@section('title', '' )
 
 @section('content')
 
@@ -17,19 +17,14 @@
 
                 {{-- Card Body --}}
                 <div class="card-body login-card-body {{ config('adminlte.classes_auth_body', '') }}">
-                    @if(session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('adminlte::adminlte.verify_email_sent') }}
-                        </div>
-                    @endif
 
-                    <p>
+                    <p class="text-center">
                         {{ __('adminlte::adminlte.verify_check_your_email') }}
                         <span class="text-danger">
                             {{ __('adminlte::adminlte.verify_messagem_spam') }}
                         </span>
                     </p>
-                    <p class="mt-3 mb-0">{{ __('adminlte::adminlte.verify_if_not_recieved') }}</p>
+                    <p class="text-center">{{ __('adminlte::adminlte.verify_if_not_recieved') }}</p>
                 </div>
 
                 {{-- Card Footer --}}
@@ -40,6 +35,12 @@
                             {{ __('adminlte::adminlte.verify_request_another') }}
                         </button>
                     </form>
+                                        
+                    @if(session('resent'))
+                        <div class="my-3 text-center alert alert-success" role="alert">
+                            {{ __('adminlte::adminlte.verify_email_sent') }}
+                        </div>
+                    @endif
                 </div>
 
             </div>
