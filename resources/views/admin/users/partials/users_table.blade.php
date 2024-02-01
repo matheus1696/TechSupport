@@ -42,7 +42,7 @@
                                     <x-form.form method="edit" route="{{route('users.update',['user'=>$item->id])}}">
 
                                         <!-- Inicio de Componentização de Select -->
-                                        <x-form.select col="12" label="Setor" id="company_id">
+                                        <x-form.select col="12" label="Setor" id="company_id" :db="$item">
                                             @foreach ($dbCompanyOrganizational as $dbCompanyOrganization)
                                             <option value="{{$dbCompanyOrganization->id}}" @if ($item->company_id ==
                                                 $dbCompanyOrganization->id) selected @endif>
@@ -55,7 +55,7 @@
                                         </x-form.select>
 
                                         <!-- Inicio de Componentização de Select -->
-                                        <x-form.select col="12" label="Cargo" id="occupation_id">
+                                        <x-form.select col="12" label="Cargo" id="occupation_id" :db="$item">
                                             @foreach ($dbCompanyOccupations as $dbCompanyOccupation)
                                             <option value="{{$dbCompanyOccupation->id}}" @if ($item->occupation_id ==
                                                 $dbCompanyOccupation->id) selected @endif>{{$dbCompanyOccupation->code}}
@@ -64,7 +64,7 @@
                                         </x-form.select>
 
                                         <!-- Inicio de Componentização de Select -->
-                                        <x-form.select col="12" label="Estabelecimento" id="establishment_id">
+                                        <x-form.select col="12" label="Estabelecimento" id="establishment_id" :db="$item">
                                             @foreach ($dbEstablishments as $dbEstablishment)
                                             <option value="{{$dbEstablishment->id}}" @if ($item->establishment_id ==
                                                 $dbEstablishment->id) selected @endif>{{$dbEstablishment->title}}

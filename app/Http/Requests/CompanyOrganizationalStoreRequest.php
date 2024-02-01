@@ -22,9 +22,9 @@ class CompanyOrganizationalStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'no_setor' => 'required',
-            'sg_setor' => 'required|min:2|uppercase|unique:company_organizational',
-            'hie_setor' => 'required',
+            'title' => 'required',
+            'acronym' => 'required|min:2|uppercase|unique:company_organizational',
+            'hierarchy' => 'required',
         ];
     }
 
@@ -36,9 +36,9 @@ class CompanyOrganizationalStoreRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'no_setor' => 'setor',
-            'sg_setor' => 'sigla',
-            'hie_setor' => 'hierarquia',
+            'title' => 'setor',
+            'acronym' => 'sigla',
+            'hierarchy' => 'hierarquia',
         ];
     }
 }

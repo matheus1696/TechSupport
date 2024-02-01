@@ -1,7 +1,13 @@
+<!-- Inicio de Componentização Page Edit -->
+<x-pages.forms method="edit" route="{{route('organizational.update',['organizational'=>$db->id])}}" btnBack="{{route('organizational.index')}}">
+    
+    <!-- Slot Header -->
+    @slot('header')
+        <x-header title="Organograma" route="{{ route('organizational.create') }}" />
+    @endslot
 
-    <!-- Inicio de Componentização Page Edit -->
-    <x-pages.forms method="edit" route="{{route('organizational.update',['organizational'=>$db->id])}}" btnBack="{{route('organizational.index')}}">
-
+    <!-- Slot Body -->
+    @slot('body')
         <x-form.select col="4" label="Hierarquia" id="hierarchy">
             <option value="0" @if ($db->hierarchy == 0) selected @endif>Setor Principal</option>
             @foreach ($dbSector as $item)
@@ -13,8 +19,10 @@
                 @endif
             @endforeach
         </x-form.select>
-
+        
         <x-form.input col="2" label="Siglas" id="acronym" value="{{$db->acronym}}"/>
         <x-form.input col="6" label="Setor" id="title" value="{{$db->title}}"/>
         <x-form.textarea label="Descrição do Setor" id="description" value="{{$db->description}}"/>
-    </x-pages.forms>
+    @endslot
+    
+</x-pages.forms>

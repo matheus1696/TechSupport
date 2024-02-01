@@ -58,7 +58,7 @@ class CompanyOrganizationalController extends Controller
     {
         //Dados do Formulário
         $data = $request->all();
-        $data['filter'] = strtolower($request['occupation']);
+        $data['filter'] = strtolower($request['title']);
 
         //Salvando Dados
         CompanyOrganizationalModel::create($data);
@@ -105,7 +105,7 @@ class CompanyOrganizationalController extends Controller
 
         //Dados do Formulário
         $data = $request->all();
-        $data['filter'] = strtolower($request['order']);
+        $data['filter'] = strtolower($request['title']);
 
         //Salvando Dados
         $db->update($data);
@@ -141,7 +141,7 @@ class CompanyOrganizationalController extends Controller
             Logger::error();
 
             return redirect(route('organizational.index'))
-                ->with('errors','Existe setores vinculados a '.$db->no_setor);
+                ->with('errors','Existe setores vinculados a '.$db->title);
         }
     }
 
@@ -159,16 +159,16 @@ class CompanyOrganizationalController extends Controller
                 //Atribuindo Hierariquia Principal
                 if ($sectorValue['hierarchy'] == 0) {
                     $db = CompanyOrganizationalModel::find($sectorValue['id']);
-                    $db->ord_setor = "0" . $sectorValue['acronym'];
+                    $db->order = "0" . $sectorValue['acronym'];
                     $db->save();
                 }
 
                 //Listando Setores para Ordenação Hierarquica
-                    $antecessor = CompanyOrganizationalModel::select()->where('id', $sectorValue['hierarchy'])->get();
+                    $predecessor = CompanyOrganizationalModel::select()->where('id', $sectorValue['hierarchy'])->get();
 
-                foreach ($antecessor as $valueantecessor) {
+                foreach ($predecessor as $valuepredecessor) {
                     $db = CompanyOrganizationalModel::find($sectorValue['id']);
-                    $db->ord_setor = $valueantecessor['order'] . $sectorValue['id'] . $sectorValue['acronym'];
+                    $db->order = $valuepredecessor['order'] . $sectorValue['id'] . $sectorValue['acronym'];
                     $db->save();
                 }
             }

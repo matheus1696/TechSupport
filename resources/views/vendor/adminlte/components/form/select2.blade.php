@@ -9,7 +9,7 @@
 @section('input_group_item')
 
     {{-- Select --}}
-    <select id="{{ $id }}" name="{{ $name }}"
+    <select id="select{{ $id }}" name="{{ $name }}"
         {{ $attributes->merge(['class' => $makeItemClass()]) }}>
         {{ $slot }}
     </select>
@@ -22,7 +22,7 @@
 <script>
 
     $(() => {
-        $('#{{ $id }}').select2( @json($config) );
+        $('#select{{ $id }}').select2( @json($config) );
 
         // Add support to auto select old submitted values in case of
         // validation errors.
@@ -31,13 +31,13 @@
 
             let oldOptions = @json(collect($getOldValue($errorKey)));
 
-            $('#{{ $id }} option').each(function()
+            $('#select{{ $id }} option').each(function()
             {
                 let value = $(this).val() || $(this).text();
                 $(this).prop('selected', oldOptions.includes(value));
             });
 
-            $('#{{ $id }}').trigger('change');
+            $('#select{{ $id }}').trigger('change');
 
         @endif
     })

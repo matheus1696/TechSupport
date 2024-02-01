@@ -2,7 +2,7 @@
     
     <x-adminlte-select2 
         name="{{$id}}"
-        id="{{$id}}"
+        id="{{$db->id ?? $id}}"
         class="form-control"
     >
         <option selected disabled>Selecione</option>
