@@ -1,23 +1,20 @@
+<x-pages.index>
+    @slot('body')
+        <x-conteiner>
 
-    <x-pages.index>
-        @slot('body')
-            <x-conteiner>
+            @include('bidding.bidding.partials.show.bidding_show_description')
 
-                @include('bidding.bidding.partials.show.bidding_show_description')
+            <hr>
 
-                <hr>
+            @include('bidding.bidding.partials.show.bidding_show_buttons')
 
-                @include('bidding.bidding.partials.show.bidding_show_buttons')
+            @include('bidding.bidding.partials.show.bidding_show_alert')
 
-                @include('bidding.bidding.partials.show.bidding_show_alert')
+        </x-conteiner>
 
-                
-            </x-conteiner>
+        @include('bidding.bidding.partials.show.bidding_show_products_table')
 
-            @include('bidding.bidding.partials.show.bidding_show_products_table')
-
-
-        @endslot
-    </x-pages.index>
+    @endslot
+</x-pages.index>
 
 

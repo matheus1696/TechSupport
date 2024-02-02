@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('company_establishments_contact', function (Blueprint $table) {
             $table->id();
-            $table->string('dp_unidade');
-            $table->string('con_unidade')->nullable();
-            $table->string('con_unidade_2')->nullable();
-            $table->string('con_principal')->nullable()->default('Interno');
-            $table->unsignedBigInteger('estabelecimento_id');
+            $table->string('department');
+            $table->string('contact_1')->nullable();
+            $table->string('contact_2')->nullable();
+            $table->string('type')->nullable()->default('Internal');
+            $table->unsignedBigInteger('establishment_id');
             $table->timestamps();
 
-            $table->foreign('estabelecimento_id')->references('id')->on('company_establishments');
+            $table->foreign('establishment_id')->references('id')->on('company_establishments');
         });
     }
 

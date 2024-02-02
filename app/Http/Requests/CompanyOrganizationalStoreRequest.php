@@ -23,7 +23,7 @@ class CompanyOrganizationalStoreRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'acronym' => 'required|min:2|uppercase|unique:company_organizational',
+            'acronym' => 'required|min:2|uppercase|string|unique:company_organizational',
             'hierarchy' => 'required',
         ];
     }

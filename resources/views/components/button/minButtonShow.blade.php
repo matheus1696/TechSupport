@@ -1,7 +1,7 @@
 
 <a
     href="{{$route}}"
-    class="btn btn-sm btn-success elevation-2 m-1"
+    class="m-1 btn btn-sm btn-info elevation-2"
     style="font-size: 0.8em"
 >
     <i class="fas fa-location-arrow"></i>

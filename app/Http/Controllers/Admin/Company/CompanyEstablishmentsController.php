@@ -102,6 +102,13 @@ class CompanyEstablishmentsController extends Controller
     public function show(string $id)
     {
         //
+        $db = CompanyEstablishmentsModel::find($id);
+        $dbDepartments = CompanyEstablishmentContactsModel::where('establishment_id', $id);
+
+        return view('admin.company.establishments.establishments_show',[
+            'db'=>$db,
+            'dbDepartments'=>$dbDepartments,
+        ]);
     }
 
     /**

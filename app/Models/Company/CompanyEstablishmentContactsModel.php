@@ -12,14 +12,14 @@ class CompanyEstablishmentContactsModel extends Model
     protected $table = "company_establishments_contact";
 
     protected $fillable = [
-        'dp_unidade',
-        'con_unidade',
-        'con_unidade_2',
-        'con_principal',
-        'estabelecimento_id'
+        'department',
+        'contact_1',
+        'contact_2',
+        'type',
+        'establishment_id'
     ];
 
     public function CompanyEstablishments(){
-        return $this->belongsTo(CompanyEstablishmentsModel::class,'estabelecimento_id','id');
+        return $this->belongsTo(CompanyEstablishmentsModel::class,'establishment_id','id');
     }
 }

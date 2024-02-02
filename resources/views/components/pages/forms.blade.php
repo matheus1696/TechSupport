@@ -30,6 +30,9 @@
             </form>
 
         </x-conteiner>
+
+        
+        {{$table ?? ""}}
     </section>
 @stop
 

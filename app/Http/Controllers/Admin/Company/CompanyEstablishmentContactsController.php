@@ -15,17 +15,14 @@ class CompanyEstablishmentContactsController extends Controller
      */
     public function index(string $id)
     {
-        $dbLists = CompanyEstablishmentContactsModel::where('estabelecimento_id',$id)
-            ->orderBy('contact_1')
-            ->orderBy('contact_2')
-            ->get();
+        $db = CompanyEstablishmentContactsModel::where('establishment_id',$id)->get();            
         $dbEstablishments = CompanyEstablishmentsModel::find($id);
 
         //Log do Sistema
         Logger::create();
 
         return view('admin.company.establishments.contact.establishmentContact_create',[
-            'dbLists'=>$dbLists,
+            'db'=>$db,
             'dbEstablishments'=>$dbEstablishments,
         ]);
     }
@@ -50,9 +47,9 @@ class CompanyEstablishmentContactsController extends Controller
         CompanyEstablishmentContactsModel::create($data);
 
         //Log do Sistema
-        Logger::store('Lista Telefônica '.$data['dp_unidade']);
+        Logger::store();
 
-        return redirect(route('establishments.contact.index',['establishment'=>$data['estabelecimento_id']]))
+        return redirect(route('establishments.show',['establishment'=>$data['establishment_id']]))
             ->with('success','Cadastro salvo com sucesso');
     }
 
@@ -70,24 +67,14 @@ class CompanyEstablishmentContactsController extends Controller
     public function edit(string $establishments, string $contact)
     {
         $db = CompanyEstablishmentContactsModel::find($contact);
-        $dbLists = CompanyEstablishmentContactsModel::where('estabelecimento_id',$establishments)
-            ->orderBy('con_unidade')
-            ->orderBy('con_unidade_2')
-            ->get();
+
         $dbEstablishments = CompanyEstablishmentsModel::find($establishments);
 
-        //Header
-        $header = [
-            'title'=>"Lista Telefônica " . $dbEstablishments->no_unidade,
-        ];
-
         //Log do Sistema
-        Logger::create($header['title']);
+        Logger::create();
 
         return view('admin.company.establishments.contact.establishmentContact_edit',[
-            'header'=>$header,
             'db'=>$db,
-            'dbLists'=>$dbLists,
             'dbEstablishments'=>$dbEstablishments,
         ]);
     }
@@ -103,12 +90,11 @@ class CompanyEstablishmentContactsController extends Controller
         //Salvando Dados
         $db = CompanyEstablishmentContactsModel::find($id);
         $db->update($data);
-        $db->save();
 
         //Log do Sistema
-        Logger::update($db->no_unidade);
+        Logger::update();
 
-        return redirect(route('establishments.contact.index',['establishment'=>$data['estabelecimento_id']]))
+        return redirect(route('establishments.contact.index',['establishment'=>$data['establishment_id']]))
             ->with('success','Cadastro salvo com sucesso');
     }
 
@@ -119,23 +105,23 @@ class CompanyEstablishmentContactsController extends Controller
     {
         //Listando Dados
         $db = CompanyEstablishmentContactsModel::find($id);
-        $dbEstablishments = $db->estabelecimento_id;
+        $dbEstablishments = $db->establishment_id;
 
         //Verificação
         if ($db != NULL) {
             $db->delete();
 
             //Log do Sistema
-            Logger::destroy("Contato".$db->dp_unidade);
+            Logger::destroy();
 
             return redirect(route('establishments.contact.index',['establishment'=>$dbEstablishments]))
                 ->with('success','Exclusão realizada com sucesso.');
         }else {
             //Log do Sistema
-            Logger::error('Exclusão não realizada, existe setores vinculados a '.$db->no_unidade);
+            Logger::error();
 
             return redirect(route('establishments.contact.index',['establishment'=>$dbEstablishments]))
-                ->with('errors','Existe setores vinculados a '.$db->no_unidade);
+                ->with('errors','Existe setores vinculados a '.$db->title);
         }
     }
 }

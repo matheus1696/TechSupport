@@ -54,11 +54,7 @@ Route::middleware('auth')->group(function () {
                 Route::put('establishments/status/{establishment}',[CompanyEstablishmentsController::class,'status'])->name('establishments.status');
                 Route::resource('establishments',CompanyEstablishmentsController::class);
                 //Rota - Dados do Contato Estabelecimento de Saúde
-                Route::get('establishments/{establishment}/contact',[CompanyEstablishmentContactsController::class,'index'])->name('establishments.contact.index');
-                Route::post('establishments/contact',[CompanyEstablishmentContactsController::class,'store'])->name('establishments.contact.store');
-                Route::get('establishments/{establishment}/contact/{contact}/edit',[CompanyEstablishmentContactsController::class,'edit'])->name('establishments.contact.edit');
-                Route::put('establishments/contact/{contact}',[CompanyEstablishmentContactsController::class,'update'])->name('establishments.contact.update');
-                Route::delete('establishments/contact/{contact}',[CompanyEstablishmentContactsController::class,'destroy'])->name('establishments.contact.destroy');
+                Route::resource('establishmentContacts',CompanyEstablishmentContactsController::class);
                 //Rota - Nível de Atenção
                 Route::resource('attentions',CompanyAttentionLevelsController::class);
             });

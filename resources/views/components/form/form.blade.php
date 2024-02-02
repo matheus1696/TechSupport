@@ -9,6 +9,7 @@
     <!-- Inicio de Componentização dos Botões -->
     <x-button.buttonGroup>
         <!-- Inicio de Componentização dos Botões de Ação -->
-        <x-button.buttonSubmit action="{{$method}}" @else @endif />
+        <x-button.buttonSubmit action="{{$method}}"/>
+        
     </x-button.buttonGroup>
 </form>

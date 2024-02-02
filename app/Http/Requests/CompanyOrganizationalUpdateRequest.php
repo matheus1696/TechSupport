@@ -27,6 +27,7 @@ class CompanyOrganizationalUpdateRequest extends FormRequest
             'acronym' => [
                 'required',
                 'min:2',
+                'string',
                 'uppercase',
                 Rule::unique('company_organizational')->ignore($this->organizational),
             ],

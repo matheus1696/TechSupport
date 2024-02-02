@@ -1,4 +1,4 @@
-<x-pages.index paginate="{{$dbEstablishments->links()}}">
+<x-pages.index>
     @slot('body')
         <x-conteiner>
 
@@ -10,7 +10,7 @@
                 </form>
             </div>
 
-            <x-table.table>
+            <x-table.table :db="$db">
                 @slot('thead')
                 <tr>
                     <th>Unidade</th>
