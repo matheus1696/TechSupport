@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Company;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AttentionsLevelStoreRequest;
+use App\Http\Requests\AttentionsLevelUpdateRequest;
 use App\Models\Company\CompanyAttentionLevelsModel;
 use App\Services\Logger;
 
@@ -49,7 +50,7 @@ class CompanyAttentionLevelsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AttentionsLevelStoreRequest $request)
     {
         //Dados do formulário
         $data = $request->all();
@@ -91,7 +92,7 @@ class CompanyAttentionLevelsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AttentionsLevelUpdateRequest $request, string $id)
     {
         //Dados do formulário
         $data = $request->all();

@@ -1,2 +1,2 @@
-
-<x-form.input col="12" label="Unidade de Medida" id="title" required="required" value="{{$db->title ?? ''}}" />
+<x-form.input col="2" label="Sigla" id="acronym" required="required" value="{{$db->acronym ?? ''}}" />
+<x-form.input col="10" label="Unidade de Medida" id="title" required="required" value="{{$db->title ?? ''}}" />

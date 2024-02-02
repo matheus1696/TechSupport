@@ -14,6 +14,7 @@ class CompanyAttentionLevelsModel extends Model
     protected $fillable =
     [
         'title',
+        'acronym',
         'color',
         'status',
     ];

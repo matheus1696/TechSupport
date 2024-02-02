@@ -1,6 +1,7 @@
 <x-table.table :db="$db">
     @slot('thead')
         <tr>
+            <th class="col-1">Sigla</th>
             <th>Unidade de Medida</th>
             <th class="col-1">Status</th>
             <th class="col-1"></th>
@@ -10,6 +11,7 @@
     @slot('tbody')
         @foreach ($db as $item)
             <tr>
+                <td class="text-center">{{$item->acronym}}</td>
                 <td>{{$item->title}}</td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" name="status"

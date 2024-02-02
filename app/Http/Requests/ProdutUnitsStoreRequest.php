@@ -22,6 +22,7 @@ class ProdutUnitsStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'acronym' => 'required|max:8|unique:product_units',
             'title' => 'required|min:6|unique:product_units',
         ];
     }
@@ -34,6 +35,7 @@ class ProdutUnitsStoreRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'acronym' => 'sigla',
             'title' => 'unidade de medida',
         ];
     }

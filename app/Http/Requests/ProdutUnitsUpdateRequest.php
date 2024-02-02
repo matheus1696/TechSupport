@@ -23,11 +23,17 @@ class ProdutUnitsUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'acronym' => [
+                'required',
+                'max:8',
+                'uppercase',
+                Rule::unique('product_units')->ignore($this->unit),
+            ],
             'title' => [
                 'required',
                 'min:6',
                 'lowercase',
-                Rule::unique('product_units')->ignore($this->id),
+                Rule::unique('product_units')->ignore($this->unit),
             ],
         ];
     }
@@ -40,6 +46,7 @@ class ProdutUnitsUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'acronym' => 'sigla',
             'title' => 'unidade de medida',
         ];
     }
