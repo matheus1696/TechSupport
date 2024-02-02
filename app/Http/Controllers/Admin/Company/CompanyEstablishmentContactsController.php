@@ -64,18 +64,15 @@ class CompanyEstablishmentContactsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $establishments, string $contact)
+    public function edit(string $id)
     {
-        $db = CompanyEstablishmentContactsModel::find($contact);
-
-        $dbEstablishments = CompanyEstablishmentsModel::find($establishments);
+        $db = CompanyEstablishmentContactsModel::find($id);
 
         //Log do Sistema
         Logger::create();
 
         return view('admin.company.establishments.contact.establishmentContact_edit',[
             'db'=>$db,
-            'dbEstablishments'=>$dbEstablishments,
         ]);
     }
 
@@ -114,13 +111,13 @@ class CompanyEstablishmentContactsController extends Controller
             //Log do Sistema
             Logger::destroy();
 
-            return redirect(route('establishments.contact.index',['establishment'=>$dbEstablishments]))
+            return redirect(route('establishments.show',['establishment'=>$dbEstablishments]))
                 ->with('success','Exclusão realizada com sucesso.');
         }else {
             //Log do Sistema
             Logger::error();
 
-            return redirect(route('establishments.contact.index',['establishment'=>$dbEstablishments]))
+            return redirect(route('establishments.show',['establishment'=>$dbEstablishments]))
                 ->with('errors','Existe setores vinculados a '.$db->title);
         }
     }

@@ -103,7 +103,7 @@ class CompanyEstablishmentsController extends Controller
     {
         //
         $db = CompanyEstablishmentsModel::find($id);
-        $dbDepartments = CompanyEstablishmentContactsModel::where('establishment_id', $id);
+        $dbDepartments = CompanyEstablishmentContactsModel::where('establishment_id', $id)->get();
 
         return view('admin.company.establishments.establishments_show',[
             'db'=>$db,

@@ -1,4 +1,4 @@
-<x-pages.forms method="edit" route="{{route('establishments.contact.update',['contact'=>$db->id])}}" btnBack="{{route('establishments.index')}}">
+<x-pages.forms method="edit" route="{{route('establishmentContacts.update',['contact'=>$db->id])}}" btnBack="{{route('establishments.index')}}">
 
     <!-- Slot Header -->
     @slot('header')

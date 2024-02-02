@@ -14,14 +14,14 @@
             @foreach ($dbDepartments as $dbDepartment)
                 <tr>
                     <td>{{$dbDepartment->department}}</td>
-                    <td>{{$dbDepartment->contact_1}}</td>
-                    <td>{{$dbDepartment->contact_2}}</td>
-                    <td>{{$dbDepartment->type}}</td>
+                    <td class="text-center">{{$dbDepartment->contact_1}}</td>
+                    <td class="text-center">{{$dbDepartment->contact_2}}</td>
+                    <td class="text-center">{{$dbDepartment->type}}</td>
                     <td class="text-center">
                         <x-button.minButtonEdit
-                            route="{{route('establishments.contact.edit',['establishment'=>$dbDepartment->establishment_id, 'contact'=>$dbDepartment->id])}}">
+                            route="{{route('establishmentContacts.edit',['establishmentContact'=>$dbDepartment->id])}}">
                         </x-button.minButtonEdit>
-                        <x-button.minButtonDelete route="{{route('establishments.contact.destroy',['contact'=>$dbDepartment->id])}}">
+                        <x-button.minButtonDelete route="{{route('establishmentContacts.destroy',['establishmentContact'=>$dbDepartment->id])}}">
                         </x-button.minButtonDelete>
                     </td>
                 </tr>
