@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Company\CompanyEstablishmentsModel;
-use App\Models\Company\CompanyEstablishmentContactsModel;
+use App\Models\Company\CompanyEstablishmentDepartmentsModel;
 
 class ContactListsController extends Controller
 {
@@ -15,24 +15,25 @@ class ContactListsController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $dbEstablishments = CompanyEstablishmentsModel::where('status',true)
-            ->orderBy('establishment')->paginate(20);
-        $dbLists = CompanyEstablishmentContactsModel::all();
+    {            
+        $db = CompanyEstablishmentsModel::where('status',true)
+            ->orderBy('title')
+            ->get();
+
+        $dbContact = CompanyEstablishmentDepartmentsModel::where('contact','<>',NULL)->get();
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName'])) {
-            $dbEstablishments = CompanyEstablishmentsModel::where('status',true)
-                ->where('ft_unidade','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('establishment')
-                ->paginate(20);
+            $db = CompanyEstablishmentsModel::where('status',true)
+                ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->get();
         }
 
-        return view('public.contact',[
+        return view('public.contacts.contacts_index',[
             'search'=>$search,
-            'dbEstablishments'=>$dbEstablishments,
-            'dbLists'=>$dbLists
+            'db'=>$db,            
+            'dbContact'=>$dbContact,
         ]);
     }
 
@@ -55,9 +56,29 @@ class ContactListsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        //
+        $db = CompanyEstablishmentDepartmentsModel::where('contact','<>',NULL)
+        ->where('establishment_id', $id)
+        ->with('CompanyEstablishments')
+        ->orderBy('contact')
+        ->get();
+
+        //Pesquisar Dados
+        $search = $request->all();
+        if (isset($search['searchName'])) {
+            $db = CompanyEstablishmentDepartmentsModel::where('contact','<>',NULL)
+                ->where('establishment_id', $id)
+                ->where('department','LIKE','%'.strtolower($search['searchName']).'%')
+                ->with('CompanyEstablishments')
+                ->orderBy('contact')
+                ->get();
+        }
+
+        return view('public.contacts.contacts_show',[
+            'search'=>$search,
+            'db'=>$db,
+        ]);
     }
 
     /**
@@ -88,7 +109,7 @@ class ContactListsController extends Controller
      * API Display a listing of the resource.
      */
     public function getAllContact() {
-        $contact = CompanyEstablishmentContactsModel::select()
+        $contact = CompanyEstablishmentDepartmentsModel::select()
         ->join('company_establishments', 'company_establishments.id', '=', 'company_establishments_contact.estabelecimento_id')
         ->get()->toJson(JSON_PRETTY_PRINT);
         return response($contact, 200);

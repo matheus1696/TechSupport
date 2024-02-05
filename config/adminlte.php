@@ -315,7 +315,7 @@ return [
         [
             'text'    => 'Lista Telefônica',
             'classes' => 'btn-sm',
-            'route'   => 'contact.index',
+            'route'   => 'contacts.index',
             'icon'    => 'fas fa-phone-volume',
         ],
 

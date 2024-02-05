@@ -8,7 +8,7 @@ use App\Http\Requests\CompanyEstablishmentsStoreRequest;
 use App\Http\Requests\CompanyEstablishmentsUpdateRequest;
 use App\Models\Company\CompanyAttentionLevelsModel;
 use App\Models\Company\CompanyEstablishmentsModel;
-use App\Models\Company\CompanyEstablishmentContactsModel;
+use App\Models\Company\CompanyEstablishmentDepartmentsModel;
 use App\Models\Company\CompanyTypeEstablishmentsModel;
 use App\Models\Region\RegionCitiesModel;
 use App\Services\Logger;
@@ -37,7 +37,7 @@ class CompanyEstablishmentsController extends Controller
             ->with('RegionCities')
             ->paginate(20);
 
-        $dbLists= CompanyEstablishmentContactsModel::all();
+        $dbLists= CompanyEstablishmentDepartmentsModel::all();
 
         //Pesquisar Dados
         $search = $request->all();
@@ -99,11 +99,13 @@ class CompanyEstablishmentsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         //
         $db = CompanyEstablishmentsModel::find($id);
-        $dbDepartments = CompanyEstablishmentContactsModel::where('establishment_id', $id)->get();
+        $dbDepartments = CompanyEstablishmentDepartmentsModel::where('establishment_id', $id)
+            ->orderBy('contact')
+            ->get();
 
         return view('admin.company.establishments.establishments_show',[
             'db'=>$db,
@@ -149,7 +151,7 @@ class CompanyEstablishmentsController extends Controller
         //Log do Sistema
         Logger::update($db->title);
 
-        return redirect(route('establishments.index'))->with('success','Cadastro salvo com sucesso');
+        return redirect(route('establishments.show',['establishment'=>$id]))->with('success','Cadastro salvo com sucesso');
     }
 
     /**

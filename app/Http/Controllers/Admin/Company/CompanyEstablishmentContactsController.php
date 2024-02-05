@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Company\CompanyEstablishmentsModel;
-use App\Models\Company\CompanyEstablishmentContactsModel;
+use App\Models\Company\CompanyEstablishmentDepartmentsModel;
 use App\Services\Logger;
 
 class CompanyEstablishmentContactsController extends Controller
@@ -15,16 +14,7 @@ class CompanyEstablishmentContactsController extends Controller
      */
     public function index(string $id)
     {
-        $db = CompanyEstablishmentContactsModel::where('establishment_id',$id)->get();            
-        $dbEstablishments = CompanyEstablishmentsModel::find($id);
-
-        //Log do Sistema
-        Logger::create();
-
-        return view('admin.company.establishments.contact.establishmentContact_create',[
-            'db'=>$db,
-            'dbEstablishments'=>$dbEstablishments,
-        ]);
+        //
     }
 
     /**
@@ -44,7 +34,7 @@ class CompanyEstablishmentContactsController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        CompanyEstablishmentContactsModel::create($data);
+        CompanyEstablishmentDepartmentsModel::create($data);
 
         //Log do Sistema
         Logger::store();
@@ -66,7 +56,7 @@ class CompanyEstablishmentContactsController extends Controller
      */
     public function edit(string $id)
     {
-        $db = CompanyEstablishmentContactsModel::find($id);
+        $db = CompanyEstablishmentDepartmentsModel::find($id);
 
         //Log do Sistema
         Logger::create();
@@ -85,13 +75,13 @@ class CompanyEstablishmentContactsController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        $db = CompanyEstablishmentContactsModel::find($id);
+        $db = CompanyEstablishmentDepartmentsModel::find($id);
         $db->update($data);
 
         //Log do Sistema
         Logger::update();
 
-        return redirect(route('establishments.contact.index',['establishment'=>$data['establishment_id']]))
+        return redirect(route('establishments.show',['establishment'=>$db['establishment_id']]))
             ->with('success','Cadastro salvo com sucesso');
     }
 
@@ -101,7 +91,7 @@ class CompanyEstablishmentContactsController extends Controller
     public function destroy(string $id)
     {
         //Listando Dados
-        $db = CompanyEstablishmentContactsModel::find($id);
+        $db = CompanyEstablishmentDepartmentsModel::find($id);
         $dbEstablishments = $db->establishment_id;
 
         //Verificação

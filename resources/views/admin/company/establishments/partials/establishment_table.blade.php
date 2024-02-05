@@ -25,7 +25,7 @@
                         route="{{route('establishments.status',['establishment'=>$item->id])}}" />
                 </td>
                 <td class="text-center">
-                    <x-button.minButtonModal id="EstablishmentsModel{{$item->id}}" title="Estabelecimento de Saúde">
+                    <x-button.minButtonModalInfo id="EstablishmentsModel{{$item->id}}" title="Estabelecimento de Saúde">
                         <div class="row">
                             <p class="col-lg-2"><strong>CNES: </strong>{{$item->code ?? ""}}</p>
                             <p class="col-lg-10"><strong>Unidade: </strong>{{$item->title ?? ""}}</p>
@@ -56,8 +56,8 @@
                                             @if($item->id === $dbList->establishment_id)
                                             <tr class="text-center">
                                                 <td>{{$dbList->department}}</td>
-                                                <td>{{$dbList->contact_1}}</td>
-                                                <td>{{$dbList->contact_2}}</td>
+                                                <td>{{$dbList->contact}}</td>
+                                                <td>{{$dbList->extension}}</td>
                                             </tr>
                                             @endif
                                         @endforeach
@@ -65,7 +65,7 @@
                                 </x-table.table>
                             </div>
                         </div>
-                    </x-button.minButtonModal>
+                    </x-button.minButtonModalInfo>
                     <x-button.minButtonShow route="{{route('establishments.show',['establishment'=>$item->id])}}" />
                     <x-button.minButtonEdit route="{{route('establishments.edit',['establishment'=>$item->id])}}" />
                 </td>

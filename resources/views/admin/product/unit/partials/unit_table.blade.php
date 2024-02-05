@@ -17,7 +17,7 @@
                     <x-button.buttonStatus condition="{{$item->status}}" name="status"
                         route="{{route('units.status',['unit'=>$item->id])}}" />
                 </td>
-                <td>
+                <td class="text-center">
                     <x-button.minButtonEdit route="{{route('units.edit',['unit'=>$item->id])}}" />
                 </td>
             </tr>

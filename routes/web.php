@@ -22,8 +22,6 @@ use App\Http\Controllers\Bidding\BiddingItensController;
 
 Route::get('/',function(){return view('index');});
 
-
-
 //Camada de Seguraça para Usuários Logados
 Route::middleware('auth')->group(function () {
 
@@ -106,7 +104,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //Lista Telefônica
-Route::get('/contact',[ContactListsController::class,'index'])->name('contact.index');
+Route::resource('contacts', ContactListsController::class);
 
 //Rotas de Autenticação
-    Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true]);

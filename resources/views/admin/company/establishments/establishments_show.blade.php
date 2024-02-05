@@ -2,6 +2,8 @@
     @slot('body')
         <x-conteiner>
             @include('admin.company.establishments.partials.show.establishment_show_description')
+            <hr>            
+            @include('admin.company.establishments.partials.show.establishment_show_buttons')
         </x-conteiner>
         
         <x-conteiner>

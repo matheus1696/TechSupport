@@ -27,7 +27,7 @@
 
                     <td class="text-center">
                         <!-- Inicio de Componentização do ModalShow -->
-                        <x-button.minButtonModal id="UserModal{{$item->id}}" title="Dados do Perfil">
+                        <x-button.minButtonModalEdit id="UserModal{{$item->id}}" title="Dados do Perfil">
                             <div class="row">
                                 <p class="col-lg-4"><strong>Nome: </strong>{{$item->name}}</p>
                                 <p class="col-lg-4"><strong>Email: </strong>{{$item->email}}</p>
@@ -42,7 +42,7 @@
                                     <x-form.form method="edit" route="{{route('users.update',['user'=>$item->id])}}">
 
                                         <!-- Inicio de Componentização de Select -->
-                                        <x-form.select col="12" label="Setor" id="company_id" :db="$item">
+                                        <x-form.select col="12" label="Setor" id="company_id" db="company_id{{$item}}">
                                             @foreach ($dbCompanyOrganizational as $dbCompanyOrganization)
                                             <option value="{{$dbCompanyOrganization->id}}" @if ($item->company_id ==
                                                 $dbCompanyOrganization->id) selected @endif>
@@ -55,7 +55,7 @@
                                         </x-form.select>
 
                                         <!-- Inicio de Componentização de Select -->
-                                        <x-form.select col="12" label="Cargo" id="occupation_id" :db="$item">
+                                        <x-form.select col="12" label="Cargo" id="occupation_id" db="occupation_id{{$item}}">
                                             @foreach ($dbCompanyOccupations as $dbCompanyOccupation)
                                             <option value="{{$dbCompanyOccupation->id}}" @if ($item->occupation_id ==
                                                 $dbCompanyOccupation->id) selected @endif>{{$dbCompanyOccupation->code}}
@@ -96,7 +96,7 @@
                                 </form>
                                 
                             </x-button.buttonGroup>
-                        </x-button.minButtonModal>
+                        </x-button.minButtonModalEdit>
 
                         <!-- Inicio de Componentização do Modal Permissões -->
                         <x-modal.modalUserPermission id="UserPermissionModal{{$item->id}}" title="Permissões">

@@ -10,7 +10,7 @@
     @slot('tbody')
         @foreach ($db as $item)
             <tr>
-                <td>{{$item->code}}</td>
+                <td class="text-center">{{$item->code}}</td>
                 <td>{{$item->title}}</td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}"

@@ -5,17 +5,17 @@ namespace App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyEstablishmentContactsModel extends Model
+class CompanyEstablishmentDepartmentsModel extends Model
 {
     use HasFactory;
 
-    protected $table = "company_establishments_contact";
+    protected $table = "company_establishment_departments";
 
     protected $fillable = [
         'department',
-        'contact_1',
-        'contact_2',
-        'type',
+        'contact',
+        'extension',
+        'type_contact',
         'establishment_id'
     ];
 

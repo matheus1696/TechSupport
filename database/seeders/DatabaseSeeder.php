@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             CompanyTypeEstablishmentsSeed::class,
             CompanyAttentionLevelsSeed::class,
             CompanyEstablishmentsSeed::class,
-            CompanyEstablishmentContactsSeed::class,
+            CompanyEstablishmentDepartmentsSeed::class,
             ProductUnitsSeed::class,
         ]);
     }

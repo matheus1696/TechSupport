@@ -29,20 +29,20 @@
                     <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('biddings.status',['bidding'=>$item->id])}}" />
                 </td>
                 <td class="text-center">
-                    <x-button.minButtonModal id="Bidding{{$item->id}}" title="Informação do Processo Licitatório">
+                    <x-button.minButtonModalInfo id="Bidding{{$item->id}}" title="Informação do Processo Licitatório">
                             <div class="row justify-content-center" 
                                 @if ($item->due_date < Today() && $item->due_date != NULL) style="background: rgba(255, 0, 0, 0.500);border-radius: 5px; padding: 10px;"
                                 @elseif($item->due_date < date('Y-m-d', strtotime("+90 days")) && $item->due_date != NULL) style="background: rgba(255, 255, 0, 0.500);border-radius: 5px; padding:10px;"
                                 @endif
                             >
                                 <div class="row justify-content-center">
-                                    <div class="my-2 col-lg-4"><strong>Nº do Processo</strong>{{$item->code_process}}</div>
-                                    <div class="my-2 col-lg-4"><strong>Nº do Pregão:</strong>{{$item->cod_pregao}}</div>
-                                    <div class="my-2 col-lg-4"><strong>Nº do Contrato:</strong>{{$item->code_contract}}</div>
-                                    <div class="my-2 col-lg-12"><strong>Título:</strong>{{$item->bidding_process}}</div>
+                                    <div class="my-2 col-lg-4"><strong>Nº do Processo: </strong>{{$item->code_process}}</div>
+                                    <div class="my-2 col-lg-4"><strong>Nº do Pregão: </strong>{{$item->code_auction}}</div>
+                                    <div class="my-2 col-lg-4"><strong>Nº do Contrato: </strong>{{$item->code_contract}}</div>
+                                    <div class="my-2 col-lg-12"><strong>Título: </strong>{{$item->title}}</div>
                                     <div class="my-2 col-lg-12 row">
-                                        <strong>Objetivo: </strong>
-                                        {!!$item->description!!}
+                                        <strong class="pr-1">Objetivo:</strong>
+                                        <div>{!!$item->description!!}</div>
                                     </div>
                                     <div class="my-2 col-lg-4">
                                         <strong>Início:</strong>
@@ -57,11 +57,12 @@
                                         @if (!empty($item->validity)) meses @endif
                                     </div>
                                     
-                                    <hr>
+                                    
 
-                                    <div>
-                                        <h6 class="my-2 text-center col-12">Lista de Itens</h6>
-                                        <div class="my-2 col-12">
+                                    <div class="col-12">
+                                        <hr>
+                                        <h6 class="my-2 text-center">Lista de Itens</h6>
+                                        <div class="my-2">
                                             <x-table.table>
                                                 @slot('thead')
                                                     <tr>
@@ -74,8 +75,8 @@
                                                     @if ($item->id == $dbBiddigItem->processo_id)
                                                         @slot('tbody')
                                                             <tr>
-                                                                <td class="text-center">{{$dbBiddigItem->Product->cod_produto ?? ""}}</td>
-                                                                <td class="text-center">{{$dbBiddigItem->Product->no_produto ?? ""}}</td>
+                                                                <td class="text-center">{{$dbBiddigItem->Product->code ?? ""}}</td>
+                                                                <td class="text-center">{{$dbBiddigItem->Product->title ?? ""}}</td>
                                                                 <td class="text-center">{{$dbBiddigItem->quant_adm + $dbBiddigItem->quant_atb + $dbBiddigItem->quant_mac + $dbBiddigItem->quant_vsan + $dbBiddigItem->quant_vepd ?? ""}}</td>
                                                             </tr>
                                                         @endslot
@@ -86,7 +87,7 @@
                                     </div>
                                 </div>
                             </div>
-                    </x-button.minButtonModal>
+                    </x-button.minButtonModalInfo>
                     <x-button.minButtonShow route="{{route('biddings.show',['bidding'=>$item->id])}}" />
                     <x-button.minButtonEdit route="{{route('biddings.edit',['bidding'=>$item->id])}}" />
                 </td>

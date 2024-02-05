@@ -29,7 +29,7 @@
                     <td class="text-center">
                         {{$item->warranty}} meses</td>
                     <td class="text-center">
-                        <x-button.minButtonModal id="BiddingItens{{$item->id}}" title="Informação do Produto">
+                        <x-button.minButtonModalInfo id="BiddingItens{{$item->id}}" title="Informação do Produto">
                             <p><strong>Código do Produto:</strong> {{$item->Product->code_product}}</p>
                             <p><strong>Produto:</strong> {{$item->Product->title}}</p>
                             <div>
@@ -41,7 +41,7 @@
                                 @if ($item->Product->type === "Permanent") Permanente @endif
                                 @if ($item->Product->type === "Consumption") Consumo @endif
                             </p>
-                        </x-button.minButtonModal>
+                        </x-button.minButtonModalInfo>
                         <x-button.minButtonEdit route="{{route('biddingItens.edit',['biddingItem'=>$item->id])}}"/>
                         <x-button.minButtonDelete route="{{route('biddingItens.destroy',['biddingItem'=>$item->id])}}"/>
                     </td>

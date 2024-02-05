@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company_establishments_contact', function (Blueprint $table) {
+        Schema::create('company_establishment_departments', function (Blueprint $table) {
             $table->id();
             $table->string('department');
-            $table->string('contact_1')->nullable();
-            $table->string('contact_2')->nullable();
-            $table->string('type')->nullable()->default('Internal');
+            $table->string('filter');
+            $table->string('contact')->nullable();
+            $table->string('extension')->nullable();
+            $table->string('type_contact')->nullable()->default('Internal');
             $table->unsignedBigInteger('establishment_id');
             $table->timestamps();
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('company_establishments_contact');
+        Schema::dropIfExists('company_establishment_departments');
     }
 };
