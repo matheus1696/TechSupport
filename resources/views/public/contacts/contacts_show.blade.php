@@ -4,9 +4,13 @@
 
             <div class="pb-3">
                 <form method="get" class="row">
-                    <x-form.input col="11" label="Setor da Unidade" id="searchName" placeholder="Pesquisa por Setor da Unidade"
+                    <x-form.input col="10" label="Setor da Unidade" id="searchName" placeholder="Pesquisa por Setor da Unidade"
                         value="{{$search['searchName'] ?? ''}}" />
                     <x-button.buttonSearch />
+                    <div class="form-group col-lg-1 mt-lg-2 align-self-end">
+                        <label class="col-form-label"></label>
+                        <a href="{{ route('contacts.index') }}" class="text-sm btn btn-block bg-secondary elevation-1 form-control"><i class="fas fa-reply fa-sm"></i></a>
+                    </div>
                 </form>
             </div>
 

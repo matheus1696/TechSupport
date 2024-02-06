@@ -12,7 +12,7 @@
 
             <div class="row">
                 @foreach ($db as $item)
-                    <div class="px-2 col-xl-2 col-4">
+                    <div class="px-2 col-xl-2 col-md-4 col-6">
                         <div class="small-box {{$item->AttentionLevels->color ?? 'bg-success'}}">
                             <div class="px-2 inner">
                                 <p style="height: 50px" class="text-sm text-center">{{$item->title}}</p>

@@ -15,7 +15,7 @@ return [
     */
 
     'title' => 'TechSupport',
-    'title_prefix' => 'TechSupport ',
+    'title_prefix' => 'TechSupport',
     'title_postfix' => '',
 
     /*

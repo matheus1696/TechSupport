@@ -15,26 +15,31 @@ class CompanyAttentionLevelsSeed extends Seeder
         //
         CompanyAttentionLevelsModel::create([
             'title'=>'Administração',
+            'color'=>'bg-success',
             'acronym'=>'ADM',
         ]);
 
         CompanyAttentionLevelsModel::create([
             'title'=>'Atenção Especializada',
+            'color'=>'bg-danger',
             'acronym'=>'ATE',
         ]);
 
         CompanyAttentionLevelsModel::create([
             'title'=>'Atenção Básica',
+            'color'=>'bg-primary',
             'acronym'=>'ATB',
         ]);
 
         CompanyAttentionLevelsModel::create([
             'title'=>'Vigilância Epdemiológica',
+            'color'=>'bg-success',
             'acronym'=>'VEPD',
         ]);
 
         CompanyAttentionLevelsModel::create([
             'title'=>'Vigilância Sanitária',
+            'color'=>'bg-success',
             'acronym'=>'VSAN',
         ]);
     }

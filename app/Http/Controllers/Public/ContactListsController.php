@@ -69,7 +69,7 @@ class ContactListsController extends Controller
         if (isset($search['searchName'])) {
             $db = CompanyEstablishmentDepartmentsModel::where('contact','<>',NULL)
                 ->where('establishment_id', $id)
-                ->where('department','LIKE','%'.strtolower($search['searchName']).'%')
+                ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->with('CompanyEstablishments')
                 ->orderBy('contact')
                 ->get();

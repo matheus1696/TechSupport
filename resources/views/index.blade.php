@@ -17,12 +17,12 @@
         </video>
 
         <section class="row justify-content-center align-items-center h-100">
-            <div class="col-12 text-center">
+            <div class="text-center col-12">
                 <img src="assets/img/intellectusLogo.png" alt="" width="100" class="elevation-3">
-                <h1 class="text-light p-2">{{env('APP_NAME')}}</h1>
+                <h1 class="p-2 text-light">{{env('APP_NAME')}}</h1>
                 <div class="row justify-content-center">
-                    <a href="{{route('login')}}" class="col-md-2 mt-3 mx-2 p-2 btn btn-sm btn-block btn-light elevation-3">Acessar Sistema</a>
-                    <a href="{{route('contact.index')}}" class="col-md-2 mt-3 mx-2 p-2 btn btn-sm btn-block btn-light elevation-3">Contatos</a>
+                    <a href="{{route('login')}}" class="p-2 mx-2 mt-3 col-md-2 btn btn-sm btn-block btn-light elevation-3">Acessar Sistema</a>
+                    <a href="{{route('contacts.index')}}" class="p-2 mx-2 mt-3 col-md-2 btn btn-sm btn-block btn-light elevation-3">Contatos</a>
                 </div>
             </div>
         </section>
