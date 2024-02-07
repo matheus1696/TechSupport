@@ -42,7 +42,7 @@ Para clonar um repositório para o seu repositório local, siga os seguintes pas
     <li>Volte ao terminal ou prompt de comando e digite o comando git clone seguido da URL do repositório.</li>
 </ol>
 
-    git clone https://github.com/matheus1696/system_ingestio.git
+    git clone https://github.com/matheus1696/TechSupport.git
 
 Para instalar dependências em um projeto, siga os seguintes passos:
 
