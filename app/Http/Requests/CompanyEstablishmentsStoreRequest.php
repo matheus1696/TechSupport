@@ -29,26 +29,7 @@ class CompanyEstablishmentsStoreRequest extends FormRequest
             'district' => 'required',
             'city_id' => 'required',
             'type_establishment_id' => 'required',
-            'attention_level_id' => 'required',
-        ];
-    }
-
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array<string, string>
-     */
-    public function attributes(): array
-    {
-        return [
-            'code' => 'CNES',
-            'title' => 'estabelecimento',
-            'address' => 'logradouro',
-            'number' => 'nº',
-            'district' => 'bairro',
-            'city_id' => 'cidade',
-            'type_establishment_id' => 'tipo de estabelecimento',
-            'attention_level_id' => 'nivel de atenção',
+            'financial_block_id' => 'required',
         ];
     }
 }

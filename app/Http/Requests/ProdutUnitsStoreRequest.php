@@ -26,17 +26,4 @@ class ProdutUnitsStoreRequest extends FormRequest
             'title' => 'required|min:6|unique:product_units',
         ];
     }
-
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array<string, string>
-     */
-    public function attributes(): array
-    {
-        return [
-            'acronym' => 'sigla',
-            'title' => 'unidade de medida',
-        ];
-    }
 }

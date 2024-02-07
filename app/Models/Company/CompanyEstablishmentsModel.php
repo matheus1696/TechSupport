@@ -24,7 +24,7 @@ class CompanyEstablishmentsModel extends Model
         'latitude',
         'longitude',
         'type_establishment_id',
-        'attention_level_id',
+        'financial_block_id',
         'status',
     ];
 
@@ -36,8 +36,8 @@ class CompanyEstablishmentsModel extends Model
         return $this->belongsTo(CompanyTypeEstablishmentsModel::class,'type_establishment_id','id');
     }
 
-    public function AttentionLevels(){
-        return $this->belongsTo(CompanyAttentionLevelsModel::class,'attention_level_id','id');
+    public function FinancialBlocks(){
+        return $this->belongsTo(CompanyFinancialBlocksModel::class,'financial_block_id','id');
     }
 }
 

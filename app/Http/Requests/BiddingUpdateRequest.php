@@ -40,22 +40,4 @@ class BiddingUpdateRequest extends FormRequest
             'due_date' => 'nullable|date',
         ];
     }
-
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array<string, string>
-     */
-    public function attributes(): array
-    {
-        return [
-            'title' => 'título do processo',
-            'description' => 'objetivo do processo',
-            'code_process' => 'cód. do processo',
-            'code_auction' => 'cód. do pregão',
-            'code_contract' => 'cód. do contrato',
-            'start_date' => 'data de inicio',
-            'due_date' => 'data de vencimento',
-        ];
-    }
 }

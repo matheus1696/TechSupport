@@ -1,4 +1,4 @@
-<x-form.input col="2" label="CNES" id="code" required="required" value="{{$db->code ?? ''}}" />
+<x-form.input col="2" label="Código" id="code" required="required" value="{{$db->code ?? ''}}" />
 <x-form.input col="10" label="Nome do Estabelecimento" id="title" required="required" value="{{$db->title ?? ''}}" />
 <x-form.input col="10" label="Logradouro" id="address" required="required" value="{{$db->address ?? ''}}" />
 <x-form.input col="2" label="Número" id="number" required="required" value="{{$db->number ?? ''}}" />
@@ -23,9 +23,9 @@
     @endforeach
 </x-form.select>
 
-<x-form.select col="6" label="Nível de Atenção" id="attention_level_id" required="required">
-    @foreach ($dbCompanyAttentionLevels as $item)
-        <option value="{{$item->id}}" @isset($db)  @if ($db->attention_level_id == $item->id) selected @endif @endisset>
+<x-form.select col="6" label="Bloco Financeiro" id="financial_block_id" required="required">
+    @foreach ($dbCompanyFinancialBlocks as $item)
+        <option value="{{$item->id}}" @isset($db)  @if ($db->financial_block_id == $item->id) selected @endif @endisset>
             {{$item->title}}
         </option>
     @endforeach

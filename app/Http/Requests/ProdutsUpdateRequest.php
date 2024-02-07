@@ -37,19 +37,4 @@ class ProdutsUpdateRequest extends FormRequest
             'type' => 'required',
         ];
     }
-
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array<string, string>
-     */
-    public function attributes(): array
-    {
-        return [
-            'title' => 'nome do produto',
-            'code' => 'código do produto',
-            'description' => 'descrição do produto',
-            'type' => 'tipo do produto',
-        ];
-    }
 }

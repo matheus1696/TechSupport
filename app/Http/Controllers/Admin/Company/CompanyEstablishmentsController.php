@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyEstablishmentsStoreRequest;
 use App\Http\Requests\CompanyEstablishmentsUpdateRequest;
-use App\Models\Company\CompanyAttentionLevelsModel;
+use App\Models\Company\CompanyFinancialBlocksModel;
 use App\Models\Company\CompanyEstablishmentsModel;
 use App\Models\Company\CompanyEstablishmentDepartmentsModel;
 use App\Models\Company\CompanyTypeEstablishmentsModel;
@@ -32,7 +32,7 @@ class CompanyEstablishmentsController extends Controller
         $db = CompanyEstablishmentsModel::select()
             ->orderBy('status','DESC')
             ->orderBy('title')
-            ->with('AttentionLevels')
+            ->with('FinancialBlocks')
             ->with('TypeEstablishments')
             ->with('RegionCities')
             ->paginate(20);
@@ -66,7 +66,7 @@ class CompanyEstablishmentsController extends Controller
         //Listagem de Dados
         $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
         $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
-        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('title')->get();
+        $dbCompanyFinancialBlocks = CompanyFinancialBlocksModel::where('status',true)->orderBy('title')->get();
 
         //Log do Sistema
         Logger::create();
@@ -74,7 +74,7 @@ class CompanyEstablishmentsController extends Controller
         return view('admin.company.establishments.establishments_create',[
             'dbRegionCities'=>$dbRegionCities,
             'dbCompanyTypeEstablishments'=>$dbCompanyTypeEstablishments,
-            'dbCompanyAttentionLevels'=>$dbCompanyAttentionLevels,
+            'dbCompanyFinancialBlocks'=>$dbCompanyFinancialBlocks,
         ]);
     }
 
@@ -122,7 +122,7 @@ class CompanyEstablishmentsController extends Controller
         $db = CompanyEstablishmentsModel::find($id);
         $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
         $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
-        $dbCompanyAttentionLevels = CompanyAttentionLevelsModel::where('status',true)->orderBy('title')->get();
+        $dbCompanyFinancialBlocks = CompanyFinancialBlocksModel::where('status',true)->orderBy('title')->get();
 
         //Log do Sistema
         Logger::edit($db->establishment);
@@ -131,7 +131,7 @@ class CompanyEstablishmentsController extends Controller
             'db'=>$db,
             'dbRegionCities'=>$dbRegionCities,
             'dbCompanyTypeEstablishments'=>$dbCompanyTypeEstablishments,
-            'dbCompanyAttentionLevels'=>$dbCompanyAttentionLevels,
+            'dbCompanyFinancialBlocks'=>$dbCompanyFinancialBlocks,
         ]);
     }
 

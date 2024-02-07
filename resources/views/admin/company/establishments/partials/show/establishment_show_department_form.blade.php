@@ -1,4 +1,4 @@
-<x-form.form method="create" route="{{route('establishmentContacts.store')}}">
+<x-form.form method="create" route="{{route('establishment_contacts.store')}}">
     <input type="hidden" name="establishment_id" value="{{$db->id}}">
     <x-form.input col="5" label="Departamento" id="department" required="required" />
     <x-form.input col="2" type="tel" label="Telefone" id="contact" />

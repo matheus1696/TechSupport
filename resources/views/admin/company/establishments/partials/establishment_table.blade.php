@@ -17,9 +17,9 @@
         @foreach ($db as $item)
             <tr>
                 <td class="text-center">{{$item->code}}</td>
-                <td>{{$item->title}}</td>
-                <td>{{$item->district}}</td>
-                <td>{{$item->AttentionLevels->title}}</td>
+                <td class="text-center">{{$item->title}}</td>
+                <td class="text-center">{{$item->district}}</td>
+                <td class="text-center">{{$item->FinancialBlocks->title}}</td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" name="status"
                         route="{{route('establishments.status',['establishment'=>$item->id])}}" />
@@ -35,8 +35,8 @@
                             </p>
                             <p class="col-lg-12"><strong>Tipo de Estabelecimento:
                                 </strong>{{$item->TypeEstablishments->title ?? ""}}</p>
-                            <p class="col-lg-12"><strong>Nivel de Atenção:
-                                </strong>{{$item->AttentionLevels->title ?? ""}}</p>
+                            <p class="col-lg-12"><strong>Bloco Financeiro:
+                                </strong>{{$item->FinancialBlocks->title ?? ""}}</p>
                         </div>
                         <hr>
                         <div>

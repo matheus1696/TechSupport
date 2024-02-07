@@ -26,17 +26,4 @@ class BiddingStoreRequest extends FormRequest
             'description' => 'required|min:20',
         ];
     }
-
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array<string, string>
-     */
-    public function attributes(): array
-    {
-        return [
-            'title' => 'título do processo',
-            'description' => 'objetivo do processo',
-        ];
-    }
 }

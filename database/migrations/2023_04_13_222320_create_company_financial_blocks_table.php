@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company_attention_levels', function (Blueprint $table) {
+        Schema::create('company_financial_blocks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('acronym');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('company_attention_levels');
+        Schema::dropIfExists('company_financial_blocks');
     }
 };

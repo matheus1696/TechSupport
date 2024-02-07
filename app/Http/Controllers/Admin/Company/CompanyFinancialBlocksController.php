@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin\Company;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AttentionsLevelStoreRequest;
-use App\Http\Requests\AttentionsLevelUpdateRequest;
-use App\Models\Company\CompanyAttentionLevelsModel;
+use App\Http\Requests\FinancialBlocksStoreRequest;
+use App\Http\Requests\FinancialBlocksUpdateRequest;
+use App\Models\Company\CompanyFinancialBlocksModel;
 use App\Services\Logger;
 
-class CompanyAttentionLevelsController extends Controller
+class CompanyFinancialBlocksController extends Controller
 {
     /*
      * Controller access permission resource.
@@ -24,14 +24,14 @@ class CompanyAttentionLevelsController extends Controller
     public function index()
     {
         //Listagem de Dados
-        $db = CompanyAttentionLevelsModel::select()
+        $db = CompanyFinancialBlocksModel::select()
             ->orderBy('title')
             ->paginate(20);
 
         //Log do Sistema
         Logger::access();
 
-        return view('admin.company.attentions.attentions_index',[
+        return view('admin.company.financial_blocks.financial_blocks_index',[
             'db'=>$db,
         ]);
     }
@@ -44,24 +44,24 @@ class CompanyAttentionLevelsController extends Controller
         //Log do Sistema
         Logger::create();
 
-        return view('admin.company.attentions.attentions_create');
+        return view('admin.company.financial_blocks.financial_blocks_create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AttentionsLevelStoreRequest $request)
+    public function store(FinancialBlocksStoreRequest $request)
     {
         //Dados do formulário
         $data = $request->all();
 
         //Salvando Dados
-        CompanyAttentionLevelsModel::create($data);
+        CompanyFinancialBlocksModel::create($data);
 
         //Log do Sistema
         Logger::store();
 
-        return redirect(route('attentions.index'))
+        return redirect(route('financial_blocks.index'))
             ->with('success','Cadastro salvo com sucesso');
     }
 
@@ -79,12 +79,12 @@ class CompanyAttentionLevelsController extends Controller
     public function edit(string $id)
     {
         //Listando Dados
-        $db = CompanyAttentionLevelsModel::find($id);
+        $db = CompanyFinancialBlocksModel::find($id);
 
         //Log do Sistema
         Logger::edit();
 
-        return view('admin.company.attentions.attentions_edit',[
+        return view('admin.company.financial_blocks.financial_blocks_edit',[
             'db'=>$db,
         ]);
     }
@@ -92,19 +92,19 @@ class CompanyAttentionLevelsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AttentionsLevelUpdateRequest $request, string $id)
+    public function update(FinancialBlocksUpdateRequest $request, string $id)
     {
         //Dados do formulário
         $data = $request->all();
 
         //Atualizando dados
-        $db = CompanyAttentionLevelsModel::find($id);
+        $db = CompanyFinancialBlocksModel::find($id);
         $db->update($data);
 
         //Log do Sistema
         Logger::update();
 
-        return redirect(route('attentions.index'))
+        return redirect(route('financial_blocks.index'))
             ->with('success','Cadastro alterado com sucesso');
     }
 

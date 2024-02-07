@@ -36,27 +36,4 @@ class BiddingItensStoreRequest extends FormRequest
             'reference_model_3' => 'nullable|min:6',
         ];
     }
-
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array<string, string>
-     */
-    public function attributes(): array
-    {
-        return [
-            'process_id' => 'processo',
-            'product_id' => 'produto',
-            'amount_adm' => 'quantidade adm',
-            'amount_atb' => 'quantidade atb',
-            'amount_mac' => 'quantidade mac',
-            'amount_vsan' => 'quantidade v. san',
-            'amount_vepd' => 'quantidade v. epd',
-            'units_id' => 'required',
-            'warranty' => 'required|number',
-            'reference_model_1' => 'modelo de referência',
-            'reference_model_2' => 'modelo de referência',
-            'reference_model_3' => 'modelo de referência',
-        ];
-    }
 }

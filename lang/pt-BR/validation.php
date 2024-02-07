@@ -170,6 +170,7 @@ return [
     */
 
     'attributes' => [
+        'acronym'   => 'sigla',
         'address'   => 'endereço',
         'age'       => 'idade',
         'body'      => 'conteúdo',

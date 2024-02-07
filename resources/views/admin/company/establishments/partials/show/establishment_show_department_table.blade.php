@@ -24,13 +24,13 @@
                         
                         <x-button.minButtonModalEdit id="Departamento{{$dbDepartment->id}}" title="{{$dbDepartment->department}}">
 
-                            <x-form.form route="{{route('establishmentContacts.update',['establishmentContact'=>$dbDepartment->id])}}" method="edit">
+                            <x-form.form route="{{route('establishment_contacts.update',['establishment_contact'=>$dbDepartment->id])}}" method="edit">
                                 
                                 <x-form.input col="5" label="Departamento" id="department" required="required" value="{{ $dbDepartment->department}}" />
                                 <x-form.input col="2" type="tel" label="Telefone" id="contact" value="{{ $dbDepartment->contact}}" />
                                 <x-form.input col="2" type="number" label="Ramal" id="extension" value="{{ $dbDepartment->extension}}" />
                                 
-                                <x-form.select col="3" label="Tipo de Contato" id="type_contact">
+                                <x-form.select col="3" label="Tipo de Contato" id="type_contact{{$dbDepartment->id}}">
                                     <option @if($dbDepartment->type_contact === "Main") selected @endif value="Main">Contato Externo</option>
                                     <option @if($dbDepartment->type_contact === "Internal") selected @endif value="Internal">Ramal Interno</option>
                                 </x-form.select>
@@ -39,7 +39,7 @@
                             
                         </x-button.minButtonModalEdit>
 
-                        <x-button.minButtonDelete route="{{route('establishmentContacts.destroy',['establishmentContact'=>$dbDepartment->id])}}">
+                        <x-button.minButtonDelete route="{{route('establishment_contacts.destroy',['establishment_contact'=>$dbDepartment->id])}}">
                         </x-button.minButtonDelete>
                     </td>
                 </tr>

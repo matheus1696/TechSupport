@@ -13,6 +13,7 @@ class CompanyEstablishmentDepartmentsModel extends Model
 
     protected $fillable = [
         'department',
+        'filter',
         'contact',
         'extension',
         'type_contact',

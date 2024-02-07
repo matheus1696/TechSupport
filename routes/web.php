@@ -6,9 +6,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Public\ContactListsController;
 use App\Http\Controllers\Users\Profile\ProfileController;
 use App\Http\Controllers\Admin\Users\UsersController;
-use App\Http\Controllers\Admin\Company\CompanyAttentionLevelsController;
+use App\Http\Controllers\Admin\Company\CompanyFinancialBlocksController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentsController;
-use App\Http\Controllers\Admin\Company\CompanyEstablishmentContactsController;
+use App\Http\Controllers\Admin\Company\CompanyEstablishmentDepartmentsController;
 use App\Http\Controllers\Admin\Company\CompanyOccupationController;
 use App\Http\Controllers\Admin\Company\CompanyOrganizationalController;
 use App\Http\Controllers\Admin\Company\CompanyTypeEstablishmentsController;
@@ -52,9 +52,9 @@ Route::middleware('auth')->group(function () {
                 Route::put('establishments/status/{establishment}',[CompanyEstablishmentsController::class,'status'])->name('establishments.status');
                 Route::resource('establishments',CompanyEstablishmentsController::class);
                 //Rota - Dados do Contato Estabelecimento de Saúde
-                Route::resource('establishmentContacts',CompanyEstablishmentContactsController::class);
+                Route::resource('establishment_contacts',CompanyEstablishmentDepartmentsController::class);
                 //Rota - Nível de Atenção
-                Route::resource('attentions',CompanyAttentionLevelsController::class);
+                Route::resource('financial_blocks',CompanyFinancialBlocksController::class);
             });
 
             //Grupo de Rotas - Configuração de Localização

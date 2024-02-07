@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('company_establishments', function (Blueprint $table) {
             $table->id();
-            $table->integer('code')->nullable()->unique();
+            $table->string('code')->nullable()->unique();
             $table->string('title')->unique();
             $table->string('filter');
             $table->string('address');
@@ -23,14 +23,14 @@ return new class extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->unsignedBigInteger('type_establishment_id');
-            $table->unsignedBigInteger('attention_level_id');
+            $table->unsignedBigInteger('financial_block_id');
             $table->text('description')->nullable();
             $table->string('status')->default(true);
             $table->timestamps();
 
             $table->foreign('city_id')->references('id')->on('region_cities');
             $table->foreign('type_establishment_id')->references('id')->on('company_type_establishments');
-            $table->foreign('attention_level_id')->references('id')->on('company_attention_levels');
+            $table->foreign('financial_block_id')->references('id')->on('company_financial_blocks');
         });
     }
 

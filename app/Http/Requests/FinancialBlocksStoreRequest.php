@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProdutsStoreRequest extends FormRequest
+class FinancialBlocksStoreRequest extends FormRequest
 {
-    /*
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
@@ -17,15 +17,13 @@ class ProdutsStoreRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'title' => 'required|unique:products',
-            'code' => 'required|min:3|uppercase|unique:products',
-            'description' => 'required|min:20',
-            'type' => 'required',
+            'title' => 'required|unique:company_financial_blocks',
+            'acronym' => 'required|min:3|max:10|uppercase|unique:company_financial_blocks',
         ];
     }
 }

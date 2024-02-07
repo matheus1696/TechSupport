@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company\CompanyEstablishmentDepartmentsModel;
 use App\Services\Logger;
 
-class CompanyEstablishmentContactsController extends Controller
+class CompanyEstablishmentDepartmentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,6 +32,7 @@ class CompanyEstablishmentContactsController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
+        $data['filter'] = strtolower($data['department']);
 
         //Salvando Dados
         CompanyEstablishmentDepartmentsModel::create($data);

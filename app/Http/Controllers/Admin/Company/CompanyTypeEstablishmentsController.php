@@ -41,7 +41,7 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.company.type_establishments.type_establishments_create');
     }
 
     /**
@@ -49,7 +49,11 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $db = $request->all();
+
+        CompanyTypeEstablishmentsModel::create($db);
+
+        return redirect(route('type_establishments.index'));
     }
 
     /**

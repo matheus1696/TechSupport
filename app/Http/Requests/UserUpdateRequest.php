@@ -28,19 +28,4 @@ class UserUpdateRequest extends FormRequest
             'password' => 'nullable|min:8|confirmed',
         ];
     }
-
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array<string, string>
-     */
-    public function attributes(): array
-    {
-        return [
-            'name' => 'nome completo',
-            'con_usuario_1' => 'telefone',
-            'con_usuario_2' => 'telefone',
-            'password'=>'senha',
-        ];
-    }
 }

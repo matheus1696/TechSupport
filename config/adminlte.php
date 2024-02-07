@@ -371,9 +371,9 @@ return [
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
-                            'text'    => 'Níveis de Atenção',
+                            'text'    => 'Blocos Financeiros',
                             'classes' => 'btn-sm',
-                            'route'   => 'attentions.index',
+                            'route'   => 'financial_blocks.index',
                             'icon'    => 'fas fa-grip-lines-vertical',
                             'can'     => ['sysadmin','admin'],
                         ],

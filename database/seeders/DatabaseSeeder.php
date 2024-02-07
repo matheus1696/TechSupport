@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             //CompanyOrganizationalSeed::class,
             CompanyOccupationsSeed::class,
             //CompanyTypeEstablishmentsSeed::class,
-            //CompanyAttentionLevelsSeed::class,
+            //CompanyFinancialBlocksSeed::class,
             //CompanyEstablishmentsSeed::class,
             //CompanyEstablishmentDepartmentsSeed::class,
             ProductUnitsSeed::class,
