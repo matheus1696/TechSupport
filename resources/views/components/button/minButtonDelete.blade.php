@@ -2,10 +2,9 @@
     @csrf @method('DELETE')
     <button
         type="submit"
-        class="btn btn-sm btn-danger elevation-2 m-1"
+        class="m-1 btn btn-xs btn-danger elevation-2"
         onclick="return confirm('Realmente deseja realizar a exclusão?')"
-        style="font-size: 0.8em"
     >
-        <i class="fas fa-trash"></i>
+        <i class="p-1 text-xs fas fa-trash"></i>
     </button>
 </form>

@@ -3,10 +3,10 @@
     <!-- Components THead -->
     @slot('thead')
         <tr>
-            <th>CNES</th>
+            <th>Código</th>
             <th>Estabelecimento</th>
             <th>Bairro</th>
-            <th>Nivel de Atenção</th>
+            <th>Bloco Financeiro</th>
             <th>Status</th>
             <th></th>
         </tr>

@@ -26,12 +26,12 @@ class DatabaseSeeder extends Seeder
             RegionCountriesSeed::class,
             RegionStatesSeed::class,
             RegionCitiesSeed::class,
-            //CompanyOrganizationalSeed::class,
+            CompanyOrganizationalSeed::class,
             CompanyOccupationsSeed::class,
-            //CompanyTypeEstablishmentsSeed::class,
-            //CompanyFinancialBlocksSeed::class,
-            //CompanyEstablishmentsSeed::class,
-            //CompanyEstablishmentDepartmentsSeed::class,
+            CompanyTypeEstablishmentsSeed::class,
+            CompanyFinancialBlocksSeed::class,
+            CompanyEstablishmentsSeed::class,
+            CompanyEstablishmentDepartmentsSeed::class,
             ProductUnitsSeed::class,
         ]);
     }

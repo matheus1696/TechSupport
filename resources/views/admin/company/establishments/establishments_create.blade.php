@@ -3,7 +3,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Cadastrar Estabelecimento"/>
+        <x-header title="Lista de Estabelecimento" />
     @endslot
     
     <!-- Slot Body -->

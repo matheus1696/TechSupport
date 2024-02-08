@@ -16,7 +16,7 @@ class UserSeed extends Seeder
         User::create([
             'name'=>'Administrador de Sistema',
             'filter'=>strtolower('Administrador de Sistema'),
-            'email'=>'sysadmin@gest360.com.br',
+            'email'=>'sysadmin',
             'contact_1'=>'(81) 0000-0000',
             'contact_2'=>'(81) 0000-0000',
             'birthday'=>'1990-12-31',
@@ -27,7 +27,7 @@ class UserSeed extends Seeder
         User::create([
             'name'=>'Administrador',
             'filter'=>strtolower('Administrador'),
-            'email'=>'admin@gest360.com.br',
+            'email'=>'admin',
             'contact_1'=>'(81) 0000-0000',
             'contact_2'=>'(81) 0000-0000',
             'birthday'=>'1990-12-31',
@@ -38,7 +38,7 @@ class UserSeed extends Seeder
         User::create([
             'name'=>'Usuário',
             'filter'=>strtolower('Usuário'),
-            'email'=>'user@gest360.com.br',
+            'email'=>'user',
             'contact_1'=>'(81) 0000-0000',
             'contact_2'=>'(81) 0000-0000',
             'birthday'=>'1990-12-31',
@@ -49,7 +49,7 @@ class UserSeed extends Seeder
         User::create([
             'name'=>'Verificar Email',
             'filter'=>strtolower('Verificar Email'),
-            'email'=>'ve@gest360.com.br',
+            'email'=>'ve',
             'contact_1'=>'(81) 0000-0000',
             'contact_2'=>'(81) 0000-0000',
             'birthday'=>'1990-12-31',
@@ -59,7 +59,7 @@ class UserSeed extends Seeder
         User::create([
             'name'=>'Processos Licitatórios',
             'filter'=>strtolower('Processos Licitatórios'),
-            'email'=>'bidding@gest360.com.br',
+            'email'=>'bidding',
             'contact_1'=>'(81) 0000-0000',
             'contact_2'=>'(81) 0000-0000',
             'birthday'=>'2024-01-18',

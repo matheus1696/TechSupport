@@ -5,10 +5,9 @@
             <th class="text-xs col-1">Nº Pregão</th>
             <th class="text-xs col-1">Nº Contrato</th>
             <th class="text-xs">Titulo do Processo</th>
-            <th class="text-xs col-1">Data Início</th>
             <th class="text-xs col-1">Data Venc.</th>
             <th class="text-xs col-1">Status</th>
-            <th class="text-xs col-3"></th>
+            <th class="text-xs col-2"></th>
         </tr>
     @endslot
 
@@ -23,7 +22,6 @@
                 <td class="text-center">{{$item->code_auction}}</td>
                 <td class="text-center">{{$item->code_contract}}</td>
                 <td class="text-center">{{$item->title}}</td>
-                <td class="text-center">{{$item->start_date == NULL ? "" : date('d/m/Y',strtotime($item->start_date))}}</td>
                 <td class="text-center">{{$item->due_date == NULL ? "" : date('d/m/Y',strtotime($item->due_date))}}</td>
                 <td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('supply_processes.status',['supply_process'=>$item->id])}}" />

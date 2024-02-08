@@ -25,14 +25,14 @@ class FinancialBlocksUpdateRequest extends FormRequest
         return [
             'title' => [
                 'required',
-                Rule::unique('company_financial_blocks')->ignore($this->financial_blocks),
+                Rule::unique('company_financial_blocks')->ignore($this->financial_block),
             ],
             'acronym' => [
                 'required',
                 'min:3',
-                'max:10',
+                'max:15',
                 'uppercase',
-                Rule::unique('company_financial_blocks')->ignore($this->financial_blocks),
+                Rule::unique('company_financial_blocks')->ignore($this->financial_block),
             ],
         ];
     }

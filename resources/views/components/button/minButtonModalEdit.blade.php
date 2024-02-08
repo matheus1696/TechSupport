@@ -1,11 +1,10 @@
 <button
     type="button"
-    class="m-1 btn btn-sm btn-warning elevation-2"
+    class="m-1 btn btn-xs btn-warning elevation-2"
     data-toggle="modal"
     data-target="#{{$id}}"
-    style="font-size: 0.8em"
 >
-  <i class="{{$icon ?? "fas fa-pen"}}"></i>
+  <i class="{{$icon ?? "fas fa-pen"}} text-xs p-1"></i>
 </button>
 
 <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">

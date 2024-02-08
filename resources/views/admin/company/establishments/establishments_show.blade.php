@@ -1,4 +1,11 @@
 <x-pages.index>
+    
+    <!-- Slot Header -->
+    @slot('header')
+        <x-header title="Lista de Estabelecimento: {{ $db->title }}"/>
+    @endslot
+
+    <!-- Slot Body -->
     @slot('body')
         <x-conteiner>
             @include('admin.company.establishments.partials.show.establishment_show_description')

@@ -23,7 +23,7 @@ class FinancialBlocksStoreRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:company_financial_blocks',
-            'acronym' => 'required|min:3|max:10|uppercase|unique:company_financial_blocks',
+            'acronym' => 'required|min:3|max:15|uppercase|unique:company_financial_blocks',
         ];
     }
 }

@@ -1,15 +1,14 @@
 <button
     type="button"
-    class="btn btn-sm btn-success elevation-2 m-1"
+    class="m-1 btn btn-xs btn-success elevation-2"
     data-toggle="modal"
     data-target="#{{$id}}"
-    style="font-size: 0.8em"
 >
-  <i class="{{$icon ?? "fas fa-eye"}}"></i>
+  <i class="{{$icon ?? "fas fa-eye"}} text-xs p-1"></i>
 </button>
 
 <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
-    <div class="modal-dialog modal-xl text-left" role="document">
+    <div class="text-left modal-dialog modal-xl" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -19,7 +18,7 @@
                 </button>
             </div>
 
-            <div class="modal-body m-4">
+            <div class="m-4 modal-body">
                 {{$slot}}
             </div>
         </div>
