@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Models\Bidding;
+namespace App\Models\SupplyProcess;
 
 use App\Models\Product\ProductModel;
 use App\Models\Product\ProductUnitModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BiddingItensModel extends Model
+class SupplyProcessItemsModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'bidding_process_itens';
+    protected $table = 'supply_process_items';
 
     protected $fillable =[
         'process_id',
@@ -28,8 +28,8 @@ class BiddingItensModel extends Model
         'reference_model_3',
     ];
 
-    public function Bidding(){
-        return $this->belongsTo(BiddingModel::class,'process_id','id');
+    public function SupplyProcesses(){
+        return $this->belongsTo(SupplyProcessesModel::class,'process_id','id');
     }
 
     public function Product(){

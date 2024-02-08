@@ -1,9 +1,9 @@
 <!-- Inicio de Componentização Page Create -->
-<x-pages.forms method="create" route="{{route('biddings.store')}}" btnBack="{{route('biddings.index')}}">
+<x-pages.forms method="create" route="{{route('supply_processes.store')}}" btnBack="{{route('supply_processes.index')}}">
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Processos Licitatórios"/>
+        <x-header title="Processos de Fornecimento"/>
     @endslot
 
     <!-- Slot Body -->

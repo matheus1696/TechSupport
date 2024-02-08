@@ -8,7 +8,7 @@
             <th class="text-xs col-1">Data Início</th>
             <th class="text-xs col-1">Data Venc.</th>
             <th class="text-xs col-1">Status</th>
-            <th class="text-xs col-2"></th>
+            <th class="text-xs col-3"></th>
         </tr>
     @endslot
 
@@ -26,10 +26,10 @@
                 <td class="text-center">{{$item->start_date == NULL ? "" : date('d/m/Y',strtotime($item->start_date))}}</td>
                 <td class="text-center">{{$item->due_date == NULL ? "" : date('d/m/Y',strtotime($item->due_date))}}</td>
                 <td class="text-center">
-                    <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('biddings.status',['bidding'=>$item->id])}}" />
+                    <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('supply_processes.status',['supply_process'=>$item->id])}}" />
                 </td>
                 <td class="text-center">
-                    <x-button.minButtonModalInfo id="Bidding{{$item->id}}" title="Informação do Processo Licitatório">
+                    <x-button.minButtonModalInfo id="SupplyProcess{{$item->id}}" title="Informação do Processo de Fornecimento">
                             <div class="row justify-content-center" 
                                 @if ($item->due_date < Today() && $item->due_date != NULL) style="background: rgba(255, 0, 0, 0.500);border-radius: 5px; padding: 10px;"
                                 @elseif($item->due_date < date('Y-m-d', strtotime("+90 days")) && $item->due_date != NULL) style="background: rgba(255, 255, 0, 0.500);border-radius: 5px; padding:10px;"
@@ -56,8 +56,6 @@
                                         <strong>Vigência:</strong>{{$item->validity}}
                                         @if (!empty($item->validity)) meses @endif
                                     </div>
-                                    
-                                    
 
                                     <div class="col-12">
                                         <hr>
@@ -66,18 +64,18 @@
                                             <x-table.table>
                                                 @slot('thead')
                                                     <tr>
-                                                        <td class="col-3">Cód.</td>
-                                                        <td class="col-7">Nome Produto</td>
+                                                        <td class="col-2">Cód.</td>
+                                                        <td class="col-8">Nome Produto</td>
                                                         <td class="col-2">Quant. Total</td>
                                                     </tr>
                                                 @endslot
-                                                @foreach ($dbBiddigItens as $dbBiddigItem)
-                                                    @if ($item->id == $dbBiddigItem->processo_id)
+                                                @foreach ($dbSupplyProcessItems as $dbSupplyProcessItem)
+                                                    @if ($item->id == $dbSupplyProcessItem->process_id)
                                                         @slot('tbody')
                                                             <tr>
-                                                                <td class="text-center">{{$dbBiddigItem->Product->code ?? ""}}</td>
-                                                                <td class="text-center">{{$dbBiddigItem->Product->title ?? ""}}</td>
-                                                                <td class="text-center">{{$dbBiddigItem->quant_adm + $dbBiddigItem->quant_atb + $dbBiddigItem->quant_mac + $dbBiddigItem->quant_vsan + $dbBiddigItem->quant_vepd ?? ""}}</td>
+                                                                <td class="text-center">{{$dbSupplyProcessItem->Product->code ?? ""}}</td>
+                                                                <td class="text-center">{{$dbSupplyProcessItem->Product->title ?? ""}}</td>
+                                                                <td class="text-center">{{$dbSupplyProcessItem->amount_adm + $dbSupplyProcessItem->amount_atb + $dbSupplyProcessItem->amount_mac + $dbSupplyProcessItem->amount_vsan + $dbSupplyProcessItem->amount_vepd ?? ""}}</td>
                                                             </tr>
                                                         @endslot
                                                     @endif
@@ -88,8 +86,8 @@
                                 </div>
                             </div>
                     </x-button.minButtonModalInfo>
-                    <x-button.minButtonShow route="{{route('biddings.show',['bidding'=>$item->id])}}" />
-                    <x-button.minButtonEdit route="{{route('biddings.edit',['bidding'=>$item->id])}}" />
+                    <x-button.minButtonShow route="{{route('supply_processes.show',['supply_process'=>$item->id])}}" />
+                    <x-button.minButtonEdit route="{{route('supply_processes.edit',['supply_process'=>$item->id])}}" />
                 </td>
             </tr>
         @endforeach

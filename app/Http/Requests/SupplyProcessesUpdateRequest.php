@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class BiddingUpdateRequest extends FormRequest
+class SupplyProcessesUpdateRequest extends FormRequest
 {
     /*
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class BiddingUpdateRequest extends FormRequest
             'max:9',
             'min:8',
             'uppercase',
-            Rule::unique('bidding_processes')->ignore($this->bidding),            
+            Rule::unique('supply_processes')->ignore($this->supply_process),            
         ];
 
         return [
@@ -36,6 +36,7 @@ class BiddingUpdateRequest extends FormRequest
             'code_process' => $codesRules,
             'code_auction' => $codesRules,
             'code_contract' => $codesRules,
+            'code_price_registration' => $codesRules,
             'strat_date' => 'nullable|date',
             'due_date' => 'nullable|date',
         ];

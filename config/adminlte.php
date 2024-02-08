@@ -302,11 +302,11 @@ return [
             'text'    => 'Buscar Menu',
         ],
 
-        //Processos Licitatórios
+        //Processos de Fornecimentos
         [
-            'text'    => 'Processos Licitatórios',
+            'text'    => 'Processos de Fornecimento',
             'classes' => 'btn-sm',
-            'route'   => 'biddings.index',
+            'route'   => 'supply_processes.index',
             'icon'    => 'fas fa-file-signature',
             'can'     => ['sysadmin','admin','bidding'],
         ],

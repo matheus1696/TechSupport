@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bidding_process_itens', function (Blueprint $table) {
+        Schema::create('supply_process_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('process_id');
             $table->unsignedBigInteger('product_id');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text('reference_model_3')->nullable();
             $table->timestamps();
 
-            $table->foreign('process_id')->references('id')->on('bidding_processes');
+            $table->foreign('process_id')->references('id')->on('supply_processes');
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('units_id')->references('id')->on('product_units');
         });
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bidding_process_itens');
+        Schema::dropIfExists('supply_process_items');
     }
 };

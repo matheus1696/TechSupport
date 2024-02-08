@@ -1,7 +1,8 @@
 <div class="text-sm row px-lg-2 py-lg-2">
-    <p class="col-lg"><strong>Nº do Processo: </strong>{{$db->code_process ?? ""}}</p>
-    <p class="col-lg"><strong>Nº do Pregão: </strong>{{$db->code_auction ?? ""}}</p>
-    <p class="col-lg"><strong>Nº do Contrato: </strong>{{$db->code_contract ?? ""}}</p>
+    <p class="col-lg-4"><strong>Nº do Processo: </strong>{{$db->code_process ?? ""}}</p>
+    <p class="col-lg-4"><strong>Nº do Pregão: </strong>{{$db->code_auction ?? ""}}</p>
+    <p class="col-lg-4"><strong>Nº do Contrato: </strong>{{$db->code_contract ?? ""}}</p>
+    <p class="col-lg-6"><strong>Nº do Regristro de Preço: </strong>{{$db->code_contract ?? ""}}</p>
     <p class="col-lg-12"><strong>Titulo: </strong>{{$db->title ?? ""}}</p>
     <div class="mb-3 col-lg-12">
         <strong>Objetivo: </strong>

@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Bidding;
+namespace App\Http\Controllers\SupplyProcess;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BiddingItensStoreRequest;
-use App\Http\Requests\BiddingItensUpdateRequest;
-use App\Models\Bidding\BiddingModel;
-use App\Models\Bidding\BiddingItensModel;
+use App\Http\Requests\SupplyProcessItemsStoreRequest;
+use App\Http\Requests\SupplyProcessItemsUpdateRequest;
+use App\Models\SupplyProcess\SupplyProcessesModel;
+use App\Models\SupplyProcess\SupplyProcessItemsModel;
 use App\Models\Product\ProductModel;
 use App\Models\Product\ProductUnitModel;
 use App\Services\Logger;
 
-class BiddingItensController extends Controller
+class SupplyProcessItemsController extends Controller
 {
     /*
      * Controller access permission resource.
      */
     public function __construct()
     {
-        $this->middleware(['permission:sysadmin|admin|bidding']);
+        $this->middleware(['permission:sysadmin|admin|supply']);
     }
 
     /**
@@ -35,12 +35,12 @@ class BiddingItensController extends Controller
     public function create(string $id)
     {
         //Listando Dados
-        $dbBidding = BiddingModel::find($id);
+        $dbSupplyProcesses = SupplyProcessesModel::find($id);
         $dbProducts = ProductModel::where('status',true)->orderBy('title')->get();
         $dbUnits = ProductUnitModel::all();
 
-        return view('bidding.bidding_itens.biddings_itens_create',[
-            'dbBidding'=>$dbBidding,
+        return view('supply_process.supply_process_item.supply_process_item_create',[
+            'dbSupplyProcesses'=>$dbSupplyProcesses,
             'dbProducts'=>$dbProducts,
             'dbUnits'=>$dbUnits,
         ]);
@@ -49,15 +49,15 @@ class BiddingItensController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BiddingItensStoreRequest $request)
+    public function store(SupplyProcessItemsStoreRequest $request)
     {
         //Dados dos Formulários
         $data = $request->all();
 
         //Salvando Dados
-        BiddingItensModel::create($data);
+        SupplyProcessItemsModel::create($data);
 
-        return redirect(route('biddings.show',['bidding'=>$data['process_id']]))
+        return redirect(route('supply_processes.show',['supply_process'=>$data['process_id']]))
             ->with('success','Cadastro salvo com sucesso');
     }
 
@@ -75,14 +75,14 @@ class BiddingItensController extends Controller
     public function edit(string $id)
     {
         //Listagem de Dados
-        $db = BiddingItensModel::find($id);
-        $dbBidding = BiddingModel::find($db['process_id']);
+        $db = SupplyProcessItemsModel::find($id);
+        $dbSupplyProcesses = SupplyProcessesModel::find($db['process_id']);
         $dbProducts = ProductModel::all();
         $dbUnits = ProductUnitModel::all();
 
-        return view('bidding.bidding_itens.biddings_itens_edit',[
+        return view('supply_process.supply_process_item.supply_process_item_edit',[
             'db'=>$db,
-            'dbBidding'=>$dbBidding,
+            'dbSupplyProcesses'=>$dbSupplyProcesses,
             'dbProducts'=>$dbProducts,
             'dbUnits'=>$dbUnits,
         ]);
@@ -91,16 +91,16 @@ class BiddingItensController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(string $id, BiddingItensUpdateRequest $request)
+    public function update(string $id, SupplyProcessItemsUpdateRequest $request)
     {
         //Dados dos Formulários
         $data = $request->all();
 
         //Salvando Dados
-        $db = BiddingItensModel::find($id);
+        $db = SupplyProcessItemsModel::find($id);
         $db->update($data);
 
-        return redirect(route('biddings.show',['bidding'=>$data['process_id']]))
+        return redirect(route('supply_processes.show',['supply_process'=>$data['process_id']]))
             ->with('success','Cadastro salvo com sucesso');
     }
 
@@ -110,7 +110,7 @@ class BiddingItensController extends Controller
     public function destroy($id)
     {
         //Listando Dados
-        $db = BiddingItensModel::find($id);
+        $db = SupplyProcessItemsModel::find($id);
 
         //Exclusão de Item
             $db->delete();
@@ -118,7 +118,7 @@ class BiddingItensController extends Controller
             //Log do Sistema
             Logger::destroy();
 
-            return redirect(route('biddings.show',['bidding'=>$db['processo_id']]))
+            return redirect(route('supply_processes.show',['supply_process'=>$db['processo_id']]))
                 ->with('success','Item excluido com sucesso');
     }
 }

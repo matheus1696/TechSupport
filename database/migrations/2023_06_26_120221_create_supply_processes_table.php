@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bidding_processes', function (Blueprint $table) {
+        Schema::create('supply_processes', function (Blueprint $table) {
             $table->id();
             $table->text('title');
             $table->string('filter');
@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('code_process')->unique()->nullable();
             $table->string('code_auction')->unique()->nullable();
             $table->string('code_contract')->unique()->nullable();
+            $table->string('code_price_registration')->unique()->nullable();
             $table->date('start_date')->nullable();
             $table->date('due_date')->nullable();
             $table->integer('validity')->nullable();
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bidding_processes');
+        Schema::dropIfExists('supply_processes');
     }
 };

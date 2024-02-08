@@ -17,8 +17,8 @@ use App\Http\Controllers\Admin\Region\RegionCountriesController;
 use App\Http\Controllers\Admin\Region\RegionStatesController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
-use App\Http\Controllers\Bidding\BiddingController;
-use App\Http\Controllers\Bidding\BiddingItensController;
+use App\Http\Controllers\SupplyProcess\SupplyProcessesController;
+use App\Http\Controllers\SupplyProcess\SupplyProcessItemsController;
 
 Route::get('/',function(){return view('index');});
 
@@ -81,18 +81,18 @@ Route::middleware('auth')->group(function () {
         });
 
         //Grupo de Rotas - Processos Licitatórios
-        Route::prefix('biddings')->group(function (){
+        Route::prefix('supply_processes')->group(function (){
 
             //Grupo de Rotas - Configurações de Processos Licitatórios
-                Route::put('biddings/status/{bidding}',[BiddingController::class,'status'])->name('biddings.status');
-                Route::resource('biddings',BiddingController::class);
+                Route::put('supply_processes/status/{supply_process}',[SupplyProcessesController::class,'status'])->name('supply_processes.status');
+                Route::resource('supply_processes',SupplyProcessesController::class);
 
             //Grupo de Rotas - Configurações dos Itens dos Processos Licitatórios
-                Route::get('{bidding}/itens/create/',[BiddingItensController::class,'create'])->name('biddingItens.create');
-                Route::post('itens/store',[BiddingItensController::class,'store'])->name('biddingItens.store');
-                Route::get('itens/{biddingItem}/edit',[BiddingItensController::class,'edit'])->name('biddingItens.edit');
-                Route::put('itens/{biddingItem}/update',[BiddingItensController::class,'update'])->name('biddingItens.update');
-                Route::delete('itens/{biddingItem}/destroy',[BiddingItensController::class,'destroy'])->name('biddingItens.destroy');
+                Route::get('{supply_process}/items/create/',[SupplyProcessItemsController::class,'create'])->name('supply_process_items.create');
+                Route::post('items/store',[SupplyProcessItemsController::class,'store'])->name('supply_process_items.store');
+                Route::get('itens/{supply_process_item}/edit',[SupplyProcessItemsController::class,'edit'])->name('supply_process_items.edit');
+                Route::put('itens/{supply_process_item}/update',[SupplyProcessItemsController::class,'update'])->name('supply_process_items.update');
+                Route::delete('itens/{supply_process_item}/destroy',[SupplyProcessItemsController::class,'destroy'])->name('supply_process_items.destroy');
         });
 
         Route::get('home', [HomeController::class, 'index'])->name('home');
