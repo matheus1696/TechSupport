@@ -26,7 +26,7 @@ class UserPermissionsSeed extends Seeder
             'guard_name'=>'web'
         ]);
         UserPermissionsModel::create([
-            'name'=>'bidding',
+            'name'=>'supply',
             'guard_name'=>'web'
         ]);
     }

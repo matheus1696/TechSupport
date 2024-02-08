@@ -16,55 +16,62 @@ class UserSeed extends Seeder
         User::create([
             'name'=>'Administrador de Sistema',
             'filter'=>strtolower('Administrador de Sistema'),
-            'email'=>'sysadmin',
+            'email'=>'sysadmin@techsupport.com.br',
             'contact_1'=>'(81) 0000-0000',
             'contact_2'=>'(81) 0000-0000',
             'birthday'=>'1990-12-31',
             'email_verified_at'=>now(),
             'password'=> Hash::make('sysadmin'),
-        ])->givePermissionTo('bidding','user','admin','sysadmin');
+        ])->givePermissionTo('supply','user','admin','sysadmin');
 
+        /*
         User::create([
             'name'=>'Administrador',
             'filter'=>strtolower('Administrador'),
-            'email'=>'admin',
+            'email'=>'admin@techsupport.com.br',
             'contact_1'=>'(81) 0000-0000',
             'contact_2'=>'(81) 0000-0000',
             'birthday'=>'1990-12-31',
             'email_verified_at'=>now(),
             'password'=> Hash::make('admin'),
         ])->givePermissionTo('user','admin');
+        */
 
-        User::create([
-            'name'=>'Usuário',
-            'filter'=>strtolower('Usuário'),
-            'email'=>'user',
-            'contact_1'=>'(81) 0000-0000',
-            'contact_2'=>'(81) 0000-0000',
-            'birthday'=>'1990-12-31',
-            'email_verified_at'=>now(),
-            'password'=> Hash::make('user'),
-        ])->givePermissionTo('user');
+        /*
+            User::create([
+                'name'=>'Usuário',
+                'filter'=>strtolower('Usuário'),
+                'email'=>'user@techsupport.com.br',
+                'contact_1'=>'(81) 0000-0000',
+                'contact_2'=>'(81) 0000-0000',
+                'birthday'=>'1990-12-31',
+                'email_verified_at'=>now(),
+                'password'=> Hash::make('user'),
+            ])->givePermissionTo('user');
+        */
+        /*
+            User::create([
+                'name'=>'Verificar Email',
+                'filter'=>strtolower('Verificar Email'),
+                'email'=>'ve@techsupport.com.br',
+                'contact_1'=>'(81) 0000-0000',
+                'contact_2'=>'(81) 0000-0000',
+                'birthday'=>'1990-12-31',
+                'password'=> Hash::make('verificar'),
+            ])->givePermissionTo('user');
+        */
 
-        User::create([
-            'name'=>'Verificar Email',
-            'filter'=>strtolower('Verificar Email'),
-            'email'=>'ve',
-            'contact_1'=>'(81) 0000-0000',
-            'contact_2'=>'(81) 0000-0000',
-            'birthday'=>'1990-12-31',
-            'password'=> Hash::make('verificar'),
-        ])->givePermissionTo('user');
-
-        User::create([
-            'name'=>'Processos Licitatórios',
-            'filter'=>strtolower('Processos Licitatórios'),
-            'email'=>'bidding',
-            'contact_1'=>'(81) 0000-0000',
-            'contact_2'=>'(81) 0000-0000',
-            'birthday'=>'2024-01-18',
-            'email_verified_at'=>now(),
-            'password'=> Hash::make('bidding'),
-        ])->givePermissionTo('bidding');
+        /*
+            User::create([
+                'name'=>'Processos Licitatórios',
+                'filter'=>strtolower('Processos Licitatórios'),
+                'email'=>'supply@techsupport.com.br',
+                'contact_1'=>'(81) 0000-0000',
+                'contact_2'=>'(81) 0000-0000',
+                'birthday'=>'2024-01-18',
+                'email_verified_at'=>now(),
+                'password'=> Hash::make('supply'),
+            ])->givePermissionTo('supply');
+        */
     }
 }
