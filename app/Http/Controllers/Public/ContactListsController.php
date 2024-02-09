@@ -110,7 +110,7 @@ class ContactListsController extends Controller
      */
     public function getAllContact() {
         $contact = CompanyEstablishmentDepartmentsModel::select()
-        ->join('company_establishments', 'company_establishments.id', '=', 'company_establishments_contact.estabelecimento_id')
+        ->join('company_establishments', 'company_establishments.id', '=', 'company_establishment_departments.establishment_id')
         ->get()->toJson(JSON_PRETTY_PRINT);
         return response($contact, 200);
     }

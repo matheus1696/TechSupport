@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\Company\CompanyEstablishmentContactsController;
 use App\Http\Controllers\Public\ContactListsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
