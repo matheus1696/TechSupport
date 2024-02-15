@@ -5,7 +5,7 @@
             <th>Blocos Financeiros</th>
             <th class="col-1">Cor</th>
             <th class="col-1">Status</th>
-            <th class="col-1"></th>
+            <th></th>
         </tr>
     @endslot
 

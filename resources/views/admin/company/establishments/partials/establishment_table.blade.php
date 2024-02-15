@@ -3,7 +3,7 @@
     <!-- Components THead -->
     @slot('thead')
         <tr>
-            <th>Código</th>
+            <th class="col-1">Código</th>
             <th>Estabelecimento</th>
             <th>Bairro</th>
             <th>Bloco Financeiro</th>

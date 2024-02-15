@@ -2,12 +2,10 @@
     @slot('thead')
         <tr>
             <th class="text-xs col-1">Nº Processo</th>
-            <th class="text-xs col-1">Nº Pregão</th>
-            <th class="text-xs col-1">Nº Contrato</th>
             <th class="text-xs">Titulo do Processo</th>
             <th class="text-xs col-1">Data Venc.</th>
             <th class="text-xs col-1">Status</th>
-            <th class="text-xs col-2"></th>
+            <th class="text-xs"></th>
         </tr>
     @endslot
 
