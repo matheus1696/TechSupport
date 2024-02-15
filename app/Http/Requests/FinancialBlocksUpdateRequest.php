@@ -34,6 +34,10 @@ class FinancialBlocksUpdateRequest extends FormRequest
                 'uppercase',
                 Rule::unique('company_financial_blocks')->ignore($this->financial_block),
             ],
+            'color' => [
+                'required',
+                Rule::unique('company_financial_blocks')->ignore($this->financial_block),
+            ],
         ];
     }
 }
