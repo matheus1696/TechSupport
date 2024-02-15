@@ -349,7 +349,7 @@ return [
                 [
                     'text'    => 'Configurações de Dashboard',
                     'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-users-cog',
+                    'icon'    => 'fas fa-chart-pie',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
                         [
