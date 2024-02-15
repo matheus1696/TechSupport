@@ -12,11 +12,13 @@ use App\Http\Controllers\Admin\Company\CompanyEstablishmentDepartmentsController
 use App\Http\Controllers\Admin\Company\CompanyOccupationController;
 use App\Http\Controllers\Admin\Company\CompanyOrganizationalController;
 use App\Http\Controllers\Admin\Company\CompanyTypeEstablishmentsController;
+use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Region\RegionCitiesController;
 use App\Http\Controllers\Admin\Region\RegionCountriesController;
 use App\Http\Controllers\Admin\Region\RegionStatesController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
+use App\Http\Controllers\Dashboard\ViewDashboardController;
 use App\Http\Controllers\SupplyProcess\SupplyProcessesController;
 use App\Http\Controllers\SupplyProcess\SupplyProcessItemsController;
 
@@ -77,6 +79,11 @@ Route::middleware('auth')->group(function () {
 
                 Route::put('units/status/{unit}',[ProductUnitController::class,'status'])->name('units.status');
                 Route::resource('units',ProductUnitController::class);
+            });            
+
+            //Grupo de Rotas - Configuração de Dashbaord
+            Route::prefix('dashboards')->group(function (){
+                Route::resource('dashboards',DashboardController::class);
             });
         });
 
@@ -101,6 +108,11 @@ Route::middleware('auth')->group(function () {
 
     //Rotas de Perfil do Usuário
     Route::resource('profile', ProfileController::class);
+
+    //Grupo de Rotas - Configuração de Dashbaord
+    Route::prefix('dashboards')->group(function (){
+        Route::resource('view_dashboards',ViewDashboardController::class);
+    });
 });
 
 //Lista Telefônica

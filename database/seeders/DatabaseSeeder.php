@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             CompanyEstablishmentsSeed::class,
             CompanyEstablishmentDepartmentsSeed::class,
             ProductUnitsSeed::class,
+            DashboardSeeder::class,
         ]);
     }
 }

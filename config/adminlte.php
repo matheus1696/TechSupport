@@ -301,6 +301,15 @@ return [
             'type'    => 'sidebar-menu-search',
             'text'    => 'Buscar Menu',
         ],
+        
+        //Dashboards
+        [
+            'text'    => 'Dashboard',
+            'classes' => 'btn-sm',
+            'route'   => 'view_dashboards.index',
+            'icon'    => 'fas fa-chart-pie',
+            'can'     => 'user'
+        ],
 
         //Processos de Fornecimentos
         [
@@ -335,12 +344,23 @@ return [
             'icon'    => 'fas fa-cogs',
             'can'     => ['sysadmin','admin'],
             'submenu' => [
+
+                //Dashboards
+                [
+                    'text'    => 'Dashboard',
+                    'classes' => 'btn-sm',
+                    'route'   => 'dashboards.index',
+                    'icon'    => 'fas fa-chart-line',
+                    'can'     => 'user'
+                ],
+
                 [
                     'text'    => 'Configurações de Perfil',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-users-cog',
                     'can'     => ['sysadmin'],
                     'submenu' => [
+
                         [
                             'text'    => 'Usuários',
                             'classes' => 'btn-sm',
@@ -348,8 +368,10 @@ return [
                             'icon'    => 'fas fa-users',
                             'can'     => ['sysadmin'],
                         ],
+
                     ]
                 ],
+
                 [
                     'text'    => 'Configurações da Empresa',
                     'classes' => 'btn-sm',
