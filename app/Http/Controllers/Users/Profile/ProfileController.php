@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\Company\CompanyEstablishmentsModel;
 use App\Models\User;
 use App\Models\User\UserSexModel;
 use App\Services\Logger;
@@ -66,6 +67,7 @@ class ProfileController extends Controller
         //Listando Dados
         $db = User::find($id);
         $dbUserSex = UserSexModel::where('status',true)->get();
+        $dbEstablishments = CompanyEstablishmentsModel::all();
 
         if ($db && $db->id === Auth::user()->id) {
             //Log do Sistema
@@ -74,6 +76,7 @@ class ProfileController extends Controller
             return view('users.profile.profile_index',[
                 'db'=>$db,
                 'dbUserSex'=>$dbUserSex,
+                'dbEstablishments'=>$dbEstablishments,
             ]);
         } else {
             //Log do Sistema

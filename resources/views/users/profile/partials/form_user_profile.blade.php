@@ -19,11 +19,15 @@
                 @endforeach
             </x-form.select>
 
-            <x-form.input col="12" label="Departamento" id="disabled" value="{{$db->CompanyOrganizational->acronym ?? ''}} -  {{$db->CompanyOrganizational->title ?? ''}}" disabled="disabled" />
-
             <x-form.input col="12" label="Cargo" id="disabled" value="{{$db->CompanyOccupations->occupation ?? ''}}" disabled="disabled" />
-                
-            <x-form.input col="12" label="Estabelecimento" id="disabled" value="{{$db->CompanyEstablishments->establishment ?? ''}}" disabled="disabled" />
+
+            <x-form.select col="12" label="Estabelecimento" id="establishment_id">
+                @foreach ($dbEstablishments as $Establishment)
+                    <option value="{{$Establishment->id}}" @if ($db->establishment_id ==
+                        $Establishment->id) selected @endif>{{$Establishment->title}}
+                    </option>
+                @endforeach
+            </x-form.select>
 
             <x-form.input col="6" label="Contato 1" type="tel" id="contact_1" value="{{$db->contact_1}}" maxlength="15" minlength="13" placeholder="(00) 00000-0000"/>
             <x-form.input col="6" label="Contato 2" type="tel" id="contact_2" value="{{$db->contact_2}}" maxlength="15" minlength="13" placeholder="(00) 00000-0000"/>
