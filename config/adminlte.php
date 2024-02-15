@@ -311,21 +311,21 @@ return [
             'can'     => 'user'
         ],
 
-        //Processos de Fornecimentos
-        [
-            'text'    => 'Processos de Fornecimento',
-            'classes' => 'btn-sm',
-            'route'   => 'supply_processes.index',
-            'icon'    => 'fas fa-file-signature',
-            'can'     => ['sysadmin','admin','bidding'],
-        ],
-
         //Lista Telefônica
         [
             'text'    => 'Lista Telefônica',
             'classes' => 'btn-sm',
             'route'   => 'contacts.index',
             'icon'    => 'fas fa-phone-volume',
+        ],
+
+        //Processos de Fornecimentos
+        [
+            'text'    => 'Processos de Fornecimento',
+            'classes' => 'btn-sm',
+            'route'   => 'supply_processes.index',
+            'icon'    => 'fas fa-file-signature',
+            'can'     => 'user'
         ],
 
         //Perfil do Usuário
@@ -345,20 +345,29 @@ return [
             'can'     => ['sysadmin','admin'],
             'submenu' => [
 
-                //Dashboards
+                //Configurção de Dashboards
                 [
-                    'text'    => 'Dashboard',
+                    'text'    => 'Configurações de Dashboard',
                     'classes' => 'btn-sm',
-                    'route'   => 'dashboards.index',
-                    'icon'    => 'fas fa-chart-line',
-                    'can'     => 'user'
+                    'icon'    => 'fas fa-users-cog',
+                    'can'     => ['sysadmin','admin'],
+                    'submenu' => [
+                        [
+                            'text'    => 'Dashboard PowerBI',
+                            'classes' => 'btn-sm',
+                            'route'   => 'dashboards.index',
+                            'icon'    => 'fas fa-chart-line',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                    ]
                 ],
 
+                //Configuração de Perfil
                 [
                     'text'    => 'Configurações de Perfil',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-users-cog',
-                    'can'     => ['sysadmin'],
+                    'can'     => ['sysadmin','admin'],
                     'submenu' => [
 
                         [
@@ -366,12 +375,13 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'users.index',
                             'icon'    => 'fas fa-users',
-                            'can'     => ['sysadmin'],
+                            'can'     => ['sysadmin','admin'],
                         ],
 
                     ]
                 ],
 
+                //Configuração de Empresas
                 [
                     'text'    => 'Configurações da Empresa',
                     'classes' => 'btn-sm',
@@ -416,35 +426,39 @@ return [
 
                     ]
                 ],
+
+                //Configuração de Regiões
                 [
-                    'text'    => 'Configurações Geográficas',
+                    'text'    => 'Configurações de Regiões',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-globe-americas',
-                    'can'     => ['sysadmin'],
+                    'can'     => ['sysadmin','admin'],
                     'submenu' => [
                         [
                             'text'    => 'Paises',
                             'classes' => 'btn-sm',
                             'route'   => 'countries.index',
                             'icon'    => 'fas fa-map-marked-alt',
-                            'can'     => ['sysadmin'],
+                            'can'     => ['sysadmin','admin'],
                         ],
                         [
                             'text'    => 'Estados',
                             'classes' => 'btn-sm',
                             'route'   => 'states.index',
                             'icon'    => 'fas fa-map-marked-alt',
-                            'can'     => ['sysadmin'],
+                            'can'     => ['sysadmin','admin'],
                         ],
                         [
                             'text'    => 'Cidades',
                             'classes' => 'btn-sm',
                             'route'   => 'cities.index',
                             'icon'    => 'fas fa-map-marked-alt',
-                            'can'     => ['sysadmin'],
+                            'can'     => ['sysadmin','admin'],
                         ],
                     ]
                 ],
+
+                //Configuração de Produtos
                 [
                     'text'    => 'Produtos',
                     'classes' => 'btn-sm',
