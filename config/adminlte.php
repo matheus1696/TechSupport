@@ -308,7 +308,6 @@ return [
             'classes' => 'btn-sm',
             'route'   => 'view_dashboards.index',
             'icon'    => 'fas fa-chart-pie',
-            'can'     => 'user'
         ],
 
         //Lista Telefônica
@@ -334,7 +333,6 @@ return [
             'classes' => 'btn-sm',
             'route'   => 'profile.index',
             'icon'    => 'fas fa-user',
-            'can'     => 'user'
         ],
 
         //Configurações
