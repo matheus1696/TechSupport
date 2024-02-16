@@ -24,7 +24,6 @@ use App\Http\Controllers\SupplyProcess\SupplyProcessItemsController;
 
 Route::get('/',function(){return view('index');});
 
-
 //Lista Telefônica
 Route::resource('contacts', ContactListsController::class);
 
