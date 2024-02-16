@@ -17,9 +17,6 @@ class ViewDashboardController extends Controller
         //Listagem de Dados
         $db = Dashboard::select()->orderBy('title')->with('FinancialBlocks')->get();
 
-        //Log do Sistema
-        Logger::access();
-
         return view('dashboard.dashboard_index',[
             'db'=>$db,
         ]);
@@ -46,15 +43,7 @@ class ViewDashboardController extends Controller
      */
     public function show(string $id)
     {
-        //Listagem de Dados
-        $db = Dashboard::find($id);
-
-        //Log do Sistema
-        Logger::access();
-
-        return view('dashboard.dashboard_show',[
-            'db'=>$db,
-        ]);
+        //
     }
 
     /**
