@@ -324,7 +324,7 @@ return [
             'classes' => 'btn-sm',
             'route'   => 'supply_processes.index',
             'icon'    => 'fas fa-file-signature',
-            'can'     => 'user'
+            'can'     => 'supply'
         ],
 
         //Perfil do Usuário

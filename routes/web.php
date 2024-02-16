@@ -24,6 +24,15 @@ use App\Http\Controllers\SupplyProcess\SupplyProcessItemsController;
 
 Route::get('/',function(){return view('index');});
 
+
+//Lista Telefônica
+Route::resource('contacts', ContactListsController::class);
+
+//Grupo de Rotas - Configuração de Dashbaord
+Route::prefix('dashboards')->group(function (){
+    Route::resource('view_dashboards',ViewDashboardController::class);
+});
+
 //Camada de Seguraça para Usuários Logados
 Route::middleware('auth')->group(function () {
 
@@ -108,14 +117,6 @@ Route::middleware('auth')->group(function () {
 
     //Rotas de Perfil do Usuário
     Route::resource('profile', ProfileController::class);    
-});
-
-//Lista Telefônica
-Route::resource('contacts', ContactListsController::class);
-
-//Grupo de Rotas - Configuração de Dashbaord
-Route::prefix('dashboards')->group(function (){
-    Route::resource('view_dashboards',ViewDashboardController::class);
 });
 
 //Rotas de Autenticação

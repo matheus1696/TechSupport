@@ -119,7 +119,7 @@ class SupplyProcessesController extends Controller
         //Dados dos Formulários
         $data = $request->all();
         $data['filter'] = StrtoLower($data['title']);
-        $data['validity'] = floor((strtotime($data['due_date']) - strtotime($data['start_date'])) / (60 * 60 * 24 ) / 30);;
+        $data['validity'] = floor((strtotime($data['due_date']) - strtotime($data['start_date'])) / (60 * 60 * 24 ) / 30);
 
         //Salvando Dados
         $db = SupplyProcessesModel::find($id);
