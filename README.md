@@ -2,33 +2,41 @@
 
 ## Apresentação
 
-O TechSupport é um sistema de controle interno de gestão projetado especialmente para atender às necessidades de órgãos públicos inicialmente para o setor de tecnologia da informação e comunicação. Composto por módulos cuidadosamente estruturados, o sistema oferece recursos avançados para gerenciar eficientemente diversos departamentos.
+Apresentamos o TechSupport, uma solução abrangente de gestão interna projetada sob medida para atender às exigências dos órgãos públicos, com foco inicial no setor de Tecnologia da Informação e Comunicação (TIC).
 
-Nossa solução utiliza tecnologia de ponta no desenvolvimento de software e conta com um gerenciador de banco de dados robusto. Isso garante segurança e estabilidade excepcionais, proporcionando uma solução de gerenciamento confiável e duradoura.
+Com uma estrutura modular cuidadosamente elaborada, nosso sistema oferece uma gama de recursos avançados para o eficiente gerenciamento de diversos departamentos. Incorporando tecnologia de ponta no desenvolvimento de software e um robusto gerenciador de banco de dados, garantimos segurança e estabilidade excepcionais, assegurando uma solução de gerenciamento confiável e duradoura.
 
-Estamos comprometidos em fornecer o melhor em termos de tecnologia e funcionalidades para atender às demandas específicas dos órgãos públicos. Nosso objetivo é oferecer uma solução completa e eficaz para o gerenciamento interno, proporcionando eficiência e resultados positivos.
+Nosso compromisso é proporcionar o que há de melhor em termos de tecnologia e funcionalidades, adaptando-nos às demandas específicas dos órgãos públicos. Buscamos oferecer uma solução completa e eficaz para o gerenciamento interno, promovendo eficiência e resultados positivos.
 
-Conte conosco para auxiliar na otimização dos processos de sua organização e garantir um controle interno efetivo.
+Conte conosco para otimizar os processos de sua organização e assegurar um controle interno efetivo. Estamos aqui para fornecer suporte e orientação, rumo ao sucesso de sua instituição.
 
 ## Módulos
 
 ### Módulo de Gerenciamento de Controle de Acesso do Sistema
 
-O módulo de gerenciamento de controle de acesso do sistema é projetado para oferecer facilidade e segurança aos usuários. Ele permite que cada usuário crie seu próprio perfil, utilizando o email como identificador para acessar o sistema.
+O módulo de controle de acesso do nosso sistema é cuidadosamente projetado para proporcionar facilidade e segurança aos usuários. Ele permite que cada indivíduo crie seu próprio perfil, utilizando o endereço de e-mail como identificador para acessar o sistema.
 
-Visando a segurança, implementamos validações de conta para o acesso às páginas e a recuperação de senha. Essas etapas adicionais são solicitadas pelo próprio usuário, garantindo um nível extra de proteção.
+Priorizando a segurança, implementamos verificações de conta para o acesso às páginas e para a recuperação de senha. Essas etapas adicionais são acionadas pelo próprio usuário, garantindo um nível adicional de proteção.
 
-Além disso, o módulo oferece recursos abrangentes, como o gerenciamento de estabelecimentos, organograma e criação de logs. Essas funcionalidades auxiliam no controle e na organização eficiente dos processos.
+Além disso, o módulo oferece uma gama abrangente de recursos, incluindo o gerenciamento de estabelecimentos, organograma e criação de logs. Essas funcionalidades são fundamentais para o controle e organização eficiente dos processos.
 
-Por padrão temos algumas permissões criadas
+Por padrão, incluímos algumas permissões predefinidas:
 
-- sysadmin: Permissão de administrador de sistema
+- sysadmin: Permissão de administrador do sistema
 
-- admin: Permissão de Administrador
+- admin: Permissão de administrador
 
-- user: Permissão de Usuário
+- user: Permissão de usuário
 
-- bidding: Permissão de Processo Licitatórios
+- supply: Permissão para processos licitatórios
+
+- dashboard: Permissão para visualização de dashboards
+
+Essas permissões oferecem uma estrutura sólida para o controle de acesso e garantem que cada usuário tenha as autorizações apropriadas para realizar suas tarefas de maneira eficaz.
+
+### Módulo de Gerenciamento e Controle de Fornecimento ( Processos Licitatórios )
+
+### Módulo de Dashboards
 
 ## Instalação
 
@@ -75,8 +83,11 @@ Senha: `admin`
 Usuários: `user@ingestio.com.br` <br>
 Senha: `user`
 
-Usuários: `bidding@ingestio.com.br` <br>
-Senha: `bidding`
+Usuários: `sypply@ingestio.com.br` <br>
+Senha: `sypply`
+
+Usuários: `dashboard@ingestio.com.br` <br>
+Senha: `dashboard`
 
 ## Bibliotecas Utilizadas no Projeto
 

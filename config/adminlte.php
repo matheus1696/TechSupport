@@ -308,6 +308,7 @@ return [
             'classes' => 'btn-sm',
             'route'   => 'view_dashboards.index',
             'icon'    => 'fas fa-chart-pie',
+            'can'     => ['sysadmin','admin','dashboard'],
         ],
 
         //Lista Telefônica
@@ -324,7 +325,7 @@ return [
             'classes' => 'btn-sm',
             'route'   => 'supply_processes.index',
             'icon'    => 'fas fa-file-signature',
-            'can'     => 'supply'
+            'can'     => ['sysadmin','admin','suppy'],
         ],
 
         //Perfil do Usuário
@@ -332,7 +333,7 @@ return [
             'text'    => 'Perfil',
             'classes' => 'btn-sm',
             'route'   => 'profile.index',
-            'icon'    => 'fas fa-user',            
+            'icon'    => 'fas fa-user',
             'can'     => 'user'
         ],
 
@@ -344,28 +345,12 @@ return [
             'can'     => ['sysadmin','admin'],
             'submenu' => [
 
-                //Configurção de Dashboards
-                [
-                    'text'    => 'Configurações de Dashboard',
-                    'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-chart-pie',
-                    'can'     => ['sysadmin','admin'],
-                    'submenu' => [
-                        [
-                            'text'    => 'Dashboard PowerBI',
-                            'classes' => 'btn-sm',
-                            'route'   => 'dashboards.index',
-                            'icon'    => 'fas fa-chart-line',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                    ]
-                ],
-
                 //Configuração de Perfil
                 [
                     'text'    => 'Configurações de Perfil',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-users-cog',
+                    'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
 
@@ -374,6 +359,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'users.index',
                             'icon'    => 'fas fa-users',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
 
@@ -385,6 +371,7 @@ return [
                     'text'    => 'Configurações da Empresa',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-building',
+                    'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
                         [
@@ -392,6 +379,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'establishments.index',
                             'icon'    => 'fas fa-clinic-medical',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
@@ -399,6 +387,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'type_establishments.index',
                             'icon'    => 'fas fa-grip-horizontal',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
@@ -406,6 +395,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'financial_blocks.index',
                             'icon'    => 'fas fa-grip-lines-vertical',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
@@ -413,6 +403,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'organizational.index',
                             'icon'    => 'fas fa-bezier-curve',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
@@ -420,6 +411,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'occupations.index',
                             'icon'    => 'fas fa-id-badge',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
 
@@ -431,6 +423,7 @@ return [
                     'text'    => 'Configurações de Regiões',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-globe-americas',
+                    'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
                         [
@@ -438,6 +431,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'countries.index',
                             'icon'    => 'fas fa-map-marked-alt',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
@@ -445,6 +439,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'states.index',
                             'icon'    => 'fas fa-map-marked-alt',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
@@ -452,6 +447,26 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'cities.index',
                             'icon'    => 'fas fa-map-marked-alt',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                    ]
+                ],
+
+                //Configurção de Dashboards
+                [
+                    'text'    => 'Configurações de Dashboard',
+                    'classes' => 'btn-sm',
+                    'icon'    => 'fas fa-chart-pie',
+                    'icon_color' => 'info',
+                    'can'     => ['sysadmin','admin'],
+                    'submenu' => [
+                        [
+                            'text'    => 'Dashboard PowerBI',
+                            'classes' => 'btn-sm',
+                            'route'   => 'dashboards.index',
+                            'icon'    => 'fas fa-chart-line',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                     ]
@@ -462,6 +477,7 @@ return [
                     'text'    => 'Produtos',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-screwdriver',
+                    'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
                         [
@@ -469,6 +485,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'products.index',
                             'icon'    => 'fas fa-screwdriver',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
@@ -476,6 +493,7 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'units.index',
                             'icon'    => 'fas fa-calculator',
+                            'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                     ]
