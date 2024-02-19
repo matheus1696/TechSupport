@@ -68,6 +68,6 @@ class RegisterController extends Controller
             'filter' => strtolower($data['name']),
             'email' => strtolower($data['email']),
             'password' => Hash::make($data['password']),
-        ]);
+        ])->givePermissionTo('user');
     }
 }

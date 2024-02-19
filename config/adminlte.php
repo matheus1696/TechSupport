@@ -311,21 +311,21 @@ return [
             'can'     => ['sysadmin','admin','dashboard'],
         ],
 
-        //Lista Telefônica
-        [
-            'text'    => 'Lista Telefônica',
-            'classes' => 'btn-sm',
-            'route'   => 'contacts.index',
-            'icon'    => 'fas fa-phone-volume',
-        ],
-
         //Processos de Fornecimentos
         [
             'text'    => 'Processos de Fornecimento',
             'classes' => 'btn-sm',
             'route'   => 'supply_processes.index',
             'icon'    => 'fas fa-file-signature',
-            'can'     => ['sysadmin','admin','suppy'],
+            'can'     => ['sysadmin','admin','supply'],
+        ],
+        
+        //Lista Telefônica
+        [
+            'text'    => 'Lista Telefônica',
+            'classes' => 'btn-sm',
+            'route'   => 'contacts.index',
+            'icon'    => 'fas fa-phone-volume',
         ],
 
         //Perfil do Usuário
