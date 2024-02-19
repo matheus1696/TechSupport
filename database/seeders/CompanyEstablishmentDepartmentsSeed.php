@@ -167,7 +167,7 @@ class CompanyEstablishmentDepartmentsSeed extends Seeder
         CompanyEstablishmentDepartmentsModel::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0404', 'extension'=>'0404', 'type_contact'=>'Main', 'establishment_id'=>57,]);
         CompanyEstablishmentDepartmentsModel::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0419', 'extension'=>'0419', 'type_contact'=>'Main', 'establishment_id'=>58,]);
         CompanyEstablishmentDepartmentsModel::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0377', 'extension'=>'0377', 'type_contact'=>'Main', 'establishment_id'=>59,]);
-        CompanyEstablishmentDepartmentsModel::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0392', 'extension'=>'0392', 'type_contact'=>'Main', 'establishment_id'=>60,]);
+        CompanyEstablishmentDepartmentsModel::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0325', 'extension'=>'0325', 'type_contact'=>'Main', 'establishment_id'=>60,]);
         CompanyEstablishmentDepartmentsModel::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0392', 'extension'=>'0392', 'type_contact'=>'Main', 'establishment_id'=>61,]);
         CompanyEstablishmentDepartmentsModel::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0426', 'extension'=>'0426', 'type_contact'=>'Main', 'establishment_id'=>62,]);
         CompanyEstablishmentDepartmentsModel::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0387', 'extension'=>'0387', 'type_contact'=>'Main', 'establishment_id'=>63,]);
