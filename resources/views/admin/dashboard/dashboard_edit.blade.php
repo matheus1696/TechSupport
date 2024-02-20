@@ -10,4 +10,4 @@
     @slot('body')
         @include('admin.dashboard.partials.dashboard_form')
     @endslot
-    </x-pages.forms>
+</x-pages.forms>

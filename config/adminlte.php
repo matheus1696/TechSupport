@@ -345,7 +345,7 @@ return [
             'can'     => ['sysadmin','admin'],
             'submenu' => [
 
-                //Configuração de Perfil
+                //Configurações de Perfil
                 [
                     'text'    => 'Configurações de Perfil',
                     'classes' => 'btn-sm',
@@ -366,7 +366,7 @@ return [
                     ]
                 ],
 
-                //Configuração de Empresas
+                //Configurações de Empresas
                 [
                     'text'    => 'Configurações da Empresa',
                     'classes' => 'btn-sm',
@@ -418,7 +418,7 @@ return [
                     ]
                 ],
 
-                //Configuração de Regiões
+                //Configurações de Regiões
                 [
                     'text'    => 'Configurações de Regiões',
                     'classes' => 'btn-sm',
@@ -453,7 +453,7 @@ return [
                     ]
                 ],
 
-                //Configurção de Dashboards
+                //Configurações de Dashboards
                 [
                     'text'    => 'Configurações de Dashboard',
                     'classes' => 'btn-sm',
@@ -472,9 +472,9 @@ return [
                     ]
                 ],
 
-                //Configuração de Produtos
+                //Configurações de Produtos
                 [
-                    'text'    => 'Produtos',
+                    'text'    => 'Configurações de Produtos',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-screwdriver',
                     'icon_color' => 'info',
@@ -493,6 +493,33 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'units.index',
                             'icon'    => 'fas fa-calculator',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                    ]
+                ],
+
+                //Configurações de Tickets
+                [
+                    'text'    => 'Configurações de Tickets',
+                    'classes' => 'btn-sm',
+                    'icon'    => 'fas fa-ticket-alt',
+                    'icon_color' => 'info',
+                    'can'     => ['sysadmin','admin'],
+                    'submenu' => [
+                        [
+                            'text'    => 'Tipos de Status',
+                            'classes' => 'btn-sm',
+                            'route'   => 'ticket_statuses.index',
+                            'icon'    => 'fas fa-toggle-off',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                        [
+                            'text'    => 'Tipos de Serviços',
+                            'classes' => 'btn-sm',
+                            'route'   => 'ticket_type_services.index',
+                            'icon'    => 'fas fa-vest',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
