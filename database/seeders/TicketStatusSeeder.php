@@ -14,7 +14,8 @@ class TicketStatusSeeder extends Seeder
     public function run(): void
     {
         TicketStatus::create([
-            'title'=>'Aberto'
+            'title'=>'Aberto',
+            'default'=>1
         ]);
         TicketStatus::create([
             'title'=>'Aguardando Material'

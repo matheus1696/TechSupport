@@ -2,26 +2,26 @@
 
 namespace Database\Seeders;
 
-use App\Models\Ticket\TicketTypeCategories;
+use App\Models\Ticket\TicketTypeCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TicketTypeCategoriesSeeder extends Seeder
+class TicketTypeCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        TicketTypeCategories::create([
+        TicketTypeCategory::create([
             'title'=>'Informática',
         ]);
 
-        TicketTypeCategories::create([
+        TicketTypeCategory::create([
             'title'=>'Almoxarifado',
         ]);
 
-        TicketTypeCategories::create([
+        TicketTypeCategory::create([
             'title'=>'Manutenção',
         ]);
     }
