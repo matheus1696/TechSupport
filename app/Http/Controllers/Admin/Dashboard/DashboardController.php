@@ -64,6 +64,9 @@ class DashboardController extends Controller
     public function show(string $id)
     {
         //
+        $db = Dashboard::find($id);
+
+        return view('dashboard.dashboard_show', compact('db'));
     }
 
     /**
