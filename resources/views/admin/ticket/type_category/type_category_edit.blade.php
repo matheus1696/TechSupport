@@ -2,7 +2,7 @@
 <x-pages.forms method="edit" route="{{route('ticket_type_categories.update',['ticket_type_category'=>$db->id])}}" btnBack="{{route('ticket_type_categories.index')}}">
     <!-- Slot Header -->
     @slot('header')
-    <x-header title="Categorias dos Tickets" />
+    <x-header title="Categorias do Ticket" />
     @endslot
 
     <!-- Slot Body -->

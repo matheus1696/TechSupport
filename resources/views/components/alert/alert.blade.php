@@ -11,11 +11,11 @@
     </div>
 @endif
 
-@if (\Session::has('errors'))
+@if (\Session::has('error'))
     <div style="position:fixed; bottom:20px; right: 20px; z-index: 99">
         <div>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {!! \Session::get('errors') !!}
+                {!! \Session::get('error') !!}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

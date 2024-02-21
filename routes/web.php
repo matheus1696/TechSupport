@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\Region\RegionStatesController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
 use App\Http\Controllers\Admin\Ticket\TicketStatusController;
-use App\Http\Controllers\Admin\Ticket\TicketTypeCategoriesController;
+use App\Http\Controllers\Admin\Ticket\TicketTypeCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketTypeServiceController;
 use App\Http\Controllers\Admin\Ticket\TicketTypeSubServiceController;
 use App\Http\Controllers\Dashboard\ViewDashboardController;
@@ -118,8 +118,8 @@ Route::middleware('auth')->group(function () {
                         Route::resource('ticket_statuses',TicketStatusController::class);
 
                     //Rotas de Tipos de Categorias do Ticket
-                        Route::put('ticket_type_categories/status/{ticket_type_category}',[TicketTypeCategoriesController::class,'status'])->name('ticket_type_categories.status');
-                        Route::resource('ticket_type_categories',TicketTypeCategoriesController::class);
+                        Route::put('ticket_type_categories/status/{ticket_type_category}',[TicketTypeCategoryController::class,'status'])->name('ticket_type_categories.status');
+                        Route::resource('ticket_type_categories',TicketTypeCategoryController::class);
                     
                     //Rotas de Tipos de Serviços do Ticket
                         Route::put('ticket_type_services/status/{ticket_type_service}',[TicketTypeServiceController::class,'status'])->name('ticket_type_services.status');

@@ -2,7 +2,7 @@
 <x-pages.forms method="create" route="{{route('ticket_type_categories.store')}}" btnBack="{{route('ticket_type_categories.index')}}">
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Categorias dos Tickets" />
+        <x-header title="Categorias do Ticket" />
     @endslot
 
     <!-- Slot Body -->

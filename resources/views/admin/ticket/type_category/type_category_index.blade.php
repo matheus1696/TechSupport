@@ -2,7 +2,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Tipo de Categorias" route="{{ route('ticket_type_categories.create') }}"/>
+        <x-header title="Categorias do Ticket" route="{{ route('ticket_type_categories.create') }}"/>
     @endslot
     
     <!-- Slot Body -->

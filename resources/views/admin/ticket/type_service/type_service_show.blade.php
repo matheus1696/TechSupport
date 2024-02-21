@@ -2,23 +2,16 @@
     
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="SubTipo de Ticket: {{ $db->title }}"/>
+        <x-header title="Classificação de Serviço: {{ $db->title }} ({{ $db->amount_sub_services }})"/>
     @endslot
 
     <!-- Slot Body -->
     @slot('body')
-    
-        <x-conteiner>
-            <div class="row">
-                <p class="col-12"><strong>Tipo:</strong> {{$db->title}} </p>                
-                <p class="col-12"><strong>Quantidade de Sub-Serviços:</strong> {{$dbSubServices->count()}} </p>
-            </div>
-        </x-conteiner>
 
         <x-conteiner>
             <x-form.form method="create" route="{{route('ticket_type_sub_services.store')}}">
                 <input type="hidden" name="ticket_type_service_id" value="{{$db->id}}">
-                <x-form.input col="12" label="Sub-Serviço" id="title" required="required" />
+                <x-form.input col="12" label="Classificação de Serviço" id="title" required="required" />
             </x-form.form>
 
             <hr>
@@ -27,7 +20,7 @@
                 <x-table.table>
                     @slot('thead')
                         <tr>
-                            <th>Sub-Serviço</th>
+                            <th>Classificação de Serviço</th>
                             <th class="col-1">Status</th>
                             <th class="col-1"></th>
                         </tr>

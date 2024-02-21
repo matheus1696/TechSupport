@@ -14,12 +14,9 @@ class TicketTypeServiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(TicketTypeService $ticketTypeService)
+    public function index()
     {
-        //        
-        $db = $ticketTypeService->orderBy('title')->paginate(20);
-
-        return view('admin.ticket.type_service.type_service_index', compact('db'));
+        //
     }
 
     /**
@@ -27,8 +24,7 @@ class TicketTypeServiceController extends Controller
      */
     public function create()
     {
-        //        
-        return view('admin.ticket.type_service.type_service_create');
+        //
     }
 
     /**
@@ -41,8 +37,7 @@ class TicketTypeServiceController extends Controller
 
         TicketTypeService::create($data);
 
-        return redirect(route('ticket_type_services.index'))
-            ->with('success','Status alterado com sucesso.');
+        return redirect()->back();
     }
 
     /**
@@ -56,6 +51,9 @@ class TicketTypeServiceController extends Controller
             ->orderBy('title')
             ->get();
 
+        //
+        $db->update(['amount_sub_services'=>$dbSubServices->count()]);
+
         return view('admin.ticket.type_service.type_service_show', compact('db', 'dbSubServices'));
     }
 
@@ -65,9 +63,6 @@ class TicketTypeServiceController extends Controller
     public function edit(TicketTypeService $ticketTypeService)
     {
         //
-        $db = $ticketTypeService;
-
-        return view('admin.ticket.type_service.type_service_edit', compact('db'));
     }
 
     /**
@@ -81,8 +76,7 @@ class TicketTypeServiceController extends Controller
         //Salvando Dados
         $ticketTypeService->update($data);
 
-        return redirect(route('ticket_type_services.index'))
-            ->with('success','Status alterado com sucesso.');
+        return redirect()->back();
     }
 
     /**
@@ -91,6 +85,14 @@ class TicketTypeServiceController extends Controller
     public function destroy(TicketTypeService $ticketTypeService)
     {
         //
+        if ($ticketTypeService->amount_sub_services == 0) {
+            
+            $ticketTypeService->delete();
+
+            return redirect()->back()->with('success','Classificação de serviço excluída');
+        }
+        
+        return redirect()->back()->with('error','Contém classificação de serviços cadastradas');
     }
 
     /**
@@ -101,12 +103,9 @@ class TicketTypeServiceController extends Controller
         //Dados dos Formulários
         $data = $request->only('status');
 
-        dd($ticketTypeService->status);
-
         //Salvando Dados
         $ticketTypeService->update($data);
 
-        return redirect(route('ticket_type_services.index'))
-            ->with('success','Status alterado com sucesso.');
+        return redirect()->back()->with('success','Status alterado com sucesso.');
     }
 }

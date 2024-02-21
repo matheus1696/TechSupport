@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();            
             $table->string('title');
             $table->string('status')->default(1);
+            $table->integer('amount_tickets')->nullable();
             $table->unsignedBigInteger('ticket_type_service_id');
             $table->timestamps();
 

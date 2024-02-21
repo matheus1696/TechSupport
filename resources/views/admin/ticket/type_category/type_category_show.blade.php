@@ -2,18 +2,11 @@
     
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Serviços da Categoria: {{ $db->title }}"/>
+        <x-header title="Serviços: Categoria {{ $db->title }} ({{$db->amount_services ?? 0}})"/>
     @endslot
 
     <!-- Slot Body -->
     @slot('body')
-    
-        <x-conteiner>
-            <div class="row">
-                <p class="col-12"><strong>Tipo:</strong> {{$db->title}} </p>                
-                <p class="col-12"><strong>Quantidade de Sub-Serviços:</strong> {{$dbServices->count()}} </p>
-            </div>
-        </x-conteiner>
 
         <x-conteiner>
             <x-form.form method="create" route="{{route('ticket_type_services.store')}}">
@@ -28,29 +21,35 @@
                     @slot('thead')
                         <tr>
                             <th>Serviço</th>
+                            <th class="col-1">Class. Serviço</th>
                             <th class="col-1">Status</th>
-                            <th class="col-1"></th>
+                            <th style="width: 150px"></th>
                         </tr>
                     @endslot
                 
                     @slot('tbody')
                         @foreach ($dbServices as $dbService)
                             <tr>
-                                <td>{{$dbService->title}}</td>                                
+                                <td>{{$dbService->title}}</td>  
+                                <td class="text-center">{{$dbService->amount_sub_services ?? 0}}</td>                                
                                 <td class="text-center">
-                                    <x-button.buttonStatus condition="{{$dbService->status}}" route="{{route('ticket_type_services.status',['ticket_type_sub_service'=>$dbService->id])}}" name="status"/>
+                                    <x-button.buttonStatus condition="{{$dbService->status}}" route="{{route('ticket_type_services.status',['ticket_type_service'=>$dbService->id])}}" name="status"/>
                                 </td>
                                 <td class="text-center">
                                     
+                                    <x-button.minButtonShow route="{{route('ticket_type_services.show',['ticket_type_service'=>$dbService->id])}}" />
+                                    
                                     <x-button.minButtonModalEdit id="Subtipos{{$dbService->id}}" title="{{$dbService->title}}">
             
-                                        <x-form.form route="{{route('ticket_type_services.update',['ticket_type_sub_service'=>$dbService->id])}}" method="edit">
-                                            
-                                            <x-form.input col="12" label="Serviço" id="title" required="required" value="{{$dbService->title}}" />
+                                        <x-form.form route="{{route('ticket_type_services.update',['ticket_type_service'=>$dbService->id])}}" method="edit">
+                                                                                        
+                                            <x-form.input col="12" label="Serviço" id="title" required="required" value="{{$dbService->title}} />
                                             
                                         </x-form.form>
                                         
                                     </x-button.minButtonModalEdit>
+                                    
+                                    <x-button.minButtonDelete route="{{route('ticket_type_services.destroy',['ticket_type_service'=>$dbService->id])}}" />
                                 </td>
                             </tr>
                         @endforeach

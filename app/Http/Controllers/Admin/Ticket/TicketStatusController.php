@@ -27,8 +27,7 @@ class TicketStatusController extends Controller
     public function create()
     {
         //
-        return view('admin.ticket.ticket_status.ticket_status_create')
-            ->with('success','Status alterado com sucesso.');
+        return view('admin.ticket.ticket_status.ticket_status_create');
     }
 
     /**
@@ -61,8 +60,7 @@ class TicketStatusController extends Controller
         //
         $db = $ticketStatus;
 
-        return view('admin.ticket.ticket_status.ticket_status_edit', compact('db'))
-            ->with('success','Status alterado com sucesso.');
+        return view('admin.ticket.ticket_status.ticket_status_edit', compact('db'));
     }
 
     /**
