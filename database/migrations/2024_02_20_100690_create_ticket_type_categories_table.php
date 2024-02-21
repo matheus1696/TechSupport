@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket_type_services', function (Blueprint $table) {
+        Schema::create('ticket_type_categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('amount_sub_services')->nullable();
+            $table->integer('amount_services')->nullable();
             $table->string('status')->default(1);
-            $table->unsignedBigInteger('ticket_type_category_id');
             $table->timestamps();
-
-            $table->foreign('ticket_type_category_id')->references('id')->on('ticket_type_categories');
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ticket_type_services');
+        Schema::dropIfExists('ticket_type_categories');
     }
 };

@@ -28,8 +28,7 @@ class TicketTypeServiceController extends Controller
     public function create()
     {
         //        
-        return view('admin.ticket.type_service.type_service_create')
-            ->with('success','Status alterado com sucesso.');
+        return view('admin.ticket.type_service.type_service_create');
     }
 
     /**
@@ -101,6 +100,8 @@ class TicketTypeServiceController extends Controller
     {
         //Dados dos Formulários
         $data = $request->only('status');
+
+        dd($ticketTypeService->status);
 
         //Salvando Dados
         $ticketTypeService->update($data);

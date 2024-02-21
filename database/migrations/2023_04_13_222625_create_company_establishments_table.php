@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->nullable()->unique();
             $table->string('title')->unique();
+            $table->string('surname')->nullable()->unique();
             $table->string('filter');
             $table->string('address');
             $table->string('number');

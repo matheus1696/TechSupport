@@ -14,13 +14,28 @@ class TicketTypeServiceSeeder extends Seeder
     public function run(): void
     {
         TicketTypeService::create([
-            'title'=>'Computador/Desktop/Notebook'
+            'title'=>'Computador/Desktop/Notebook',
+            'ticket_type_category_id'=>1,
         ]);
+
         TicketTypeService::create([
-            'title'=>'Impressora'
+            'title'=>'Impressora',
+            'ticket_type_category_id'=>1,
         ]);
+        
         TicketTypeService::create([
-            'title'=>'Telefone'
+            'title'=>'Telefone',
+            'ticket_type_category_id'=>1,
+        ]);
+        
+        TicketTypeService::create([
+            'title'=>'Pedido de Suprimento',
+            'ticket_type_category_id'=>2,
+        ]);
+        
+        TicketTypeService::create([
+            'title'=>'Conserto de Porta',
+            'ticket_type_category_id'=>3,
         ]);
     }
 }

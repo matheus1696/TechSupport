@@ -516,9 +516,9 @@ return [
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
-                            'text'    => 'Tipos de Serviços',
+                            'text'    => 'Tipos de Categorias',
                             'classes' => 'btn-sm',
-                            'route'   => 'ticket_type_services.index',
+                            'route'   => 'ticket_type_categories.index',
                             'icon'    => 'fas fa-vest',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],

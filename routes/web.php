@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Region\RegionStatesController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
 use App\Http\Controllers\Admin\Ticket\TicketStatusController;
+use App\Http\Controllers\Admin\Ticket\TicketTypeCategoriesController;
 use App\Http\Controllers\Admin\Ticket\TicketTypeServiceController;
 use App\Http\Controllers\Admin\Ticket\TicketTypeSubServiceController;
 use App\Http\Controllers\Dashboard\ViewDashboardController;
@@ -115,6 +116,10 @@ Route::middleware('auth')->group(function () {
                         Route::put('ticket_statuses/status/{ticket_status}',[TicketStatusController::class,'status'])->name('ticket_statuses.status');
                         Route::put('ticket_statuses/default/{ticket_status}',[TicketStatusController::class,'default'])->name('ticket_statuses.default');
                         Route::resource('ticket_statuses',TicketStatusController::class);
+
+                    //Rotas de Tipos de Categorias do Ticket
+                        Route::put('ticket_type_categories/status/{ticket_type_category}',[TicketTypeCategoriesController::class,'status'])->name('ticket_type_categories.status');
+                        Route::resource('ticket_type_categories',TicketTypeCategoriesController::class);
                     
                     //Rotas de Tipos de Serviços do Ticket
                         Route::put('ticket_type_services/status/{ticket_type_service}',[TicketTypeServiceController::class,'status'])->name('ticket_type_services.status');
@@ -123,6 +128,7 @@ Route::middleware('auth')->group(function () {
                     //Rotas de Sub-Tipos de Serviços do Ticket
                         Route::put('ticket_type_sub_services/status/{ticket_type_sub_service}',[TicketTypeSubServiceController::class,'status'])->name('ticket_type_sub_services.status');
                         Route::resource('ticket_type_sub_services',TicketTypeSubServiceController::class);
+                        
                 });
         });
 

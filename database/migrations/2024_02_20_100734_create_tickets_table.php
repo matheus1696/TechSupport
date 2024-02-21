@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->date('data_last_interaction')->nullable();;
-            $table->integer('amount_interaction')->nullable();;
+            $table->date('data_last_interaction')->nullable();
+            $table->integer('amount_interaction')->nullable();
             $table->date('ticket_reopened')->nullable();
             $table->unsignedInteger('ticket_status_id');
             $table->unsignedInteger('establishment_id');

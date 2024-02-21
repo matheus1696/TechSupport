@@ -35,7 +35,8 @@ class DatabaseSeeder extends Seeder
             CompanyEstablishmentDepartmentsSeed::class,
             ProductUnitsSeed::class,
             DashboardSeeder::class,
-            TicketStatusSeeder::class,            
+            TicketStatusSeeder::class,
+            TicketTypeCategoriesSeeder::class,
             TicketTypeServiceSeeder::class,
             TicketTypeSubServiceSeeder::class,
         ]);
