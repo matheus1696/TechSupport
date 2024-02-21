@@ -92,7 +92,7 @@ class TicketTypeServiceController extends Controller
             return redirect()->back()->with('success','Classificação de serviço excluída');
         }
         
-        return redirect()->back()->with('error','Contém classificação de serviços cadastradas');
+        return redirect()->back()->with('error','Contém classificação de serviços');
     }
 
     /**

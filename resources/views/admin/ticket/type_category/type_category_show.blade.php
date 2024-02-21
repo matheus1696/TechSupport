@@ -43,7 +43,7 @@
             
                                         <x-form.form route="{{route('ticket_type_services.update',['ticket_type_service'=>$dbService->id])}}" method="edit">
                                                                                         
-                                            <x-form.input col="12" label="Serviço" id="title" required="required" value="{{$dbService->title}} />
+                                            <x-form.input col="12" label="Serviço" id="title" required="required" value="{{$dbService->title}}" />
                                             
                                         </x-form.form>
                                         
