@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ticket_type_sub_services', function (Blueprint $table) {
-            $table->id();            
+            $table->id();
             $table->string('title');
-            $table->string('status')->default(1);
+            $table->integer('response_time')->default(72);
             $table->integer('amount_tickets')->nullable();
+            $table->string('status')->default(1);
             $table->unsignedBigInteger('ticket_type_service_id');
             $table->timestamps();
 
