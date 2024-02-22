@@ -2,7 +2,7 @@
 <x-pages.forms method="create" route="{{route('ticket_statuses.store')}}" btnBack="{{route('ticket_statuses.index')}}">
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Dashboard" />
+        <x-header title="Status do Ticket" />
     @endslot
 
     <!-- Slot Body -->

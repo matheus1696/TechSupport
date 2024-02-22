@@ -3,7 +3,7 @@
         <tr>
             <th>Código</th>
             <th>Ocupação (CBO)</th>
-            <th class="text-center col-2">Status</th>
+            <th class="col-1">Status</th>
         </tr>
     @endslot
 
@@ -13,8 +13,7 @@
                 <td class="text-center">{{$item->code}}</td>
                 <td>{{$item->title}}</td>
                 <td class="text-center">
-                    <x-button.buttonStatus condition="{{$item->status}}"
-                        route="{{route('occupations.update',['occupation'=>$item->id])}}" name="status" />
+                    <x-button.buttonStatus condition="{{$item->status}}" route="{{route('occupations.update',['occupation'=>$item->id])}}" name="status" />
                 </td>
             </tr>
         @endforeach

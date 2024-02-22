@@ -4,7 +4,7 @@
             <th class="col-1">Sigla</th>
             <th>Unidade de Medida</th>
             <th class="col-1">Status</th>
-            <th class="col-1"></th>
+            <th style="width: 50px"></th>
         </tr>
     @endslot
 
@@ -12,10 +12,9 @@
         @foreach ($db as $item)
             <tr>
                 <td class="text-center">{{$item->acronym}}</td>
-                <td>{{$item->title}}</td>
+                <td class="text-center">{{$item->title}}</td>
                 <td class="text-center">
-                    <x-button.buttonStatus condition="{{$item->status}}" name="status"
-                        route="{{route('units.status',['unit'=>$item->id])}}" />
+                    <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('units.status',['unit'=>$item->id])}}" />
                 </td>
                 <td class="text-center">
                     <x-button.minButtonEdit route="{{route('units.edit',['unit'=>$item->id])}}" />

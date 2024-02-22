@@ -1,5 +1,6 @@
 <x-form.input col="2" label="Sigla" id="acronym" value="{{$db->acronym ?? ''}}"/>
 <x-form.input col="10" label="Blocos Financeiros" id="title" value="{{$db->title ?? ''}}"/>
+
 <label class="ml-1 text-sm col-12">Cores:</label>
 <div class="px-3 row">    
     <div class="mx-2 custom-control custom-radio">

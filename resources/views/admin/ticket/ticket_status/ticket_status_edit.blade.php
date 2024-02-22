@@ -3,7 +3,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Editar Status" />
+        <x-header title="Status do Ticket: {{ $db->title }}" />
     @endslot
 
     <!-- Slot Body -->

@@ -9,4 +9,5 @@
     @slot('body')        
         @include('admin.company.type_establishments.partials.type_establishments_form')
     @endslot
+    
 </x-pages.forms>

@@ -3,7 +3,7 @@
         <tr>
             <th>Titulo</th>
             <th class="col-2">Bloco Financeiro</th>
-            <th class="col-1"></th>
+            <th style="width: 50px"></th>
         </tr>
     @endslot
 

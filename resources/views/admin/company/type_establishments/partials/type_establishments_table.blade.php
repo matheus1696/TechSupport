@@ -2,8 +2,8 @@
     @slot('thead')
         <tr>
             <th>Tipo de Estabelecimento</th>
-            <th class="text-center col-1">Status</th>
-            <th class="col-3 col-xl-2"></th>
+            <th class="col-1">Status</th>
+            <th style="width: 150px"></th>
         </tr>
     @endslot
 
@@ -15,7 +15,7 @@
                     <x-button.buttonStatus condition="{{$item->status}}" route="{{route('type_establishments.update',['type_establishment'=>$item->id])}}" name="status" />
                 </td>
                 <td class="text-center">
-                    <x-button.minButtonModalInfo id="TypeEstablishmentsModal{{$item->id}}" title="Unidades Cadastradas">
+                    <x-button.minButtonModalInfo id="TypeEstablishmentsModal{{$item->id}}" title="Estabelecimentos Cadastrados">
                         <ul>
                             @foreach ($dbEstablishments as $dbEstablishment)
                                 @if ($dbEstablishment->type_establishment_id == $item->id)

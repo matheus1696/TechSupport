@@ -2,7 +2,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Lista de Ocupações"/>
+        <x-header title="Lista de Ocupações (CBO)"/>
     @endslot
 
     <!-- Slot Body -->

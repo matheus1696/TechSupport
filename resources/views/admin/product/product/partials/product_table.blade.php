@@ -5,7 +5,7 @@
             <th>Produto</th>
             <th class="col-1">Tipo</th>
             <th class="col-1">Status</th>
-            <th class="col-1"></th>
+            <th style="width: 50px"></th>
         </tr>
     @endslot
 
@@ -13,7 +13,7 @@
         @foreach ($db as $item)
             <tr>
                 <td class="text-center">{{$item->code}}</td>
-                <td>{{$item->title}}</td>
+                <td class="text-center">{{$item->title}}</td>
                 <td class="text-center">
                     @if ($item->type === "Consumption") Consumo @endif
                     @if ($item->type === "Permanent") Permanente @endif

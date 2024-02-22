@@ -5,7 +5,7 @@
             <tr>
                 <th>Organograma</th>
                 <th class="col-1">Status</th>
-                <th class="col-1"></th>
+                <th style="width: 100px"></th>
             </tr>
         @endslot
 

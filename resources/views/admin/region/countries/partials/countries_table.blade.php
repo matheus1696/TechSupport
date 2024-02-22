@@ -1,12 +1,12 @@
 <x-table.table :db="$db">
     @slot('thead')
         <tr>
-            <th class="text-center col-1">Código</th>
-            <th class="text-center col-1">Siglas</th>
+            <th class="col-1">Código</th>
+            <th class="col-1">Siglas</th>
             <th>Pais</th>
             <th>Pais em Inglês</th>
             <th>DDI</th>
-            <th class="text-center col-1">Status</th>
+            <th class="col-1">Status</th>
         </tr>
     @endslot
 
