@@ -6,8 +6,8 @@
     <tr>
         <th>Nome</th>
         <th class="d-none d-md-table-cell">E-mail</th>
-        <th class="text-center col-1">Verificação</th>
-        <th class="col-md-2"></th>
+        <th class="col-1">Verificação</th>
+        <th style="width: 100px"></th>
     </tr>
     @endslot
 
