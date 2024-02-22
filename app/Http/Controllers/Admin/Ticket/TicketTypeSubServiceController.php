@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ticket\TicketTypeSubService;
 use App\Http\Requests\StoreTicketTypeSubServiceRequest;
 use App\Http\Requests\UpdateTicketTypeSubServiceRequest;
+use App\Services\Logger;
 use Illuminate\Http\Request;
 
 class TicketTypeSubServiceController extends Controller
@@ -36,6 +37,8 @@ class TicketTypeSubServiceController extends Controller
 
         TicketTypeSubService::create($data);
 
+        Logger::store($data['title']);
+
         return redirect()->back();
     }
 
@@ -65,6 +68,8 @@ class TicketTypeSubServiceController extends Controller
 
         $ticketTypeSubService->update($data);
 
+        Logger::update($ticketTypeSubService->title);
+
         return redirect()->back();
     }
 
@@ -86,6 +91,8 @@ class TicketTypeSubServiceController extends Controller
 
         //Salvando Dados
         $ticketTypeSubService->update($data);
+
+        Logger::status($ticketTypeSubService->id, $ticketTypeSubService->title);
 
         return redirect()->back()->with('success','Status alterado com sucesso.');
     }

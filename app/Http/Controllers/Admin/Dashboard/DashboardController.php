@@ -41,6 +41,9 @@ class DashboardController extends Controller
     {        
         $dbFinancialBlock = CompanyFinancialBlocksModel::all();
 
+        //Log do Sistema
+        Logger::create();
+
         return view('admin.dashboard.dashboard_create',[
             'dbFinancialBlock'=>$dbFinancialBlock,
         ]);
@@ -55,6 +58,9 @@ class DashboardController extends Controller
 
         Dashboard::create($data);
 
+        //Log do Sistema
+        Logger::store($data['title']);
+
         return redirect(route('dashboards.index'));
     }
 
@@ -64,9 +70,6 @@ class DashboardController extends Controller
     public function show(string $id)
     {
         //
-        $db = Dashboard::find($id);
-
-        return view('dashboard.dashboard_show', compact('db'));
     }
 
     /**
@@ -77,6 +80,9 @@ class DashboardController extends Controller
         //
         $db = Dashboard::find($id);
         $dbFinancialBlock = CompanyFinancialBlocksModel::all();
+
+        //Log do Sistema
+        Logger::edit($db->title);
 
         return view('admin.dashboard.dashboard_edit',[
             'db'=>$db,
@@ -94,6 +100,9 @@ class DashboardController extends Controller
 
         $db = Dashboard::find($id);
         $db->update($data);
+
+        //Log do Sistema
+        Logger::update($db->title);
 
         return redirect(route('dashboards.index'));
     }

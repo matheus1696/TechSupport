@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class ViewDashboardController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware('dashboard');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -17,9 +25,9 @@ class ViewDashboardController extends Controller
         //Listagem de Dados
         $db = Dashboard::select()->orderBy('title')->with('FinancialBlocks')->get();
 
-        return view('dashboard.dashboard_index',[
-            'db'=>$db,
-        ]);
+        Logger::access();
+
+        return view('dashboard.dashboard_index',compact('db'));
     }
 
     /**
@@ -43,7 +51,13 @@ class ViewDashboardController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //        
+        $db = Dashboard::find($id);
+
+        //Log do Sistema
+        Logger::show($db->title);
+
+        return view('dashboard.dashboard_show', compact('db'));
     }
 
     /**

@@ -8,7 +8,7 @@ use App\Http\Requests\CompanyEstablishmentsStoreRequest;
 use App\Http\Requests\CompanyEstablishmentsUpdateRequest;
 use App\Models\Company\CompanyFinancialBlocksModel;
 use App\Models\Company\CompanyEstablishmentsModel;
-use App\Models\Company\CompanyEstablishmentDepartmentsModel;
+use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyTypeEstablishmentsModel;
 use App\Models\Region\RegionCitiesModel;
 use App\Services\Logger;
@@ -37,7 +37,7 @@ class CompanyEstablishmentsController extends Controller
             ->with('RegionCities')
             ->paginate(20);
 
-        $dbLists= CompanyEstablishmentDepartmentsModel::all();
+        $dbLists= CompanyEstablishmentDepartment::all();
 
         //Pesquisar Dados
         $search = $request->all();
@@ -103,9 +103,12 @@ class CompanyEstablishmentsController extends Controller
     {
         //
         $db = CompanyEstablishmentsModel::find($id);
-        $dbDepartments = CompanyEstablishmentDepartmentsModel::where('establishment_id', $id)
+        $dbDepartments = CompanyEstablishmentDepartment::where('establishment_id', $id)
             ->orderBy('contact')
             ->get();
+
+        //Log do Sistema
+        Logger::show($db->title);
 
         return view('admin.company.establishments.establishments_show',[
             'db'=>$db,

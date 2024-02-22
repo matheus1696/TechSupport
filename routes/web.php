@@ -8,7 +8,7 @@ use App\Http\Controllers\Users\Profile\ProfileController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\Admin\Company\CompanyFinancialBlocksController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentsController;
-use App\Http\Controllers\Admin\Company\CompanyEstablishmentDepartmentsController;
+use App\Http\Controllers\Admin\Company\CompanyEstablishmentDepartmentController;
 use App\Http\Controllers\Admin\Company\CompanyOccupationController;
 use App\Http\Controllers\Admin\Company\CompanyOrganizationalController;
 use App\Http\Controllers\Admin\Company\CompanyTypeEstablishmentsController;
@@ -31,10 +31,7 @@ Route::get('/',function(){return view('index');});
 //Lista Telefônica
 Route::resource('contacts', ContactListsController::class);
 
-//Grupo de Rotas - Configuração de Dashbaord
-Route::prefix('dashboards')->group(function (){
-    Route::resource('view_dashboards',ViewDashboardController::class);
-});
+
 
 //Camada de Seguraça para Usuários Logados
 Route::middleware('auth')->group(function () {
@@ -71,7 +68,7 @@ Route::middleware('auth')->group(function () {
                         Route::put('establishments/status/{establishment}',[CompanyEstablishmentsController::class,'status'])->name('establishments.status');
                         Route::resource('establishments',CompanyEstablishmentsController::class);
                     //Rota - Dados do Contato Estabelecimento de Saúde
-                        Route::resource('establishment_contacts',CompanyEstablishmentDepartmentsController::class);
+                        Route::resource('establishment_contacts',CompanyEstablishmentDepartmentController::class);
                     //Rota - Nível de Atenção
                         Route::resource('financial_blocks',CompanyFinancialBlocksController::class);
 
@@ -149,7 +146,12 @@ Route::middleware('auth')->group(function () {
     });
 
     //Rotas de Perfil do Usuário
-    Route::resource('profile', ProfileController::class);    
+    Route::resource('profile', ProfileController::class);  
+    
+    //Grupo de Rotas - Configuração de Dashbaord
+    Route::prefix('dashboards')->group(function (){
+        Route::resource('view_dashboards',ViewDashboardController::class);
+    });
 });
 
 //Rotas de Autenticação

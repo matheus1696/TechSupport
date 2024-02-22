@@ -90,11 +90,9 @@ class ProductController extends Controller
         $db = ProductModel::find($id);
 
         //Logs
-        Logger::edit();
+        Logger::edit($db->title);
 
-        return view('admin.product.product.product_edit',[
-            'db'=>$db,
-        ]);
+        return view('admin.product.product.product_edit', compact('db'));
     }
 
     /**
@@ -111,7 +109,7 @@ class ProductController extends Controller
         $db->update($data);
 
         //Logs
-        Logger::update();
+        Logger::update($db->title);
 
         return redirect(route('products.index'))->with('success','Cadastro salvo com sucesso');
     }

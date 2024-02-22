@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Company\CompanyEstablishmentsModel;
-use App\Models\Company\CompanyEstablishmentDepartmentsModel;
+use App\Models\Company\CompanyEstablishmentDepartment;
+use App\Services\Logger;
 
 class ContactListsController extends Controller
 {
@@ -20,7 +21,7 @@ class ContactListsController extends Controller
             ->orderBy('title')
             ->get();
 
-        $dbContact = CompanyEstablishmentDepartmentsModel::where('contact','<>',NULL)->get();
+        $dbContact = CompanyEstablishmentDepartment::where('contact','<>',NULL)->get();
 
         //Pesquisar Dados
         $search = $request->all();
@@ -29,6 +30,8 @@ class ContactListsController extends Controller
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->get();
         }
+
+        Logger::access();
 
         return view('public.contacts.contacts_index',[
             'search'=>$search,
@@ -58,7 +61,7 @@ class ContactListsController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        $db = CompanyEstablishmentDepartmentsModel::where('contact','<>',NULL)
+        $db = CompanyEstablishmentDepartment::where('contact','<>',NULL)
         ->where('establishment_id', $id)
         ->with('CompanyEstablishments')
         ->orderBy('contact')
@@ -67,13 +70,15 @@ class ContactListsController extends Controller
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName'])) {
-            $db = CompanyEstablishmentDepartmentsModel::where('contact','<>',NULL)
+            $db = CompanyEstablishmentDepartment::where('contact','<>',NULL)
                 ->where('establishment_id', $id)
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->with('CompanyEstablishments')
                 ->orderBy('contact')
                 ->get();
         }
+
+        Logger::show($db->title);
 
         return view('public.contacts.contacts_show',[
             'search'=>$search,
@@ -109,9 +114,12 @@ class ContactListsController extends Controller
      * API Display a listing of the resource.
      */
     public function getAllContact() {
-        $contact = CompanyEstablishmentDepartmentsModel::select()
+        $contact = CompanyEstablishmentDepartment::select()
         ->join('company_establishments', 'company_establishments.id', '=', 'company_establishment_departments.establishment_id')
         ->get()->toJson(JSON_PRETTY_PRINT);
+
+        Logger::access();
+
         return response($contact, 200);
     }
 }

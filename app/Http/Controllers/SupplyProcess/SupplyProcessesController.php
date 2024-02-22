@@ -71,7 +71,7 @@ class SupplyProcessesController extends Controller
         SupplyProcessesModel::create($data);
 
         //Logs
-        Logger::store();
+        Logger::store($data['title']);
 
         return redirect(route('supply_processes.index'))
             ->with('success','Cadastro salvo com sucesso');
@@ -87,7 +87,7 @@ class SupplyProcessesController extends Controller
         $dbSupplyProcessItems = SupplyProcessItemsModel::where('process_id', $id)->paginate(20);
 
         //Logs
-        Logger::show();
+        Logger::show($db->title);
 
         return view('supply_process.supply_process.supply_process_show',[
             'db'=>$db,
@@ -104,7 +104,7 @@ class SupplyProcessesController extends Controller
         $db = SupplyProcessesModel::find($id);
 
         //Logs
-        Logger::edit();
+        Logger::edit($db->title);
 
         return view('supply_process.supply_process.supply_process_edit',[
             'db'=>$db,
@@ -126,7 +126,7 @@ class SupplyProcessesController extends Controller
         $db->update($data);
 
         //Logs
-        Logger::update();
+        Logger::update($db->title);
 
         return redirect(route('supply_processes.show',['supply_process'=>$id]))
             ->with('success','Cadastro atualizado com sucesso');

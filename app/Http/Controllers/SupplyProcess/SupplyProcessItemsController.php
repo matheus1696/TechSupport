@@ -39,6 +39,8 @@ class SupplyProcessItemsController extends Controller
         $dbProducts = ProductModel::where('status',true)->orderBy('title')->get();
         $dbUnits = ProductUnitModel::all();
 
+        Logger::create();
+
         return view('supply_process.supply_process_item.supply_process_item_create',[
             'dbSupplyProcesses'=>$dbSupplyProcesses,
             'dbProducts'=>$dbProducts,
@@ -56,6 +58,8 @@ class SupplyProcessItemsController extends Controller
 
         //Salvando Dados
         SupplyProcessItemsModel::create($data);
+
+        Logger::store($data['title']);
 
         return redirect(route('supply_processes.show',['supply_process'=>$data['process_id']]))
             ->with('success','Cadastro salvo com sucesso');
@@ -80,6 +84,8 @@ class SupplyProcessItemsController extends Controller
         $dbProducts = ProductModel::all();
         $dbUnits = ProductUnitModel::all();
 
+        Logger::edit($db->title);
+
         return view('supply_process.supply_process_item.supply_process_item_edit',[
             'db'=>$db,
             'dbSupplyProcesses'=>$dbSupplyProcesses,
@@ -100,6 +106,8 @@ class SupplyProcessItemsController extends Controller
         $db = SupplyProcessItemsModel::find($id);
         $db->update($data);
 
+        Logger::update($db->title);
+
         return redirect(route('supply_processes.show',['supply_process'=>$data['process_id']]))
             ->with('success','Cadastro salvo com sucesso');
     }
@@ -116,7 +124,7 @@ class SupplyProcessItemsController extends Controller
             $db->delete();
 
             //Log do Sistema
-            Logger::destroy();
+            Logger::destroy($db->title);
 
             return redirect(route('supply_processes.show',['supply_process'=>$db['processo_id']]))
                 ->with('success','Item excluido com sucesso');

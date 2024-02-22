@@ -58,20 +58,20 @@ class Logger
         self::Logs(1200,"Formulário de criação.");
     }
 
-    public static function edit(){
-        self::Logs(1300,"Formulário de edição.");
+    public static function edit($data){
+        self::Logs(1300,"Formulário de edição: ". $data . ".");
     }
 
-    public static function store(){
-        self::Logs(2100,"Cadastro de informação.");
+    public static function store($data){
+        self::Logs(2100,"Cadastro de informação: ". $data . ".");
     }
 
-    public static function update(){
-        self::Logs(2200,"Alteração de cadastro.");
+    public static function update($data){
+        self::Logs(2200,"Alteração de cadastro: ". $data . ".");
     }
 
-    public static function destroy(){
-        self::Logs(2300,"Exclusão de dados.");
+    public static function destroy($data){
+        self::Logs(2300,"Exclusão de dados: ". $data . ".");
     }
 
     public static function status($data, $status){
@@ -121,7 +121,7 @@ class Logger
 
     //Errors
         public static function error(){
-            self::Logs(9000,"Erro");
+            self::Logs(9000,"Erro no acesso");
         }
 
     public static function errorImproperAccess(){

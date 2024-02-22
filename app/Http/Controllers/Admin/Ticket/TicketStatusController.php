@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ticket\TicketStatus;
 use App\Http\Requests\StoreTicketStatusRequest;
 use App\Http\Requests\UpdateTicketStatusRequest;
+use App\Services\Logger;
 use Illuminate\Http\Request;
 
 class TicketStatusController extends Controller
@@ -18,6 +19,9 @@ class TicketStatusController extends Controller
         //
         $db = $ticketStatus->orderBy('title')->paginate(20);
 
+        //Logs
+        Logger::access();
+
         return view('admin.ticket.ticket_status.ticket_status_index', compact('db'));
     }
 
@@ -26,7 +30,9 @@ class TicketStatusController extends Controller
      */
     public function create()
     {
-        //
+        //Logs
+        Logger::create();
+
         return view('admin.ticket.ticket_status.ticket_status_create');
     }
 
@@ -39,6 +45,9 @@ class TicketStatusController extends Controller
         $data = $request->all();
 
         TicketStatus::create($data);
+
+        //Logs
+        Logger::store($data['title']);
 
         return redirect(route('ticket_statuses.index'))
             ->with('success','Status alterado com sucesso.');
@@ -60,6 +69,9 @@ class TicketStatusController extends Controller
         //
         $db = $ticketStatus;
 
+        //Logs
+        Logger::store($ticketStatus->title);
+
         return view('admin.ticket.ticket_status.ticket_status_edit', compact('db'));
     }
 
@@ -73,6 +85,9 @@ class TicketStatusController extends Controller
 
         //Salvando Dados
         $ticketStatus->update($data);
+
+        //Logs
+        Logger::update($ticketStatus->title);
 
         return redirect(route('ticket_statuses.index'))
             ->with('success','Status alterado com sucesso.');
@@ -96,6 +111,9 @@ class TicketStatusController extends Controller
 
         //Salvando Dados
         $ticketStatus->update($data);
+
+        //Logs
+        Logger::status($ticketStatus->id, $ticketStatus->status);
 
         return redirect(route('ticket_statuses.index'))
             ->with('success','Status alterado com sucesso.');

@@ -64,7 +64,7 @@ class CompanyOrganizationalController extends Controller
         CompanyOrganizationalModel::create($data);
 
         //Log do Sistema
-        Logger::store();
+        Logger::store($data['title']);
 
         return redirect(route('organizational.organize'));
     }
@@ -87,7 +87,7 @@ class CompanyOrganizationalController extends Controller
         $dbSector = CompanyOrganizationalModel::select()->orderBy('order')->get();
 
         //Log do Sistema
-        Logger::edit();
+        Logger::edit($db->title);
 
         return view('admin.company.organizational.organizational_edit', [
             'dbSector' => $dbSector,
@@ -111,7 +111,7 @@ class CompanyOrganizationalController extends Controller
         $db->update($data);
 
         //Log do Sistema
-        Logger::update();
+        Logger::update($db->title);
 
         return redirect(route('organizational.organize'));
     }
@@ -130,7 +130,7 @@ class CompanyOrganizationalController extends Controller
             $db->delete();
 
             //Log do Sistema
-            Logger::destroy();
+            Logger::destroy($db->title);
 
             return redirect(route('organizational.index'))
                 ->with('success','Exclusão realizada com sucesso.');
@@ -141,7 +141,7 @@ class CompanyOrganizationalController extends Controller
             Logger::error();
 
             return redirect(route('organizational.index'))
-                ->with('errors','Existe setores vinculados a '.$db->title);
+                ->with('error','Existe setores vinculados a '.$db->title);
         }
     }
 

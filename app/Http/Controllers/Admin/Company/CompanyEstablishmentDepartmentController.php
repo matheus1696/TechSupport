@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Admin\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Company\CompanyEstablishmentDepartmentsModel;
+use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Services\Logger;
 
-class CompanyEstablishmentDepartmentsController extends Controller
+class CompanyEstablishmentDepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(string $id)
+    public function index()
     {
         //
     }
@@ -35,10 +35,10 @@ class CompanyEstablishmentDepartmentsController extends Controller
         $data['filter'] = strtolower($data['department']);
 
         //Salvando Dados
-        CompanyEstablishmentDepartmentsModel::create($data);
+        CompanyEstablishmentDepartment::create($data);
 
         //Log do Sistema
-        Logger::store();
+        Logger::store($data['title']);
 
         return redirect(route('establishments.show',['establishment'=>$data['establishment_id']]))
             ->with('success','Cadastro salvo com sucesso');
@@ -57,14 +57,20 @@ class CompanyEstablishmentDepartmentsController extends Controller
      */
     public function edit(string $id)
     {
-        $db = CompanyEstablishmentDepartmentsModel::find($id);
+        $db = CompanyEstablishmentDepartment::find($id);
 
-        //Log do Sistema
-        Logger::create();
+        //Verificação
+        if ($db != NULL) {
+            //Log do Sistema
+            Logger::edit($db->title);
 
-        return view('admin.company.establishments.contact.establishmentContact_edit',[
-            'db'=>$db,
-        ]);
+            return view('admin.company.establishments.contact.establishmentContact_edit', compact('db'));
+        }else {
+            //Log do Sistema
+            Logger::error();
+
+            return redirect()->back()->with('error','Estabelecimento não existe');
+        }        
     }
 
     /**
@@ -76,14 +82,24 @@ class CompanyEstablishmentDepartmentsController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        $db = CompanyEstablishmentDepartmentsModel::find($id);
-        $db->update($data);
+        $db = CompanyEstablishmentDepartment::find($id);
 
-        //Log do Sistema
-        Logger::update();
+        //Verificação
+        if ($db != NULL) {
+            
+            $db->update($data);
 
-        return redirect(route('establishments.show',['establishment'=>$db['establishment_id']]))
-            ->with('success','Cadastro salvo com sucesso');
+            //Log do Sistema
+            Logger::update($data['title']);
+
+            return redirect(route('establishments.show',['establishment'=>$db['establishment_id']]))
+                ->with('success','Cadastro salvo com sucesso');
+        }else {
+            //Log do Sistema
+            Logger::error();
+
+            return redirect()->back()->with('error','Estabelecimento não existe');
+        }
     }
 
     /**
@@ -92,7 +108,7 @@ class CompanyEstablishmentDepartmentsController extends Controller
     public function destroy(string $id)
     {
         //Listando Dados
-        $db = CompanyEstablishmentDepartmentsModel::find($id);
+        $db = CompanyEstablishmentDepartment::find($id);
         $dbEstablishments = $db->establishment_id;
 
         //Verificação
@@ -100,7 +116,7 @@ class CompanyEstablishmentDepartmentsController extends Controller
             $db->delete();
 
             //Log do Sistema
-            Logger::destroy();
+            Logger::destroy($db->title);
 
             return redirect(route('establishments.show',['establishment'=>$dbEstablishments]))
                 ->with('success','Exclusão realizada com sucesso.');

@@ -41,6 +41,9 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function create()
     {
+        //Log do Sistema
+        Logger::create();
+
         return view('admin.company.type_establishments.type_establishments_create');
     }
 
@@ -49,9 +52,12 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function store(Request $request)
     {
-        $db = $request->all();
+        $data = $request->all();
 
-        CompanyTypeEstablishmentsModel::create($db);
+        CompanyTypeEstablishmentsModel::create($data);
+
+        //Log do Sistema
+        Logger::store($data['title']);
 
         return redirect(route('type_establishments.index'));
     }
@@ -72,7 +78,7 @@ class CompanyTypeEstablishmentsController extends Controller
         $db = CompanyTypeEstablishmentsModel::find($id);
 
         //Log do Sistema
-        Logger::edit();
+        Logger::edit($db->title);
 
         return view('admin.company.type_establishments.type_establishments_edit',[
             'db'=>$db,
@@ -111,7 +117,7 @@ class CompanyTypeEstablishmentsController extends Controller
             $db->delete();
 
             //Log do Sistema
-            Logger::destroy();
+            Logger::destroy($db->title);
 
             return redirect(route('type_establishments.index'))
                 ->with('success','Exclusão realizada com sucesso.');
@@ -120,7 +126,7 @@ class CompanyTypeEstablishmentsController extends Controller
             Logger::error();
 
             return redirect(route('type_establishments.index'))
-                ->with('errors','Existe unidades cadastradas neste tipo de estabelecimento.');
+                ->with('error','Existe unidades cadastradas neste tipo de estabelecimento.');
         }
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Ticket\TicketTypeCategory;
 use App\Http\Requests\StoreTicketTypeCategoryRequest;
 use App\Http\Requests\UpdateTicketTypeCategoryRequest;
 use App\Models\Ticket\TicketTypeService;
+use App\Services\Logger;
 use Illuminate\Http\Request;
 
 class TicketTypeCategoryController extends Controller
@@ -19,6 +20,8 @@ class TicketTypeCategoryController extends Controller
         //        
         $db = $TicketTypeCategory->orderBy('title')->paginate(20);
 
+        Logger::access();
+
         return view('admin.ticket.type_category.type_category_index', compact('db'));
     }
 
@@ -27,7 +30,10 @@ class TicketTypeCategoryController extends Controller
      */
     public function create()
     {
-        //        
+        //
+
+        Logger::create();
+
         return view('admin.ticket.type_category.type_category_create');
     }
 
@@ -40,6 +46,8 @@ class TicketTypeCategoryController extends Controller
         $data = $request->all();
 
         TicketTypeCategory::create($data);
+
+        Logger::store($data['title']);
 
         return redirect(route('ticket_type_categories.index'))
             ->with('success','Status alterado com sucesso.');
@@ -59,6 +67,8 @@ class TicketTypeCategoryController extends Controller
         //
         $db->update(['amount_services'=>$dbServices->count()]);
 
+        Logger::show($db->title);
+
         return view('admin.ticket.type_category.type_category_show', compact('db', 'dbServices'));
     }
 
@@ -69,6 +79,8 @@ class TicketTypeCategoryController extends Controller
     {
         //
         $db = $TicketTypeCategory;
+
+        Logger::edit($TicketTypeCategory->title);
 
         return view('admin.ticket.type_category.type_category_edit', compact('db'));
     }
@@ -84,6 +96,8 @@ class TicketTypeCategoryController extends Controller
         //Salvando Dados
         $TicketTypeCategory->update($data);
 
+        Logger::update($TicketTypeCategory->title);
+
         return redirect(route('ticket_type_categories.index'))
             ->with('success','Status alterado com sucesso.');
     }
@@ -98,10 +112,14 @@ class TicketTypeCategoryController extends Controller
             
             $TicketTypeCategory->delete();
 
+            Logger::edit($TicketTypeCategory->title);
+
             return redirect()->back()->with('success','Categoria excluída');
         }
+
+        Logger::error();
         
-        return redirect()->back()->with('errors','Categoria contém serviços cadastrados.');
+        return redirect()->back()->with('error','Categoria contém serviços cadastrados.');
     }
 
     /**
@@ -114,6 +132,8 @@ class TicketTypeCategoryController extends Controller
 
         //Salvando Dados
         $TicketTypeCategory->update($data);
+
+        Logger::status($TicketTypeCategory->id, $TicketTypeCategory->title);
 
         return redirect()->back()
             ->with('success','Status alterado com sucesso.');

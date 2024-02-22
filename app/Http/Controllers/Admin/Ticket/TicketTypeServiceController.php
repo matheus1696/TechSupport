@@ -7,6 +7,7 @@ use App\Models\Ticket\TicketTypeService;
 use App\Http\Requests\StoreTicketTypeServiceRequest;
 use App\Http\Requests\UpdateTicketTypeServiceRequest;
 use App\Models\Ticket\TicketTypeSubService;
+use App\Services\Logger;
 use Illuminate\Http\Request;
 
 class TicketTypeServiceController extends Controller
@@ -37,6 +38,8 @@ class TicketTypeServiceController extends Controller
 
         TicketTypeService::create($data);
 
+        Logger::store($data['title']);
+
         return redirect()->back();
     }
 
@@ -53,6 +56,8 @@ class TicketTypeServiceController extends Controller
 
         //
         $db->update(['amount_sub_services'=>$dbSubServices->count()]);
+
+        Logger::show($db->title);
 
         return view('admin.ticket.type_service.type_service_show', compact('db', 'dbSubServices'));
     }
@@ -76,6 +81,8 @@ class TicketTypeServiceController extends Controller
         //Salvando Dados
         $ticketTypeService->update($data);
 
+        Logger::update($ticketTypeService->title);
+
         return redirect()->back();
     }
 
@@ -89,8 +96,12 @@ class TicketTypeServiceController extends Controller
             
             $ticketTypeService->delete();
 
+            Logger::destroy($ticketTypeService->title);
+
             return redirect()->back()->with('success','Classificação de serviço excluída');
         }
+
+        Logger::error();
         
         return redirect()->back()->with('error','Contém classificação de serviços');
     }
@@ -105,6 +116,8 @@ class TicketTypeServiceController extends Controller
 
         //Salvando Dados
         $ticketTypeService->update($data);
+
+        Logger::status($ticketTypeService->id, $ticketTypeService->title);
 
         return redirect()->back()->with('success','Status alterado com sucesso.');
     }

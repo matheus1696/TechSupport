@@ -68,7 +68,7 @@ class ProductUnitController extends Controller
         //Salvando Dados
         ProductUnitModel::create($data);
 
-        Logger::store();
+        Logger::store($data['title']);
 
         return redirect(route('units.index'))
             ->with('success','Cadastro salvo com sucesso');
@@ -90,7 +90,7 @@ class ProductUnitController extends Controller
         //Listagem de Dados
         $db = ProductUnitModel::find($id);
 
-        Logger::edit();
+        Logger::edit($db->title);
 
         return view('admin.product.unit.unit_edit',[
             'db'=>$db,
@@ -109,7 +109,7 @@ class ProductUnitController extends Controller
         $db = ProductUnitModel::find($id);
         $db->update($data);
 
-        Logger::update();
+        Logger::update($db->title);
 
         return redirect(route('units.index'))
             ->with('success','Atualização realizada com sucesso.');

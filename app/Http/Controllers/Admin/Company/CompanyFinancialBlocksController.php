@@ -59,7 +59,7 @@ class CompanyFinancialBlocksController extends Controller
         CompanyFinancialBlocksModel::create($data);
 
         //Log do Sistema
-        Logger::store();
+        Logger::store($data['title']);
 
         return redirect(route('financial_blocks.index'))
             ->with('success','Cadastro salvo com sucesso');
@@ -82,7 +82,7 @@ class CompanyFinancialBlocksController extends Controller
         $db = CompanyFinancialBlocksModel::find($id);
 
         //Log do Sistema
-        Logger::edit();
+        Logger::edit($db->title);
 
         return view('admin.company.financial_blocks.financial_blocks_edit',[
             'db'=>$db,
@@ -102,7 +102,7 @@ class CompanyFinancialBlocksController extends Controller
         $db->update($data);
 
         //Log do Sistema
-        Logger::update();
+        Logger::update($db->title);
 
         return redirect(route('financial_blocks.index'))
             ->with('success','Cadastro alterado com sucesso');
