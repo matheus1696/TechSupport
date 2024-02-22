@@ -16,6 +16,7 @@ class CompanyEstablishmentsModel extends Model
     [
         'code',
         'title',
+        'surname',
         'filter',
         'address',
         'number',

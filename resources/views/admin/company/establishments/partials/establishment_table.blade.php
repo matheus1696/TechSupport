@@ -27,8 +27,9 @@
                 <td class="text-center">
                     <x-button.minButtonModalInfo id="EstablishmentsModel{{$item->id}}" title="Estabelecimento de Saúde">
                         <div class="row">
-                            <p class="col-lg-2"><strong>CNES: </strong>{{$item->code ?? ""}}</p>
-                            <p class="col-lg-10"><strong>Unidade: </strong>{{$item->title ?? ""}}</p>
+                            <p class="col-lg-12"><strong>CNES: </strong>{{$item->code ?? ""}}</p>
+                            <p class="col-lg-12"><strong>Estabelecimento: </strong>{{$item->title ?? ""}}</p>
+                            <p class="col-lg-12"><strong>Nome Fantasia: </strong>{{$item->surname ?? ""}}</p>
                             <p class="col-lg-12">
                                 <strong>Endereço: </strong>
                                 {{$item->address ?? ""}},{{$item->number ?? ""}}, {{$item->district ?? ""}}, {{$item->RegionCities->city ?? ""}} - {{$item->RegionCities->RegionStates->state ?? ""}}
