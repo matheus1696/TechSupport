@@ -8,7 +8,7 @@
             <th>Bairro</th>
             <th>Bloco Financeiro</th>
             <th>Status</th>
-            <th></th>
+            <th style="width: 150px"></th>
         </tr>
     @endslot
 
