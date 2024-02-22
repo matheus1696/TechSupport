@@ -1,11 +1,11 @@
 <x-table.table :db="$db">
     @slot('thead')
         <tr>
-            <th class="text-xs col-1">Nº Processo</th>
-            <th class="text-xs">Titulo do Processo</th>
-            <th class="text-xs col-1">Data Venc.</th>
-            <th class="text-xs col-1">Status</th>
-            <th class="text-xs"></th>
+            <th class="col-1">Nº Processo</th>
+            <th>Titulo do Processo</th>
+            <th class="col-1">Data Venc.</th>
+            <th class="col-1">Status</th>
+            <th style="width: 150px"></th>
         </tr>
     @endslot
 
