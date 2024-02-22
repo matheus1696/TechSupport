@@ -12,23 +12,25 @@
 
 <body>
     <main>
-        @if ($db->link_desktop)                    
+        @if ($db->link_desktop)
             <div class="d-none d-lg-block col-12">
                 <iframe src="{!! $db->link_desktop !!}" frameborder="0" style="min-height: 99vh; width: 100%"></iframe>
             </div>
         @else
-            <div class="d-none d-lg-block col-xl-2 col-md-4 col-6">                    
-                @include('dashboard.partials.dashboard_card')
+            <div class="d-none d-lg-block col-12">
+                <h2 class="p-5 mt-5 text-center"> Dashboard {{ $db->title }} em construção </h2>
+                <div class="m-auto text-center"><a href="{{ route('dashboards.index') }}" class="btn btn-block btn-secondary">Voltar</a></div>
             </div>
         @endif
 
         @if ($db->link_mobile)
-            <div class="d-lg-none col-12">                    
+            <div class="d-lg-none col-12">
                 <iframe src="{!! $db->link_mobile !!}" frameborder="0" style="min-height: 100vh; width: 100%"></iframe>
             </div>
-        @else  
-            <div class="d-lg-none col-xl-2 col-md-4 col-6">                    
-                @include('dashboard.partials.dashboard_card')
+        @else
+            <div class="d-lg-none col-12">
+                <h2 class="p-5 mt-5 text-center"> Dashboard {{ $db->title }} em construção </h2>
+                <div class="m-auto text-center"><a href="{{ route('dashboards.index') }}" class="btn btn-block btn-secondary">Voltar</a></div>
             </div>
         @endif
     </main>
