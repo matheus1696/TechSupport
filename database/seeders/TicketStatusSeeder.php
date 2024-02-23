@@ -18,16 +18,19 @@ class TicketStatusSeeder extends Seeder
             'default'=>1
         ]);
         TicketStatus::create([
-            'title'=>'Aguardando Material'
+            'title'=>'Solicitação de Material'
         ]);
         TicketStatus::create([
             'title'=>'Concluído'
         ]);
         TicketStatus::create([
-            'title'=>'Em andamento'
+            'title'=>'Andamento'
         ]);
         TicketStatus::create([
-            'title'=>'Aguardando empresa tercerizada'
+            'title'=>'Solicitação enviada ao prestador'
+        ]);
+        TicketStatus::create([
+            'title'=>'Reaberto'
         ]);
     }
 }
