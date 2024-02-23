@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('filter_country_ing');
             $table->string('code_iso')->unique();
             $table->string('code_ddi')->unique()->nullable();
-            $table->string('status')->default(false);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

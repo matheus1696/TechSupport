@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('filter');
             $table->string('code_uf');
             $table->string('code_ddd')->unique()->nullable();
-            $table->string('status')->default(true);
+            $table->boolean('status')->default(true);
             $table->unsignedBigInteger('country_id');
             $table->timestamps();
 

@@ -23,7 +23,7 @@ class ViewDashboardController extends Controller
     public function index()
     {
         //Listagem de Dados
-        $db = Dashboard::select()->orderBy('title')->with('FinancialBlocks')->get();
+        $db = Dashboard::where('status',true)->orderBy('title')->with('FinancialBlocks')->get();
 
         Logger::access();
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->integer('amount_services')->nullable();
             $table->integer('amount_tickets')->nullable();
-            $table->string('status')->default(1);
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

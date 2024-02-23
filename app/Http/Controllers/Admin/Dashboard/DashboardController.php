@@ -114,4 +114,22 @@ class DashboardController extends Controller
     {
         //
     }
+
+    /**
+     * Update the status of the specified item in storage.
+     */
+    public function status(Request $request, string $id)
+    {
+        //Dados encaminhado pelo Formulário
+        $data = $request->all();
+
+        //Salvando Dados
+        $db = Dashboard::find($id);
+        $db->update($data);
+
+        //Log do Sistema
+        Logger::status($db->id, $db->status);
+
+        return redirect()->back();
+    }
 }

@@ -19,6 +19,11 @@ class TicketTypeServiceSeeder extends Seeder
         ]);
 
         TicketTypeService::create([
+            'title'=>'Acesso ao Sistema',
+            'ticket_type_category_id'=>1,
+        ]);
+
+        TicketTypeService::create([
             'title'=>'Impressora',
             'ticket_type_category_id'=>1,
         ]);

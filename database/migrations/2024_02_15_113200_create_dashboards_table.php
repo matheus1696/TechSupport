@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('link_mobile')->nullable();
             $table->text('link_desktop')->nullable();
+            $table->boolean('status')->default(true);
             $table->unsignedBigInteger('financial_block_id');
             $table->timestamps();
             

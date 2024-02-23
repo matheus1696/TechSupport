@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->integer('response_time')->default(72);
             $table->integer('amount_tickets')->nullable();
-            $table->string('status')->default(1);
+            $table->boolean('public')->default(1);
+            $table->boolean('status')->default(1);
             $table->unsignedBigInteger('ticket_type_service_id');
             $table->timestamps();
 

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('due_date')->nullable();
             $table->integer('validity')->nullable();
-            $table->string('status')->default(true);
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

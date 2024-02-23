@@ -103,6 +103,7 @@ Route::middleware('auth')->group(function () {
 
             //Grupo de Rotas - Configuração de Dashbaord
                 Route::prefix('dashboards')->group(function (){
+                    Route::put('dashboards/status/{dashboard}',[DashboardController::class,'status'])->name('dashboards.status');
                     Route::resource('dashboards',DashboardController::class);
                 });
 

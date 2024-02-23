@@ -326,6 +326,7 @@ return [
             'classes' => 'btn-sm',
             'route'   => 'contacts.index',
             'icon'    => 'fas fa-phone-volume',
+            'can'     => 'user'
         ],
 
         //Perfil do Usuário

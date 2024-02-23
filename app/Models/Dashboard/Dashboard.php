@@ -14,6 +14,7 @@ class Dashboard extends Model
         'title',
         'link_mobile',
         'link_desktop',
+        'status',
         'financial_block_id',
     ];
 

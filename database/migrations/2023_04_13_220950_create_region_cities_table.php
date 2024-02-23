@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('filter');
             $table->string('code_cep')->nullable();
-            $table->string('status')->default(false);
+            $table->boolean('status')->default(false);
             $table->unsignedBigInteger('state_id');
             $table->timestamps();
 
