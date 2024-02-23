@@ -1,10 +1,10 @@
 <div class="overflow-hidden rounded-lg">
     <table class="table table-bordered table-striped table-hover table-responsive-md" style="font-size: 0.9em;">
-        <thead class="text-center table-success">
+        <thead class="text-sm text-center table-success">
             {{$thead ?? ""}}
         </thead>
     
-        <tbody>
+        <tbody class="text-sm text-center">
             {{$tbody ?? ""}}
         </tbody>
     </table>

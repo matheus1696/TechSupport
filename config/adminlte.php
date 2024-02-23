@@ -301,23 +301,14 @@ return [
             'type'    => 'sidebar-menu-search',
             'text'    => 'Buscar Menu',
         ],
-        
-        //Dashboards
-        [
-            'text'    => 'Dashboard',
-            'classes' => 'btn-sm',
-            'route'   => 'view_dashboards.index',
-            'icon'    => 'fas fa-chart-pie',
-            'can'     => ['sysadmin','admin','dashboard'],
-        ],
 
-        //Processos de Fornecimentos
+        //Solicitação de Chamados
         [
-            'text'    => 'Processos de Fornecimento',
+            'text'    => 'Solicitação de Chamados',
             'classes' => 'btn-sm',
-            'route'   => 'supply_processes.index',
-            'icon'    => 'fas fa-file-signature',
-            'can'     => ['sysadmin','admin','supply'],
+            'route'   => 'tickets.index',
+            'icon'    => 'fas fa-people-carry',
+            'can'     => 'user'
         ],
         
         //Lista Telefônica
@@ -336,6 +327,24 @@ return [
             'route'   => 'profile.index',
             'icon'    => 'fas fa-user',
             'can'     => 'user'
+        ],
+
+        //Dashboards
+        [
+            'text'    => 'Dashboard',
+            'classes' => 'btn-sm',
+            'route'   => 'view_dashboards.index',
+            'icon'    => 'fas fa-chart-pie',
+            'can'     => ['sysadmin','admin','dashboard'],
+        ],
+
+        //Processos de Fornecimentos
+        [
+            'text'    => 'Processos de Fornecimento',
+            'classes' => 'btn-sm',
+            'route'   => 'supply_processes.index',
+            'icon'    => 'fas fa-file-signature',
+            'can'     => ['sysadmin','admin','supply'],
         ],
 
         //Configurações

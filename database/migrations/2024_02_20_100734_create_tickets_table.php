@@ -17,15 +17,16 @@ return new class extends Migration
             $table->text('description');
             $table->date('data_last_interaction')->nullable();
             $table->integer('amount_interaction')->nullable();
-            $table->date('ticket_reopened')->nullable();
-            $table->unsignedInteger('ticket_status_id');
+            $table->date('reopened')->nullable();
             $table->unsignedInteger('establishment_id');
             $table->unsignedInteger('type_category_id');
             $table->unsignedInteger('type_service_id');
             $table->unsignedInteger('type_sub_service_id');
+            $table->unsignedInteger('status_id');
             $table->unsignedInteger('user_id');
+            $table->timestamps();
 
-            $table->foreign('ticket_status_id')->references('id')->on('ticket_statuses');
+            $table->foreign('status_id')->references('id')->on('ticket_statuses');
             $table->foreign('establishment_id')->references('id')->on('company_establishments');
             $table->foreign('type_category_id')->references('id')->on('ticket_type_categories');
             $table->foreign('type_service_id')->references('id')->on('ticket_type_services');

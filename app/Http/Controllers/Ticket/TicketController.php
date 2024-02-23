@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ticket\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -15,6 +16,14 @@ class TicketController extends Controller
     public function index()
     {
         //
+        $db = Ticket::where('user_id',Auth::user()->id)
+            ->with('TicketTypeCategory')
+            ->with('TicketTypeService')
+            ->with('TicketTypeSubService')
+            ->with('TicketStatus')
+            ->paginate(5);
+
+        return view('ticket.ticket_index', compact('db'));
     }
 
     /**
