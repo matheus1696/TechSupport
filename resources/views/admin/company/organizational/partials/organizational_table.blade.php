@@ -5,7 +5,7 @@
             <tr>
                 <th>Organograma</th>
                 <th class="col-1">Status</th>
-                <th style="width: 100px"></th>
+                <th style="width: 110px"></th>
             </tr>
         @endslot
 
@@ -13,7 +13,7 @@
             @foreach ($db as $item)
                 <tr>
                     <td>
-                        <div style="padding-left:{{preg_match_all('!\d+!',$item->order)}}em;">
+                        <div style="padding-left:{{ $item->number_hierarchy }}em;">
                             {{$item->acronym}} - {{$item->title}}
                         </div>
                     </td>

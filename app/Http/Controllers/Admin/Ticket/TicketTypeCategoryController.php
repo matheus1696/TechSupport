@@ -98,7 +98,7 @@ class TicketTypeCategoryController extends Controller
 
         Logger::update($TicketTypeCategory->title);
 
-        return redirect(route('ticket_type_categories.index'))
+        return redirect(route('ticket_type_categories.show',['ticket_type_category'=>$TicketTypeCategory->id]))
             ->with('success','Status alterado com sucesso.');
     }
 

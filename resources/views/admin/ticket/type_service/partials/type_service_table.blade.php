@@ -3,7 +3,7 @@
         <tr>
             <th>Titulo</th>
             <th class="col-1">Status</th>
-            <th class="col-1"></th>
+            <th style="width: 50px"></th>
         </tr>
     @endslot
 

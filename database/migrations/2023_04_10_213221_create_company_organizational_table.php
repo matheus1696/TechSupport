@@ -19,7 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('status')->default(true);
             $table->string('order')->nullable();
-            $table->integer('hierarchy');
+            $table->integer('hierarchy');            
+            $table->string('number_hierarchy')->nullable();
             $table->timestamps();
         });
     }

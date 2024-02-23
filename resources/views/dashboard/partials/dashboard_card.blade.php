@@ -1,4 +1,4 @@
-<a href="{{ route('dashboards.show',['dashboard'=>$item->id])}}" target="_black">  
+<a href="{{ route('view_dashboards.show',['view_dashboard'=>$item->id])}}" target="_black">  
     <div class="small-box {{$item->FinancialBlocks->color}}">
         <div class="px-2 inner">
             <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100px">

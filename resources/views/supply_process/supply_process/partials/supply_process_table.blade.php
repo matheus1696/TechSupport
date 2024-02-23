@@ -17,8 +17,6 @@
                 @endif
             >
                 <td class="text-center">{{$item->code_process}}</td>
-                <td class="text-center">{{$item->code_auction}}</td>
-                <td class="text-center">{{$item->code_contract}}</td>
                 <td class="text-center">{{$item->title}}</td>
                 <td class="text-center">{{$item->due_date == NULL ? "" : date('d/m/Y',strtotime($item->due_date))}}</td>
                 <td class="text-center">

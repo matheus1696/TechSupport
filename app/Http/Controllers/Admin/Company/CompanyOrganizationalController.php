@@ -24,15 +24,10 @@ class CompanyOrganizationalController extends Controller
      */
     public function index()
     {
-        //Listando Dados
-        $db = CompanyOrganizationalModel::select()->orderBy('order')->get();
-
         //Log do Sistema
-        Logger::access();
+        Logger::access();        
 
-        return view('admin.company.organizational.organizational_index',[
-            'db' => $db,
-        ]);
+        return redirect(route('organizational.organize'));
     }
 
     /**
@@ -41,14 +36,12 @@ class CompanyOrganizationalController extends Controller
     public function create()
     {
         //Listando Dados
-        $db = CompanyOrganizationalModel::select()->orderBy('order')->get();
+        $dbSector = CompanyOrganizationalModel::select()->orderBy('order')->get();
 
         //Log do Sistema
         Logger::create();
 
-        return view('admin.company.organizational.organizational_create', [
-            'db' => $db,
-        ]);
+        return view('admin.company.organizational.organizational_create', compact('dbSector'));
     }
 
     /**
@@ -151,29 +144,41 @@ class CompanyOrganizationalController extends Controller
     public function organize()
     {
         //Reordenando Setores
-            //Listando Setores
-                $db = CompanyOrganizationalModel::select()->orderBy('hierarchy')->get();
+            //Buscando dados Setores
+                $organizational = CompanyOrganizationalModel::select()->orderBy('hierarchy')->get();
 
-            foreach ($db as $sectorValue) {
+            foreach ($organizational as $sectorValue) {
 
-                //Atribuindo Hierariquia Principal
+                //Atribuindo Hierariquia do Setor Principal
                 if ($sectorValue['hierarchy'] == 0) {
-                    $db = CompanyOrganizationalModel::find($sectorValue['id']);
-                    $db->order = "0" . $sectorValue['acronym'];
-                    $db->save();
+                    $orderList = CompanyOrganizationalModel::find($sectorValue['id']);
+                    $orderList->order = "0" . $sectorValue['acronym'];
+                    $orderList->number_hierarchy = 1;
+                    $orderList->save();
                 }
 
                 //Listando Setores para Ordenação Hierarquica
+                    //Buscando Dados do Predecessor (Acima do setor)
                     $predecessor = CompanyOrganizationalModel::select()->where('id', $sectorValue['hierarchy'])->get();
 
                 foreach ($predecessor as $valuepredecessor) {
-                    $db = CompanyOrganizationalModel::find($sectorValue['id']);
-                    $db->order = $valuepredecessor['order'] . $sectorValue['id'] . $sectorValue['acronym'];
-                    $db->save();
+                    //Buscando dados
+                    $orderList = CompanyOrganizationalModel::find($sectorValue['id']);
+
+                    //Atribuindo Novo Valor
+                    $number_hierarchy = $valuepredecessor['order'] . $sectorValue['id'] . $sectorValue['acronym'];
+
+                    //Salvando
+                    $orderList->order = $number_hierarchy;
+                    $orderList->number_hierarchy = preg_match_all('!\d+!',$number_hierarchy);
+                    $orderList->save();
                 }
             }
+            
+            //Listando Setores
+            $db = CompanyOrganizationalModel::select()->orderBy('order')->get();
 
-            return redirect(route('organizational.index'));
+            return view('admin.company.organizational.organizational_index', compact('db'));
     }
 
     /**

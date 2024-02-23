@@ -6,7 +6,7 @@
                 <th class="col-2">Telefone</th>
                 <th class="col-2">Ramal</th>
                 <th class="col-2">Tipo de Contato</th>
-                <th class="col-1"></th>
+                <th style="width: 100px"></th>
             </tr>
         @endslot
     

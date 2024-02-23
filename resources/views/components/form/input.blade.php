@@ -15,7 +15,10 @@
         {{$disabled ?? ""}}
         {{$required ?? ""}}
         {{$autofocus ?? ""}}
-        @if (isset($type)) @if ($type == 'tel') onkeyup="handlePhone(event)" @endif @endif
+        @isset($type)
+            @if ($type == 'tel') onkeyup="handlePhone(event)" @endif
+            @if ($type == 'number') min='0' @endif
+        @endisset
     >
     @error($id)
         <x-form.errors-message>

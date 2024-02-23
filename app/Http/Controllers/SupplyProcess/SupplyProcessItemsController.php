@@ -59,7 +59,7 @@ class SupplyProcessItemsController extends Controller
         //Salvando Dados
         SupplyProcessItemsModel::create($data);
 
-        Logger::store($data['title']);
+        Logger::store($data['process_id']);
 
         return redirect(route('supply_processes.show',['supply_process'=>$data['process_id']]))
             ->with('success','Cadastro salvo com sucesso');

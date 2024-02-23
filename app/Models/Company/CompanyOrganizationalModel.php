@@ -20,6 +20,7 @@ class CompanyOrganizationalModel extends Model
         'status',
         'order',
         'hierarchy',
+        'number_hierarchy',
     ];
 }
 

@@ -14,7 +14,7 @@ class ViewDashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('dashboard');
+        $this->middleware(['permission:sysadmin|admin|dashboard']);
     }
 
     /**
