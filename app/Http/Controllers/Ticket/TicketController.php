@@ -16,12 +16,12 @@ class TicketController extends Controller
     public function index()
     {
         //
-        $db = Ticket::where('user_id',Auth::user()->id)
+        $ticketOpen = Ticket::where('user_id',Auth::user()->id)
             ->with('TicketTypeCategory')
             ->with('TicketTypeService')
             ->with('TicketTypeSubService')
             ->with('TicketStatus')
-            ->paginate(5);
+            ->paginate(20);
 
         return view('ticket.ticket_index', compact('db'));
     }
