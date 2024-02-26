@@ -2,11 +2,6 @@
 
 <div class="{{ $makeFormGroupClass() }}">
 
-    {{-- Input label --}}
-    @isset($label)        
-        <label for="{{$id}}" class="ml-1 col-form-label">{{$label ?? "Label"}}:</label>
-    @endisset
-
     {{-- Input group --}}
     <div class="{{ $makeInputGroupClass() }}">
 

@@ -3,11 +3,18 @@
 
 <!-- Configuração do Select2 -->
 <script>
+    // In your Javascript (external .js resource or <script> tag)
     $(document).ready(function() {
-                $('.js-select').select2({
-                    theme: 'bootstrap4'
-                });
-            });
+        $('.select2').select2({
+            theme: "bootstrap4"
+        });
+    });
+
+    $(document).ready(function() {
+        $('.select2-multiple').select2({
+            theme: "bootstrap4"
+        });
+    });
 </script>
 
 <!-- Configuração do Summernote -->

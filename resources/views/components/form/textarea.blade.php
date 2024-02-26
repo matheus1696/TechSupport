@@ -1,9 +1,9 @@
-<div class="form-group col-lg-{{$col ?? "6"}} text-sm">
-    <label for="{{$id}}" class="col-form-label">{{$label ?? "Label"}}</label>
+<x-form.formGroup col="{{$col ?? '6'}}">
+    @include('components.form.label')
     <textarea
         name="{{$id}}"
         id="{{$id}}"
-        class="form-control @error($id) is-invalid border border-danger @enderror summernote"
+        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-500 border-red-200 bg-red-200 @else outline-green-500 border-green-200 bg-green-200 @enderror summernote"
         rows="2"
     >@if(empty($value)){{old($id)}}@else{!!$value!!}@endif</textarea>
 
@@ -12,4 +12,4 @@
             {{$message}}
         </x-form.errors-message>
     @enderror
-</div>
+</x-form.formGroup>

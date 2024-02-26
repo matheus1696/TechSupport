@@ -1,9 +1,9 @@
-<div class="form-group col-lg-{{$col ?? "6"}} text-sm mb-0">
-    
+<x-form.formGroup col="{{$col ?? '6'}}">
+    @include('components.form.label')
     <x-adminlte-select2 
         name="{{$id}}"
         id="{{$db->id ?? $id}}"
-        class="form-control"
+        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-500 border-red-200 bg-red-200 @else outline-green-500 border-green-200 bg-green-200 @enderror"
     >
         <option selected disabled>Selecione</option>
         {{$slot}}
@@ -14,6 +14,6 @@
             {{$message}}
         </x-form.errors-message>
     @enderror
-</div>
+</x-form.formGroup>
 
 

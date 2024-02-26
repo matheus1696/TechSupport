@@ -1,17 +1,17 @@
-<div class="form-group col-lg-{{$col ?? "6"}} text-sm">
-    <label for="{{$id}}" class="ml-1 col-form-label">{{$label ?? "Label"}}:</label>
+<x-form.formGroup col="{{$col ?? '6'}}">
+    @include('components.form.label')
     <input
         type="{{$type ?? "text"}}"
         name="{{$id}}"
         id="{{$id}}"
-        class="form-control text-sm @error($id) border-red-700 text-red-700 @enderror"
+        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-500 bg-red-200 @enderror"
         @if (empty($min))  @else min="{{$min}}" @endif
         @if (empty($max))  @else max="{{$max}}" @endif
         @if (empty($minlength))  @else minlength="{{$minlength}}" @endif
         @if (empty($maxlength))  @else maxlength="{{$maxlength}}" @endif
         @error($id) value="{{old($id)}}" @enderror
         @if (empty($value)) value="{{old($id)}}" @else value="{{$value}}" @endif
-        @if (empty($placeholder))  @else placeholder="{{$placeholder}}" @endif
+        @if (empty($placeholder)) placeholder="{{$label}}" @else placeholder="{{$placeholder}}" @endif
         {{$disabled ?? ""}}
         {{$required ?? ""}}
         {{$autofocus ?? ""}}
@@ -25,4 +25,4 @@
             {{$message}}
         </x-form.errors-message>
     @enderror
-</div>
+</x-form.formGroup>
