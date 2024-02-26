@@ -1,26 +1,34 @@
 <x-pages.index>
 
-    @slot('body')
+    <!-- Slot Header -->
+    @slot('header')
+        <x-header title="Meus Chamados" route="{{ route('tickets.create') }}" btnRoute="Abrir Chamado"/>
+    @endslot
 
+    <!-- Slot Body -->
+    @slot('body')
         <x-conteiner>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <form method="get" action="{{ route('tickets.index') }}">
+                        <input type="text" name="ticket" value="open" hidden>
+                        <button type="submit" class="mx-1 nav-link">Chamados Abertos</button>
+                    </form>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+                <li class="nav-item">
+                    <form method="get" action="{{ route('tickets.index') }}">
+                        <input type="text" name="ticket" value="close" hidden>
+                        <button type="submit" class="mx-1 nav-link">Chamados Finalizados</button>
+                    </form>
                 </li>
             </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-            </div>
+            
+            @include('ticket.partials.ticket_table')
         </x-conteiner>
 
+        
     @endslot
+
+    
 
 </x-pages.index>

@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->id();
+            $table->id();            
+            $table->string('id_ticket');
             $table->string('title');
             $table->text('description');
             $table->date('data_last_interaction')->nullable();

@@ -8,7 +8,11 @@
             @isset($route)                
                 <div>
                     <a href="{{$route}}">
-                        <span><i class="text-xl text-success fas fa-plus-square"></i></span>
+                        @if (isset($btnRoute))
+                            <span class="btn btn-success ">{{$btnRoute}}</span>
+                        @else
+                            <span><i class="text-xl text-success fas fa-plus-square"></i></span>
+                        @endif
                     </a>
                 </div>
             @endisset
