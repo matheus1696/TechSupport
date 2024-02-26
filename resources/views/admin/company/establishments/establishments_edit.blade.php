@@ -7,8 +7,6 @@
     
     <!-- Slot Body -->
     @slot('body')
-
         @include('admin.company.establishments.partials.establishment_form')
-
     @endslot
 </x-pages.forms>

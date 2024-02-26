@@ -2,6 +2,7 @@
 
 namespace App\Models\Ticket;
 
+use App\Models\Company\CompanyEstablishmentsModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +39,10 @@ class Ticket extends Model
 
     public function TicketStatus(){
         return $this->belongsTo(TicketStatus::class,'status_id','id');
+    }
+
+    public function Establishment(){
+        return $this->belongsTo(CompanyEstablishmentsModel::class,'establishment_id','id');
     }
 
     public function User(){

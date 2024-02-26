@@ -1,6 +1,6 @@
 <button
     type="button"
-    class="px-2 py-2 m-1 text-xs text-white bg-green-700 rounded-lg shadow-md hover:bg-green-600"
+    class="px-2 py-2 m-1 text-xs text-white bg-green-700 rounded-lg shadow-md hover:bg-green-900"
     data-toggle="modal"
     data-target="#{{$id}}"
 >

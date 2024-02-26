@@ -1,4 +1,4 @@
-<div class="overflow-hidden rounded-lg shadow-md">
+<div class="overflow-x-auto rounded-lg shadow-md lg:overflow-hidden">
     <table class="w-full bg-white">
         <thead class="text-sm text-center bg-green-200 border-b-2 border-green-700">
             <tr>
@@ -13,8 +13,10 @@
 </div>
 
 @isset($db)
-    <div class="m-3 text-xs text-center text-slate-400">
-        Total de {{ $db->count() }} itens
+    <div class="m-3 text-xs text-center text-slate-400">        
+        <caption class="caption-bottom">
+            Total de {{ $db->count() }} itens
+        </caption>
     </div>
     <div class="flex items-center justify-center px-3">
         <div class="text-sm">

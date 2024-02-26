@@ -4,7 +4,7 @@
         <button 
             type="submit" 
             onclick="return confirm('Realmente deseja realizar a exclusão?')" 
-            class="my-2 btn btn-block btn-danger elevation-2">
+            class="w-full my-2 text-white bg-red-600 rounded-lg shadow-md h-9 hover:bg-red-800">
                 {{$title ?? "Excluir"}}
         </button>
     </form>

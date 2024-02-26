@@ -3,14 +3,12 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Lista de Estabelecimento" />
+        <x-header title="Lista de Estabelecimento"/>
     @endslot
     
     <!-- Slot Body -->
-    @slot('body')      
-    
+    @slot('body')    
         @include('admin.company.establishments.partials.establishment_form')
-        
     @endslot
 
 </x-pages.forms>
