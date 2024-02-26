@@ -7,9 +7,7 @@
     
     <!-- Slot Body -->
     @slot('body')
-        <x-conteiner>
-            @include('admin.ticket.type_category.partials.type_category_table')
-        </x-conteiner>
+        @include('admin.ticket.type_category.partials.type_category_table')
     @endslot
 
 </x-pages.index>

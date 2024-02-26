@@ -6,10 +6,8 @@
     @endslot
     
     <!-- Slot Body -->
-    @slot('body')
-        <x-conteiner>            
-            @include('admin.ticket.ticket_status.partials.ticket_status_table')
-        </x-conteiner>
+    @slot('body')  
+        @include('admin.ticket.ticket_status.partials.ticket_status_table')
     @endslot
 
 </x-pages.index>

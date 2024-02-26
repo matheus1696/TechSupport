@@ -1,32 +1,26 @@
-<x-conteiner>
-
     <x-table.table>
         @slot('thead')
-            <tr>
-                <th>Organograma</th>
-                <th class="col-1">Status</th>
-                <th style="width: 110px"></th>
-            </tr>
+                <x-table.th>Organograma</x-table.th>
+                <x-table.th>Status</x-table.th>
+                <x-table.th></x-table.th>
         @endslot
 
         @slot('tbody')
             @foreach ($db as $item)
-                <tr>
-                    <td>
+                <x-table.tr>
+                    <x-table.td class="text-left">
                         <div style="padding-left:{{ $item->number_hierarchy }}em;">
                             {{$item->acronym}} - {{$item->title}}
                         </div>
-                    </td>
-                    <td class="text-center">
+                    </x-table.td>
+                    <x-table.td class="text-center">
                         <x-button.buttonStatus condition="{{$item->status}}" route="{{route('organizational.status',['organizational'=>$item->id])}}" name="status"/>
-                    </td>
-                    <td class="text-center">
+                    </x-table.td>
+                    <x-table.td class="text-center">
                         <x-button.minButtonEdit route="{{route('organizational.edit',['organizational'=>$item->id])}}"/>
                         <x-button.minButtonDelete route="{{route('organizational.destroy',['organizational'=>$item->id])}}"/>
-                    </td>
-                </tr>
+                    </x-table.td>
+                </x-table.tr>
             @endforeach
         @endslot
     </x-table.table>
-
-</x-conteiner>

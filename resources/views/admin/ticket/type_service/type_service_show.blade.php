@@ -15,28 +15,29 @@
                 <x-form.input type="number" col="3" label="Tempo de Resposta (Horas)" id="response_time" value="72" />
             </x-form.form>
 
+            
+        </x-conteiner>
+
             <hr>
 
             <div class="col-12">
                 <x-table.table>
                     @slot('thead')
-                        <tr>
-                            <th>Classificação de Serviço</th>
-                            <th class="col-1">T. de Resposta</th>
-                            <th class="col-1">Status</th>
-                            <th style="width: 50px"></th>
-                        </tr>
+                            <x-table.th>Classificação de Serviço</x-table.th>
+                            <x-table.th>T. de Resposta</x-table.th>
+                            <x-table.th>Status</x-table.th>
+                            <x-table.th></x-table.th>
                     @endslot
                 
                     @slot('tbody')
                         @foreach ($dbSubServices as $dbSubService)
-                            <tr>
-                                <td>{{$dbSubService->title}}</td>
-                                <td class="text-center">{{$dbSubService->response_time}} Horas</td>
-                                <td class="text-center">
+                            <x-table.tr>
+                                <x-table.td>{{$dbSubService->title}}</x-table.td>
+                                <x-table.td class="text-center">{{$dbSubService->response_time}} Horas</x-table.td>
+                                <x-table.td class="text-center">
                                     <x-button.buttonStatus condition="{{$dbSubService->status}}" route="{{route('ticket_type_sub_services.status',['ticket_type_sub_service'=>$dbSubService->id])}}" name="status"/>
-                                </td>
-                                <td class="text-center">
+                                </x-table.td>
+                                <x-table.td class="text-center">
                                     
                                     <x-button.minButtonModalEdit id="Subtipos{{$dbSubService->id}}" title="{{$dbSubService->title}}">
             
@@ -48,12 +49,11 @@
                                         </x-form.form>
                                         
                                     </x-button.minButtonModalEdit>
-                                </td>
-                            </tr>
+                                </x-table.td>
+                            </x-table.tr>
                         @endforeach
                     @endslot
                 </x-table.table>
             </div>
-        </x-conteiner>
     @endslot
 </x-pages.index>

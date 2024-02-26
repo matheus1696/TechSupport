@@ -3,12 +3,10 @@
 
     <!-- Inicio Slot THead -->
     @slot('thead')
-    <tr>
-        <th>Nome</th>
-        <th class="d-none d-md-table-cell">E-mail</th>
-        <th class="col-1">Verificação</th>
-        <th style="width: 100px"></th>
-    </tr>
+        <x-table.th>Nome</x-table.th>
+        <x-table.th>E-mail</x-table.th>
+        <x-table.th>Verificação</x-table.th>
+        <x-table.th></x-table.th>
     @endslot
 
     <!-- Inicio Slot TBody -->
@@ -16,16 +14,16 @@
         @foreach ($db as $item)
             @if ($item->id != 1)
                 @if (Auth::User()->id != $item->id)
-                <tr>
-                    <td>{{$item->name}}</td>
-                    <td class="d-none d-md-table-cell">{{$item->email}}</td>
-                    <td class="text-center">
+                <x-table.tr>
+                    <x-table.td>{{$item->name}}</x-table.td>
+                    <x-table.td class="d-none d-md-table-cell">{{$item->email}}</x-table.td>
+                    <x-table.td class="text-center">
                         <span class="badge badge-{{$item->email_verified_at ? 'success' : 'warning' }}">
                             {{$item->email_verified_at ? "Verificado" : "Aguardando"}}
                         </span>
-                    </td>
+                    </x-table.td>
 
-                    <td class="text-center">
+                    <x-table.td class="text-center">
                         <!-- Inicio de Componentização do ModalShow -->
                         <x-button.minButtonModalEdit id="UserModal{{$item->id}}" title="Dados do Perfil">
                             <div class="row">
@@ -126,8 +124,8 @@
                                 <x-button.buttonSubmit action="edit" col="12" />
                             </form>
                         </x-modal.modalUserPermission>
-                    </td>
-                </tr>
+                    </x-table.td>
+                </x-table.tr>
                 @endif
             @endif
         @endforeach

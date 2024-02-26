@@ -11,8 +11,10 @@
 
             @include('admin.product.product.partials.product_search')
 
-            @include('admin.product.product.partials.product_table')
+            
 
         </x-conteiner>
+
+            @include('admin.product.product.partials.product_table')
     @endslot
 </x-pages.index>

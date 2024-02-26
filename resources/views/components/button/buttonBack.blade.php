@@ -1,5 +1,5 @@
-<div class="col-md-{{$col ?? "6"}}">
-    <a href="{{$route}}" class="my-2 btn btn-block bg-secondary elevation-2">
+<div class="w-full text-white rounded-lg shadow-md bg-slate-700 h-9 hover:bg-slate-600">
+    <a href="{{$route}}" class="flex items-center justify-center w-full h-9 hover:text-white">
         {{$title ?? "Voltar"}}
     </a>
 </div>

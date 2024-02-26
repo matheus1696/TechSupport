@@ -5,10 +5,8 @@
         <x-header title="Lista de Dashboards" route="{{ route('dashboards.create') }}"/>
     @endslot
     
-    @slot('body')
-        <x-conteiner>            
-            @include('admin.dashboard.partials.dashboard_table')
-        </x-conteiner>
+    @slot('body')           
+        @include('admin.dashboard.partials.dashboard_table')
     @endslot
 
 </x-pages.index>

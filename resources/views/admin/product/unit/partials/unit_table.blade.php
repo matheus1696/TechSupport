@@ -1,25 +1,23 @@
 <x-table.table :db="$db">
     @slot('thead')
-        <tr>
-            <th class="col-1">Sigla</th>
-            <th>Unidade de Medida</th>
-            <th class="col-1">Status</th>
-            <th style="width: 50px"></th>
-        </tr>
+        <x-table.th>Sigla</x-table.th>
+        <x-table.th>Unidade de Medida</x-table.th>
+        <x-table.th>Status</x-table.th>
+        <x-table.th></x-table.th>
     @endslot
 
     @slot('tbody')
         @foreach ($db as $item)
-            <tr>
-                <td class="text-center">{{$item->acronym}}</td>
-                <td class="text-center">{{$item->title}}</td>
-                <td class="text-center">
+            <x-table.tr>
+                <x-table.td class="text-center">{{$item->acronym}}</x-table.td>
+                <x-table.td class="text-center">{{$item->title}}</x-table.td>
+                <x-table.td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('units.status',['unit'=>$item->id])}}" />
-                </td>
-                <td class="text-center">
+                </x-table.td>
+                <x-table.td class="text-center">
                     <x-button.minButtonEdit route="{{route('units.edit',['unit'=>$item->id])}}" />
-                </td>
-            </tr>
+                </x-table.td>
+            </x-table.tr>
         @endforeach
     @endslot
 </x-table.table>

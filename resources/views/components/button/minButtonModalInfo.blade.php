@@ -1,10 +1,10 @@
 <button
     type="button"
-    class="m-1 btn btn-xs btn-success elevation-2"
+    class="w-8 py-2 m-1 text-xs text-white bg-green-700 rounded-lg shadow-md hover:bg-green-600"
     data-toggle="modal"
     data-target="#{{$id}}"
 >
-  <i class="{{$icon ?? "fas fa-eye"}} text-xs p-1"></i>
+  <i class="{{$icon ?? "fas fa-eye"}}"></i>
 </button>
 
 <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">

@@ -5,11 +5,7 @@
         <x-header title="Lista de Blocos Financeiros" route="{{ route('financial_blocks.create') }}"/>
     @endslot
     
-    @slot('body')
-    <x-conteiner>
-        
+    @slot('body')        
         @include('admin.company.financial_blocks.partials.financial_blocks_table')
-
-    </x-conteiner>
     @endslot
 </x-pages.index>

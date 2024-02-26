@@ -6,8 +6,6 @@
         
     <!-- Slot Body -->
     @slot('body')
-    <x-conteiner>
-         @include('admin.company.type_establishments.partials.type_establishments_table')
-    </x-conteiner>
+        @include('admin.company.type_establishments.partials.type_establishments_table')
     @endslot
 </x-pages.index>

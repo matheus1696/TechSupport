@@ -11,8 +11,8 @@
 
             @include('admin.region.countries.partials.countries_search')
 
-            @include('admin.region.countries.partials.countries_table')
-
         </x-conteiner>
+
+            @include('admin.region.countries.partials.countries_table')
     @endslot
 </x-pages.index>

@@ -1,24 +1,22 @@
 <x-table.table :db="$db">
     @slot('thead')
-        <tr>
-            <th class="col-1">IBGE</th>
-            <th>Municipios</th>
-            <th class="col-2">Estados</th>
-            <th class="col-1">Status</th>
-        </tr>
+        <x-table.th class="col-1">IBGE</x-table.th>
+        <x-table.th>Municipios</x-table.th>
+        <x-table.th class="col-2">Estados</x-table.th>
+        <x-table.th class="col-1">Status</x-table.th>
     @endslot
 
     @slot('tbody')
         @foreach ($db as $item)
-            <tr>
-                <td class="text-center">{{$item->code_ibge}}</td>
-                <td class="text-center">{{$item->city}}</td>
-                <td class="text-center">{{$item->RegionStates->state}}</td>
-                <td class="text-center">
+            <x-table.tr>
+                <x-table.td class="text-center">{{$item->code_ibge}}</x-table.td>
+                <x-table.td class="text-center">{{$item->city}}</x-table.td>
+                <x-table.td class="text-center">{{$item->RegionStates->state}}</x-table.td>
+                <x-table.td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}"
                         route="{{route('cities.status',['city'=>$item->id])}}" />
-                </td>
-            </tr>
+                </x-table.td>
+            </x-table.tr>
         @endforeach
     @endslot
 </x-table.table>

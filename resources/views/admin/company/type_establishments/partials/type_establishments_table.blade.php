@@ -1,20 +1,18 @@
 <x-table.table :db="$db">
     @slot('thead')
-        <tr>
-            <th>Tipo de Estabelecimento</th>
-            <th class="col-1">Status</th>
-            <th style="width: 150px"></th>
-        </tr>
+        <x-table.th>Tipo de Estabelecimento</x-table.th>
+        <x-table.th>Status</x-table.th>
+        <x-table.th></x-table.th>
     @endslot
 
     @slot('tbody')
         @foreach ($db as $item)
-            <tr>
-                <td>{{$item->title}}</td>
-                <td class="text-center">
+            <x-table.tr>
+                <x-table.td>{{$item->title}}</x-table.td>
+                <x-table.td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" route="{{route('type_establishments.update',['type_establishment'=>$item->id])}}" name="status" />
-                </td>
-                <td class="text-center">
+                </x-table.td>
+                <x-table.td class="text-center">
                     <x-button.minButtonModalInfo id="TypeEstablishmentsModal{{$item->id}}" title="Estabelecimentos Cadastrados">
                         <ul>
                             @foreach ($dbEstablishments as $dbEstablishment)
@@ -26,8 +24,8 @@
                     </x-button.minButtonModalInfo>
                     <x-button.minButtonEdit route="{{route('type_establishments.edit',['type_establishment'=>$item->id])}}" />
                     <x-button.minButtonDelete route="{{route('type_establishments.destroy',['type_establishment'=>$item->id])}}" />
-                </td>
-            </tr>
+                </x-table.td>
+            </x-table.tr>
         @endforeach
     @endslot
 </x-table.table>

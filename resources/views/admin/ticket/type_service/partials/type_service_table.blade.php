@@ -1,24 +1,22 @@
 <x-table.table :db="$db">
     @slot('thead')
-        <tr>
-            <th>Titulo</th>
-            <th class="col-1">Status</th>
-            <th style="width: 50px"></th>
-        </tr>
+        <x-table.th>Titulo</x-table.th>
+        <x-table.th>Status</x-table.th>
+        <x-table.th></x-table.th>
     @endslot
 
     @slot('tbody')
         @foreach ($db as $item)
-            <tr>
-                <td class="text-center">{{$item->title}}</td>
-                <td class="text-center">
+            <x-table.tr>
+                <x-table.td class="text-center">{{$item->title}}</x-table.td>
+                <x-table.td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" route="{{route('ticket_type_services.status',['ticket_type_service'=>$item->id])}}" name="status"/>
-                </td>
-                <td class="text-center">                    
+                </x-table.td>
+                <x-table.td class="text-center">                    
                     <x-button.minButtonShow route="{{route('ticket_type_services.show',['ticket_type_service'=>$item->id])}}" />
                     <x-button.minButtonEdit route="{{route('ticket_type_services.edit',['ticket_type_service'=>$item->id])}}" />
-                </td>
-            </tr>
+                </x-table.td>
+            </x-table.tr>
         @endforeach
     @endslot
 </x-table.table>

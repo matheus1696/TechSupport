@@ -9,9 +9,9 @@
     <x-conteiner>
 
         @include('admin.region.cities.partials.cities_search')
-
-        @include('admin.region.cities.partials.cities_table')
         
     </x-conteiner>
+
+        @include('admin.region.cities.partials.cities_table')
     @endslot
 </x-pages.index>

@@ -1,3 +1,3 @@
-<div class="mt-3 text-sm row justify-content-center">
+<div class="flex items-center gap-3">
     {{$slot}}
 </div>

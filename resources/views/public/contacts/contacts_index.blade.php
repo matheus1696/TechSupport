@@ -8,7 +8,9 @@
                         value="{{$search['searchName'] ?? ''}}" />
                     <x-button.buttonSearch />
                 </form>
-            </div>
+            </div>           
+
+        </x-conteiner>
 
             <div class="row">
                 @foreach ($db as $item)
@@ -41,7 +43,5 @@
             <div>
                 <p class="text-xs text-center text-secondary">Total de {{ $db->count() }} unidades.</p>
             </div>
-
-        </x-conteiner>
     @endslot
 </x-pages.index>

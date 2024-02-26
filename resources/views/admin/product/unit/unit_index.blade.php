@@ -10,10 +10,10 @@
     @slot('body')
     <x-conteiner>
 
-        @include('admin.product.unit.partials.unit_search')
-
-        @include('admin.product.unit.partials.unit_table')        
+        @include('admin.product.unit.partials.unit_search')     
 
     </x-conteiner>
+
+        @include('admin.product.unit.partials.unit_table')   
     @endslot
 </x-pages.index>

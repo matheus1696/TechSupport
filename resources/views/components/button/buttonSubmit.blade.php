@@ -1,9 +1,9 @@
 @if ($action == "create")
-    <div class="col-md">
-        <button type="submit" class="my-2 btn btn-block btn-success elevation-2">{{$title ?? "Cadastrar"}}</button>
+    <div class="w-full">
+        <button type="submit" class="w-full my-2 text-white bg-green-700 rounded-lg shadow-md h-9 hover:bg-green-600">{{$title ?? "Cadastrar"}}</button>
     </div>
 @else
-    <div class="col-md">
-        <button type="submit" class="my-2 btn btn-block btn-info elevation-2">{{$title ?? "Salvar Alteração"}}</button>
+    <div class="w-full">
+        <button type="submit" class="w-full my-2 text-white bg-green-700 rounded-lg shadow-md h-9 hover:bg-green-600">{{$title ?? "Salvar Alteração"}}</button>
     </div>
 @endif

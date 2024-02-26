@@ -8,11 +8,9 @@
     <!-- Slot Body -->
     @slot('body')
     <x-conteiner>
-
         @include('admin.company.occupations.partials.occupations_search')
+    </x-conteiner>
 
         @include('admin.company.occupations.partials.occupations_table')
-
-    </x-conteiner>
     @endslot
 </x-pages.index>

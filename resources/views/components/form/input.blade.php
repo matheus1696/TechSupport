@@ -4,7 +4,7 @@
         type="{{$type ?? "text"}}"
         name="{{$id}}"
         id="{{$id}}"
-        class="form-control text-sm @error($id) is-invalid border border-danger @enderror"
+        class="form-control text-sm @error($id) border-red-700 text-red-700 @enderror"
         @if (empty($min))  @else min="{{$min}}" @endif
         @if (empty($max))  @else max="{{$max}}" @endif
         @if (empty($minlength))  @else minlength="{{$minlength}}" @endif
