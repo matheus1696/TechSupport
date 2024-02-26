@@ -10,10 +10,11 @@
         <x-conteiner>
 
             @include('admin.company.establishments.partials.establishment_search')
-
-            @include('admin.company.establishments.partials.establishment_table')
+            
 
         </x-conteiner>
+
+            @include('admin.company.establishments.partials.establishment_table')
     @endslot
     
 </x-pages.index>
