@@ -5,7 +5,7 @@
     <form method="POST" action="{{route('profile.update',['profile'=>$db->id])}}">
         @csrf @method('PUT')
 
-        <div class="form-row justify-content-center">
+        <div class="grid grid-cols-12 justify-center items-center gap-3">
 
             <!-- Inicio de Componentização de Input e Select -->
             <x-form.input col="12" label="Email" id="email" value="{{$db->email}}" disabled="disabled" />
