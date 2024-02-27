@@ -7,7 +7,7 @@
 
     <!-- Slot Body -->
     @slot('body')
-        @include('ticket.partials.ticket_table')
+        <livewire:ticket.ticket-table>
     @endslot
 
 </x-pages.index>

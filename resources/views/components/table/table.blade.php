@@ -13,12 +13,7 @@
 </div>
 
 @isset($db)
-    <div class="m-3 text-xs text-center text-slate-400">        
-        <caption class="caption-bottom">
-            Total de {{ $db->count() }} itens
-        </caption>
-    </div>
-    <div class="flex items-center justify-center px-3">
+    <div class="flex items-center justify-center px-3 py-2">
         <div class="text-sm">
             {{ $db->appends($_GET)->links() }}
         </div>

@@ -15,18 +15,10 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        $db = Ticket::where('user_id',Auth::user()->id)
-            ->with('Establishment')
-            ->with('TicketTypeCategory')
-            ->with('TicketTypeService')
-            ->with('TicketTypeSubService')
-            ->with('TicketStatus')
-            ->paginate(20);
-
-        return view('ticket.ticket_index', compact('db'));
+        return view('ticket.ticket_index');
     }
 
     /**
