@@ -66,8 +66,8 @@ class ProfileController extends Controller
     {
         //Listando Dados
         $db = User::find($id);
-        $dbUserSex = UserSexModel::where('status',true)->get();
-        $dbEstablishments = CompanyEstablishmentsModel::all();
+        $dbUserSex = UserSexModel::where('status',true)->orderBy('sex')->get();
+        $dbEstablishments = CompanyEstablishmentsModel::select()->orderBy('title')->get();
 
         if ($db && $db->id === Auth::user()->id) {
             //Log do Sistema
@@ -100,7 +100,7 @@ class ProfileController extends Controller
             $db->update($data);
 
             //Alterando Senha
-            if ($request['password']) {
+            if ($request['password'] != "") {
                 $db->password = Hash::make($request['password']);
                 $db->save();
 

@@ -12,7 +12,9 @@
         @include('components.alert.alert')
 
         <!-- Inicio de Componentização do Conteiner -->
-        {{$body ?? ""}} 
+        <div class="pt-2">
+            {{$body ?? ""}} 
+        </div>
     </section>
 @stop
 

@@ -1,7 +1,7 @@
 <!-- Componente Header -->
-<div>
+<div class="flex flex-col items-center justify-between gap-4 lg:flex-row">
     @isset($title)
-        <div class="flex items-center justify-between px-4 pt-2">
+        <div class="flex items-center gap-4">
             <div class="flex-1">
                 <h1 class="font-semibold">{{$title}}</h1>
             </div>

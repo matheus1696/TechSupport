@@ -25,9 +25,9 @@ class ContactListsController extends Controller
 
         //Pesquisar Dados
         $search = $request->all();
-        if (isset($search['searchName'])) {
+        if (isset($search['searchTitle'])) {
             $db = CompanyEstablishmentsModel::where('status',true)
-                ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->where('filter','LIKE','%'.strtolower($search['searchTitle']).'%')
                 ->get();
         }
 

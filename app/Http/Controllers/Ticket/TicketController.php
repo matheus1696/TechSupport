@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ticket\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use App\Models\Ticket\TicketStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,26 +18,13 @@ class TicketController extends Controller
     public function index(Request $request)
     {
         //
-        
         $db = Ticket::where('user_id',Auth::user()->id)
-            ->whereNot('status_id', 3)
+            ->with('Establishment')
             ->with('TicketTypeCategory')
             ->with('TicketTypeService')
             ->with('TicketTypeSubService')
             ->with('TicketStatus')
-            ->paginate(10);
-
-        if ($request['ticket']) {
-            if ($request['ticket'] == 'close') {
-                $db = Ticket::where('user_id',Auth::user()->id)
-                ->where('status_id', 3)
-                ->with('TicketTypeCategory')
-                ->with('TicketTypeService')
-                ->with('TicketTypeSubService')
-                ->with('TicketStatus')
-                ->paginate(10);
-            }            
-        }       
+            ->paginate(20);
 
         return view('ticket.ticket_index', compact('db'));
     }

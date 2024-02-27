@@ -3,7 +3,7 @@
     <!-- Components THead -->
     @slot('thead')
         <x-table.th>#</x-table.th>
-        <x-table.th>Title</x-table.th>
+        <x-table.th>Título</x-table.th>
         <x-table.th>Estabelecimento</x-table.th>
         <x-table.th class="hidden lg:table-cell">Tipo de Serviços</x-table.th>
         <x-table.th class="hidden lg:table-cell">Interações</x-table.th>
