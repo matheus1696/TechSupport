@@ -1,5 +1,5 @@
-<div class="overflow-x-auto rounded-lg shadow-md lg:overflow-hidden">
-    <table class="w-full bg-white">
+<div class="overflow-x-auto shadow-md rounded-xl lg:overflow-hidden">
+    <table class="w-full bg-white border">
         <thead class="text-sm text-center bg-green-200 border-b-2 border-green-700">
             <tr>
                 {{$thead ?? ""}}

@@ -11,6 +11,11 @@
         <!-- Alerta de Atulizações -->
         @include('components.alert.alert')
 
+        <!-- Inicio de Componentização do Search -->
+        <div class="pt-2">
+            {{$search ?? ""}}
+        </div>
+
         <!-- Inicio de Componentização do Conteiner -->
         <div class="pt-2">
             {{$body ?? ""}} 
