@@ -4,8 +4,9 @@
         name="{{$id}}"
         id="{{$db->id ?? $id}}"
         class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-500 bg-red-200 @enderror"
+        @isset($onchange) onchange="this.form.submit()" @endisset
     >
-        <option selected disabled>Selecione</option>
+        <option disabled class="disabled:bg-gray-200">Selecione</option>
         {{$slot}}
     </select>
 

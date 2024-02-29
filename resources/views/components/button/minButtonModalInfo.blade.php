@@ -15,7 +15,7 @@
         <div class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 border-b rounded-t md:p-5">
-                <h4 class="text-lg font-semibold">
+                <h4 class="text-lg font-semibold text-center">
                     {{$title}}
                 </h4>
                 <button type="button" class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto" data-modal-hide="modalEdit{{$id}}">

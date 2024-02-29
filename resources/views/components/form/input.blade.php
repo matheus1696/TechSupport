@@ -4,7 +4,7 @@
         type="{{$type ?? "text"}}"
         name="{{$id}}"
         id="{{$id}}"
-        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-500 bg-red-200 @enderror"
+        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-500 bg-red-200 @enderror disabled:bg-gray-200"
         @if (empty($min))  @else min="{{$min}}" @endif
         @if (empty($max))  @else max="{{$max}}" @endif
         @if (empty($minlength))  @else minlength="{{$minlength}}" @endif

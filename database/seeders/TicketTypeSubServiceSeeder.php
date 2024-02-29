@@ -31,27 +31,27 @@ class TicketTypeSubServiceSeeder extends Seeder
         ]);
         TicketTypeSubService::create([
             'title'=>'Impressora atolando',
-            'ticket_type_service_id'=>2
+            'ticket_type_service_id'=>3
         ]);
         TicketTypeSubService::create([
             'title'=>'Impressora não liga',
-            'ticket_type_service_id'=>2
+            'ticket_type_service_id'=>3
         ]);
         TicketTypeSubService::create([
             'title'=>'Solicitação de toner',
-            'ticket_type_service_id'=>2
+            'ticket_type_service_id'=>3
         ]);
         TicketTypeSubService::create([
             'title'=>'Telefone desligado',
-            'ticket_type_service_id'=>3
+            'ticket_type_service_id'=>4
         ]);
         TicketTypeSubService::create([
             'title'=>'Telefone não faz ligações',
-            'ticket_type_service_id'=>3
+            'ticket_type_service_id'=>4
         ]);
         TicketTypeSubService::create([
             'title'=>'Telefone mudo',
-            'ticket_type_service_id'=>3
+            'ticket_type_service_id'=>4
         ]);
     }
 }

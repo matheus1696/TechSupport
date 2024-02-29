@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Ticket\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
-use App\Models\Ticket\TicketStatus;
-use Illuminate\Http\Request;
+use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Ticket\TicketTypeCategory;
 use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
@@ -35,6 +35,9 @@ class TicketController extends Controller
     public function create()
     {
         //
+        $dbEstablishments = CompanyEstablishmentsModel::select()->orderBy('title')->get();
+
+        return view('ticket.ticket_create', compact('dbEstablishments'));
     }
 
     /**
@@ -43,6 +46,16 @@ class TicketController extends Controller
     public function store(StoreTicketRequest $request)
     {
         //
+        $db = Ticket::all();
+        $date = date('Ymd');
+
+        $data = $request->all();        
+        $data['ticket_number'] = $date.$db->count();
+        $data['user_id'] = Auth::user()->id;
+        Ticket::create($data);
+
+        return redirect(route('tickets.index'));
+        
     }
 
     /**
@@ -59,6 +72,9 @@ class TicketController extends Controller
     public function edit(Ticket $ticket)
     {
         //
+        $db = $ticket;
+
+        return view('ticket.ticket_index', compact('db'));
     }
 
     /**

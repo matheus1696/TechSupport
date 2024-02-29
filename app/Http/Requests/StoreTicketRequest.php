@@ -22,7 +22,11 @@ class StoreTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|min:4',
+            'description' => 'required|min:4',
+            'establishment_id' => 'required',
+            'type_category_id' => 'required',
+            'type_service_id' => 'required',
         ];
     }
 }

@@ -15,7 +15,7 @@
             <form method="POST" action="{{$route}}">
                 @csrf @if($method == "edit") @method('PUT') @endif
 
-                <div class="grid grid-cols-12 gap-2">
+                <div class="grid grid-cols-12 gap-6">
                     {{$body ?? ""}}
                 </div>
 

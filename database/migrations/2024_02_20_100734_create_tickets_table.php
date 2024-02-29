@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();            
-            $table->string('id_ticket');
+            $table->string('ticket_number');
             $table->string('title');
             $table->text('description');
             $table->date('data_last_interaction')->nullable();
@@ -22,8 +22,8 @@ return new class extends Migration
             $table->unsignedInteger('establishment_id');
             $table->unsignedInteger('type_category_id');
             $table->unsignedInteger('type_service_id');
-            $table->unsignedInteger('type_sub_service_id');
-            $table->unsignedInteger('status_id');
+            $table->unsignedInteger('type_sub_service_id')->nullable();
+            $table->unsignedInteger('status_id')->default(1);
             $table->unsignedInteger('user_id');
             $table->timestamps();
 
