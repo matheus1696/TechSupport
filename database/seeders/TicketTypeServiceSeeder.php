@@ -37,9 +37,14 @@ class TicketTypeServiceSeeder extends Seeder
             'title'=>'Pedido de Suprimento',
             'ticket_type_category_id'=>2,
         ]);
+
+        TicketTypeService::create([
+            'title'=>'Ar-condicionado',
+            'ticket_type_category_id'=>3,
+        ]);
         
         TicketTypeService::create([
-            'title'=>'Conserto de Porta',
+            'title'=>'Manutenção Prédial',
             'ticket_type_category_id'=>3,
         ]);
     }

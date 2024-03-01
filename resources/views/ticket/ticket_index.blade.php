@@ -7,7 +7,7 @@
 
     <!-- Slot Body -->
     @slot('body')
-        @include('ticket.partials.ticket-table')
+        @include('ticket.partials.ticket_table')
     @endslot
 
 </x-pages.index>

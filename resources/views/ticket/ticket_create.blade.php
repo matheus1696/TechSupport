@@ -8,7 +8,7 @@
 
     <!-- Slot Body -->
     @slot('body')
-        @include('ticket.partials.ticket-form')
+        @include('ticket.partials.ticket_form')
     @endslot
 
 </x-pages.forms>

@@ -3,7 +3,7 @@
     <textarea
         name="{{$id}}"
         id="{{$id}}"
-        class="text-sm rounded-md border @error($id) outline-red-500 border-red-200 bg-red-200 @else outline-green-500 border-green-200 bg-green-200 @enderror summernote"
+        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-500 bg-red-200 @enderror summernote"
         rows="2"
     >@if(empty($value)){{old($id)}}@else{!!$value!!}@endif</textarea>
 

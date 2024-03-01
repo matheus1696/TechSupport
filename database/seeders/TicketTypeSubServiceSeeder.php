@@ -30,6 +30,14 @@ class TicketTypeSubServiceSeeder extends Seeder
             'ticket_type_service_id'=>1
         ]);
         TicketTypeSubService::create([
+            'title'=>'e-SUS',
+            'ticket_type_service_id'=>2
+        ]);
+        TicketTypeSubService::create([
+            'title'=>'Salus',
+            'ticket_type_service_id'=>2
+        ]);
+        TicketTypeSubService::create([
             'title'=>'Impressora atolando',
             'ticket_type_service_id'=>3
         ]);
@@ -52,6 +60,38 @@ class TicketTypeSubServiceSeeder extends Seeder
         TicketTypeSubService::create([
             'title'=>'Telefone mudo',
             'ticket_type_service_id'=>4
+        ]);        
+        TicketTypeSubService::create([
+            'title'=>'Papel A4',
+            'ticket_type_service_id'=>5
+        ]);       
+        TicketTypeSubService::create([
+            'title'=>'Pilha AA/AAA',
+            'ticket_type_service_id'=>5
+        ]);               
+        TicketTypeSubService::create([
+            'title'=>'Sem Ligar',
+            'ticket_type_service_id'=>6
+        ]);                 
+        TicketTypeSubService::create([
+            'title'=>'Sem Gelar',
+            'ticket_type_service_id'=>6
+        ]);                   
+        TicketTypeSubService::create([
+            'title'=>'Conserto de Porta',
+            'ticket_type_service_id'=>7
+        ]);                    
+        TicketTypeSubService::create([
+            'title'=>'Pintura',
+            'ticket_type_service_id'=>7
+        ]);                  
+        TicketTypeSubService::create([
+            'title'=>'Troca de Fechadura',
+            'ticket_type_service_id'=>7
+        ]);                 
+        TicketTypeSubService::create([
+            'title'=>'Goteira',
+            'ticket_type_service_id'=>7
         ]);
     }
 }

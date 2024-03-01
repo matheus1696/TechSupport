@@ -7,7 +7,10 @@ use App\Models\Ticket\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Ticket\TicketInteraction;
 use App\Models\Ticket\TicketTypeCategory;
+use App\Models\Ticket\TicketTypeService;
+use App\Models\Ticket\TicketTypeSubService;
 use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
@@ -26,7 +29,9 @@ class TicketController extends Controller
         ->with('TicketStatus')
         ->paginate(20);
 
-        return view('ticket.ticket_index', compact('db'));
+        $dbInteractions = TicketInteraction::all();
+
+        return view('ticket.ticket_index', compact('db','dbInteractions'));
     }
 
     /**
@@ -36,8 +41,11 @@ class TicketController extends Controller
     {
         //
         $dbEstablishments = CompanyEstablishmentsModel::select()->orderBy('title')->get();
+        $dbTypeCategories = TicketTypeCategory::all();
+        $dbTypeServices = TicketTypeService::all();
+        $dbTypeSubServices = TicketTypeSubService::all();
 
-        return view('ticket.ticket_create', compact('dbEstablishments'));
+        return view('ticket.ticket_create', compact('dbEstablishments','dbTypeCategories','dbTypeServices','dbTypeSubServices'));
     }
 
     /**
@@ -47,15 +55,23 @@ class TicketController extends Controller
     {
         //
         $db = Ticket::all();
-        $date = date('Ymd');
 
         $data = $request->all();        
-        $data['ticket_number'] = $date.$db->count();
+        $data['ticket_number'] = "#".date('ymd').$db->count();
+        $data['data_last_interaction'] = now();
+        $data['amount_interaction'] = 1;
         $data['user_id'] = Auth::user()->id;
         Ticket::create($data);
 
-        return redirect(route('tickets.index'));
-        
+        $db = Ticket::where('ticket_number', $data['ticket_number'])->first();
+
+        $sync['description']=$data['description'];
+        $sync['ticket_id']=$db->id;
+        $sync['user_id']=Auth::user()->id;
+
+        TicketInteraction::create($sync);
+
+        return redirect(route('tickets.index'));        
     }
 
     /**
