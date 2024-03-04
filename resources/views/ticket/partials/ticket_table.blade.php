@@ -8,15 +8,13 @@
             <x-table.th>Estabelecimento</x-table.th>
             <x-table.th class="hidden lg:table-cell">Tipo de Serviços</x-table.th>
             <x-table.th class="hidden lg:table-cell">Interações</x-table.th>
-            <x-table.th>Status</x-table.th>
-            <x-table.th class="hidden lg:table-cell">Reaberto</x-table.th>
+            <x-table.th class="hidden lg:table-cell">Status</x-table.th>
             <x-table.th></x-table.th>
         @endslot
 
         <!-- Components TBody -->
         @slot('tbody')
             @foreach ($db as $item)
-            @error('record')  @enderror
                 <x-table.tr>
                     <x-table.td> <a href="{{ route('tickets.show',['ticket'=>$item->id]) }}">{{$item->ticket_number}}</a> </x-table.td>
                     <x-table.td>{{$item->title}}</x-table.td>
@@ -24,15 +22,11 @@
                     <x-table.td class="hidden lg:table-cell">{{$item->TicketTypeService->title ?? ''}}</x-table.td>
                     <x-table.td class="hidden lg:table-cell">
                         @if ($item->data_last_interaction)
-                        
-                            <span class="bg-blue-200 text-xs font-medium text-blue-800 text-center p-0.5 leading-none rounded-full px-2 -translate-y-1/2 translate-x-1/2 left-auto top-0 right-0">top-right</span>
-                            {{$item->amount_interaction}}
-                            {{ date('d/m/Y',strtotime($item->data_last_interaction))$item->data_last_interaction}}
+                            {{ date('d/m/Y',strtotime($item->data_last_interaction)) }}
                         @endif
                     </x-table.td>
-                    <x-table.td>{{$item->TicketStatus->title}}</x-table.td>
-                    <x-table.td class="hidden lg:table-cell"> @if ($item->reopened) Sim @else Não @endif </x-table.td>
-                    <x-table.td>                        
+                    <x-table.td class="hidden lg:table-cell">{{$item->TicketStatus->title}}</x-table.td>
+                    <x-table.td>
                         <x-button.minButtonShow route="{{ route('tickets.show',['ticket'=>$item->id]) }}" />
                         <x-button.minButtonModalInfo :id="$item->id" title="{{$item->ticket_number}} - {{$item->title}}">
                             <div class="flex flex-col justify-start gap-2 mb-3">
