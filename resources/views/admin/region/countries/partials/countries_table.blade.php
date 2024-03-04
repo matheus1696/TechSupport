@@ -5,7 +5,7 @@
             <x-table.th>Pais</x-table.th>
             <x-table.th>Pais em Inglês</x-table.th>
             <x-table.th>DDI</x-table.th>
-            <x-table.th>Status</x-table.th>
+            <x-table.th class="w-28">Status</x-table.th>
     @endslot
 
     @slot('tbody')

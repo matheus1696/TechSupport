@@ -6,8 +6,8 @@
         <x-table.th>Estabelecimento</x-table.th>
         <x-table.th>Bairro</x-table.th>
         <x-table.th>Bloco Financeiro</x-table.th>
-        <x-table.th>Status</x-table.th>
-        <x-table.th></x-table.th>
+        <x-table.th class="w-28">Status</x-table.th>
+        <x-table.th class="w-40"></x-table.th>
     @endslot
 
     <!-- Components TBody -->

@@ -3,8 +3,8 @@
 
     <!-- Inicio Slot THead -->
     @slot('thead')
-        <x-table.th>Nome</x-table.th>
-        <x-table.th>E-mail</x-table.th>
+        <x-table.th class="w-1/3">Nome</x-table.th>
+        <x-table.th class="w-1/3">E-mail</x-table.th>
         <x-table.th>Verificação</x-table.th>
         <x-table.th></x-table.th>
     @endslot
@@ -16,26 +16,26 @@
                 @if (Auth::User()->id != $item->id)
                 <x-table.tr>
                     <x-table.td>{{$item->name}}</x-table.td>
-                    <x-table.td class="d-none d-md-table-cell">{{$item->email}}</x-table.td>
-                    <x-table.td class="text-center">
+                    <x-table.td>{{$item->email}}</x-table.td>
+                    <x-table.td>
                         <span class="badge badge-{{$item->email_verified_at ? 'success' : 'warning' }}">
                             {{$item->email_verified_at ? "Verificado" : "Aguardando"}}
                         </span>
                     </x-table.td>
 
-                    <x-table.td class="text-center">
+                    <x-table.td>
                         <!-- Inicio de Componentização do ModalShow -->
                         <x-button.minButtonModalEdit id="UserModal{{$item->id}}" title="Dados do Perfil">
-                            <div class="row">
-                                <p class="col-lg-4"><strong>Nome: </strong>{{$item->name}}</p>
-                                <p class="col-lg-4"><strong>Email: </strong>{{$item->email}}</p>
-                                <p class="col-lg-4"><strong>Data de Nascimento: </strong>@if($item->birthday)
+                            <div class="grid grid-cols-1 gap-3">
+                                <p><strong>Nome: </strong>{{$item->name}}</p>
+                                <p><strong>Email: </strong>{{$item->email}}</p>
+                                <p><strong>Data de Nascimento: </strong>@if($item->birthday)
                                     {{date('d/m/Y',strtotime($item->birthday))}} @endif</p>
-                                <p class="col-lg-4"><strong>Contato: </strong>{{$item->contact_1}}</p>
-                                <p class="col-lg-4"><strong>Contato: </strong>{{$item->contact_2}}</p>
-                                <p class="col-lg-4"><strong>Sexo: </strong>{{$item->SexualOrientations->sex ?? ""}}</p>
+                                <p><strong>Contato: </strong>{{$item->contact_1}}</p>
+                                <p><strong>Contato: </strong>{{$item->contact_2}}</p>
+                                <p><strong>Sexo: </strong>{{$item->SexualOrientations->sex ?? ""}}</p>
 
-                                <div class="px-2 col-12">
+                                <div>
                                     <!-- Inicio de Componentização de Formulário -->
                                     <x-form.form method="edit" route="{{route('users.update',['user'=>$item->id])}}">
 
@@ -75,55 +75,58 @@
 
                             <!-- Inicio de Componentização dos Botões -->
                             <x-button.buttonGroup>
+                                <a href="{{route('users.verify',['user'=>$item->id])}}" class="w-full">
+                                    <div class="w-full py-2 text-sm text-center text-white transition duration-300 bg-gray-600 rounded-lg shadow-md hover:bg-gray-700">
+                                        Solicitar Verificação de Conta
+                                    </div>
+                                </a>
 
-                                <div class="col-md-6">
-                                    <a href="{{route('users.verify',['user'=>$item->id])}}"
-                                        class="my-2 btn btn-block bg-secondary elevation-2">Solicitar Verificação de
-                                        Conta</a>
+                                <div class="w-full">
+                                    <form action="{{route('password.email')}}" method="post">
+                                        @csrf
+                                        {{-- Email field --}}
+                                        <div class="input-group"><input type="email" name="email" value="{{$item->email}}" hidden></div>
+    
+                                        {{-- Send reset link button --}}
+                                        <button 
+                                            type="submit"
+                                            class="w-full py-2 text-sm text-white transition duration-300 bg-yellow-600 rounded-lg shadow-md hover:bg-yellow-700"
+                                        >
+                                            Enviar Recuperação de Senha
+                                        </button>
+                                    </form>
                                 </div>
-
-                                <form action="{{route('password.email')}}" method="post" class="col-md-6">
-                                    @csrf
-                                    {{-- Email field --}}
-                                    <div class="input-group"><input type="email" name="email" value="{{$item->email}}"
-                                            hidden></div>
-
-                                    {{-- Send reset link button --}}
-                                    <button type="submit" class="my-2 btn btn-block bg-warning elevation-2">Enviar
-                                        Recuperação de Senha</button>
-                                </form>
                                 
                             </x-button.buttonGroup>
                         </x-button.minButtonModalEdit>
 
                         <!-- Inicio de Componentização do Modal Permissões -->
-                        <x-modal.modalUserPermission id="UserPermissionModal{{$item->id}}" title="Permissões">
+                        <x-button.minButtonModalUserPermission id="UserPermissionModal{{$item->id}}" title="Permissões">
                             <form action="{{route('users.update',['user'=>$item->id])}}" method="post">
                                 @csrf @method('PUT')
                                 <div class="p-3">
                                     @foreach ($dbPermissions as $permission)
-                                    <div class="form-check form-check-inline">
-                                        <label class="label-checkbox" for="{{$permission->id}}">
-                                            <input class="input-checkbox" type="checkbox" id="{{$permission->id}}"
-                                                name={{$permission->name}} value="{{$permission->id}}"
-                                            @foreach ($dbHasPermissions as $hasPermission)
-                                            @if ($hasPermission->permission_id == $permission->id)
-                                            @if ($item->id == $hasPermission->model_id)
-                                            checked
-                                            @endif
-                                            @endif
-                                            @endforeach
-                                            >
-                                            <span class="input-checkbox-mark">{{$permission->name}}</span>
-                                        </label>
-                                    </div>
+                                        <div class="form-check form-check-inline">
+                                            <label class="label-checkbox" for="{{$permission->id}}">
+                                                <input class="input-checkbox" type="checkbox" id="{{$permission->id}}" name={{$permission->name}} value="{{$permission->id}}"
+                                                    @foreach ($dbHasPermissions as $hasPermission)
+                                                        @if ($hasPermission->permission_id == $permission->id)
+                                                            @if ($item->id == $hasPermission->model_id)
+                                                                checked
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                >
+                                                <span class="input-checkbox-mark">{{$permission->name}}</span>
+                                            </label>
+                                        </div>
                                     @endforeach
                                 </div>
 
                                 <!-- Inicio de Componentização dos Botões -->
                                 <x-button.buttonSubmit action="edit" col="12" />
                             </form>
-                        </x-modal.modalUserPermission>
+                        </x-button.minButtonModalUserPermission>
                     </x-table.td>
                 </x-table.tr>
                 @endif

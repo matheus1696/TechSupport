@@ -2,7 +2,7 @@
     @slot('thead')
         <x-table.th>Código</x-table.th>
         <x-table.th>Ocupação (CBO)</x-table.th>
-        <x-table.th>Status</x-table.th>
+        <x-table.th class="w-28">Status</x-table.th>
     @endslot
 
     @slot('tbody')

@@ -3,8 +3,8 @@
         <x-table.th>Código</x-table.th>
         <x-table.th>Produto</x-table.th>
         <x-table.th>Tipo</x-table.th>
-        <x-table.th>Status</x-table.th>
-        <x-table.th></x-table.th>
+        <x-table.th class="w-28">Status</x-table.th>
+        <x-table.th class="w-40"></x-table.th>
     @endslot
 
     @slot('tbody')

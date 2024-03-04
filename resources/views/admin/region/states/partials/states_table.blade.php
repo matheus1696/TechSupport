@@ -4,7 +4,7 @@
         <x-table.th>Sigla</x-table.th>
         <x-table.th>Estados</x-table.th>
         <x-table.th>Paises</x-table.th>
-        <x-table.th>Status</x-table.th>
+        <x-table.th class="w-28">Status</x-table.th>
     @endslot
 
     @slot('tbody')

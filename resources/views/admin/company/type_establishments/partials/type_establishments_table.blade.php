@@ -1,8 +1,8 @@
 <x-table.table :db="$db">
     @slot('thead')
         <x-table.th>Tipo de Estabelecimento</x-table.th>
-        <x-table.th>Status</x-table.th>
-        <x-table.th></x-table.th>
+        <x-table.th class="w-28">Status</x-table.th>
+        <x-table.th class="w-40"></x-table.th>
     @endslot
 
     @slot('tbody')
