@@ -6,11 +6,10 @@
     @endslot
 
     <!-- Slot Body -->
-    @slot('body')
-    <x-conteiner>
-        @include('admin.company.occupations.partials.occupations_search')
-    </x-conteiner>
-
+    @slot('body')    
+        <x-conteiner>
+            @include('admin.company.occupations.partials.occupations_search')
+        </x-conteiner>
         @include('admin.company.occupations.partials.occupations_table')
     @endslot
 </x-pages.index>

@@ -18,7 +18,8 @@
         @isset($type)
             @if ($type == 'tel') onkeyup="handlePhone(event)" @endif
             @if ($type == 'number') min='0' @endif
-        @endisset
+        @endisset        
+        @isset($onchange) onchange="{{$onchange}}" @endisset
     >
     @error($id)
         <x-form.errors-message>

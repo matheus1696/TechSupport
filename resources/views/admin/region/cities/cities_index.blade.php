@@ -7,9 +7,7 @@
     
     @slot('body')
     <x-conteiner>
-
         @include('admin.region.cities.partials.cities_search')
-        
     </x-conteiner>
 
         @include('admin.region.cities.partials.cities_table')

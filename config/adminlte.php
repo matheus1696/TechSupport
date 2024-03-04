@@ -411,7 +411,7 @@ return [
                         [
                             'text'    => 'Organograma',
                             'classes' => 'btn-sm',
-                            'route'   => 'organizational.index',
+                            'route'   => 'organizational.organize',
                             'icon'    => 'fas fa-bezier-curve',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],

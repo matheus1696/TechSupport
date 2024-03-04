@@ -1,5 +1,5 @@
-<div class="w-full h-full py-3 {{$class ?? ""}}">
-    <div class="p-4 bg-white rounded-lg shadow-md">
+<div class="w-full mb-3 {{$class ?? ""}}">
+    <div class="grid grid-cols-1 px-3 pt-3 bg-white rounded-lg shadow-md">
         {{$slot}}
     </div>
 </div>

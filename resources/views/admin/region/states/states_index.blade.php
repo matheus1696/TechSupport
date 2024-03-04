@@ -6,12 +6,10 @@
     @endslot
 
     @slot('body')
-    <x-conteiner>
-
-        @include('admin.region.states.partials.states_search')
-
-    </x-conteiner>
-
+        <x-conteiner>
+            @include('admin.region.states.partials.states_search')
+        </x-conteiner>
+        
         @include('admin.region.states.partials.states_table')
     @endslot
 </x-pages.index>

@@ -24,22 +24,20 @@
                 </x-table.td>
                 <x-table.td>
                     <x-button.minButtonModalInfo id="EstablishmentsModel{{$item->id}}" title="Estabelecimento de Saúde">
-                        <div class="row">
-                            <p class="col-lg-12"><strong>CNES: </strong>{{$item->code ?? ""}}</p>
-                            <p class="col-lg-12"><strong>Estabelecimento: </strong>{{$item->title ?? ""}}</p>
-                            <p class="col-lg-12"><strong>Nome Fantasia: </strong>{{$item->surname ?? ""}}</p>
-                            <p class="col-lg-12">
+                        <div class="flex flex-col gap-3 mb-3">
+                            <p><strong>CNES: </strong>{{$item->code ?? ""}}</p>
+                            <p><strong>Estabelecimento: </strong>{{$item->title ?? ""}}</p>
+                            <p><strong>Nome Fantasia: </strong>{{$item->surname ?? ""}}</p>
+                            <p>
                                 <strong>Endereço: </strong>
                                 {{$item->address ?? ""}},{{$item->number ?? ""}}, {{$item->district ?? ""}}, {{$item->RegionCities->city ?? ""}} - {{$item->RegionCities->RegionStates->state ?? ""}}
                             </p>
-                            <p class="col-lg-12"><strong>Tipo de Estabelecimento:
-                                </strong>{{$item->TypeEstablishments->title ?? ""}}</p>
-                            <p class="col-lg-12"><strong>Bloco Financeiro:
-                                </strong>{{$item->FinancialBlocks->title ?? ""}}</p>
+                            <p><strong>Tipo de Estabelecimento:</strong>{{$item->TypeEstablishments->title ?? ""}}</p>
+                            <p><strong>Bloco Financeiro:</strong>{{$item->FinancialBlocks->title ?? ""}}</p>
                         </div>
                         <hr>
                         <div>
-                            <p class="text-center"><strong>Lista de Contatos</strong></p>
+                            <p class="mt-3 text-center"><strong>Lista de Contatos</strong></p>
                             <div class="mt-3">
                                 <x-table.table>
                                     @slot('thead')

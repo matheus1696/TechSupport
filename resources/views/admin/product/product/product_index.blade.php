@@ -8,11 +8,7 @@
 
     @slot('body')
         <x-conteiner>
-
             @include('admin.product.product.partials.product_search')
-
-            
-
         </x-conteiner>
 
             @include('admin.product.product.partials.product_table')

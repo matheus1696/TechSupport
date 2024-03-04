@@ -8,11 +8,8 @@
     <!-- Slot Body -->
     @slot('body')
         <x-conteiner>
-
             @include('admin.users.partials.users_search')
-
-            @include('admin.users.partials.users_table')
-
         </x-conteiner>
+        @include('admin.users.partials.users_table')
     @endslot
 </x-pages.index>

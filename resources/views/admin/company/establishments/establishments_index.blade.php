@@ -7,7 +7,9 @@
     
     <!-- Slot Body -->
     @slot('body')
-        @include('admin.company.establishments.partials.establishment_search')
+        <x-conteiner>
+            @include('admin.company.establishments.partials.establishment_search')
+        </x-conteiner>
 
         @include('admin.company.establishments.partials.establishment_table')
     @endslot
