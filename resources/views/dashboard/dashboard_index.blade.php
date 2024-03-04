@@ -5,16 +5,12 @@
         <x-header title="Dashboards"/>
     @endslot
 
-    @slot('body')
-        <x-conteiner>
-            <div class="row">
-                @foreach ($db as $item)
-                    <div class="col-xl-2 col-md-4 col-6">
-                        @include('dashboard.partials.dashboard_card')
-                    </div>
-                @endforeach
-            </div>
-        </x-conteiner>
+    @slot('body')            
+        <div class="grid grid-cols-2 gap-3 px-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            @foreach ($db as $item)
+                @include('dashboard.partials.dashboard_card')
+            @endforeach
+        </div>
     @endslot
 
 </x-pages.index>

@@ -1,7 +1,7 @@
 <a href="{{ route('view_dashboards.show',['view_dashboard'=>$item->id])}}" target="_black">  
-    <div class="small-box {{$item->FinancialBlocks->color}}">
-        <div class="px-2 inner">
-            <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100px">
+    <div class="{{$item->FinancialBlocks->color}} rounded-xl hover:shadow-lg overflow-hidden">
+        <div class="px-2">
+            <div class="flex flex-col items-center justify-center" style="height: 100px">
                 <span class="text-center">{{$item->title}}</span>                
                 @if ($item->link_desktop == "" )
                     <span class="text-center d-none d-lg-block"><i class="fas fa-exclamation-triangle"></i> Em construção <i class="fas fa-exclamation-triangle"></i></span>
@@ -10,9 +10,6 @@
                     <span class="text-center d-lg-none"><i class="fas fa-exclamation-triangle"></i> Em construção <i class="fas fa-exclamation-triangle"></i></span>
                 @endif
             </div>
-        </div>
-        <div class="icon">
-            <i class="fas fa-chart-pie"></i>
         </div>
     </div>
 </a>
