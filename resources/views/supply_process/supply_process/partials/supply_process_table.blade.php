@@ -1,28 +1,26 @@
 <x-table.table :db="$db">
     @slot('thead')
-        <tr>
-            <th class="col-1">Nº Processo</th>
-            <th>Titulo do Processo</th>
-            <th class="col-1">Data Venc.</th>
-            <th class="col-1">Status</th>
-            <th style="width: 150px"></th>
-        </tr>
+        <x-table.th>Nº Processo</x-table.th>
+        <x-table.th>Titulo do Processo</x-table.th>
+        <x-table.th>Data Venc.</x-table.th>
+        <x-table.th>Status</x-table.th>
+        <x-table.th></x-table.th>
     @endslot
 
     @slot('tbody')
         @foreach ($db as $item)
-            <tr 
+            <x-table.tr 
                 @if ($item->due_date < Today() && $item->due_date != NULL) style="background: rgba(255, 0, 0, 0.500)"
                 @elseif ($item->due_date < date('Y-m-d', strtotime("+90 days")) && $item->due_date != NULL) style="background: rgba(255, 255, 0, 0.500)" 
                 @endif
             >
-                <td class="text-center">{{$item->code_process}}</td>
-                <td class="text-center">{{$item->title}}</td>
-                <td class="text-center">{{$item->due_date == NULL ? "" : date('d/m/Y',strtotime($item->due_date))}}</td>
-                <td class="text-center">
+                <x-table.td class="text-center">{{$item->code_process}}</x-table.td>
+                <x-table.td class="text-center">{{$item->title}}</x-table.td>
+                <x-table.td class="text-center">{{$item->due_date == NULL ? "" : date('d/m/Y',strtotime($item->due_date))}}</x-table.td>
+                <x-table.td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('supply_processes.status',['supply_process'=>$item->id])}}" />
-                </td>
-                <td class="text-center">
+                </x-table.td>
+                <x-table.td class="text-center">
                     <x-button.minButtonModalInfo id="SupplyProcess{{$item->id}}" title="Informação do Processo de Fornecimento">
                             <div class="row justify-content-center" 
                                 @if ($item->due_date < Today() && $item->due_date != NULL) style="background: rgba(255, 0, 0, 0.500);border-radius: 5px; padding: 10px;"
@@ -83,7 +81,7 @@
                     <x-button.minButtonShow route="{{route('supply_processes.show',['supply_process'=>$item->id])}}" />
                     <x-button.minButtonEdit route="{{route('supply_processes.edit',['supply_process'=>$item->id])}}" />
                 </td>
-            </tr>
+            </x-table.tr>
         @endforeach
     @endslot
 </x-table.table>
