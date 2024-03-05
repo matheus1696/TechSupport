@@ -7,9 +7,7 @@
     @endslot
     
     @slot('body')
-        <x-conteiner>
-            @include('admin.region.countries.partials.countries_search')
-        </x-conteiner>
+        @include('admin.region.countries.partials.countries_search')
         @include('admin.region.countries.partials.countries_table')
     @endslot
 </x-pages.index>

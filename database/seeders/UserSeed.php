@@ -24,7 +24,6 @@ class UserSeed extends Seeder
             'password'=> Hash::make('sysadmin'),
         ])->givePermissionTo('supply','user','admin','sysadmin');
 
-        /*
         User::create([
             'name'=>'Administrador',
             'filter'=>strtolower('Administrador'),
@@ -35,9 +34,7 @@ class UserSeed extends Seeder
             'email_verified_at'=>now(),
             'password'=> Hash::make('admin'),
         ])->givePermissionTo('user','admin');
-        */
 
-        /*
             User::create([
                 'name'=>'Usuário',
                 'filter'=>strtolower('Usuário'),
@@ -48,8 +45,7 @@ class UserSeed extends Seeder
                 'email_verified_at'=>now(),
                 'password'=> Hash::make('user'),
             ])->givePermissionTo('user');
-        */
-        /*
+
             User::create([
                 'name'=>'Verificar Email',
                 'filter'=>strtolower('Verificar Email'),
@@ -59,9 +55,7 @@ class UserSeed extends Seeder
                 'birthday'=>'1990-12-31',
                 'password'=> Hash::make('verificar'),
             ])->givePermissionTo('user');
-        */
 
-        /*
             User::create([
                 'name'=>'Processos Licitatórios',
                 'filter'=>strtolower('Processos Licitatórios'),
@@ -72,6 +66,16 @@ class UserSeed extends Seeder
                 'email_verified_at'=>now(),
                 'password'=> Hash::make('supply'),
             ])->givePermissionTo('supply');
-        */
+
+            User::create([
+                'name'=>'Dashboard',
+                'filter'=>strtolower('dashboard'),
+                'email'=>'dashboard@techsupport.com.br',
+                'contact_1'=>'(81) 0000-0000',
+                'contact_2'=>'(81) 0000-0000',
+                'birthday'=>'2024-01-18',
+                'email_verified_at'=>now(),
+                'password'=> Hash::make('dashboard'),
+            ])->givePermissionTo('dashboard');
     }
 }

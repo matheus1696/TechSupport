@@ -12,7 +12,7 @@
             <x-table.tr>
                 <x-table.td>{{$item->acronym}}</x-table.td>
                 <x-table.td>{{$item->title}}</x-table.td>                
-                <x-table.td><div class="h-8 w-8 m-auto {{$item->color}}"></div></x-table.td>
+                <x-table.td><div class="h-4 w-4 rounded-full {{$item->color}}"></div></x-table.td>
                 <x-table.td>
                     <x-button.buttonStatus condition="{{$item->status}}" route="{{route('financial_blocks.update',['financial_block'=>$item->id])}}" name="status" />
                 </x-table.td>

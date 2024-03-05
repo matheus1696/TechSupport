@@ -31,8 +31,8 @@ class UsersController extends Controller
         $db = User::orderBy('name')->with('SexualOrientations')->paginate(20);
         $dbPermissions= UserPermissionsModel::all();
         $dbHasPermissions = UserHasPermissionsModel::all();
-        $dbCompanyOrganizational = CompanyOrganizationalModel::where('status',true)->orderBy('hierarchy')->get();
-        $dbCompanyOccupations = CompanyOccupationsModel::where('status',true)->orderBy('code')->get();
+        $dbCompanyOrganizational = CompanyOrganizationalModel::where('status',true)->orderBy('order')->get();
+        $dbCompanyOccupations = CompanyOccupationsModel::where('status',true)->orderBy('title')->get();
         $dbEstablishments = CompanyEstablishmentsModel::where('status',true)->orderBy('title')->get();
 
         //Pesquisar Dados

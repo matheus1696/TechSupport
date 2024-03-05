@@ -38,7 +38,7 @@ class CompanyEstablishmentDepartmentController extends Controller
         CompanyEstablishmentDepartment::create($data);
 
         //Log do Sistema
-        Logger::store($data['title']);
+        Logger::store($data['department']);
 
         return redirect(route('establishments.show',['establishment'=>$data['establishment_id']]))
             ->with('success','Cadastro salvo com sucesso');

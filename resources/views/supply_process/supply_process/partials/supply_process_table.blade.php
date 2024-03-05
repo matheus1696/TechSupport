@@ -1,10 +1,10 @@
 <x-table.table :db="$db">
     @slot('thead')
-        <x-table.th>Nº Processo</x-table.th>
+        <x-table.th class="w-40">Nº Processo</x-table.th>
         <x-table.th>Titulo do Processo</x-table.th>
-        <x-table.th>Data Venc.</x-table.th>
-        <x-table.th>Status</x-table.th>
-        <x-table.th></x-table.th>
+        <x-table.th class="w-40">Data Venc.</x-table.th>
+        <x-table.th class="w-28">Status</x-table.th>
+        <x-table.th class="w-40"></x-table.th>
     @endslot
 
     @slot('tbody')

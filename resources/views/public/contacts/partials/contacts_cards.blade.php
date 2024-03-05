@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-between overflow-hidden text-white bg-green-700 rounded-lg shadow-md">
     <div class="px-1 py-2">
-        <p class="text-sm text-center min-h-14">{{$item->title}}</p>
-        <h5 class="text-center">
+        <p class="px-3 text-sm text-center min-h-14">{{$item->title}}</p>
+        <h5 class="text-lg text-center">
             @foreach ($dbContact as $contact)
                 @if ($contact->establishment_id === $item->id)
                     @if ($contact->type_contact === "Main")

@@ -4,8 +4,9 @@
     <x-form.input col="2" type="tel" label="Telefone" id="contact" />
     <x-form.input col="2" type="number" label="Ramal" id="extension" />
 
-    <x-form.select col="3" label="Contato Principal" id="type_contact">
+    <x-form.select col="3" label="Tipo de Contato" id="type_contact">
+        <option value="">Sem Ramal</option>
         <option value="Main">Principal</option>
-        <option value="Internal" selected>Interno</option>
+        <option value="Internal">Interno</option>
     </x-form.select>
 </x-form.form>

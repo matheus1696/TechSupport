@@ -3,10 +3,10 @@
 
     <!-- Inicio Slot THead -->
     @slot('thead')
-        <x-table.th class="w-1/3">Nome</x-table.th>
-        <x-table.th class="w-1/3">E-mail</x-table.th>
-        <x-table.th>Verificação</x-table.th>
-        <x-table.th></x-table.th>
+        <x-table.th>Nome</x-table.th>
+        <x-table.th>E-mail</x-table.th>
+        <x-table.th class="w-28">Verificação</x-table.th>
+        <x-table.th class="w-40"></x-table.th>
     @endslot
 
     <!-- Inicio Slot TBody -->
@@ -18,7 +18,9 @@
                     <x-table.td>{{$item->name}}</x-table.td>
                     <x-table.td>{{$item->email}}</x-table.td>
                     <x-table.td>
-                        <span class="badge badge-{{$item->email_verified_at ? 'success' : 'warning' }}">
+                        <span 
+                            class="px-2 py-1 text-xs font-semibold text-white bg-{{$item->email_verified_at ? 'green' : 'yellow' }}-700 rounded-lg shadow-md"
+                        >
                             {{$item->email_verified_at ? "Verificado" : "Aguardando"}}
                         </span>
                     </x-table.td>
@@ -26,7 +28,7 @@
                     <x-table.td>
                         <!-- Inicio de Componentização do ModalShow -->
                         <x-button.minButtonModalEdit id="UserModal{{$item->id}}" title="Dados do Perfil">
-                            <div class="grid grid-cols-1 gap-3">
+                            <div class="grid grid-cols-1 gap-3 mb-3">
                                 <p><strong>Nome: </strong>{{$item->name}}</p>
                                 <p><strong>Email: </strong>{{$item->email}}</p>
                                 <p><strong>Data de Nascimento: </strong>@if($item->birthday)
@@ -34,44 +36,50 @@
                                 <p><strong>Contato: </strong>{{$item->contact_1}}</p>
                                 <p><strong>Contato: </strong>{{$item->contact_2}}</p>
                                 <p><strong>Sexo: </strong>{{$item->SexualOrientations->sex ?? ""}}</p>
-
-                                <div>
-                                    <!-- Inicio de Componentização de Formulário -->
-                                    <x-form.form method="edit" route="{{route('users.update',['user'=>$item->id])}}">
-
-                                        <!-- Inicio de Componentização de Select -->
-                                        <x-form.select col="12" label="Setor" id="company_id" db="company_id{{$item}}">
-                                            @foreach ($dbCompanyOrganizational as $dbCompanyOrganization)
-                                            <option value="{{$dbCompanyOrganization->id}}" @if ($item->company_id ==
-                                                $dbCompanyOrganization->id) selected @endif>
-                                                @for ($i = 0; $i < preg_match_all('!\d+!',$dbCompanyOrganization->
-                                                    ord_setor); $i++) <span>-</span> @endfor
-                                                    {{$dbCompanyOrganization->acronym}} -
-                                                    {{$dbCompanyOrganization->title}}
-                                            </option>
-                                            @endforeach
-                                        </x-form.select>
-
-                                        <!-- Inicio de Componentização de Select -->
-                                        <x-form.select col="12" label="Cargo" id="occupation_id" db="occupation_id{{$item}}">
-                                            @foreach ($dbCompanyOccupations as $dbCompanyOccupation)
-                                            <option value="{{$dbCompanyOccupation->id}}" @if ($item->occupation_id ==
-                                                $dbCompanyOccupation->id) selected @endif>{{$dbCompanyOccupation->code}}
-                                                - {{$dbCompanyOccupation->title}}</option>
-                                            @endforeach
-                                        </x-form.select>
-
-                                        <!-- Inicio de Componentização de Select -->
-                                        <x-form.select col="12" label="Estabelecimento" id="establishment_id" :db="$item">
-                                            @foreach ($dbEstablishments as $dbEstablishment)
-                                            <option value="{{$dbEstablishment->id}}" @if ($item->establishment_id ==
-                                                $dbEstablishment->id) selected @endif>{{$dbEstablishment->title}}
-                                            </option>
-                                            @endforeach
-                                        </x-form.select>
-                                    </x-form.form>
-                                </div>
                             </div>
+                            <hr>
+                            <div class="mt-3">
+                                <!-- Inicio de Componentização de Formulário -->
+                                <x-form.form method="edit" route="{{route('users.update',['user'=>$item->id])}}">
+
+                                    <!-- Inicio de Componentização de Select -->
+                                    <x-form.select col="12" label="Setor" id="company_id" db="company_id{{$item}}">
+                                        @foreach ($dbCompanyOrganizational as $dbCompanyOrganization)
+                                            <option 
+                                                value="{{$dbCompanyOrganization->id}}" 
+                                                @if ($item->company_id == $dbCompanyOrganization->id) selected @endif
+                                            >
+                                                @for ($i = 0; $i < $dbCompanyOrganization->number_hierarchy; $i++)
+                                                    <span> - </span>
+                                                @endfor
+                                                {{$dbCompanyOrganization->acronym}} - {{$dbCompanyOrganization->title}}
+                                            </option>
+                                        @endforeach
+                                    </x-form.select>
+
+                                    <!-- Inicio de Componentização de Select -->
+                                    <x-form.select col="12" label="Cargo" id="occupation_id" db="occupation_id{{$item}}">
+                                        @foreach ($dbCompanyOccupations as $dbCompanyOccupation)
+                                            <option
+                                                value="{{$dbCompanyOccupation->id}}" 
+                                                @if ($item->occupation_id == $dbCompanyOccupation->id) selected @endif
+                                            >
+                                                {{$dbCompanyOccupation->code}} - {{$dbCompanyOccupation->title}}
+                                            </option>
+                                        @endforeach
+                                    </x-form.select>
+
+                                    <!-- Inicio de Componentização de Select -->
+                                    <x-form.select col="12" label="Estabelecimento" id="establishment_id" :db="$item">
+                                        @foreach ($dbEstablishments as $dbEstablishment)
+                                        <option value="{{$dbEstablishment->id}}" @if ($item->establishment_id ==
+                                            $dbEstablishment->id) selected @endif>{{$dbEstablishment->title}}
+                                        </option>
+                                        @endforeach
+                                    </x-form.select>
+                                </x-form.form>
+                            </div>
+                            
 
                             <!-- Inicio de Componentização dos Botões -->
                             <x-button.buttonGroup>

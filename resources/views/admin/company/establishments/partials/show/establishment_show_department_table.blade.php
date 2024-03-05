@@ -1,26 +1,24 @@
-<div class="col-12">
+<div class="my-3">
     <x-table.table>
         @slot('thead')
-            <tr>
-                <th class="col-5">Setor</th>
-                <th class="col-2">Telefone</th>
-                <th class="col-2">Ramal</th>
-                <th class="col-2">Tipo de Contato</th>
-                <th style="width: 100px"></th>
-            </tr>
+            <x-table.th>Setor</x-table.th>
+            <x-table.th class="w-40">Telefone</x-table.th>
+            <x-table.th class="w-28">Ramal</x-table.th>
+            <x-table.th class="w-40">Tipo de contato</x-table.th>
+            <x-table.th class="w-40"></x-table.th>
         @endslot
     
         @slot('tbody')
             @foreach ($dbDepartments as $dbDepartment)
-                <tr>
-                    <td>{{$dbDepartment->department}}</td>
-                    <td class="text-center">{{$dbDepartment->contact}}</td>
-                    <td class="text-center">{{$dbDepartment->extension}}</td>
-                    <td class="text-center">                        
-                        @if($dbDepartment->type_contact === "Main") Contato Externo @endif
-                        @if($dbDepartment->type_contact === "Internal") Ramal Interno @endif
-                    </td>
-                    <td class="text-center">
+                <x-table.tr>
+                    <x-table.td>{{$dbDepartment->department}}</x-table.td>
+                    <x-table.td class="text-center">{{$dbDepartment->contact}}</x-table.td>
+                    <x-table.td class="text-center">{{$dbDepartment->extension}}</x-table.td>
+                    <x-table.td class="text-center">                        
+                        @if($dbDepartment->type_contact == "Main") Contato Externo @endif
+                        @if($dbDepartment->type_contact == "Internal") Ramal Interno @endif
+                    </x-table.td>
+                    <x-table.td class="text-center">
                         
                         <x-button.minButtonModalEdit id="Departamento{{$dbDepartment->id}}" title="{{$dbDepartment->department}}">
 
@@ -41,8 +39,8 @@
 
                         <x-button.minButtonDelete route="{{route('establishment_contacts.destroy',['establishment_contact'=>$dbDepartment->id])}}">
                         </x-button.minButtonDelete>
-                    </td>
-                </tr>
+                    </x-table.td>
+                </x-table.tr>
             @endforeach
         @endslot
     </x-table.table>

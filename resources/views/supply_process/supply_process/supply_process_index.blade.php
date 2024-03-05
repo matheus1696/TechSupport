@@ -6,9 +6,7 @@
     @endslot
     
     @slot('body')
-        <x-conteiner>
-            @include('supply_process.supply_process.partials.supply_process_search')
-        </x-conteiner>
+        @include('supply_process.supply_process.partials.supply_process_search')
         @include('supply_process.supply_process.partials.supply_process_table')
     @endslot
 </x-pages.index>

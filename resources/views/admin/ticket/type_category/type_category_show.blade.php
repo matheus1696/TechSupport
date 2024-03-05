@@ -13,17 +13,15 @@
                 <input type="hidden" name="ticket_type_category_id" value="{{$db->id}}">
                 <x-form.input col="12" label="Serviço" id="title" required="required" />
             </x-form.form>
-
-            
         </x-conteiner>
 
-            <div class="col-12">
+            <div class="my-3">
                 <x-table.table>
                     @slot('thead')
-                            <x-table.th>Serviço</x-table.th>
-                            <x-table.th>Class. Serviço</x-table.th>
-                            <x-table.th>Status</x-table.th>
-                            <x-table.th></x-table.th>
+                        <x-table.th>Serviço</x-table.th>
+                        <x-table.th class="w-28">Class. Serviço</x-table.th>
+                        <x-table.th class="w-28">Status</x-table.th>
+                        <x-table.th class="w-40"></x-table.th>
                     @endslot
                 
                     @slot('tbody')

@@ -12,16 +12,16 @@
             <hr>            
             @include('admin.company.establishments.partials.show.establishment_show_buttons')
         </x-conteiner>
-        
+
         <x-conteiner>
             <div>
                 @include('admin.company.establishments.partials.show.establishment_show_department_form')
             </div>
-            <hr>
-            <div>
-                @include('admin.company.establishments.partials.show.establishment_show_department_table')
-            </div>
         </x-conteiner>
+        <hr>
+        <div>
+            @include('admin.company.establishments.partials.show.establishment_show_department_table')
+        </div>
 
     @endslot
 </x-pages.index>
