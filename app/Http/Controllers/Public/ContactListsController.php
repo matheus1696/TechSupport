@@ -78,7 +78,7 @@ class ContactListsController extends Controller
                 ->get();
         }
 
-        Logger::show($db->title);
+        Logger::show($db->department);
 
         return view('public.contacts.contacts_show',[
             'search'=>$search,
