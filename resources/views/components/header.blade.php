@@ -8,8 +8,12 @@
             @isset($route)                
                 <div>
                     <a href="{{$route}}">
-                        @if (isset($btnRoute))
-                            <span class="px-3 py-2 text-sm text-white bg-green-700 rounded-full shadow-md hover:bg-green-600">{{$btnRoute}}</span>
+                        @if (isset($btnTitle))
+                            @if ($btnTitle == 'Retornar')
+                                <span class="px-3 py-2 text-sm text-white bg-gray-700 rounded-full shadow-md hover:bg-gray-600">Retornar</span>
+                            @else                                
+                                <span class="px-3 py-2 text-sm text-white bg-green-700 rounded-full shadow-md hover:bg-green-600">{{$btnTitle}}</span>
+                            @endif
                         @else
                             <span class="px-2 py-1 text-lg text-white bg-green-700 rounded-full shadow-md hover:bg-green-600"><i class="fas fa-plus"></i></span>
                         @endif

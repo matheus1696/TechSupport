@@ -1,43 +1,33 @@
-<x-pages.index>
-    @slot('body')        
-        <x-conteiner>
+<x-pages.index>    
 
-            <div class="pb-3">
-                <form method="get" class="row">
-                    <x-form.input col="10" label="Setor da Unidade" id="searchName" placeholder="Pesquisa por Setor da Unidade"
-                        value="{{$search['searchName'] ?? ''}}" />
-                    <x-button.buttonSearch />
-                    <div class="form-group col-lg-1 mt-lg-2 align-self-end">
-                        <label class="col-form-label"></label>
-                        <a href="{{ route('contacts.index') }}" class="text-sm btn btn-block bg-secondary elevation-1 form-control"><i class="fas fa-reply fa-sm"></i></a>
-                    </div>
-                </form>
-            </div>
+    <!-- Slot Header -->
+    @slot('header')
+        <x-header title="{{$dbEstablishment->title}}" route="{{route('contacts.index')}}" btnTitle="Retornar"/>
+    @endslot
 
-            <x-table.table>
-                @slot('thead')
-                    <tr>
-                        <th>Setor</th>
-                        <th>Contato</th>
-                        <th>Ramal</th>
-                    </tr>
-                @endslot
+    @slot('body')     
+    
+        <!-- Search -->
+        <x-search.formSearch>
+            <x-search.inputSearch label="Departamentos" id="searchName" value="{{ $search['searchName'] ?? '' }}" class="flex-1"/>
+        </x-search.formSearch>
 
-                @slot('tbody')
-                    @foreach ($db as $item)
-                        <tr>
-                            <td>{{$item->department}}</td>                            
-                            <td class="text-center">{{$item->contact}}</td>                            
-                            <td class="text-center">{{$item->extension}}</td>
-                        </tr>
-                    @endforeach
-                @endslot
-            </x-table.table>
+        <x-table.table :db="$db">
+            @slot('thead')
+                <x-table.th>Setor</x-table.th>
+                <x-table.th>Contato</x-table.th>
+                <x-table.th>Ramal</x-table.th>
+            @endslot
 
-            <div>
-                <p class="text-xs text-center text-secondary">Total de {{ $db->count() }} setores.</p>
-            </div>
-
-        </x-conteiner>
+            @slot('tbody')
+                @foreach ($db as $item)
+                    <x-table.tr>
+                        <x-table.td>{{$item->department}}</x-table.td>                            
+                        <x-table.td class="text-center">{{$item->contact}}</x-table.td>                            
+                        <x-table.td class="text-center">{{$item->extension}}</x-table.td>
+                    </x-table.tr>
+                @endforeach
+            @endslot
+        </x-table.table>
     @endslot
 </x-pages.index>

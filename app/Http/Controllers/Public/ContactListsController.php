@@ -63,9 +63,10 @@ class ContactListsController extends Controller
     {
         $db = CompanyEstablishmentDepartment::where('contact','<>',NULL)
         ->where('establishment_id', $id)
-        ->with('CompanyEstablishments')
         ->orderBy('contact')
-        ->get();
+        ->paginate(20);
+
+        $dbEstablishment = CompanyEstablishmentsModel::find($id);
 
         //Pesquisar Dados
         $search = $request->all();
@@ -73,16 +74,16 @@ class ContactListsController extends Controller
             $db = CompanyEstablishmentDepartment::where('contact','<>',NULL)
                 ->where('establishment_id', $id)
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
-                ->with('CompanyEstablishments')
                 ->orderBy('contact')
-                ->get();
+                ->paginate(20);
         }
 
-        Logger::show($db->department);
+        Logger::show();
 
         return view('public.contacts.contacts_show',[
             'search'=>$search,
             'db'=>$db,
+            'dbEstablishment'=>$dbEstablishment,
         ]);
     }
 

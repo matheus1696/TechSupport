@@ -13,6 +13,10 @@
 </div>
 
 @isset($db)
+    <div>
+        <p class="py-3 text-xs text-center text-secondary">Total de {{ $db->count() ?? ""}} </p>
+    </div>
+    
     <div class="flex items-center justify-center px-3 py-2">
         <div class="text-sm">
             {{ $db->appends($_GET)->links() }}

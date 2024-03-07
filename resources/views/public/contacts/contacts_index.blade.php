@@ -5,11 +5,8 @@
     @endslot
 
     @slot('body')
-
-        <x-conteiner>
-            @include('public.contacts.partials.contacts_search')
-        </x-conteiner>
-
+        @include('public.contacts.partials.contacts_search')
+        
         <div class="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             @foreach ($db as $item)
                 @include('public.contacts.partials.contacts_cards')
@@ -19,5 +16,6 @@
         <div>
             <p class="text-xs text-center text-secondary">Total de {{ $db->count() }} unidades.</p>
         </div>
+
     @endslot
 </x-pages.index>

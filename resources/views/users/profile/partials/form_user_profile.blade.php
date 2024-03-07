@@ -1,11 +1,11 @@
 <!-- Inicio de Componentização do Conteiner -->
 <x-conteiner>
-    <h3 class="mb-3 text-center">Dados do Pessoais</h3>
+    <h3 class="mb-3 text-lg font-semibold text-center">Dados do Pessoais</h3>
 
     <form method="POST" action="{{route('profile.update',['profile'=>$db->id])}}">
         @csrf @method('PUT')
         
-        <div class="grid grid-cols-12 justify-center items-center gap-3">
+        <div class="grid items-center justify-center grid-cols-12 gap-3">
             <!-- Inicio de Componentização de Input e Select -->
             <x-form.input col="12" label="Nome Completo" id="name" value="{{$db->name}}" required="required" placeholder="Fulano da Pereira da Silva Dómino"/>
 
