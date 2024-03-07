@@ -25,7 +25,7 @@ class SupplyProcessesController extends Controller
      */
     public function index(Request $request)
     {
-        $db = SupplyProcessesModel::paginate(20);
+        $db = SupplyProcessesModel::select()->orderBy('due_date', 'DESC')->paginate(20);
         $dbSupplyProcessItems = SupplyProcessItemsModel::all();
 
         //Pesquisar Dados

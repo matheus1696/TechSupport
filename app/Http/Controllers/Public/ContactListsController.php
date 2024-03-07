@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Company\CompanyEstablishmentsModel;
 use App\Models\Company\CompanyEstablishmentDepartment;
-use App\Services\Logger;
 
 class ContactListsController extends Controller
 {
@@ -30,8 +29,6 @@ class ContactListsController extends Controller
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->get();
         }
-
-        Logger::access();
 
         return view('public.contacts.contacts_index',[
             'search'=>$search,
@@ -78,8 +75,6 @@ class ContactListsController extends Controller
                 ->paginate(20);
         }
 
-        Logger::show();
-
         return view('public.contacts.contacts_show',[
             'search'=>$search,
             'db'=>$db,
@@ -118,8 +113,6 @@ class ContactListsController extends Controller
         $contact = CompanyEstablishmentDepartment::select()
         ->join('company_establishments', 'company_establishments.id', '=', 'company_establishment_departments.establishment_id')
         ->get()->toJson(JSON_PRETTY_PRINT);
-
-        Logger::access();
 
         return response($contact, 200);
     }
