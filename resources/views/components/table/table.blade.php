@@ -14,7 +14,11 @@
 
 @isset($db)
     <div>
-        <p class="py-3 text-xs text-center text-secondary">Total de {{ $db->count() ?? ""}} </p>
+        @if ($db->count() == 0)
+            <p class="py-3 text-xs text-center text-secondary">Nenhum dado cadastrado</p> 
+        @else
+            <p class="py-3 text-xs text-center text-secondary">Total de 1 de {{ $db->count() ?? ""}} </p> 
+        @endif
     </div>
     
     <div class="flex items-center justify-center px-3 py-2">
