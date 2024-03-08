@@ -17,7 +17,7 @@
         @if ($db->count() == 0)
             <p class="py-3 text-xs text-center text-secondary">Nenhum dado cadastrado</p> 
         @else
-            <p class="py-3 text-xs text-center text-secondary">Total de 1 de {{ $db->count() ?? ""}} </p> 
+            <p class="py-3 text-xs text-center text-secondary">Total de {{ $db->count() ?? ""}} cadastrados</p> 
         @endif
     </div>
     
