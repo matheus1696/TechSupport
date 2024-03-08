@@ -1,5 +1,7 @@
-<div class="flex items-center gap-2 {{$class ?? ''}}">
-    <label for="{{$id}}" class="pt-2 text-sm font-semibold">{{$label ?? ""}}:</label>
+<div class="flex items-center gap-2 {{$class ?? ''}} w-full lg:w-auto">
+    <div>        
+        <label for="{{$id}}" class="w-12 pt-2 text-sm font-semibold">{{$label ?? ""}}:</label>
+    </div>
     <input 
         type="text" 
         id="{{$id}}" 

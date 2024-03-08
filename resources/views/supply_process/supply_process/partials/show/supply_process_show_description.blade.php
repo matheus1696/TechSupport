@@ -8,4 +8,5 @@
     <p><strong>Data Inicio: </strong> {{$db->start_date == NULL ? "" : date('d/m/Y',strtotime($db->start_date))}}</p>
     <p><strong>Data de Venc.: </strong> {{$db->due_date == NULL ? "" : date('d/m/Y',strtotime($db->due_date))}}</p>
     <p><strong>Tempo de Vigência: </strong> {{$db->validity}} @if($db->validity) Meses @endif </p>
+    <p><strong>Status: </strong> {{$db->SupplyProcessStatus->title}}</p>
 </div>
