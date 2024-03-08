@@ -14,8 +14,8 @@
         <x-form.input col="3" label="Nº Pregão" id="code_auction" value="{{$db->code_auction}}" />
         <x-form.input col="3" label="Nº Contrato" id="code_contract" value="{{$db->code_contract}}" />
         <x-form.input col="3" label="Nº Registro de Preço" id="code_price_registration" value="{{$db->code_price_registration}}" />
-        <x-form.input col="3" label="Data de Inicío" type="date" id="start_date" value="{{$db->start_date}}" max="{{date('Y-m-d')}}" />
-        <x-form.input col="3" label="Data de Vencimento" type="date" id="due_date" value="{{$db->due_date}}" />
+        <x-form.input col="3" label="Data de Inicío" type="date" id="start_date" value="{{$db->start_date}}" max="{{date('Y-m-d')}}" min="2011-01-01"/>
+        <x-form.input col="3" label="Data de Vencimento" type="date" id="due_date" value="{{$db->due_date}}" min="2011-01-01"/>
     @endslot
     
 </x-pages.forms>

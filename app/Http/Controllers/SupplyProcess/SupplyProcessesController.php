@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupplyProcessesStoreRequest;
 use App\Http\Requests\SupplyProcessesUpdateRequest;
+use App\Models\Company\CompanyOrganizationalModel;
 use App\Models\SupplyProcess\SupplyProcessItemsModel;
+use App\Models\SupplyProcess\SupplyProcessStatus;
 use App\Services\Logger;
+use Illuminate\Support\Facades\Auth;
 
 class SupplyProcessesController extends Controller
 {
@@ -66,6 +69,10 @@ class SupplyProcessesController extends Controller
         //Dados dos Formulários
         $data = $request->all();
         $data['filter'] = StrtoLower($data['title']);
+        $data['user_id'] = Auth::user()->id;
+
+        $dbSupplyProcessStatus = SupplyProcessStatus::where('default', TRUE)->first();
+        $data['status_id'] = $dbSupplyProcessStatus->id;
 
         //Salvando Dados
         SupplyProcessesModel::create($data);

@@ -1,8 +1,8 @@
 <x-table.table :db="$db">
     @slot('thead')
-        <x-table.th>Sigla</x-table.th>
-        <x-table.th class="w-full">Blocos Financeiros</x-table.th>
-        <x-table.th>Cor</x-table.th>
+        <x-table.th class="w-28">Sigla</x-table.th>
+        <x-table.th>Blocos Financeiros</x-table.th>
+        <x-table.th class="w-28">Cor</x-table.th>
         <x-table.th class="w-28">Status</x-table.th>
         <x-table.th class="w-40"></x-table.th>
     @endslot

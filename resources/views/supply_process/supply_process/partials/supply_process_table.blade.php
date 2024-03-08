@@ -16,26 +16,18 @@
                 class="bg-yellow-400/50 hover:bg-yellow-100"
             @elseif ($item->due_date > Today() && $item->due_date != NULL)
                 class="hover:bg-zinc-100"
-            @endif
+            @endif 
             >
                 <x-table.td class="text-center">{{$item->code_process}}</x-table.td>
                 <x-table.td class="text-center">{{$item->title}}</x-table.td>
                 <x-table.td class="text-center">{{$item->due_date == NULL ? "" : date('d/m/Y',strtotime($item->due_date))}}</x-table.td>
-                <x-table.td class="text-center">                    
-                    <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('supply_processes.status',['supply_process'=>$item->id])}}" />
+                <x-table.td class="text-center">
+                    <span class="px-2 py-1 text-xs font-semibold text-white rounded-lg shadow-md {{$item->SupplyProcessStatus->color}}">{{$item->SupplyProcessStatus->title}}</span>
                 </x-table.td>
                 <x-table.td class="text-center">
                     <x-button.minButtonModalInfo id="SupplyProcess{{$item->id}}" title="Informação do Processo de Fornecimento">
-                            <div 
-                                @if ($item->due_date < Today() && $item->due_date != NULL)
-                                    class="bg-red-400/50 p-3 rounded-lg"
-                                @elseif ($item->due_date < date('Y-m-d', strtotime("+90 days")) && $item->due_date != NULL) 
-                                    class="bg-yellow-400/50 p-3 rounded-lg"
-                                @elseif ($item->due_date > Today() && $item->due_date != NULL)                                
-                                    class="p-3 rounded-lg"
-                                @endif
-                            >
-                                <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3">
+                            <div>
+                                <div class="grid grid-cols-1 gap-3 mb-3 lg:grid-cols-3">
                                     <div><strong>Nº do Processo: </strong>{{$item->code_process}}</div>
                                     <div><strong>Nº do Pregão: </strong>{{$item->code_auction}}</div>
                                     <div><strong>Nº do Contrato: </strong>{{$item->code_contract}}</div>

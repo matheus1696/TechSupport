@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             TicketTypeCategorySeeder::class,
             TicketTypeServiceSeeder::class,
             TicketTypeSubServiceSeeder::class,
+            SupplyProcessStatusSeeder::class,
         ]);
     }
 }

@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Region\RegionCountriesController;
 use App\Http\Controllers\Admin\Region\RegionStatesController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
+use App\Http\Controllers\Admin\SupplyProcess\SupplyProcessStatusController;
 use App\Http\Controllers\Admin\Ticket\TicketStatusController;
 use App\Http\Controllers\Admin\Ticket\TicketTypeCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketTypeServiceController;
@@ -150,6 +151,10 @@ Route::middleware('auth')->group(function () {
                     Route::get('itens/{supply_process_item}/edit',[SupplyProcessItemsController::class,'edit'])->name('supply_process_items.edit');
                     Route::put('itens/{supply_process_item}/update',[SupplyProcessItemsController::class,'update'])->name('supply_process_items.update');
                     Route::delete('itens/{supply_process_item}/destroy',[SupplyProcessItemsController::class,'destroy'])->name('supply_process_items.destroy');
+
+                    Route::put('supply_process_statuses/status/{supply_process_status}',[SupplyProcessStatusController::class,'status'])->name('supply_process_statuses.status');
+                    Route::put('supply_process_statuses/default/{supply_process_status}',[SupplyProcessStatusController::class,'default'])->name('supply_process_statuses.default');
+                    Route::resource('supply_process_statuses',SupplyProcessStatusController::class);
             });
         });        
 

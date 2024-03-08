@@ -534,6 +534,25 @@ return [
                         ],
                     ]
                 ],
+
+                //Configurações de Processos Licitatórios
+                [
+                    'text'    => 'Configurações de Processos',
+                    'classes' => 'btn-sm',
+                    'icon'    => 'fas fa-file-signature',
+                    'icon_color' => 'info',
+                    'can'     => ['sysadmin','admin'],
+                    'submenu' => [
+                        [
+                            'text'    => 'Tipos de Status',
+                            'classes' => 'btn-sm',
+                            'route'   => 'supply_process_statuses.index',
+                            'icon'    => 'fas fa-toggle-off',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                    ]
+                ],
             ],
         ],
 

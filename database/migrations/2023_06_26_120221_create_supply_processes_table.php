@@ -23,8 +23,15 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('due_date')->nullable();
             $table->integer('validity')->nullable();
-            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('company_organizational_id')->nullable();
+            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('company_organizational_id')->references('id')->on('company_organizational');
+            $table->foreign('status_id')->references('id')->on('supply_process_statuses');
+            $table->foreign('user_id')->references('id')->on('users');
+            
         });
     }
 

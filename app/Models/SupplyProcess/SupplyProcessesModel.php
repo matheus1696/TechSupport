@@ -22,6 +22,12 @@ class SupplyProcessesModel extends Model
         'start_date',
         'due_date',
         'validity',
-        'status'
+        'company_organizational_id',
+        'status_id',
+        'user_id'
     ];
+
+    public function SupplyProcessStatus(){
+        return $this->belongsTo(SupplyProcessStatus::class,'status_id','id');
+    }
 }
