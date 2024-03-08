@@ -15,31 +15,31 @@ class CompanyFinancialBlocksSeed extends Seeder
         //
         CompanyFinancialBlocksModel::create([
             'title'=>'Administração',
-            'color'=>'bg-success',
+            'color'=>'bg-green-600',
             'acronym'=>'ADM',
         ]);
 
         CompanyFinancialBlocksModel::create([
             'title'=>'Atenção Especializada',
-            'color'=>'bg-danger',
+            'color'=>'bg-red-600',
             'acronym'=>'ATE',
         ]);
 
         CompanyFinancialBlocksModel::create([
             'title'=>'Atenção Básica',
-            'color'=>'bg-primary',
+            'color'=>'bg-blue-600',
             'acronym'=>'ATB',
         ]);
 
         CompanyFinancialBlocksModel::create([
             'title'=>'Vigilância Epdemiológica',
-            'color'=>'bg-success',
+            'color'=>'bg-green-600',
             'acronym'=>'VEPD',
         ]);
 
         CompanyFinancialBlocksModel::create([
             'title'=>'Vigilância Sanitária',
-            'color'=>'bg-success',
+            'color'=>'bg-green-600',
             'acronym'=>'VSAN',
         ]);
     }
