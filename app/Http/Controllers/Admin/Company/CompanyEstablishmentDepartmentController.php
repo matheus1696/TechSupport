@@ -59,16 +59,12 @@ class CompanyEstablishmentDepartmentController extends Controller
     {
         $db = CompanyEstablishmentDepartment::find($id);
 
-        //Verificação
-        if ($db != NULL) {
-            //Log do Sistema
+        //Verificação de Existência 
+        if ($db) {
             Logger::edit($db->title);
-
             return view('admin.company.establishments.contact.establishmentContact_edit', compact('db'));
         }else {
-            //Log do Sistema
             Logger::error();
-
             return redirect()->back()->with('error','Estabelecimento não existe');
         }        
     }
@@ -85,8 +81,7 @@ class CompanyEstablishmentDepartmentController extends Controller
         $db = CompanyEstablishmentDepartment::find($id);
 
         //Verificação
-        if ($db != NULL) {
-            
+        if ($db) {            
             $db->update($data);
 
             //Log do Sistema
@@ -112,7 +107,7 @@ class CompanyEstablishmentDepartmentController extends Controller
         $dbEstablishments = $db->establishment_id;
 
         //Verificação
-        if ($db != NULL) {
+        if ($db) {
             $db->delete();
 
             //Log do Sistema
