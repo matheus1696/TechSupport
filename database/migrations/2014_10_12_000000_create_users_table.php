@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('cpf')->nullable();
+            $table->string('registration')->nullable();
             $table->string('contact_1')->nullable();
             $table->string('contact_2')->nullable();
             $table->date('birthday')->nullable();

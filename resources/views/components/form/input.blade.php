@@ -5,21 +5,25 @@
         name="{{$id}}"
         id="{{$id}}"
         class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-500 border-red-300 @else outline-green-500 border-gray-300 @enderror disabled:bg-gray-200"
-        @if (empty($min))  @else min="{{$min}}" @endif
-        @if (empty($max))  @else max="{{$max}}" @endif
-        @if (empty($minlength))  @else minlength="{{$minlength}}" @endif
-        @if (empty($maxlength))  @else maxlength="{{$maxlength}}" @endif
+        @isset($min) min="{{$min}}" @endisset        
+        @isset($max) max="{{$max}}" @endisset
+        @isset($minlength) minlength="{{$minlength}}" @endisset
+        @isset($maxlength) maxlength="{{$maxlength}}" @endisset
         @error($id) value="{{old($id)}}" @enderror
         @if (empty($value)) value="{{old($id)}}" @else value="{{$value}}" @endif
         @if (empty($placeholder)) placeholder="{{$label}}" @else placeholder="{{$placeholder}}" @endif
         {{$disabled ?? ""}}
         {{$required ?? ""}}
         {{$autofocus ?? ""}}
+        
+        @isset($onchange) onchange="{{$onchange}}" @endisset
+
         @isset($type)
             @if ($type == 'tel') onkeyup="handlePhone(event)" @endif
             @if ($type == 'number') min='0' @endif
-        @endisset        
-        @isset($onchange) onchange="{{$onchange}}" @endisset
+        @endisset
+        @if ($id == 'registration') onkeyup="handleRegistration(event)" @endif
+        @if ($id == 'cpf') onkeyup="handleCPF(event)" @endif
     >
     @error($id)
         <x-form.errors-message>

@@ -1,4 +1,3 @@
-
 const handlePhone = (event) => {
     let input = event.target
     input.value = phoneMask(input.value)

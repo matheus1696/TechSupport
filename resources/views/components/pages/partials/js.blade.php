@@ -1,5 +1,7 @@
-<!-- Maskphone (81) 99999-8888 -->
+<!-- Scripts Próprios, Máscaras de Inputs -->
 <script src="{{asset('assets/js/maskphone.js')}}"></script>
+<script src="{{asset('assets/js/maskcpf.js')}}"></script>
+<script src="{{asset('assets/js/maskregistration.js')}}"></script>
 
 <!-- Configuração do Select2 -->
 <script>
