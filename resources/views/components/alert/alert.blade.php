@@ -10,7 +10,7 @@
 @endif
 
 @if (\Session::has('error'))
-    <div class="fixed z-50 transition duration-700 bottom-2 right-2 alert">
+    <div class="fixed z-50 transition duration-700 bottom-2 right-2 w-96 alert">
         <div class="overflow-hidden rounded-lg shadow-lg">
             <div class="px-4 py-3 text-white bg-red-800 ">
                 <span class="text-sm">{!! \Session::get('error') !!}</span>
@@ -24,10 +24,10 @@
     setTimeout( function relogio() {
     let = document.querySelector('.borderAlert').classList.remove('w-full')
     let = document.querySelector('.borderAlert').classList.add('w-1')
-    }, 1300)
+    }, 2300)
     setTimeout( function relogio() {
         let = document.querySelector('.alert').classList.add('opacity-0')
-    }, 2000)
+    }, 3000)
 </script>
 
 

@@ -31,14 +31,13 @@ class CompanyOrganizationLinkedUsersController extends Controller
      */
     public function store(StoreCompanyOrganizationLinkedUsersRequest $request)
     {
-        //
         $data = $request->all();
 
         $dbUserValided = CompanyOrganizationLinkedUsers::where('user_id',$data['user_id'])->first();
 
         if ($dbUserValided) {
             return redirect()->back()->with('error','Usuário '.$dbUserValided->Users->name. ' Cadastrado em '. $dbUserValided->CompanyOrganizational->title);
-            
+
         } else {
             
             CompanyOrganizationLinkedUsers::create($data);
@@ -51,9 +50,6 @@ class CompanyOrganizationLinkedUsersController extends Controller
     
             return redirect()->back();
         }
-        
-
-        
     }
 
     /**

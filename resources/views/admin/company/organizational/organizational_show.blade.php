@@ -23,11 +23,23 @@
         </x-conteiner>
         <hr>
         <div class="mt-3">
-            <h3 class="text-lg font-semibold text-center">Usuários Vinculados</h3>
+            <x-table.table>
 
-            @foreach ($dbLinkedUsers as $dbLinkedUser)
-                {{$dbLinkedUser->Users->name}}
-            @endforeach
+                @slot('thead')
+                    <x-table.th>Usuários Vinculados</x-table.th>
+                    <x-table.th class="w-40"></x-table.th>
+                @endslot
+
+                @slot('tbody')
+                    @foreach ($dbLinkedUsers as $dbLinkedUser)
+                        <x-table.tr>
+                            <x-table.td>{{$dbLinkedUser->Users->name}}</x-table.td>
+                            <x-table.td></x-table.td>
+                        </x-table.tr>
+                    @endforeach
+                @endslot    
+
+            </x-table.table>
         </div>
 
     @endslot
