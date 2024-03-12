@@ -82,5 +82,8 @@ class CompanyOrganizationLinkedUsersController extends Controller
     public function destroy(CompanyOrganizationLinkedUsers $companyOrganizationLinkedUsers)
     {
         //
+        $companyOrganizationLinkedUsers->delete();
+
+        return redirect()->back()->with('success','Usuário removido');
     }
 }
