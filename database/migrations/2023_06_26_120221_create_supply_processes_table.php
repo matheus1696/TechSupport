@@ -16,6 +16,12 @@ return new class extends Migration
             $table->text('title');
             $table->string('filter');
             $table->text('description');
+            $table->text('intended_results');
+            $table->text('requirements');
+            $table->text('measures_adopted');
+            $table->string('head_inspector_id');
+            $table->string('deputy_inspector_id');            
+            $table->string('modality');
             $table->string('code_process')->unique()->nullable();
             $table->string('code_auction')->unique()->nullable();
             $table->string('code_contract')->unique()->nullable();

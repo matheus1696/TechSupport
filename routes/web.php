@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Company\CompanyEstablishmentsController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentDepartmentController;
 use App\Http\Controllers\Admin\Company\CompanyOccupationController;
 use App\Http\Controllers\Admin\Company\CompanyOrganizationalController;
+use App\Http\Controllers\Admin\Company\CompanyOrganizationLinkedUsersController;
 use App\Http\Controllers\Admin\Company\CompanyTypeEstablishmentsController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Region\RegionCitiesController;
@@ -66,10 +67,13 @@ Route::middleware('auth')->group(function () {
             //Grupo de Rotas - Configurações da Organização
             Route::prefix('company')->group(function (){
 
-                //Rota - Dados dos Setores
+                //Rota - Dados do Organograma
                     Route::get('organizational/organize',[CompanyOrganizationalController::class,'organize'])->name('organizational.organize');
                     Route::put('organizational/status/{organizational}',[CompanyOrganizationalController::class,'status'])->name('organizational.status');
                     Route::resource('organizational',CompanyOrganizationalController::class);
+
+                    Route::resource('organization_linked_users',CompanyOrganizationLinkedUsersController::class);
+                    
                 //Rota - Dados Ocupação (CBO)
                     Route::resource('occupations',CompanyOccupationController::class);
                 //Rota - Dados Tipo de Estabelecimento

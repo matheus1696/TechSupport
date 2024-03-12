@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProdutsStoreRequest;
 use App\Http\Requests\ProdutsUpdateRequest;
 use Illuminate\Http\Request;
-use App\Models\Product\ProductModel;
+use App\Models\Product\Product;
 use App\Services\Logger;
 
 class ProductController extends Controller
@@ -24,12 +24,12 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $db = ProductModel::paginate(20);
+        $db = Product::paginate(20);
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchProductCod']) || isset($search['searchProdutcName'])) {
-            $db = ProductModel::where('code','LIKE','%'.strtolower($search['searchProductCod']).'%')
+            $db = Product::where('code','LIKE','%'.strtolower($search['searchProductCod']).'%')
                 ->where('filter','LIKE','%'.strtolower($search['searchProdutcName']).'%')
                 ->orderBy('title')
                 ->paginate(20);
@@ -65,7 +65,7 @@ class ProductController extends Controller
         $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
-        ProductModel::create($data);
+        Product::create($data);
 
         //Logs
         Logger::store($data['title']);
@@ -87,7 +87,7 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         //Listagem de Dados
-        $db = ProductModel::find($id);
+        $db = Product::find($id);
 
         //Logs
         Logger::edit($db->title);
@@ -105,7 +105,7 @@ class ProductController extends Controller
         $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
-        $db = ProductModel::find($id);
+        $db = Product::find($id);
         $db->update($data);
 
         //Logs
@@ -131,7 +131,7 @@ class ProductController extends Controller
         $data = $request->only('status');
 
         //Salvando Dados
-        $db = ProductModel::find($id);
+        $db = Product::find($id);
         $db->update($data);
 
         //Logs

@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Company\CompanyEstablishmentsModel;
-use App\Models\Company\CompanyOccupationsModel;
-use App\Models\Company\CompanyOrganizationalModel;
-use App\Models\User\UserSexModel;
+use App\Models\Company\CompanyEstablishments;
+use App\Models\Company\CompanyOccupations;
+use App\Models\Company\CompanyOrganizational;
+use App\Models\User\UserSex;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -61,19 +61,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     public function SexualOrientations(){
-        return $this->belongsTo(UserSexModel::class,'sex_id','id');
-    }
-
-    public function CompanyOrganizational(){
-        return $this->belongsTo(CompanyOrganizationalModel::class,'company_id','id');
+        return $this->belongsTo(UserSex::class,'sex_id','id');
     }
 
     public function CompanyOccupations(){
-        return $this->belongsTo(CompanyOccupationsModel::class,'cbo_id','id');
+        return $this->belongsTo(CompanyOccupations::class,'cbo_id','id');
     }
 
     public function CompanyEstablishments(){
-        return $this->belongsTo(CompanyEstablishmentsModel::class,'establishment_id','id');
+        return $this->belongsTo(CompanyEstablishments::class,'establishment_id','id');
     }
 
 }

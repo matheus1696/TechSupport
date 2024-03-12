@@ -5,7 +5,7 @@ namespace App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyOrganizationalModel extends Model
+class CompanyOrganizational extends Model
 {
     use HasFactory;
 
@@ -17,6 +17,7 @@ class CompanyOrganizationalModel extends Model
         'acronym',
         'filter',
         'description',
+        'linked_users',
         'status',
         'order',
         'hierarchy',

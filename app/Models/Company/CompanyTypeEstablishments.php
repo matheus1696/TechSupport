@@ -5,7 +5,7 @@ namespace App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyTypeEstablishmentsModel extends Model
+class CompanyTypeEstablishments extends Model
 {
     use HasFactory;
 
@@ -18,7 +18,7 @@ class CompanyTypeEstablishmentsModel extends Model
     ];
 
     public function Establishments(){
-        return $this->belongsTo(CompanyEstablishmentsModel::class,'id','type_establishment_id');
+        return $this->belongsTo(CompanyEstablishments::class,'id','type_establishment_id');
     }
 }
 

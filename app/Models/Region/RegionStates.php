@@ -5,7 +5,7 @@ namespace App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RegionStatesModel extends Model
+class RegionStates extends Model
 {
     use HasFactory;
 
@@ -24,7 +24,7 @@ class RegionStatesModel extends Model
     ];
 
     public function RegionCountries(){
-        return $this->belongsTo(RegionCountriesModel::class,'country_id','id');
+        return $this->belongsTo(RegionCountries::class,'country_id','id');
     }
 }
 

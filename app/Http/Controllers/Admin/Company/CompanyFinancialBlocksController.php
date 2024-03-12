@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FinancialBlocksStoreRequest;
 use App\Http\Requests\FinancialBlocksUpdateRequest;
-use App\Models\Company\CompanyFinancialBlocksModel;
+use App\Models\Company\CompanyFinancialBlocks;
 use App\Services\Logger;
 
 class CompanyFinancialBlocksController extends Controller
@@ -24,7 +24,7 @@ class CompanyFinancialBlocksController extends Controller
     public function index()
     {
         //Listagem de Dados
-        $db = CompanyFinancialBlocksModel::select()
+        $db = CompanyFinancialBlocks::select()
             ->orderBy('title')
             ->paginate(20);
 
@@ -56,7 +56,7 @@ class CompanyFinancialBlocksController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        CompanyFinancialBlocksModel::create($data);
+        CompanyFinancialBlocks::create($data);
 
         //Log do Sistema
         Logger::store($data['title']);
@@ -79,7 +79,7 @@ class CompanyFinancialBlocksController extends Controller
     public function edit(string $id)
     {
         //Listando Dados
-        $db = CompanyFinancialBlocksModel::find($id);
+        $db = CompanyFinancialBlocks::find($id);
 
         //Log do Sistema
         Logger::edit($db->title);
@@ -98,7 +98,7 @@ class CompanyFinancialBlocksController extends Controller
         $data = $request->all();
 
         //Atualizando dados
-        $db = CompanyFinancialBlocksModel::find($id);
+        $db = CompanyFinancialBlocks::find($id);
         $db->update($data);
 
         //Log do Sistema

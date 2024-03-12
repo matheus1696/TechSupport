@@ -5,7 +5,7 @@ namespace App\Models\SupplyProcess;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SupplyProcessesModel extends Model
+class SupplyProcesses extends Model
 {
     use HasFactory;
 
@@ -19,6 +19,12 @@ class SupplyProcessesModel extends Model
         'title',
         'filter',
         'description',
+        'intended_results',
+        'requirements',
+        'measures_adopted',
+        'modality',
+        'head_inspector_id',
+        'deputy_inspector_id',
         'start_date',
         'due_date',
         'validity',

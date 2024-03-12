@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Public;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Company\CompanyEstablishments;
 use App\Models\Company\CompanyEstablishmentDepartment;
 
 class ContactListsController extends Controller
@@ -16,7 +16,7 @@ class ContactListsController extends Controller
      */
     public function index(Request $request)
     {            
-        $db = CompanyEstablishmentsModel::where('status',true)
+        $db = CompanyEstablishments::where('status',true)
             ->orderBy('title')
             ->get();
 
@@ -25,7 +25,7 @@ class ContactListsController extends Controller
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName'])) {
-            $db = CompanyEstablishmentsModel::where('status',true)
+            $db = CompanyEstablishments::where('status',true)
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->get();
         }
@@ -63,7 +63,7 @@ class ContactListsController extends Controller
         ->orderBy('contact')
         ->paginate(20);
 
-        $dbEstablishment = CompanyEstablishmentsModel::find($id);
+        $dbEstablishment = CompanyEstablishments::find($id);
 
         //Pesquisar Dados
         $search = $request->all();

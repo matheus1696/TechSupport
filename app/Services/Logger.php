@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\SystemLogsModel;
+use App\Models\SystemLogs;
 
 #Code Logger
 	##Acessos = 1000
@@ -35,7 +35,7 @@ use App\Models\SystemLogsModel;
 class Logger
 {
     private static function Logs($code, $message) {
-        SystemLogsModel::create([
+        SystemLogs::create([
             'log_code'=>$code,
             'log_ip'=>$_SERVER["REMOTE_ADDR"],
             'log_url'=>Request::url(),

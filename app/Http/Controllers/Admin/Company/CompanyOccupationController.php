@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Company\CompanyOccupationsModel;
+use App\Models\Company\CompanyOccupations;
 use App\Services\Logger;
 
 class CompanyOccupationController extends Controller
@@ -23,7 +23,7 @@ class CompanyOccupationController extends Controller
     public function index(Request $request)
     {
         //Listando Dados
-        $db = CompanyOccupationsModel::select()
+        $db = CompanyOccupations::select()
             ->orderBy('status','DESC')
             ->orderBy('title')
             ->paginate(20);
@@ -31,7 +31,7 @@ class CompanyOccupationController extends Controller
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName']) || isset($search['searchCod'])) {
-            $db = CompanyOccupationsModel::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
+            $db = CompanyOccupations::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('code')
                 ->paginate(20);
@@ -87,7 +87,7 @@ class CompanyOccupationController extends Controller
         $data = $request->all();
 
         //Listando Dados
-        $db = CompanyOccupationsModel::find($id);
+        $db = CompanyOccupations::find($id);
 
         //Atualizando Dados
         $db->update($data);

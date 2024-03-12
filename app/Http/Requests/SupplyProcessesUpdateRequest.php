@@ -30,14 +30,20 @@ class SupplyProcessesUpdateRequest extends FormRequest
             Rule::unique('supply_processes')->ignore($this->supply_process),            
         ];
 
-        return [
+        return [            
             'title' => 'required|min:6',
             'description' => 'required|min:20',
+            'intended_results' => 'required|min:20',
+            'requirements' => 'required|min:20',
+            'measures_adopted' => 'required|min:20',
+            'modality' => 'required',
+            'head_inspector_id' => 'required',
+            'deputy_inspector_id' => 'required',
             'code_process' => $codesRules,
             'code_auction' => $codesRules,
             'code_contract' => $codesRules,
             'code_price_registration' => $codesRules,
-            'strat_date' => 'nullable|date',
+            'start_date' => 'nullable|date',
             'due_date' => 'nullable|date',
         ];
     }

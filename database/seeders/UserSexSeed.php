@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User\UserSexModel;
+use App\Models\User\UserSex;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,17 +13,17 @@ class UserSexSeed extends Seeder
      */
     public function run(): void
     {
-        UserSexModel::create([
+        UserSex::create([
             'sex'=>'Masculino',
             'status'=>true,
         ]);
 
-        UserSexModel::create([
+        UserSex::create([
             'sex'=>'Feminino',
             'status'=>true,
         ]);
 
-        UserSexModel::create([
+        UserSex::create([
             'sex'=>'Não Definido',
             'status'=>true,
         ]);

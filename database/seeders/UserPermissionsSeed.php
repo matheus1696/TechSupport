@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User\UserPermissionsModel;
+use App\Models\User\UserPermissions;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,23 +13,23 @@ class UserPermissionsSeed extends Seeder
      */
     public function run(): void
     {
-        UserPermissionsModel::create([
+        UserPermissions::create([
             'name'=>'sysadmin',
             'guard_name'=>'web'
         ]);
-        UserPermissionsModel::create([
+        UserPermissions::create([
             'name'=>'admin',
             'guard_name'=>'web'
         ]);
-        UserPermissionsModel::create([
+        UserPermissions::create([
             'name'=>'user',
             'guard_name'=>'web'
         ]);
-        UserPermissionsModel::create([
+        UserPermissions::create([
             'name'=>'supply',
             'guard_name'=>'web'
         ]);
-        UserPermissionsModel::create([
+        UserPermissions::create([
             'name'=>'dashboard',
             'guard_name'=>'web'
         ]);

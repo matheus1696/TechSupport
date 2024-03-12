@@ -3,7 +3,7 @@
     <select
         name="{{$id}}"
         id="{{$db->id ?? $id}}"
-        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-500 border-red-300 @else outline-green-500 border-gray-300 @enderror disabled:bg-gray-200"
+        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-700 border-red-300 @else outline-green-700 border-gray-300 @enderror disabled:bg-gray-200"
         @isset($onchange) onchange="{{$onchange}}" @endisset
     >
         <option selected disabled class="disabled:bg-gray-200">Selecione</option>

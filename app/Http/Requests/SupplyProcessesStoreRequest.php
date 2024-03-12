@@ -24,6 +24,12 @@ class SupplyProcessesStoreRequest extends FormRequest
         return [
             'title' => 'required|min:6',
             'description' => 'required|min:20',
+            'intended_results' => 'required|min:20',
+            'requirements' => 'required|min:20',
+            'measures_adopted' => 'required|min:20',
+            'modality' => 'required',
+            'head_inspector_id' => 'required',
+            'deputy_inspector_id' => 'required',
         ];
     }
 }

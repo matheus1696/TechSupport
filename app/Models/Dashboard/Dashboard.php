@@ -2,7 +2,7 @@
 
 namespace App\Models\Dashboard;
 
-use App\Models\Company\CompanyFinancialBlocksModel;
+use App\Models\Company\CompanyFinancialBlocks;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +19,6 @@ class Dashboard extends Model
     ];
 
     public function FinancialBlocks(){
-        return $this->belongsTo(CompanyFinancialBlocksModel::class,'financial_block_id','id');
+        return $this->belongsTo(CompanyFinancialBlocks::class,'financial_block_id','id');
     }
 }

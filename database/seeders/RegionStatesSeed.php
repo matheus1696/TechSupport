@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Region\RegionStatesModel;
+use App\Models\Region\RegionStates;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +14,7 @@ class RegionStatesSeed extends Seeder
     public function run(): void
     {
         //
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>26,
             'acronym'=>'PE',
             'state'=>'Pernambuco',
@@ -24,7 +24,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>12,
             'acronym'=>'AC',
             'state'=>'Acre',
@@ -33,7 +33,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>27,
             'acronym'=>'AL',
             'state'=>'Alagoas',
@@ -42,7 +42,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>16,
             'acronym'=>'AP',
             'state'=>'Amapá',
@@ -51,7 +51,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>13,
             'acronym'=>'AM',
             'state'=>'Amazonas',
@@ -60,7 +60,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>29,
             'acronym'=>'BA',
             'state'=>'Bahia',
@@ -69,7 +69,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>23,
             'acronym'=>'CE',
             'state'=>'Ceará',
@@ -78,7 +78,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>32,
             'acronym'=>'ES',
             'state'=>'Espirito Santo',
@@ -87,7 +87,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>52,
             'acronym'=>'GO',
             'state'=>'Goías',
@@ -96,7 +96,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>21,
             'acronym'=>'MA',
             'state'=>'Maranhão',
@@ -105,7 +105,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>51,
             'acronym'=>'MT',
             'state'=>'Mato Grosso',
@@ -114,7 +114,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>50,
             'acronym'=>'MS',
             'state'=>'Mato Grosso do Sul',
@@ -123,7 +123,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>31,
             'acronym'=>'MG',
             'state'=>'Minas Gerais',
@@ -132,7 +132,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>15,
             'acronym'=>'PA',
             'state'=>'Pará',
@@ -141,7 +141,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>25,
             'acronym'=>'PB',
             'state'=>'Paraíba',
@@ -150,7 +150,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>41,
             'acronym'=>'PR',
             'state'=>'Paraná',
@@ -159,7 +159,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>22,
             'acronym'=>'PI',
             'state'=>'Piauí',
@@ -168,7 +168,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>33,
             'acronym'=>'RJ',
             'state'=>'Rio de Janeiro',
@@ -177,7 +177,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>24,
             'acronym'=>'RN',
             'state'=>'Rio Grande do Norte',
@@ -186,7 +186,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>43,
             'acronym'=>'RS',
             'state'=>'Rio Grande do Sul',
@@ -195,7 +195,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>11,
             'acronym'=>'RO',
             'state'=>'Rondônia',
@@ -204,7 +204,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>14,
             'acronym'=>'RR',
             'state'=>'Roraima',
@@ -213,7 +213,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>42,
             'acronym'=>'SC',
             'state'=>'Santa Catarina',
@@ -222,7 +222,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>35,
             'acronym'=>'SP',
             'state'=>'São Paulo',
@@ -231,7 +231,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>28,
             'acronym'=>'SE',
             'state'=>'Sergipe',
@@ -240,7 +240,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>17,
             'acronym'=>'TO',
             'state'=>'Tocantins',
@@ -249,7 +249,7 @@ class RegionStatesSeed extends Seeder
             'country_id'=>74,
         ]);
 
-        RegionStatesModel::create([
+        RegionStates::create([
             'id'=>53,
             'acronym'=>'DF',
             'state'=>'Distrito Federal',

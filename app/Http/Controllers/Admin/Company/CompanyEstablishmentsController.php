@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyEstablishmentsStoreRequest;
 use App\Http\Requests\CompanyEstablishmentsUpdateRequest;
-use App\Models\Company\CompanyFinancialBlocksModel;
-use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Company\CompanyFinancialBlocks;
+use App\Models\Company\CompanyEstablishments;
 use App\Models\Company\CompanyEstablishmentDepartment;
-use App\Models\Company\CompanyTypeEstablishmentsModel;
-use App\Models\Region\RegionCitiesModel;
+use App\Models\Company\CompanyTypeEstablishments;
+use App\Models\Region\RegionCities;
 use App\Services\Logger;
 
 class CompanyEstablishmentsController extends Controller
@@ -29,7 +29,7 @@ class CompanyEstablishmentsController extends Controller
     public function index(Request $request)
     {
         //Listagem de Dados
-        $db = CompanyEstablishmentsModel::select()
+        $db = CompanyEstablishments::select()
             ->orderBy('status','DESC')
             ->orderBy('title')
             ->with('FinancialBlocks')
@@ -42,7 +42,7 @@ class CompanyEstablishmentsController extends Controller
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName']) || isset($search['searchCod'])) {
-            $db = CompanyEstablishmentsModel::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
+            $db = CompanyEstablishments::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('title')
                 ->paginate(20);
@@ -64,9 +64,9 @@ class CompanyEstablishmentsController extends Controller
     public function create()
     {
         //Listagem de Dados
-        $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
-        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
-        $dbCompanyFinancialBlocks = CompanyFinancialBlocksModel::where('status',true)->orderBy('title')->get();
+        $dbRegionCities = RegionCities::where('status',true)->orderBy('city')->get();
+        $dbCompanyTypeEstablishments = CompanyTypeEstablishments::where('status',true)->orderBy('title')->get();
+        $dbCompanyFinancialBlocks = CompanyFinancialBlocks::where('status',true)->orderBy('title')->get();
 
         //Log do Sistema
         Logger::create();
@@ -88,7 +88,7 @@ class CompanyEstablishmentsController extends Controller
         $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
-        CompanyEstablishmentsModel::create($data);
+        CompanyEstablishments::create($data);
 
         //Log do Sistema
         Logger::store($data['title']);
@@ -102,7 +102,7 @@ class CompanyEstablishmentsController extends Controller
     public function show(Request $request, string $id)
     {
         //
-        $db = CompanyEstablishmentsModel::find($id);
+        $db = CompanyEstablishments::find($id);
         $dbDepartments = CompanyEstablishmentDepartment::where('establishment_id', $id)
             ->orderBy('contact')
             ->get();
@@ -122,10 +122,10 @@ class CompanyEstablishmentsController extends Controller
     public function edit(string $id)
     {
         //Listagem de Dados
-        $db = CompanyEstablishmentsModel::find($id);
-        $dbRegionCities = RegionCitiesModel::where('status',true)->orderBy('city')->get();
-        $dbCompanyTypeEstablishments = CompanyTypeEstablishmentsModel::where('status',true)->orderBy('title')->get();
-        $dbCompanyFinancialBlocks = CompanyFinancialBlocksModel::where('status',true)->orderBy('title')->get();
+        $db = CompanyEstablishments::find($id);
+        $dbRegionCities = RegionCities::where('status',true)->orderBy('city')->get();
+        $dbCompanyTypeEstablishments = CompanyTypeEstablishments::where('status',true)->orderBy('title')->get();
+        $dbCompanyFinancialBlocks = CompanyFinancialBlocks::where('status',true)->orderBy('title')->get();
 
         //Log do Sistema
         Logger::edit($db->establishment);
@@ -148,7 +148,7 @@ class CompanyEstablishmentsController extends Controller
         $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
-        $db = CompanyEstablishmentsModel::find($id);
+        $db = CompanyEstablishments::find($id);
         $db->update($data);
 
         //Log do Sistema
@@ -174,7 +174,7 @@ class CompanyEstablishmentsController extends Controller
         $data = $request->only('status');
 
         //Salvando Dados
-        $db = CompanyEstablishmentsModel::find($id);
+        $db = CompanyEstablishments::find($id);
         $db->update($data);
 
         //Log do Sistema

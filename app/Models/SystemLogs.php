@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SystemLogsModel extends Model
+class SystemLogs extends Model
 {
     use HasFactory;
 

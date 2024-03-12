@@ -6,7 +6,7 @@ use App\Models\Region\RegionCitiesModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyEstablishmentsModel extends Model
+class CompanyEstablishments extends Model
 {
     use HasFactory;
 
@@ -30,15 +30,15 @@ class CompanyEstablishmentsModel extends Model
     ];
 
     public function RegionCities(){
-        return $this->belongsTo(RegionCitiesModel::class,'city_id','id');
+        return $this->belongsTo(RegionCities::class,'city_id','id');
     }
 
     public function TypeEstablishments(){
-        return $this->belongsTo(CompanyTypeEstablishmentsModel::class,'type_establishment_id','id');
+        return $this->belongsTo(CompanyTypeEstablishments::class,'type_establishment_id','id');
     }
 
     public function FinancialBlocks(){
-        return $this->belongsTo(CompanyFinancialBlocksModel::class,'financial_block_id','id');
+        return $this->belongsTo(CompanyFinancialBlocks::class,'financial_block_id','id');
     }
 }
 

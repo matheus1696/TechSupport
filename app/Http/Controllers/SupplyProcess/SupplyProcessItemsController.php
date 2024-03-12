@@ -5,10 +5,10 @@ namespace App\Http\Controllers\SupplyProcess;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupplyProcessItemsStoreRequest;
 use App\Http\Requests\SupplyProcessItemsUpdateRequest;
-use App\Models\SupplyProcess\SupplyProcessesModel;
-use App\Models\SupplyProcess\SupplyProcessItemsModel;
-use App\Models\Product\ProductModel;
-use App\Models\Product\ProductUnitModel;
+use App\Models\SupplyProcess\SupplyProcesses;
+use App\Models\SupplyProcess\SupplyProcessItems;
+use App\Models\Product\Product;
+use App\Models\Product\ProductUnit;
 use App\Services\Logger;
 
 class SupplyProcessItemsController extends Controller
@@ -35,9 +35,9 @@ class SupplyProcessItemsController extends Controller
     public function create(string $id)
     {
         //Listando Dados
-        $dbSupplyProcesses = SupplyProcessesModel::find($id);
-        $dbProducts = ProductModel::where('status',true)->orderBy('title')->get();
-        $dbUnits = ProductUnitModel::all();
+        $dbSupplyProcesses = SupplyProcesses::find($id);
+        $dbProducts = Product::where('status',true)->orderBy('title')->get();
+        $dbUnits = ProductUnit::all();
 
         Logger::create();
 
@@ -57,7 +57,7 @@ class SupplyProcessItemsController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        SupplyProcessItemsModel::create($data);
+        SupplyProcessItems::create($data);
 
         Logger::store($data['process_id']);
 
@@ -79,10 +79,10 @@ class SupplyProcessItemsController extends Controller
     public function edit(string $id)
     {
         //Listagem de Dados
-        $db = SupplyProcessItemsModel::find($id);
-        $dbSupplyProcesses = SupplyProcessesModel::find($db['process_id']);
-        $dbProducts = ProductModel::all();
-        $dbUnits = ProductUnitModel::all();
+        $db = SupplyProcessItems::find($id);
+        $dbSupplyProcesses = SupplyProcesses::find($db['process_id']);
+        $dbProducts = Product::all();
+        $dbUnits = ProductUnit::all();
 
         Logger::edit($db->title);
 
@@ -103,7 +103,7 @@ class SupplyProcessItemsController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        $db = SupplyProcessItemsModel::find($id);
+        $db = SupplyProcessItems::find($id);
         $db->update($data);
 
         Logger::update($db->title);
@@ -118,7 +118,7 @@ class SupplyProcessItemsController extends Controller
     public function destroy($id)
     {
         //Listando Dados
-        $db = SupplyProcessItemsModel::find($id);
+        $db = SupplyProcessItems::find($id);
 
         //Exclusão de Item
             $db->delete();

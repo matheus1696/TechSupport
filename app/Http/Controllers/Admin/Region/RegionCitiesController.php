@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Region;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Region\RegionCitiesModel;
+use App\Models\Region\RegionCities;
 use App\Services\Logger;
 
 class RegionCitiesController extends Controller
@@ -23,7 +23,7 @@ class RegionCitiesController extends Controller
     public function index(Request $request)
     {
         //Listando Dados
-        $db = RegionCitiesModel::select()
+        $db = RegionCities::select()
             ->orderBy('status','DESC')
             ->orderBy('city')
             ->paginate(20);
@@ -31,7 +31,7 @@ class RegionCitiesController extends Controller
         //Pesquisar Dados
         $search=$request->all();
         if (isset($search['searchName'])) {
-            $db = RegionCitiesModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+            $db = RegionCities::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('city')
                 ->paginate(20);
         }
@@ -102,7 +102,7 @@ class RegionCitiesController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        $db = RegionCitiesModel::find($id);
+        $db = RegionCities::find($id);
         $db->update($data);
 
         //Log do Sistema

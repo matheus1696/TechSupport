@@ -8,8 +8,9 @@
 
     <!-- Slot Body -->
     @slot('body')
-        <x-form.input col="12" label="Título" id="title" required="required" value="{{$db->title}}" />
-        <x-form.textarea col="12" label="Objeto" id="description" required="required" value="{{$db->description}}" />
+    
+        @include('supply_process.supply_process.partials.supply_process_form')
+
         <x-form.input col="3" label="Nº Processo" id="code_process" value="{{$db->code_process}}" />
         <x-form.input col="3" label="Nº Pregão" id="code_auction" value="{{$db->code_auction}}" />
         <x-form.input col="3" label="Nº Contrato" id="code_contract" value="{{$db->code_contract}}" />

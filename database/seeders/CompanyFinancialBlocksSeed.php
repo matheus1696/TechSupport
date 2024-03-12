@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Company\CompanyFinancialBlocksModel;
+use App\Models\Company\CompanyFinancialBlocks;
 use Illuminate\Database\Seeder;
 
 class CompanyFinancialBlocksSeed extends Seeder
@@ -13,31 +13,31 @@ class CompanyFinancialBlocksSeed extends Seeder
     public function run(): void
     {
         //
-        CompanyFinancialBlocksModel::create([
+        CompanyFinancialBlocks::create([
             'title'=>'Administração',
             'color'=>'bg-green-600',
             'acronym'=>'ADM',
         ]);
 
-        CompanyFinancialBlocksModel::create([
+        CompanyFinancialBlocks::create([
             'title'=>'Atenção Especializada',
             'color'=>'bg-red-600',
             'acronym'=>'ATE',
         ]);
 
-        CompanyFinancialBlocksModel::create([
+        CompanyFinancialBlocks::create([
             'title'=>'Atenção Básica',
             'color'=>'bg-blue-600',
             'acronym'=>'ATB',
         ]);
 
-        CompanyFinancialBlocksModel::create([
+        CompanyFinancialBlocks::create([
             'title'=>'Vigilância Epdemiológica',
             'color'=>'bg-green-600',
             'acronym'=>'VEPD',
         ]);
 
-        CompanyFinancialBlocksModel::create([
+        CompanyFinancialBlocks::create([
             'title'=>'Vigilância Sanitária',
             'color'=>'bg-green-600',
             'acronym'=>'VSAN',

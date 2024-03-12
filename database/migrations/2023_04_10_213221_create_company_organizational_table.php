@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('acronym');
             $table->string('filter');
             $table->text('description')->nullable();
+            $table->integer('linked_users')->nullable();
             $table->boolean('status')->default(true);
             $table->string('order')->nullable();
             $table->integer('hierarchy');            

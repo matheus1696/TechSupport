@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyOrganizationalStoreRequest;
 use App\Http\Requests\CompanyOrganizationalUpdateRequest;
-use App\Models\Company\CompanyOrganizationalModel;
+use App\Models\Company\CompanyOrganizational;
+use App\Models\Company\CompanyOrganizationLinkedUsers;
+use App\Models\User;
 use App\Services\Logger;
 
 class CompanyOrganizationalController extends Controller
@@ -36,7 +38,7 @@ class CompanyOrganizationalController extends Controller
     public function create()
     {
         //Listando Dados
-        $dbSector = CompanyOrganizationalModel::select()->orderBy('order')->get();
+        $dbSector = CompanyOrganizational::select()->orderBy('order')->get();
 
         //Log do Sistema
         Logger::create();
@@ -54,7 +56,7 @@ class CompanyOrganizationalController extends Controller
         $data['filter'] = strtolower($request['title']);
 
         //Salvando Dados
-        CompanyOrganizationalModel::create($data);
+        CompanyOrganizational::create($data);
 
         //Log do Sistema
         Logger::store($data['title']);
@@ -67,7 +69,15 @@ class CompanyOrganizationalController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //Listando Dados
+        $db = CompanyOrganizational::find($id);
+        $dbUsers = User::all();
+        $dbLinkedUsers = CompanyOrganizationLinkedUsers::where('organizational_id',$id)->get();
+
+        //Log do Sistema
+        Logger::show($db->title);
+
+        return view('admin.company.organizational.organizational_show', compact('db','dbUsers','dbLinkedUsers'));
     }
 
     /**
@@ -76,8 +86,8 @@ class CompanyOrganizationalController extends Controller
     public function edit(string $id)
     {
         //Listando Dados
-        $db = CompanyOrganizationalModel::find($id);
-        $dbSector = CompanyOrganizationalModel::select()->orderBy('order')->get();
+        $db = CompanyOrganizational::find($id);
+        $dbSector = CompanyOrganizational::select()->orderBy('order')->get();
 
         //Log do Sistema
         Logger::edit($db->title);
@@ -94,7 +104,7 @@ class CompanyOrganizationalController extends Controller
     public function update(CompanyOrganizationalUpdateRequest $request, string $id)
     {
         //Listando Dados
-        $db = CompanyOrganizationalModel::find($id);
+        $db = CompanyOrganizational::find($id);
 
         //Dados do Formulário
         $data = $request->all();
@@ -115,8 +125,8 @@ class CompanyOrganizationalController extends Controller
     public function destroy(string $id)
     {
         //Listando Dados
-        $db = CompanyOrganizationalModel::find($id);
-        $dbCount = CompanyOrganizationalModel::where('hierarchy',$id)->count();
+        $db = CompanyOrganizational::find($id);
+        $dbCount = CompanyOrganizational::where('hierarchy',$id)->count();
 
         //Verificação
         if ($dbCount == 0) {
@@ -128,7 +138,7 @@ class CompanyOrganizationalController extends Controller
             return redirect(route('organizational.index'))
                 ->with('success','Exclusão realizada com sucesso.');
         }else {
-            $db = CompanyOrganizationalModel::find($id);
+            $db = CompanyOrganizational::find($id);
 
             //Log do Sistema
             Logger::error();
@@ -145,13 +155,13 @@ class CompanyOrganizationalController extends Controller
     {
         //Reordenando Setores
             //Buscando dados Setores
-                $organizational = CompanyOrganizationalModel::select()->orderBy('hierarchy')->get();
+                $organizational = CompanyOrganizational::select()->orderBy('hierarchy')->get();
 
             foreach ($organizational as $sectorValue) {
 
                 //Atribuindo Hierariquia do Setor Principal
                 if ($sectorValue['hierarchy'] == 0) {
-                    $orderList = CompanyOrganizationalModel::find($sectorValue['id']);
+                    $orderList = CompanyOrganizational::find($sectorValue['id']);
                     $orderList->order = "0" . $sectorValue['acronym'];
                     $orderList->number_hierarchy = 1;
                     $orderList->save();
@@ -159,11 +169,11 @@ class CompanyOrganizationalController extends Controller
 
                 //Listando Setores para Ordenação Hierarquica
                     //Buscando Dados do Predecessor (Acima do setor)
-                    $predecessor = CompanyOrganizationalModel::select()->where('id', $sectorValue['hierarchy'])->get();
+                    $predecessor = CompanyOrganizational::select()->where('id', $sectorValue['hierarchy'])->get();
 
                 foreach ($predecessor as $valuepredecessor) {
                     //Buscando dados
-                    $orderList = CompanyOrganizationalModel::find($sectorValue['id']);
+                    $orderList = CompanyOrganizational::find($sectorValue['id']);
 
                     //Atribuindo Novo Valor
                     $number_hierarchy = $valuepredecessor['order'] . $sectorValue['id'] . $sectorValue['acronym'];
@@ -176,7 +186,7 @@ class CompanyOrganizationalController extends Controller
             }
             
             //Listando Setores
-            $db = CompanyOrganizationalModel::select()->orderBy('order')->get();
+            $db = CompanyOrganizational::select()->orderBy('order')->get();
 
             return view('admin.company.organizational.organizational_index', compact('db'));
     }
@@ -187,7 +197,7 @@ class CompanyOrganizationalController extends Controller
     public function status(Request $request, string $id)
     {
         //Listando Dados
-        $db = CompanyOrganizationalModel::find($id);
+        $db = CompanyOrganizational::find($id);
 
         //Dados encaminhado pelo Formulário
         $data = $request->all();

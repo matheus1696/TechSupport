@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProdutUnitsStoreRequest;
 use App\Http\Requests\ProdutUnitsUpdateRequest;
-use App\Models\Product\ProductUnitModel;
+use App\Models\Product\ProductUnit;
 use App\Services\Logger;
 
 class ProductUnitController extends Controller
@@ -25,7 +25,7 @@ class ProductUnitController extends Controller
     public function index(Request $request)
     {
         //Listando Dados
-        $db = ProductUnitModel::select()
+        $db = ProductUnit::select()
             ->orderBy('status','desc')
             ->orderBy('title')
             ->paginate(20);
@@ -33,7 +33,7 @@ class ProductUnitController extends Controller
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName'])) {
-            $db = ProductUnitModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+            $db = ProductUnit::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('title')
                 ->paginate(20);
         }
@@ -66,7 +66,7 @@ class ProductUnitController extends Controller
         $data['filter'] = StrtoLower($data['title']);
 
         //Salvando Dados
-        ProductUnitModel::create($data);
+        ProductUnit::create($data);
 
         Logger::store($data['title']);
 
@@ -88,7 +88,7 @@ class ProductUnitController extends Controller
     public function edit(string $id)
     {
         //Listagem de Dados
-        $db = ProductUnitModel::find($id);
+        $db = ProductUnit::find($id);
 
         Logger::edit($db->title);
 
@@ -106,7 +106,7 @@ class ProductUnitController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        $db = ProductUnitModel::find($id);
+        $db = ProductUnit::find($id);
         $db->update($data);
 
         Logger::update($db->title);
@@ -132,7 +132,7 @@ class ProductUnitController extends Controller
         $data = $request->only('status');
 
         //Salvando Dados
-        $db = ProductUnitModel::find($id);
+        $db = ProductUnit::find($id);
         $db->update($data);
 
         Logger::status($db->id, $db->status);

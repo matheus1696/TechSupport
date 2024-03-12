@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company\CompanyFinancialBlocksModel;
+use App\Models\Company\CompanyFinancialBlocks;
 use App\Models\Dashboard\Dashboard;
 use App\Services\Logger;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class DashboardController extends Controller
      */
     public function create()
     {        
-        $dbFinancialBlock = CompanyFinancialBlocksModel::all();
+        $dbFinancialBlock = CompanyFinancialBlocks::all();
 
         //Log do Sistema
         Logger::create();
@@ -79,7 +79,7 @@ class DashboardController extends Controller
     {
         //
         $db = Dashboard::find($id);
-        $dbFinancialBlock = CompanyFinancialBlocksModel::all();
+        $dbFinancialBlock = CompanyFinancialBlocks::all();
 
         //Log do Sistema
         Logger::edit($db->title);

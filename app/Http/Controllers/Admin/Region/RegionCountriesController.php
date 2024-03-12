@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Region;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Region\RegionCountriesModel;
+use App\Models\Region\RegionCountries;
 use App\Services\Logger;
 
 class RegionCountriesController extends Controller
@@ -23,7 +23,7 @@ class RegionCountriesController extends Controller
     public function index(Request $request)
     {
         //Listando Dados
-        $db = RegionCountriesModel::select()
+        $db = RegionCountries::select()
             ->orderBy('status','DESC')
             ->orderBy('country')
             ->paginate(20);
@@ -31,7 +31,7 @@ class RegionCountriesController extends Controller
         //Pesquisar Dados
         $search=$request->all();
         if (isset($search['searchName'])) {
-            $db = RegionCountriesModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+            $db = RegionCountries::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('country')
                 ->paginate(20);
         }
@@ -102,7 +102,7 @@ class RegionCountriesController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        $db = RegionCountriesModel::find($id);
+        $db = RegionCountries::find($id);
         $db->update($data);
 
         //Log do Sistema

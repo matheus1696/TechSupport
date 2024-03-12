@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Region;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Region\RegionStatesModel;
+use App\Models\Region\RegionStates;
 use App\Services\Logger;
 
 class RegionStatesController extends Controller
@@ -23,7 +23,7 @@ class RegionStatesController extends Controller
     public function index(Request $request)
     {
         //Listando Dados
-        $db = RegionStatesModel::select()
+        $db = RegionStates::select()
             ->orderBy('status','DESC')
             ->orderBy('state')
             ->paginate(20);
@@ -31,7 +31,7 @@ class RegionStatesController extends Controller
         //Pesquisar Dados
         $search=$request->all();
         if (isset($search['searchName'])) {
-            $db = RegionStatesModel::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+            $db = RegionStates::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('state')
                 ->paginate(20);
         }
@@ -102,7 +102,7 @@ class RegionStatesController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        $db = RegionStatesModel::find($id);
+        $db = RegionStates::find($id);
         $db->update($data);
 
         //Log do Sistema
