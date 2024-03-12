@@ -38,20 +38,22 @@ class CompanyOrganizationLinkedUsersController extends Controller
 
         if ($dbUserValided) {
             return redirect()->back()->with('error','Usuário '.$dbUserValided->Users->name. ' Cadastrado em '. $dbUserValided->CompanyOrganizational->title);
+            
         } else {
-            dd('Erro');
+            
+            CompanyOrganizationLinkedUsers::create($data);
+
+            $dbCountLinkedUsers = CompanyOrganizationLinkedUsers::where('organizational_id', $data['organizational_id'])->count();
+    
+            $db = CompanyOrganizational::find($data['organizational_id']);
+            $db->linked_users = $dbCountLinkedUsers + 1;
+            $db->save();        
+    
+            return redirect()->back();
         }
         
 
-        CompanyOrganizationLinkedUsers::create($data);
-
-        $dbCountLinkedUsers = CompanyOrganizationLinkedUsers::where('organizational_id', $data['organizational_id'])->count();
-
-        $db = CompanyOrganizational::find($data['organizational_id']);
-        $db->linked_users = $dbCountLinkedUsers + 1;
-        $db->save();        
-
-        return redirect()->back();
+        
     }
 
     /**
