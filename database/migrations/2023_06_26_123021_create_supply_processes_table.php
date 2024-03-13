@@ -32,12 +32,12 @@ return new class extends Migration
             $table->unsignedBigInteger('requesting_id');            
             $table->unsignedBigInteger('inspector_head_id');
             $table->unsignedBigInteger('inspector_deputy_id');
-            $table->unsignedBigInteger('company_organization_id')->nullable();
+            $table->unsignedBigInteger('organizations_id')->nullable();
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('company_organization_id')->references('id')->on('company_organizations');
+            $table->foreign('organizations_id')->references('id')->on('company_organizations');
             $table->foreign('status_id')->references('id')->on('supply_process_statuses');
             $table->foreign('demantant_id')->references('id')->on('supply_process_demantants');
             $table->foreign('requesting_id')->references('id')->on('supply_process_requestings');
