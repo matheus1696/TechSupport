@@ -10,7 +10,7 @@
                     <a href="{{$route}}">
                         @if (isset($btnTitle))
                             @if ($btnTitle == 'Retornar')
-                                <span class="px-3 py-2 text-sm text-white bg-gray-700 rounded-full shadow-md hover:bg-gray-600">Retornar</span>
+                                <span class="px-3 py-2 text-sm text-white bg-gray-700 rounded-full shadow-md hover:bg-gray-600"><i class="fas fa-undo"></i> Retornar</span>
                             @else                                
                                 <span class="px-3 py-2 text-sm text-white bg-green-700 rounded-full shadow-md hover:bg-green-600">{{$btnTitle}}</span>
                             @endif

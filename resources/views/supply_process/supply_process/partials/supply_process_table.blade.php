@@ -2,7 +2,6 @@
     @slot('thead')
         <x-table.th class="w-40">Modalidade</x-table.th>
         <x-table.th>Titulo do Processo</x-table.th>
-        <x-table.th class="w-40">Data Venc.</x-table.th>
         <x-table.th class="w-28">Status</x-table.th>
         <x-table.th class="w-40"></x-table.th>
     @endslot
@@ -27,7 +26,6 @@
                     @endif
                 </x-table.td>
                 <x-table.td class="text-center">{{$item->title}}</x-table.td>
-                <x-table.td class="text-center">{{$item->due_date == NULL ? "" : date('d/m/Y',strtotime($item->due_date))}}</x-table.td>
                 <x-table.td class="text-center">
                     <span class="px-2 py-1 text-xs font-semibold text-white rounded-lg shadow-md {{$item->SupplyProcessStatus->color}}">{{$item->SupplyProcessStatus->title}}</span>
                 </x-table.td>
@@ -35,23 +33,35 @@
                     <x-button.minButtonModalInfo id="SupplyProcess{{$item->id}}" title="Informação do Processo de Fornecimento">
                             <div>
                                 <div class="grid grid-cols-1 gap-3 mb-3 lg:grid-cols-3">
-                                    <div><strong>Nº do Processo: </strong>{{$item->code_process}}</div>
-                                    <div><strong>Nº do Pregão: </strong>{{$item->code_auction}}</div>
-                                    <div><strong>Nº do Contrato: </strong>{{$item->code_contract}}</div>
+                                    <div class="lg:col-span-3">
+                                        <strong>Modalidade: </strong>
+                                        @if ($item->modality == 'direct_purchase') 
+                                            <span>Compra Direta</span>
+                                        @endif                    
+                                        @if ($item->modality == 'bidding_process') 
+                                            <span>Licitação</span>
+                                        @endif
+                                    </div>
                                     <div class="lg:col-span-3"><strong>Título: </strong>{{$item->title}}</div>
-                                    <div class="lg:col-span-3"><strong>Objetivo: </strong> {!! $item->description ?? "" !!} </div>
-                                    <div>
-                                        <strong>Início:</strong>
-                                        {{$item->start_date == NULL ? "" : date('d/m/Y',strtotime($item->start_date))}}
-                                    </div>
-                                    <div>
-                                        <strong>Vencimento:</strong>
-                                        {{$item->due_date == NULL ? "" : date('d/m/Y',strtotime($item->due_date))}}
-                                    </div>
-                                    <div>
-                                        <strong>Vigência:</strong>{{$item->validity}}
-                                        @if (!empty($item->validity)) meses @endif
-                                    </div>
+                                    <div class="lg:col-span-3"><strong>Motivação e justificativa: </strong> {!! $item->description ?? "" !!} </div>
+                                                       
+                                    @if ($item->modality == 'bidding_process') 
+                                        <div><strong>Nº do Processo: </strong>{{$item->code_process}}</div>
+                                        <div><strong>Nº do Pregão: </strong>{{$item->code_auction}}</div>
+                                        <div><strong>Nº do Contrato: </strong>{{$item->code_contract}}</div>
+                                        <div>
+                                            <strong>Início:</strong>
+                                            {{$item->start_date == NULL ? "" : date('d/m/Y',strtotime($item->start_date))}}
+                                        </div>
+                                        <div>
+                                            <strong>Vencimento:</strong>
+                                            {{$item->due_date == NULL ? "" : date('d/m/Y',strtotime($item->due_date))}}
+                                        </div>
+                                        <div>
+                                            <strong>Vigência:</strong>{{$item->validity}}
+                                            @if (!empty($item->validity)) meses @endif
+                                        </div>
+                                    @endif                                    
                                 </div>                               
                                 <hr>
                                 <div class="my-2">

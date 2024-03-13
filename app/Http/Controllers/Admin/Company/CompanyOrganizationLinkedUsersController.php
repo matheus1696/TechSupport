@@ -7,6 +7,7 @@ use App\Models\Company\CompanyOrganizationLinkedUsers;
 use App\Http\Requests\StoreCompanyOrganizationLinkedUsersRequest;
 use App\Http\Requests\UpdateCompanyOrganizationLinkedUsersRequest;
 use App\Models\Company\CompanyOrganizational;
+use Illuminate\Http\Request;
 
 class CompanyOrganizationLinkedUsersController extends Controller
 {
@@ -32,7 +33,6 @@ class CompanyOrganizationLinkedUsersController extends Controller
     public function store(StoreCompanyOrganizationLinkedUsersRequest $request)
     {
         $data = $request->all();
-
         $dbUserValided = CompanyOrganizationLinkedUsers::where('user_id',$data['user_id'])->first();
 
         if ($dbUserValided) {
@@ -45,8 +45,8 @@ class CompanyOrganizationLinkedUsersController extends Controller
             $dbCountLinkedUsers = CompanyOrganizationLinkedUsers::where('organizational_id', $data['organizational_id'])->count();
     
             $db = CompanyOrganizational::find($data['organizational_id']);
-            $db->linked_users = $dbCountLinkedUsers + 1;
-            $db->save();        
+            $db->linked_users = $dbCountLinkedUsers;
+            $db->save();
     
             return redirect()->back();
         }
@@ -79,10 +79,16 @@ class CompanyOrganizationLinkedUsersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CompanyOrganizationLinkedUsers $companyOrganizationLinkedUsers)
+    public function destroy(string $id)
     {
-        //
-        $companyOrganizationLinkedUsers->delete();
+        $db = CompanyOrganizationLinkedUsers::find($id);
+        $db->delete();
+
+        $dbCountLinkedUsers = CompanyOrganizationLinkedUsers::where('organizational_id', $db->organizational_id)->count();
+
+        $dbOrganizational = CompanyOrganizational::find($db->organizational_id);
+        $dbOrganizational->linked_users = $dbCountLinkedUsers;
+        $dbOrganizational->save();     
 
         return redirect()->back()->with('success','Usuário removido');
     }

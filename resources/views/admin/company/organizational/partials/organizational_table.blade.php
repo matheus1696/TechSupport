@@ -11,6 +11,13 @@
                     <x-table.td class="text-left">
                         <div style="padding-left:{{ $item->number_hierarchy }}em;">
                             {{$item->acronym}} - {{$item->title}}
+                            @if ($item->linked_users > 0)
+                                <span class="px-2 py-1 mx-3 text-xs font-semibold text-white rounded-lg shadow-md bg-gray-700/50">
+                                    <i class="mx-1 fas fa-user"></i>
+                                    <span>{{$item->linked_users}}</span>
+                                    <span>Usuários </span>
+                                </span>
+                            @endif
                         </div>
                     </x-table.td>
                     <x-table.td class="text-center">

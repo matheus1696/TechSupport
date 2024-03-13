@@ -2,7 +2,7 @@
     
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Organigrama: {{ $db->title }}"/>
+        <x-header title="Organigrama: {{ $db->title }} ({{$db->linked_users}})" route="{{ route('organizational.index') }}" btnTitle="Retornar"/>
     @endslot
 
     <!-- Slot Body -->
