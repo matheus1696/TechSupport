@@ -9,10 +9,10 @@
 <x-form.select col="6" label="Usuário Demantante" id="user_demantant_id">
     @foreach ($dbUsers as $dbUser)
         <option 
-            class="hidden user_demantant_id"
+            class="hidden userDemantant{{$dbUser->organization_id}}"
             value="{{$dbUser->id}}" 
             @isset($db) 
-                @if ($db->user_demantant_id == $dbUser->id) 
+                @if ($db->user_demantant_id == $dbUser->id)
                     selected 
                 @endif 
             @endisset
@@ -22,7 +22,7 @@
     @endforeach
 </x-form.select>
 
-<x-form.select col="6" label="Setor Solicitante" id="departament_requesting_id">
+<x-form.select col="6" label="Setor Solicitante" id="departament_requesting_id" onchange="userRequestiong()">
     @foreach ($dbOrganizational as $organizational)
         <option value="{{$organizational->id}}" @isset($db) @if ($db->user_requesting_id == $organizational->id) selected @endif @endisset>
             {{$organizational->title}}
@@ -32,9 +32,15 @@
 
 <x-form.select col="6" label="Usuário Solicitante" id="user_requesting_id">
     @foreach ($dbUsers as $dbUser)
-        <option value="{{$dbUser->id}}" @isset($db) @if ($db->user_requesting_id == $dbUser->id) selected @endif @endisset>
-            {{$dbUser->name}}
-        </option>
+        <option 
+            class="userRequesting{{$dbUser->organization_id}}"
+            value="{{$dbUser->id}}" 
+            @isset($db) 
+                @if ($db->user_requesting_id == $dbUser->id) 
+                    selected 
+                @endif 
+            @endisset
+        >
     @endforeach
 </x-form.select>
 
@@ -52,3 +58,5 @@
 
 <x-form.input col="6" label="Fiscal Titular" id="head_inspector_id" required="required" value="{{$db->head_inspector_id ?? ''}}"/>
 <x-form.input col="6" label="Fiscal Suplente" id="deputy_inspector_id" required="required" value="{{$db->deputy_inspector_id ?? ''}}"/>
+
+@include('supply_process.supply_process.partials.js.supply_process_script')
