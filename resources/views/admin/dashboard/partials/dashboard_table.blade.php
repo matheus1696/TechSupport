@@ -10,7 +10,7 @@
         @foreach ($db as $item)
             <x-table.tr>
                 <x-table.td class="text-center">{{$item->title}}</x-table.td>
-                <x-table.td class="text-center">{{$item->FinancialBlocks->title}}</x-table.td>
+                <x-table.td class="text-center">{{$item->FinancialBlock->title}}</x-table.td>
                 <x-table.td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('dashboards.status',['dashboard'=>$item->id])}}" />
                 </x-table.td>

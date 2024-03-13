@@ -11,7 +11,7 @@
             <x-table.tr>
                 <x-table.td>{{$item->code_ibge}}</x-table.td>
                 <x-table.td>{{$item->city}}</x-table.td>
-                <x-table.td>{{$item->RegionStates->state}}</x-table.td>
+                <x-table.td>{{$item->RegionState->state}}</x-table.td>
                 <x-table.td>
                     <x-button.buttonStatus condition="{{$item->status}}" route="{{route('cities.status',['city'=>$item->id])}}" />
                 </x-table.td>

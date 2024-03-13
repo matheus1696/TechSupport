@@ -29,7 +29,7 @@ class CompanyOrganizationUpdateRequest extends FormRequest
                 'min:2',
                 'string',
                 'uppercase',
-                Rule::unique('company_organizational')->ignore($this->organizational),
+                Rule::unique('company_organizations')->ignore($this->organizations),
             ],
             'hierarchy' => 'required',
         ];

@@ -13,7 +13,7 @@
                 <x-table.td class="text-center">{{$item->code_uf}}</x-table.td>
                 <x-table.td class="text-center">{{$item->acronym}}</x-table.td>
                 <x-table.td class="text-center">{{$item->state}}</x-table.td>
-                <x-table.td class="text-center">{{$item->RegionCountries->country}}</x-table.td>
+                <x-table.td class="text-center">{{$item->RegionCountry->country}}</x-table.td>
                 <x-table.td class="text-center">
                     <x-button.buttonStatus condition="{{$item->status}}"
                         route="{{route('states.status',['state'=>$item->id])}}" name="status" />
