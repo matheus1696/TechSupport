@@ -5,8 +5,8 @@ namespace App\Http\Controllers\SupplyProcess;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupplyProcess\SupplyProcessItemStoreRequest;
 use App\Http\Requests\SupplyProcess\SupplyProcessItemUpdateRequest;
-use App\Models\SupplyProcess\SupplyProcesses;
-use App\Models\SupplyProcess\SupplyProcessItems;
+use App\Models\SupplyProcess\SupplyProcess;
+use App\Models\SupplyProcess\SupplyProcessItem;
 use App\Models\Product\Product;
 use App\Models\Product\ProductUnit;
 use App\Services\Logger;
@@ -35,7 +35,7 @@ class SupplyProcessItemController extends Controller
     public function create(string $id)
     {
         //Listando Dados
-        $dbSupplyProcesses = SupplyProcesses::find($id);
+        $dbSupplyProcesses = SupplyProcess::find($id);
         $dbProducts = Product::where('status',true)->orderBy('title')->get();
         $dbUnits = ProductUnit::all();
 
@@ -57,7 +57,7 @@ class SupplyProcessItemController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        SupplyProcessItems::create($data);
+        SupplyProcessItem::create($data);
 
         Logger::store($data['process_id']);
 
@@ -79,8 +79,8 @@ class SupplyProcessItemController extends Controller
     public function edit(string $id)
     {
         //Listagem de Dados
-        $db = SupplyProcessItems::find($id);
-        $dbSupplyProcesses = SupplyProcesses::find($db['process_id']);
+        $db = SupplyProcessItem::find($id);
+        $dbSupplyProcesses = SupplyProcess::find($db['process_id']);
         $dbProducts = Product::all();
         $dbUnits = ProductUnit::all();
 
@@ -103,7 +103,7 @@ class SupplyProcessItemController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        $db = SupplyProcessItems::find($id);
+        $db = SupplyProcessItem::find($id);
         $db->update($data);
 
         Logger::update($db->title);
@@ -118,7 +118,7 @@ class SupplyProcessItemController extends Controller
     public function destroy($id)
     {
         //Listando Dados
-        $db = SupplyProcessItems::find($id);
+        $db = SupplyProcessItem::find($id);
 
         //Exclusão de Item
             $db->delete();

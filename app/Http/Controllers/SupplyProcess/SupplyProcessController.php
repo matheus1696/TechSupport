@@ -58,7 +58,10 @@ class SupplyProcessController extends Controller
     public function create()
     {
         $dbOrganizational = CompanyOrganization::where('linked_users', '>', 0)->get();
-        $dbUsers = User::all();
+        $dbUsers = User::where('registration', '!=',NULL)
+            ->where('cpf', '!=',NULL)            
+            ->where('organization_id', '!=',NULL)
+            ->get();
 
         //Logs
         Logger::create();

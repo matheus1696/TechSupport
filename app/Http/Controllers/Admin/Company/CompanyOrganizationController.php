@@ -25,16 +25,6 @@ class CompanyOrganizationController extends Controller
      */
     public function index()
     {
-        $dbOrganizations = CompanyOrganization::all();
-
-        foreach ($dbOrganizations as $dbOrganization) {
-            $dbLinkedUsers = User::where('organization_id',$dbOrganization->id)->count();
-
-            $db = CompanyOrganization::find($dbOrganization->id);
-            $db->linked_users = $dbLinkedUsers;
-            $db->save();
-        }
-
         //Log do Sistema
         Logger::access();        
 
@@ -78,10 +68,23 @@ class CompanyOrganizationController extends Controller
      */
     public function show(string $id)
     {
+        //Calculando Usuários Cadastrados
+        $dbOrganizations = CompanyOrganization::all();
+
+        foreach ($dbOrganizations as $dbOrganization) {
+            $dbLinkedUsers = User::where('organization_id',$dbOrganization->id)->count();
+
+            $db = CompanyOrganization::find($dbOrganization->id);
+            $db->linked_users = $dbLinkedUsers;
+            $db->save();
+        }
+
         //Listando Dados
         $db = CompanyOrganization::find($id);
         $dbUsers = User::all();
         $dbLinkedUsers = User::where('organization_id',$id)->get();
+
+        
 
         //Log do Sistema
         Logger::show($db->title);
@@ -162,6 +165,18 @@ class CompanyOrganizationController extends Controller
      */
     public function organize()
     {
+
+        //Verificando Usuários Cadastrados
+        $dbOrganizations = CompanyOrganization::all();
+
+        foreach ($dbOrganizations as $dbOrganization) {
+            $dbLinkedUsers = User::where('organization_id',$dbOrganization->id)->count();
+
+            $dbLinked = CompanyOrganization::find($dbOrganization->id);
+            $dbLinked->linked_users = $dbLinkedUsers;
+            $dbLinked->save();
+        }
+
         //Reordenando Setores
             //Buscando dados Setores
             $organizations = CompanyOrganization::select()->orderBy('hierarchy')->get();
