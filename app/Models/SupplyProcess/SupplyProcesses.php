@@ -19,6 +19,8 @@ class SupplyProcesses extends Model
         'title',
         'filter',
         'description',
+        'user_demantant_id',
+        'user_requesting_id',
         'intended_results',
         'requirements',
         'measures_adopted',

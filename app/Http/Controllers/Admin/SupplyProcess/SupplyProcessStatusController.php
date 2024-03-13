@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin\SupplyProcess;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SupplyProcess\SupplyProcessStatusStoreRequest;
+use App\Http\Requests\SupplyProcess\SupplyProcessStatusUpdateRequest;
 use App\Models\SupplyProcess\SupplyProcessStatus;
-use App\Http\Requests\StoreSupplyProcessStatusRequest;
-use App\Http\Requests\UpdateSupplyProcessStatusRequest;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 
@@ -38,7 +38,7 @@ class SupplyProcessStatusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSupplyProcessStatusRequest $request)
+    public function store(SupplyProcessStatusStoreRequest $request)
     {
         //
         $data = $request->all();
@@ -77,7 +77,7 @@ class SupplyProcessStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSupplyProcessStatusRequest $request, SupplyProcessStatus $supplyProcessStatus)
+    public function update(SupplyProcessStatusUpdateRequest $request, SupplyProcessStatus $supplyProcessStatus)
     {
         //Dados dos Formulários
         $data = $request->all();

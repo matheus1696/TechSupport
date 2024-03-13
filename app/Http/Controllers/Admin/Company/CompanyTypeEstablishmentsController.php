@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Company\CompanyEstablishments;
-use App\Models\Company\CompanyTypeEstablishments;
+use App\Models\Company\CompanyEstablishment;
+use App\Models\Company\CompanyTypeEstablishment;
 use App\Services\Logger;
 
-class CompanyTypeEstablishmentsController extends Controller
+class CompanyTypeEstablishmentController extends Controller
 {
     /*
      * Controller access permission resource.
@@ -24,8 +24,8 @@ class CompanyTypeEstablishmentsController extends Controller
     public function index()
     {
         //Listagem de Dados
-        $db = CompanyTypeEstablishments::select()->orderBy('status','DESC')->orderBy('title')->paginate(20);
-        $dbEstablishments = CompanyEstablishments::select()->orderBy('title')->get();
+        $db = CompanyTypeEstablishment::select()->orderBy('status','DESC')->orderBy('title')->paginate(20);
+        $dbEstablishments = CompanyEstablishment::select()->orderBy('title')->get();
 
         //Log do Sistema
         Logger::access();
@@ -54,7 +54,7 @@ class CompanyTypeEstablishmentsController extends Controller
     {
         $data = $request->all();
 
-        CompanyTypeEstablishments::create($data);
+        CompanyTypeEstablishment::create($data);
 
         //Log do Sistema
         Logger::store($data['title']);
@@ -75,7 +75,7 @@ class CompanyTypeEstablishmentsController extends Controller
      */
     public function edit(string $id)
     {
-        $db = CompanyTypeEstablishments::find($id);
+        $db = CompanyTypeEstablishment::find($id);
 
         //Log do Sistema
         Logger::edit($db->title);
@@ -94,7 +94,7 @@ class CompanyTypeEstablishmentsController extends Controller
         $data = $request->all();
 
         //Salvando Dados
-        $db = CompanyTypeEstablishments::find($id);
+        $db = CompanyTypeEstablishment::find($id);
         $db->update($data);
 
         //Log do Sistema
@@ -110,8 +110,8 @@ class CompanyTypeEstablishmentsController extends Controller
     public function destroy(string $id)
     {
         //Verificando Dados
-        $db = CompanyTypeEstablishments::find($id);
-        $dbEstablishments = CompanyEstablishments::where('type_establishment_id',$id)->count();
+        $db = CompanyTypeEstablishment::find($id);
+        $dbEstablishments = CompanyEstablishment::where('type_establishment_id',$id)->count();
 
         if ($dbEstablishments == 0) {
             $db->delete();

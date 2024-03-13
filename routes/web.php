@@ -6,17 +6,17 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Public\ContactListsController;
 use App\Http\Controllers\Users\Profile\ProfileController;
 use App\Http\Controllers\Admin\Users\UsersController;
-use App\Http\Controllers\Admin\Company\CompanyFinancialBlocksController;
-use App\Http\Controllers\Admin\Company\CompanyEstablishmentsController;
+use App\Http\Controllers\Admin\Company\CompanyFinancialBlockController;
+use App\Http\Controllers\Admin\Company\CompanyEstablishmentController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentDepartmentController;
 use App\Http\Controllers\Admin\Company\CompanyOccupationController;
-use App\Http\Controllers\Admin\Company\CompanyOrganizationalController;
-use App\Http\Controllers\Admin\Company\CompanyOrganizationLinkedUsersController;
-use App\Http\Controllers\Admin\Company\CompanyTypeEstablishmentsController;
+use App\Http\Controllers\Admin\Company\CompanyOrganizationController;
+use App\Http\Controllers\Admin\Company\CompanyOrganizationLinkedUserController;
+use App\Http\Controllers\Admin\Company\CompanyTypeEstablishmentController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
-use App\Http\Controllers\Admin\Region\RegionCitiesController;
-use App\Http\Controllers\Admin\Region\RegionCountriesController;
-use App\Http\Controllers\Admin\Region\RegionStatesController;
+use App\Http\Controllers\Admin\Region\RegionCityController;
+use App\Http\Controllers\Admin\Region\RegionCountryController;
+use App\Http\Controllers\Admin\Region\RegionStateController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
 use App\Http\Controllers\Admin\SupplyProcess\SupplyProcessStatusController;
@@ -25,8 +25,8 @@ use App\Http\Controllers\Admin\Ticket\TicketTypeCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketTypeServiceController;
 use App\Http\Controllers\Admin\Ticket\TicketTypeSubServiceController;
 use App\Http\Controllers\Dashboard\ViewDashboardController;
-use App\Http\Controllers\SupplyProcess\SupplyProcessesController;
-use App\Http\Controllers\SupplyProcess\SupplyProcessItemsController;
+use App\Http\Controllers\SupplyProcess\SupplyProcessController;
+use App\Http\Controllers\SupplyProcess\SupplyProcessItemController;
 use App\Http\Controllers\Ticket\TicketController;
 
 Route::get('/',function(){return view('index');});
@@ -68,23 +68,23 @@ Route::middleware('auth')->group(function () {
             Route::prefix('company')->group(function (){
 
                 //Rota - Dados do Organograma
-                    Route::get('organizational/organize',[CompanyOrganizationalController::class,'organize'])->name('organizational.organize');
-                    Route::put('organizational/status/{organizational}',[CompanyOrganizationalController::class,'status'])->name('organizational.status');
-                    Route::resource('organizational',CompanyOrganizationalController::class);
+                    Route::get('organizational/organize',[CompanyOrganizationController::class,'organize'])->name('organizational.organize');
+                    Route::put('organizational/status/{organizational}',[CompanyOrganizationController::class,'status'])->name('organizational.status');
+                    Route::resource('organizational',CompanyOrganizationController::class);
 
-                    Route::resource('organization_linked_users',CompanyOrganizationLinkedUsersController::class);
+                    Route::resource('organization_linked_users',CompanyOrganizationLinkedUserController::class);
                     
                 //Rota - Dados Ocupação (CBO)
                     Route::resource('occupations',CompanyOccupationController::class);
                 //Rota - Dados Tipo de Estabelecimento
-                    Route::resource('type_establishments',CompanyTypeEstablishmentsController::class);
+                    Route::resource('type_establishments',CompanyTypeEstablishmentController::class);
                 //Rota - Dados Estabelecimento de Saúde
-                    Route::put('establishments/status/{establishment}',[CompanyEstablishmentsController::class,'status'])->name('establishments.status');
-                    Route::resource('establishments',CompanyEstablishmentsController::class);
+                    Route::put('establishments/status/{establishment}',[CompanyEstablishmentController::class,'status'])->name('establishments.status');
+                    Route::resource('establishments',CompanyEstablishmentController::class);
                 //Rota - Dados do Contato Estabelecimento de Saúde
                     Route::resource('establishment_contacts',CompanyEstablishmentDepartmentController::class);
                 //Rota - Nível de Atenção
-                    Route::resource('financial_blocks',CompanyFinancialBlocksController::class);
+                    Route::resource('financial_blocks',CompanyFinancialBlockController::class);
 
             });
 
@@ -92,14 +92,14 @@ Route::middleware('auth')->group(function () {
             Route::prefix('region')->group(function (){
 
                 //Rota - Dados Paises
-                    Route::put('countries/status/{country}',[RegionCountriesController::class,'status'])->name('countries.status');
-                    Route::resource('countries',RegionCountriesController::class);
+                    Route::put('countries/status/{country}',[RegionCountryController::class,'status'])->name('countries.status');
+                    Route::resource('countries',RegionCountryController::class);
                 //Rota - Dados Estados
-                    Route::put('states/status/{state}',[RegionStatesController::class,'status'])->name('states.status');
-                    Route::resource('states',RegionStatesController::class);
+                    Route::put('states/status/{state}',[RegionStateController::class,'status'])->name('states.status');
+                    Route::resource('states',RegionStateController::class);
                 //Rota - Dados Cidades
-                    Route::put('cities/status/{city}',[RegionCitiesController::class,'status'])->name('cities.status');
-                    Route::resource('cities',RegionCitiesController::class);
+                    Route::put('cities/status/{city}',[RegionCityController::class,'status'])->name('cities.status');
+                    Route::resource('cities',RegionCityController::class);
 
             });
 
@@ -147,14 +147,14 @@ Route::middleware('auth')->group(function () {
             Route::prefix('supply_processes')->group(function (){
 
                 //Grupo de Rotas - Configurações de Processos Licitatórios
-                    Route::put('supply_processes/status/{supply_process}',[SupplyProcessesController::class,'status'])->name('supply_processes.status');
-                    Route::resource('supply_processes',SupplyProcessesController::class);
+                    Route::put('supply_processes/status/{supply_process}',[SupplyProcessController::class,'status'])->name('supply_processes.status');
+                    Route::resource('supply_processes',SupplyProcessController::class);
                 //Grupo de Rotas - Configurações dos Itens dos Processos Licitatórios
-                    Route::get('{supply_process}/items/create/',[SupplyProcessItemsController::class,'create'])->name('supply_process_items.create');
-                    Route::post('items/store',[SupplyProcessItemsController::class,'store'])->name('supply_process_items.store');
-                    Route::get('itens/{supply_process_item}/edit',[SupplyProcessItemsController::class,'edit'])->name('supply_process_items.edit');
-                    Route::put('itens/{supply_process_item}/update',[SupplyProcessItemsController::class,'update'])->name('supply_process_items.update');
-                    Route::delete('itens/{supply_process_item}/destroy',[SupplyProcessItemsController::class,'destroy'])->name('supply_process_items.destroy');
+                    Route::get('{supply_process}/items/create/',[SupplyProcessItemController::class,'create'])->name('supply_process_items.create');
+                    Route::post('items/store',[SupplyProcessItemController::class,'store'])->name('supply_process_items.store');
+                    Route::get('itens/{supply_process_item}/edit',[SupplyProcessItemController::class,'edit'])->name('supply_process_items.edit');
+                    Route::put('itens/{supply_process_item}/update',[SupplyProcessItemController::class,'update'])->name('supply_process_items.update');
+                    Route::delete('itens/{supply_process_item}/destroy',[SupplyProcessItemController::class,'destroy'])->name('supply_process_items.destroy');
 
                     Route::put('supply_process_statuses/status/{supply_process_status}',[SupplyProcessStatusController::class,'status'])->name('supply_process_statuses.status');
                     Route::put('supply_process_statuses/default/{supply_process_status}',[SupplyProcessStatusController::class,'default'])->name('supply_process_statuses.default');

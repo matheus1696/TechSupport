@@ -16,6 +16,10 @@ return new class extends Migration
             $table->text('title');
             $table->string('filter');
             $table->text('description');
+            $table->string('department_demantant_id');
+            $table->string('user_demantant_id');
+            $table->string('department_requesting_id'); 
+            $table->string('user_requesting_id');   
             $table->text('intended_results');
             $table->text('requirements');
             $table->text('measures_adopted');
@@ -29,12 +33,12 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('due_date')->nullable();
             $table->integer('validity')->nullable();
-            $table->unsignedBigInteger('company_organizational_id')->nullable();
+            $table->unsignedBigInteger('company_organization_id')->nullable();
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('company_organizational_id')->references('id')->on('company_organizational');
+            $table->foreign('company_organization_id')->references('id')->on('company_organizations');
             $table->foreign('status_id')->references('id')->on('supply_process_statuses');
             $table->foreign('user_id')->references('id')->on('users');
             

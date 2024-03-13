@@ -1,3 +1,43 @@
+<x-form.select col="6" label="Setor Demantante" id="department_demantant_id" onchange="userDemantant()">
+    @foreach ($dbOrganizational as $organizational)
+        <option value="{{$organizational->id}}" @isset($db) @if ($db->user_demantant_id == $organizational->id) selected @endif @endisset>
+            {{$organizational->title}}
+        </option>
+    @endforeach
+</x-form.select>
+
+<x-form.select col="6" label="Usuário Demantante" id="user_demantant_id">
+    @foreach ($dbUsers as $dbUser)
+        <option 
+            class="hidden user_demantant_id"
+            value="{{$dbUser->id}}" 
+            @isset($db) 
+                @if ($db->user_demantant_id == $dbUser->id) 
+                    selected 
+                @endif 
+            @endisset
+        >
+            {{$dbUser->name}}
+        </option>
+    @endforeach
+</x-form.select>
+
+<x-form.select col="6" label="Setor Solicitante" id="departament_requesting_id">
+    @foreach ($dbOrganizational as $organizational)
+        <option value="{{$organizational->id}}" @isset($db) @if ($db->user_requesting_id == $organizational->id) selected @endif @endisset>
+            {{$organizational->title}}
+        </option>
+    @endforeach
+</x-form.select>
+
+<x-form.select col="6" label="Usuário Solicitante" id="user_requesting_id">
+    @foreach ($dbUsers as $dbUser)
+        <option value="{{$dbUser->id}}" @isset($db) @if ($db->user_requesting_id == $dbUser->id) selected @endif @endisset>
+            {{$dbUser->name}}
+        </option>
+    @endforeach
+</x-form.select>
+
 <x-form.input col="8" label="Título" id="title" required="required" value="{{$db->title ?? ''}}" />
 
 <x-form.select col="4" label="Modalidade" id="modality">

@@ -21,6 +21,6 @@ class CompanyEstablishmentDepartment extends Model
     ];
 
     public function CompanyEstablishments(){
-        return $this->belongsTo(CompanyEstablishmentsModel::class,'establishment_id','id');
+        return $this->belongsTo(CompanyEstablishment::class,'establishment_id','id');
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin\Ticket;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Ticket\TicketStatusStoreRequest;
+use App\Http\Requests\Ticket\TicketStatusUpdateRequest;
 use App\Models\Ticket\TicketStatus;
-use App\Http\Requests\StoreTicketStatusRequest;
-use App\Http\Requests\UpdateTicketStatusRequest;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 
@@ -39,7 +39,7 @@ class TicketStatusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTicketStatusRequest $request)
+    public function store(TicketStatusStoreRequest $request)
     {
         //
         $data = $request->all();
@@ -78,7 +78,7 @@ class TicketStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTicketStatusRequest $request, TicketStatus $ticketStatus)
+    public function update(TicketStatusUpdateRequest $request, TicketStatus $ticketStatus)
     {
         //Dados dos Formulários
         $data = $request->all();

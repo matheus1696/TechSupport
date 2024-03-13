@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Ticket;
 use App\Http\Controllers\Controller;
 use App\Models\Ticket\TicketTypeCategory;
 use App\Http\Requests\StoreTicketTypeCategoryRequest;
+use App\Http\Requests\Ticket\TicketTypeCategoryStoreRequest;
+use App\Http\Requests\Ticket\TicketTypeCategoryUpdateRequest;
 use App\Http\Requests\UpdateTicketTypeCategoryRequest;
 use App\Models\Ticket\TicketTypeService;
 use App\Services\Logger;
@@ -40,7 +42,7 @@ class TicketTypeCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTicketTypeCategoryRequest $request)
+    public function store(TicketTypeCategoryStoreRequest $request)
     {
         //
         $data = $request->all();
@@ -88,7 +90,7 @@ class TicketTypeCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTicketTypeCategoryRequest $request, TicketTypeCategory $TicketTypeCategory)
+    public function update(TicketTypeCategoryUpdateRequest $request, TicketTypeCategory $TicketTypeCategory)
     {
         //Dados dos Formulários
         $data = $request->all();

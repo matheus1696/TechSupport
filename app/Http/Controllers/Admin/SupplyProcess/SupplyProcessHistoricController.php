@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin\SupplyProcess;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SupplyProcess\SupplyProcessHistoricStoreRequest;
+use App\Http\Requests\SupplyProcess\SupplyProcessHistoricUpdateRequest;
 use App\Models\SupplyProcess\SupplyProcessHistoric;
-use App\Http\Requests\StoreSupplyProcessHistoricRequest;
-use App\Http\Requests\UpdateSupplyProcessHistoricRequest;
 
 class SupplyProcessHistoricController extends Controller
 {
@@ -28,7 +28,7 @@ class SupplyProcessHistoricController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSupplyProcessHistoricRequest $request)
+    public function store(SupplyProcessHistoricStoreRequest $request)
     {
         //
     }
@@ -52,7 +52,7 @@ class SupplyProcessHistoricController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSupplyProcessHistoricRequest $request, SupplyProcessHistoric $supplyProcessHistoric)
+    public function update(SupplyProcessHistoricUpdateRequest $request, SupplyProcessHistoric $supplyProcessHistoric)
     {
         //
     }

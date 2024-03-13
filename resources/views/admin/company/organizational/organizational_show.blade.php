@@ -33,7 +33,7 @@
                 @slot('tbody')
                     @foreach ($dbLinkedUsers as $dbLinkedUser)
                         <x-table.tr>
-                            <x-table.td>{{$dbLinkedUser->Users->name}}</x-table.td>
+                            <x-table.td>{{$dbLinkedUser->name}}</x-table.td>
                             <x-table.td>
                                 <x-button.minButtonDelete route="{{route('organization_linked_users.destroy',['organization_linked_user'=>$dbLinkedUser->id])}}" />
                             </x-table.td>

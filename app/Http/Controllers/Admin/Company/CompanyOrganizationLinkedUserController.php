@@ -1,0 +1,77 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Company;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Company\CompanyOrganizationLinkedUserStoreRequest;
+use App\Http\Requests\Company\CompanyOrganizationLinkedUserUpdateRequest;
+use App\Models\User;
+
+class CompanyOrganizationLinkedUserController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(CompanyOrganizationLinkedUserStoreRequest $request)
+    {
+        $data = $request->all();
+            
+        $dbUsers = User::find($data['user_id']);
+        $dbUsers->organizational_id = $data['organizational_id'];
+        $dbUsers->save();
+
+        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show()
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit()
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(CompanyOrganizationLinkedUserUpdateRequest $request)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $dbUsers = User::find($id);
+        $dbUsers->organizational_id = NULL;
+        $dbUsers->save();
+
+        return redirect()->back()->with('success','Usuário removido');
+    }
+}

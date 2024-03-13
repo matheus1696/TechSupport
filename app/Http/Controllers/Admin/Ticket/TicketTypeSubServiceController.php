@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Ticket;
 use App\Http\Controllers\Controller;
 use App\Models\Ticket\TicketTypeSubService;
 use App\Http\Requests\StoreTicketTypeSubServiceRequest;
+use App\Http\Requests\Ticket\TicketTypeSubServiceStoreRequest;
+use App\Http\Requests\Ticket\TicketTypeSubServiceUpdateRequest;
 use App\Http\Requests\UpdateTicketTypeSubServiceRequest;
 use App\Services\Logger;
 use Illuminate\Http\Request;
@@ -30,7 +32,7 @@ class TicketTypeSubServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTicketTypeSubServiceRequest $request)
+    public function store(TicketTypeSubServiceStoreRequest $request)
     {
         //
         $data = $request->all();
@@ -61,7 +63,7 @@ class TicketTypeSubServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTicketTypeSubServiceRequest $request, TicketTypeSubService $ticketTypeSubService)
+    public function update(TicketTypeSubServiceUpdateRequest $request, TicketTypeSubService $ticketTypeSubService)
     {
         //
         $data = $request->all();
