@@ -23,7 +23,7 @@ class RegionState extends Model
         'country_id',
     ];
 
-    public function RegionCountries(){
+    public function RegionCountry(){
         return $this->belongsTo(RegionCountry::class,'country_id','id');
     }
 }

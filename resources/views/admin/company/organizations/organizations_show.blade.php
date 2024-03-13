@@ -2,7 +2,7 @@
     
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Organigrama: {{ $db->title }} ({{$db->linked_users}})" route="{{ route('organizational.index') }}" btnTitle="Retornar"/>
+        <x-header title="Organigrama: {{ $db->title }} ({{$db->linked_users}})" route="{{ route('organizations.index') }}" btnTitle="Retornar"/>
     @endslot
 
     <!-- Slot Body -->
@@ -11,7 +11,7 @@
         <x-conteiner>
             <div>
                 <x-form.form method="create" route="{{route('organization_linked_users.store')}}">
-                    <input type="hidden" name="organizational_id" value="{{$db->id}}">
+                    <input type="hidden" name="organization_id" value="{{$db->id}}">
                 
                     <x-form.select col="12" label="Usuário" id="user_id">
                         @foreach ($dbUsers as $dbUser)

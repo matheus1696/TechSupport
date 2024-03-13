@@ -2,7 +2,7 @@
 
 namespace App\Models\Company;
 
-use App\Models\Region\RegionCities;
+use App\Models\Region\RegionCity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,15 +29,15 @@ class CompanyEstablishment extends Model
         'status',
     ];
 
-    public function RegionCities(){
-        return $this->belongsTo(RegionCities::class,'city_id','id');
+    public function RegionCity(){
+        return $this->belongsTo(RegionCity::class,'city_id','id');
     }
 
-    public function TypeEstablishments(){
+    public function TypeEstablishment(){
         return $this->belongsTo(CompanyTypeEstablishment::class,'type_establishment_id','id');
     }
 
-    public function FinancialBlocks(){
+    public function FinancialBlock(){
         return $this->belongsTo(CompanyFinancialBlock::class,'financial_block_id','id');
     }
 }

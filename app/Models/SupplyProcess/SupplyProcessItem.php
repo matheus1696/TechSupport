@@ -7,7 +7,7 @@ use App\Models\Product\ProductUnitModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SupplyProcessItems extends Model
+class SupplyProcessItem extends Model
 {
     use HasFactory;
 
@@ -28,8 +28,8 @@ class SupplyProcessItems extends Model
         'reference_model_3',
     ];
 
-    public function SupplyProcesses(){
-        return $this->belongsTo(SupplyProcesses::class,'process_id','id');
+    public function SupplyProcess(){
+        return $this->belongsTo(SupplyProcess::class,'process_id','id');
     }
 
     public function Product(){

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Admin\Users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Company\CompanyEstablishmentsModel;
-use App\Models\Company\CompanyOccupationsModel;
-use App\Models\Company\CompanyOrganizationalModel;
+use App\Models\Company\CompanyEstablishment;
+use App\Models\Company\CompanyOccupation;
+use App\Models\Company\CompanyOrganization;
 use App\Models\User;
-use App\Models\User\UserHasPermissionsModel;
-use App\Models\User\UserPermissionsModel;
+use App\Models\User\UserHasPermissions;
+use App\Models\User\UserPermissions;
 use App\Services\Logger;
 
 class UsersController extends Controller
@@ -28,12 +28,12 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         //Listando Dados
-        $db = User::orderBy('name')->with('SexualOrientations')->paginate(20);
-        $dbPermissions= UserPermissionsModel::all();
-        $dbHasPermissions = UserHasPermissionsModel::all();
-        $dbCompanyOrganizational = CompanyOrganizationalModel::where('status',true)->orderBy('order')->get();
-        $dbCompanyOccupations = CompanyOccupationsModel::where('status',true)->orderBy('title')->get();
-        $dbEstablishments = CompanyEstablishmentsModel::where('status',true)->orderBy('title')->get();
+        $db = User::orderBy('name')->with('SexualOrientation')->paginate(20);
+        $dbPermissions= UserPermissions::all();
+        $dbHasPermissions = UserHasPermissions::all();
+        $dbCompanyOrganizational = CompanyOrganization::where('status',true)->orderBy('order')->get();
+        $dbCompanyOccupations = CompanyOccupation::where('status',true)->orderBy('title')->get();
+        $dbEstablishments = CompanyEstablishment::where('status',true)->orderBy('title')->get();
 
         //Pesquisar Dados
         $search = $request->all();
@@ -115,10 +115,10 @@ class UsersController extends Controller
 
         //Alterando Permissão do Usuário
             //Listando Permissões
-            $dbPermissions = UserPermissionsModel::all();
+            $dbPermissions = UserPermissions::all();
 
             //Sicronizando Permissões (Exclusão de Permissões Cadastradas)
-            UserHasPermissionsModel::where('model_id', $id)->delete();
+            UserHasPermissions::where('model_id', $id)->delete();
 
             //Atribundo FALSE nas permissões vazias encaminhadas pelo POST (Input Checked)
             foreach ($dbPermissions as $Permission) {
@@ -128,13 +128,13 @@ class UsersController extends Controller
             }
 
             //Atribuindo a permissão com TRUE em USER
-            $userPermission = UserPermissionsModel::select()->where('name','user')->first();
+            $userPermission = UserPermissions::select()->where('name','user')->first();
             $request['user'] = $userPermission->id;
 
             //Realizando a atualização das permissões
             foreach ($dbPermissions as $Permission) {
                 if ($request[$Permission->name]) {
-                    $data = new UserHasPermissionsModel;
+                    $data = new UserHasPermissions;
                     $data->permission_id = $request[$Permission->name];
                     $data->model_id = $id;
                     $data->save();

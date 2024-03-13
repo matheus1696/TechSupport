@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin\Company;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Company\FinancialBlockStoreRequest as CompanyFinancialBlockStoreRequest;
-use App\Http\Requests\Company\FinancialBlockUpdateRequest as CompanyFinancialBlockUpdateRequest;
-use App\Http\Requests\FinancialBlockStoreRequest;
-use App\Http\Requests\FinancialBlockUpdateRequest;
+use App\Http\Requests\Company\CompanyFinancialBlockStoreRequest;
+use App\Http\Requests\Company\CompanyFinancialBlockUpdateRequest;
 use App\Models\Company\CompanyFinancialBlock;
 use App\Services\Logger;
 

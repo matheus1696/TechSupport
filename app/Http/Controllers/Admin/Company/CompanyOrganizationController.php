@@ -35,11 +35,10 @@ class CompanyOrganizationController extends Controller
             $db->save();
         }
 
-
         //Log do Sistema
         Logger::access();        
 
-        return redirect(route('organizational.organize'));
+        return redirect(route('organizations.organize'));
     }
 
     /**
@@ -53,7 +52,7 @@ class CompanyOrganizationController extends Controller
         //Log do Sistema
         Logger::create();
 
-        return view('admin.company.organizational.organizational_create', compact('dbSector'));
+        return view('admin.company.organizations.organizations_create', compact('dbSector'));
     }
 
     /**
@@ -71,7 +70,7 @@ class CompanyOrganizationController extends Controller
         //Log do Sistema
         Logger::store($data['title']);
 
-        return redirect(route('organizational.organize'));
+        return redirect(route('organizations.index'));
     }
 
     /**
@@ -82,12 +81,12 @@ class CompanyOrganizationController extends Controller
         //Listando Dados
         $db = CompanyOrganization::find($id);
         $dbUsers = User::all();
-        $dbLinkedUsers = User::where('organizational_id',$id)->get();
+        $dbLinkedUsers = User::where('organization_id',$id)->get();
 
         //Log do Sistema
         Logger::show($db->title);
 
-        return view('admin.company.organizational.organizational_show', compact('db','dbUsers','dbLinkedUsers'));
+        return view('admin.company.organizations.organizations_show', compact('db','dbUsers','dbLinkedUsers'));
     }
 
     /**
@@ -102,7 +101,7 @@ class CompanyOrganizationController extends Controller
         //Log do Sistema
         Logger::edit($db->title);
 
-        return view('admin.company.organizational.organizational_edit', [
+        return view('admin.company.organizations.organizations_edit', [
             'dbSector' => $dbSector,
             'db' => $db,
         ]);
@@ -126,7 +125,7 @@ class CompanyOrganizationController extends Controller
         //Log do Sistema
         Logger::update($db->title);
 
-        return redirect(route('organizational.organize'));
+        return redirect(route('organizations.index'));
     }
 
     /**
@@ -145,7 +144,7 @@ class CompanyOrganizationController extends Controller
             //Log do Sistema
             Logger::destroy($db->title);
 
-            return redirect(route('organizational.index'))
+            return redirect(route('organizations.index'))
                 ->with('success','Exclusão realizada com sucesso.');
         }else {
             $db = CompanyOrganization::find($id);
@@ -153,7 +152,7 @@ class CompanyOrganizationController extends Controller
             //Log do Sistema
             Logger::error();
 
-            return redirect(route('organizational.index'))
+            return redirect(route('organizations.index'))
                 ->with('error','Existe setores vinculados a '.$db->title);
         }
     }
@@ -165,28 +164,28 @@ class CompanyOrganizationController extends Controller
     {
         //Reordenando Setores
             //Buscando dados Setores
-                $organizational = CompanyOrganization::select()->orderBy('hierarchy')->get();
+            $organizations = CompanyOrganization::select()->orderBy('hierarchy')->get();
 
-            foreach ($organizational as $sectorValue) {
+            foreach ($organizations as $organization) {
 
                 //Atribuindo Hierariquia do Setor Principal
-                if ($sectorValue['hierarchy'] == 0) {
-                    $orderList = CompanyOrganization::find($sectorValue['id']);
-                    $orderList->order = "0" . $sectorValue['acronym'];
+                if ($organization['hierarchy'] == 0) {
+                    $orderList = CompanyOrganization::find($organization['id']);
+                    $orderList->order = "0" . $organization['acronym'];
                     $orderList->number_hierarchy = 1;
                     $orderList->save();
                 }
 
                 //Listando Setores para Ordenação Hierarquica
                     //Buscando Dados do Predecessor (Acima do setor)
-                    $predecessor = CompanyOrganization::select()->where('id', $sectorValue['hierarchy'])->get();
+                    $predecessor = CompanyOrganization::select()->where('id', $organization['hierarchy'])->get();
 
                 foreach ($predecessor as $valuepredecessor) {
                     //Buscando dados
-                    $orderList = CompanyOrganization::find($sectorValue['id']);
+                    $orderList = CompanyOrganization::find($organization['id']);
 
                     //Atribuindo Novo Valor
-                    $number_hierarchy = $valuepredecessor['order'] . $sectorValue['id'] . $sectorValue['acronym'];
+                    $number_hierarchy = $valuepredecessor['order'] . $organization['id'] . $organization['acronym'];
 
                     //Salvando
                     $orderList->order = $number_hierarchy;
@@ -198,7 +197,7 @@ class CompanyOrganizationController extends Controller
             //Listando Setores
             $db = CompanyOrganization::select()->orderBy('order')->get();
 
-            return view('admin.company.organizational.organizational_index', compact('db'));
+            return view('admin.company.organizations.organizations_index', compact('db'));
     }
 
     /**
@@ -218,6 +217,6 @@ class CompanyOrganizationController extends Controller
         //Log do Sistema
         Logger::status($db->id, $db->status);
 
-        return redirect(route('organizational.organize'));
+        return redirect(route('organizations.organize'));
     }
 }

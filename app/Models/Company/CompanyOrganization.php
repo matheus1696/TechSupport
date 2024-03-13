@@ -11,8 +11,7 @@ class CompanyOrganization extends Model
 
     protected $table = 'company_organizations';
 
-    protected $fillable =
-    [
+    protected $fillable = [
         'title',
         'acronym',
         'filter',

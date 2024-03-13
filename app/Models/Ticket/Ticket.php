@@ -2,7 +2,7 @@
 
 namespace App\Models\Ticket;
 
-use App\Models\Company\CompanyEstablishmentsModel;
+use App\Models\Company\CompanyEstablishment;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -43,7 +43,7 @@ class Ticket extends Model
     }
 
     public function Establishment(){
-        return $this->belongsTo(CompanyEstablishmentsModel::class,'establishment_id','id');
+        return $this->belongsTo(CompanyEstablishment::class,'establishment_id','id');
     }
 
     public function User(){

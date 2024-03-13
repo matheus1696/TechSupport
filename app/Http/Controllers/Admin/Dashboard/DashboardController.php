@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company\CompanyFinancialBlocks;
+use App\Models\Company\CompanyFinancialBlock;
 use App\Models\Dashboard\Dashboard;
 use App\Services\Logger;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class DashboardController extends Controller
     public function index()
     {
         //Listagem de Dados
-        $db = Dashboard::select()->orderBy('title')->with('FinancialBlocks')->paginate(20);
+        $db = Dashboard::select()->orderBy('title')->with('FinancialBlock')->paginate(20);
 
         //Log do Sistema
         Logger::access();
@@ -39,7 +39,7 @@ class DashboardController extends Controller
      */
     public function create()
     {        
-        $dbFinancialBlock = CompanyFinancialBlocks::all();
+        $dbFinancialBlock = CompanyFinancialBlock::all();
 
         //Log do Sistema
         Logger::create();
@@ -79,7 +79,7 @@ class DashboardController extends Controller
     {
         //
         $db = Dashboard::find($id);
-        $dbFinancialBlock = CompanyFinancialBlocks::all();
+        $dbFinancialBlock = CompanyFinancialBlock::all();
 
         //Log do Sistema
         Logger::edit($db->title);

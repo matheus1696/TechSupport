@@ -20,7 +20,7 @@ class CompanyEstablishmentDepartment extends Model
         'establishment_id'
     ];
 
-    public function CompanyEstablishments(){
+    public function CompanyEstablishment(){
         return $this->belongsTo(CompanyEstablishment::class,'establishment_id','id');
     }
 }

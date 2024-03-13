@@ -68,9 +68,9 @@ Route::middleware('auth')->group(function () {
             Route::prefix('company')->group(function (){
 
                 //Rota - Dados do Organograma
-                    Route::get('organizational/organize',[CompanyOrganizationController::class,'organize'])->name('organizational.organize');
-                    Route::put('organizational/status/{organizational}',[CompanyOrganizationController::class,'status'])->name('organizational.status');
-                    Route::resource('organizational',CompanyOrganizationController::class);
+                    Route::get('organizations/organize',[CompanyOrganizationController::class,'organize'])->name('organizations.organize');
+                    Route::put('organizations/status/{organization}',[CompanyOrganizationController::class,'status'])->name('organizations.status');
+                    Route::resource('organizations',CompanyOrganizationController::class);
 
                     Route::resource('organization_linked_users',CompanyOrganizationLinkedUserController::class);
                     

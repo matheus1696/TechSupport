@@ -17,7 +17,7 @@ class CompanyTypeEstablishment extends Model
         'status',
     ];
 
-    public function Establishments(){
+    public function Establishment(){
         return $this->belongsTo(CompanyEstablishment::class,'id','type_establishment_id');
     }
 }

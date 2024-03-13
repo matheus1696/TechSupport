@@ -4,7 +4,7 @@ namespace App\Http\Requests\Company;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FinancialBlockStoreRequest extends FormRequest
+class CompanyFinancialBlockStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class FinancialBlockStoreRequest extends FormRequest
         return [
             'title' => 'required|unique:company_financial_blocks',
             'acronym' => 'required|min:3|max:15|uppercase|unique:company_financial_blocks',
-            'color' => 'required|min:3|max:15|uppercase|unique:company_financial_blocks',
+            'color' => 'required',
         ];
     }
 }

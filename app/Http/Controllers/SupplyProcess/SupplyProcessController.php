@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SupplyProcess\SupplyProcessStoreRequest;
 use App\Http\Requests\SupplyProcess\SupplyProcessUpdateRequest;
 use App\Models\Company\CompanyOrganization;
-use App\Models\SupplyProcess\SupplyProcesses;
-use App\Models\SupplyProcess\SupplyProcessItems;
+use App\Models\SupplyProcess\SupplyProcess;
+use App\Models\SupplyProcess\SupplyProcessItem;
 use App\Models\SupplyProcess\SupplyProcessStatus;
 use App\Models\User;
 use App\Services\Logger;
@@ -30,13 +30,13 @@ class SupplyProcessController extends Controller
      */
     public function index(Request $request)
     {
-        $db = SupplyProcesses::select()->orderBy('due_date', 'DESC')->paginate(20);
-        $dbSupplyProcessItems = SupplyProcessItems::all();
+        $db = SupplyProcess::select()->orderBy('due_date', 'DESC')->paginate(20);
+        $dbSupplyProcessItem = SupplyProcessItem::all();
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchCod']) || isset($search['searchName'])) {
-            $db = SupplyProcesses::where('code_process','LIKE','%'.strtolower($search['searchCod']).'%')
+            $db = SupplyProcess::where('code_process','LIKE','%'.strtolower($search['searchCod']).'%')
                 ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('title')
                 ->paginate(20);
@@ -48,7 +48,7 @@ class SupplyProcessController extends Controller
         return view('supply_process.supply_process.supply_process_index',[
             'search'=>$search,
             'db'=>$db,
-            'dbSupplyProcessItems'=>$dbSupplyProcessItems,
+            'dbSupplyProcessItem'=>$dbSupplyProcessItem,
         ]);
     }
 
@@ -80,7 +80,7 @@ class SupplyProcessController extends Controller
         $data['status_id'] = $dbSupplyProcessStatus->id;
 
         //Salvando Dados
-        SupplyProcesses::create($data);
+        SupplyProcess::create($data);
 
         //Logs
         Logger::store($data['title']);
@@ -95,15 +95,15 @@ class SupplyProcessController extends Controller
     public function show(string $id)
     {
         //Listagem de Dados
-        $db = SupplyProcesses::find($id);
-        $dbSupplyProcessItems = SupplyProcessItems::where('process_id', $id)->paginate(20);
+        $db = SupplyProcess::find($id);
+        $dbSupplyProcessItem = SupplyProcessItem::where('process_id', $id)->paginate(20);
 
         //Logs
         Logger::show($db->title);
 
         return view('supply_process.supply_process.supply_process_show',[
             'db'=>$db,
-            'dbSupplyProcessItems'=>$dbSupplyProcessItems,
+            'dbSupplyProcessItem'=>$dbSupplyProcessItem,
         ]);
     }
 
@@ -113,7 +113,7 @@ class SupplyProcessController extends Controller
     public function edit(string $id)
     {
         //Listagem de Dados
-        $db = SupplyProcesses::find($id);
+        $db = SupplyProcess::find($id);
 
         //Logs
         Logger::edit($db->title);
@@ -134,7 +134,7 @@ class SupplyProcessController extends Controller
         $data['validity'] = floor((strtotime($data['due_date']) - strtotime($data['start_date'])) / (60 * 60 * 24 ) / 30);
 
         //Salvando Dados
-        $db = SupplyProcesses::find($id);
+        $db = SupplyProcess::find($id);
         $db->update($data);
 
         //Logs
@@ -161,7 +161,7 @@ class SupplyProcessController extends Controller
         $data = $request->only('status');
 
         //Salvando Dados
-        $db = SupplyProcesses::find($id);
+        $db = SupplyProcess::find($id);
         $db->update($data);
 
         //Logs

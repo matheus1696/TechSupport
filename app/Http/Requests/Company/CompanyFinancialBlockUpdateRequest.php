@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Company
-;
+namespace App\Http\Requests\Company;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class FinancialBlockUpdateRequest extends FormRequest
+class CompanyFinancialBlockUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,10 +34,7 @@ class FinancialBlockUpdateRequest extends FormRequest
                 'uppercase',
                 Rule::unique('company_financial_blocks')->ignore($this->financial_block),
             ],
-            'color' => [
-                'required',
-                Rule::unique('company_financial_blocks')->ignore($this->financial_block),
-            ],
+            'color' => 'required',
         ];
     }
 }

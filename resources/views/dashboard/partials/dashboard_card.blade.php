@@ -1,5 +1,5 @@
-<a href="{{ route('view_dashboards.show',['view_dashboard'=>$item->id])}}" target="_black">  
-    <div class="{{$item->FinancialBlocks->color}} rounded-xl hover:shadow-lg overflow-hidden border-4 hover:border-gray-400">
+<a href="{{ route('view_dashboards.show',['view_dashboard'=>$item->id])}}" target="_black" class="text-white">  
+    <div class="{{$item->FinancialBlock->color}} rounded-xl hover:shadow-lg overflow-hidden border-4 hover:border-gray-400">
         <div class="px-2">
             <div class="flex flex-col items-center justify-center" style="height: 100px">
                 <span class="text-center">{{$item->title}}</span>                

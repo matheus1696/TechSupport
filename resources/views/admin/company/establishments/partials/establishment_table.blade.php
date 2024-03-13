@@ -17,7 +17,7 @@
                 <x-table.td>{{$item->code}}</x-table.td>
                 <x-table.td>{{$item->title}}</x-table.td>
                 <x-table.td>{{$item->district}}</x-table.td>
-                <x-table.td>{{$item->FinancialBlocks->title}}</x-table.td>
+                <x-table.td>{{$item->FinancialBlock->title}}</x-table.td>
                 <x-table.td>
                     <x-button.buttonStatus condition="{{$item->status}}" name="status" route="{{route('establishments.status',['establishment'=>$item->id])}}" />
                 </x-table.td>
@@ -31,8 +31,8 @@
                                 <strong>Endereço: </strong>
                                 {{$item->address ?? ""}},{{$item->number ?? ""}}, {{$item->district ?? ""}}, {{$item->RegionCities->city ?? ""}} - {{$item->RegionCities->RegionStates->state ?? ""}}
                             </p>
-                            <p><strong>Tipo de Estabelecimento: </strong>{{$item->TypeEstablishments->title ?? ""}}</p>
-                            <p><strong>Bloco Financeiro: </strong>{{$item->FinancialBlocks->title ?? ""}}</p>
+                            <p><strong>Tipo de Estabelecimento: </strong>{{$item->TypeEstablishment->title ?? ""}}</p>
+                            <p><strong>Bloco Financeiro: </strong>{{$item->FinancialBlock->title ?? ""}}</p>
                         </div>
                         <hr>
                         <div>

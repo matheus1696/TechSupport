@@ -21,7 +21,7 @@ class RegionCity extends Model
         'state_id',
     ];
 
-    public function RegionStates(){
+    public function RegionState(){
         return $this->belongsTo(RegionState::class,'state_id','id');
     }
 }

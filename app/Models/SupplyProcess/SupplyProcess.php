@@ -5,7 +5,7 @@ namespace App\Models\SupplyProcess;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SupplyProcesses extends Model
+class SupplyProcess extends Model
 {
     use HasFactory;
 

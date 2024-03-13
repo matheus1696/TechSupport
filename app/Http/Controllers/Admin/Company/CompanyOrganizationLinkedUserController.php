@@ -33,7 +33,7 @@ class CompanyOrganizationLinkedUserController extends Controller
         $data = $request->all();
             
         $dbUsers = User::find($data['user_id']);
-        $dbUsers->organizational_id = $data['organizational_id'];
+        $dbUsers->organization_id = $data['organization_id'];
         $dbUsers->save();
 
         return redirect()->back();
@@ -69,7 +69,7 @@ class CompanyOrganizationLinkedUserController extends Controller
     public function destroy(string $id)
     {
         $dbUsers = User::find($id);
-        $dbUsers->organizational_id = NULL;
+        $dbUsers->organization_id = NULL;
         $dbUsers->save();
 
         return redirect()->back()->with('success','Usuário removido');

@@ -24,14 +24,14 @@
             <x-form.input col="6" label="Matricula" id="registration" value="{{$db->registration}}" maxlength="8" minlength="8" placeholder="99.999-2"/>
 
             <x-form.select col="12" label="Estabelecimento" id="establishment_id">
-                @foreach ($dbEstablishments as $Establishment)
-                    <option value="{{$Establishment->id}}" @if ($db->establishment_id ==
-                        $Establishment->id) selected @endif>{{$Establishment->title}}
+                @foreach ($dbEstablishments as $establishment)
+                    <option value="{{$establishment->id}}" @if ($db->establishment_id ==
+                        $establishment->id) selected @endif>{{$establishment->title}}
                     </option>
                 @endforeach
             </x-form.select>
 
-            <x-form.input col="12" label="Cargo" id="disabled" value="{{$db->CompanyOccupations->occupation ?? ''}}" disabled="disabled" />                      
+            <x-form.input col="12" label="Cargo" id="disabled" value="{{$db->CompanyOccupation->title ?? ''}}" disabled="disabled" />
             
             <x-form.input col="6" label="Contato 1" type="tel" id="contact_1" value="{{$db->contact_1}}" maxlength="15" minlength="13" placeholder="(00) 00000-0000"/>
                 

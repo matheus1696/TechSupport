@@ -8,7 +8,7 @@
 <x-form.select col="4" label="Cidade" id="city_id" required="required">
     @foreach ($dbRegionCities as $item)
         <option value="{{$item->id}}" @isset($db) @if ($db->city_id == $item->id) selected @endif @endisset>
-            {{$item->code_ibge}} | {{$item->city}} - {{$item->RegionStates->acronym}}
+            {{$item->code_ibge}} | {{$item->city}} - {{$item->RegionState->acronym}}
         </option>
     @endforeach
 </x-form.select>

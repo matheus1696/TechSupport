@@ -21,12 +21,12 @@
                         </div>
                     </x-table.td>
                     <x-table.td class="text-center">
-                        <x-button.buttonStatus condition="{{$item->status}}" route="{{route('organizational.status',['organizational'=>$item->id])}}" name="status"/>
+                        <x-button.buttonStatus condition="{{$item->status}}" route="{{route('organizations.status',['organization'=>$item->id])}}" name="status"/>
                     </x-table.td>
                     <x-table.td class="text-center">                        
-                        <x-button.minButtonShow route="{{route('organizational.show',['organizational'=>$item->id])}}"/>
-                        <x-button.minButtonEdit route="{{route('organizational.edit',['organizational'=>$item->id])}}"/>
-                        <x-button.minButtonDelete route="{{route('organizational.destroy',['organizational'=>$item->id])}}"/>
+                        <x-button.minButtonShow route="{{route('organizations.show',['organization'=>$item->id])}}"/>
+                        <x-button.minButtonEdit route="{{route('organizations.edit',['organization'=>$item->id])}}"/>
+                        <x-button.minButtonDelete route="{{route('organizations.destroy',['organization'=>$item->id])}}"/>
                     </x-table.td>
                 </x-table.tr>
             @endforeach
