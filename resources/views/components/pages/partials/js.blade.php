@@ -25,19 +25,19 @@
 <script type="text/javascript">
     $(document).ready(function () {
                 $('.summernote').summernote({
-                    height: 300,
+                    height: 200,
                     toolbar: [
                         // [groupName, [list of button]]
-                        ['style', ['style',]],
                         ['style', ['bold', 'italic', 'underline', 'clear',]],
                         ['color', ['color']],
+                        ['font', ['strikethrough', 'superscript', 'subscript']],
                         ['fontsize', ['fontsize']],
-                        ['para', ['ul', 'ol', 'paragraph']],
                         ['height', ['height']],
                         ['font', ['superscript', 'subscript']],
                         ['table', ['table','addRowDown', 'addRowUp', 'addColLeft', 'addColRight','delete','deleteRow', 'deleteCol', 'deleteTable']],
                         ['view', ['fullscreen']],
-                    ]
+                    ],
+                    placeholder: 'Digite aqui...',
                 });
             });
 </script>
