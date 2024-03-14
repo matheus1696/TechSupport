@@ -2,10 +2,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+//Controllers
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Public\ContactListsController;
-use App\Http\Controllers\Users\Profile\ProfileController;
-use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\Admin\Company\CompanyFinancialBlockController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentDepartmentController;
@@ -13,28 +12,28 @@ use App\Http\Controllers\Admin\Company\CompanyOccupationController;
 use App\Http\Controllers\Admin\Company\CompanyOrganizationController;
 use App\Http\Controllers\Admin\Company\CompanyOrganizationLinkedUserController;
 use App\Http\Controllers\Admin\Company\CompanyTypeEstablishmentController;
-use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Region\RegionCityController;
 use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
-use App\Http\Controllers\Admin\SupplyProcess\SupplyProcessStatusController;
-use App\Http\Controllers\Admin\Ticket\TicketStatusController;
-use App\Http\Controllers\Admin\Ticket\TicketTypeCategoryController;
-use App\Http\Controllers\Admin\Ticket\TicketTypeServiceController;
-use App\Http\Controllers\Admin\Ticket\TicketTypeSubServiceController;
+use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use App\Http\Controllers\Dashboard\ViewDashboardController;
+use App\Http\Controllers\SupplyProcess\Admin\SupplyProcessStatusController;
 use App\Http\Controllers\SupplyProcess\SupplyProcessController;
 use App\Http\Controllers\SupplyProcess\SupplyProcessItemController;
+use App\Http\Controllers\Ticket\Admin\TicketStatusController;
+use App\Http\Controllers\Ticket\Admin\TicketTypeCategoryController;
+use App\Http\Controllers\Ticket\Admin\TicketTypeServiceController;
+use App\Http\Controllers\Ticket\Admin\TicketTypeSubServiceController;
 use App\Http\Controllers\Ticket\TicketController;
+use App\Http\Controllers\Users\Admin\UsersController;
+use App\Http\Controllers\Users\ProfileController;
 
 Route::get('/',function(){return view('index');});
 
 //Lista Telefônica
 Route::resource('contacts', ContactListsController::class);
-
-
 
 //Camada de Seguraça para Usuários Logados
 Route::middleware('auth')->group(function () {

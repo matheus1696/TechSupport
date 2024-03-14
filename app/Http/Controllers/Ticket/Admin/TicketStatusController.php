@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Ticket;
+namespace App\Http\Controllers\Ticket\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ticket\TicketStatusStoreRequest;

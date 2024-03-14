@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\SupplyProcess;
+namespace App\Http\Controllers\SupplyProcess\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupplyProcess\SupplyProcessStatusStoreRequest;

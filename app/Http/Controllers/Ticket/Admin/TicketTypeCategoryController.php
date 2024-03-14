@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Ticket;
+namespace App\Http\Controllers\Ticket\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ticket\TicketTypeCategory;
-use App\Http\Requests\StoreTicketTypeCategoryRequest;
 use App\Http\Requests\Ticket\TicketTypeCategoryStoreRequest;
 use App\Http\Requests\Ticket\TicketTypeCategoryUpdateRequest;
-use App\Http\Requests\UpdateTicketTypeCategoryRequest;
 use App\Models\Ticket\TicketTypeService;
 use App\Services\Logger;
 use Illuminate\Http\Request;
