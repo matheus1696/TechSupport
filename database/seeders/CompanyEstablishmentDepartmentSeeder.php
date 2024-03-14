@@ -6,7 +6,7 @@ use App\Models\Company\CompanyEstablishmentDepartment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CompanyEstablishmentDepartmentsSeeder extends Seeder
+class CompanyEstablishmentDepartmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.

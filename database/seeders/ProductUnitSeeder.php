@@ -6,7 +6,7 @@ use App\Models\Product\ProductUnit;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProductUnitsSeeder extends Seeder
+class ProductUnitSeeder extends Seeder
 {
     /**
      * Run the database seeds.

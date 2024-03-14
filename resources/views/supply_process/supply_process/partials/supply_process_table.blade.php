@@ -19,10 +19,10 @@
             >
                 <x-table.td class="text-center">
                     @if ($item->modality == 'direct_purchase') 
-                        <span class="px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded-lg shadow-md">Compra Direta</span>
+                        <div class="px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded-lg shadow-md">Compra Direta</div>
                     @endif                    
                     @if ($item->modality == 'bidding_process') 
-                        <span class="px-2 py-1 text-xs font-semibold text-white bg-yellow-700 rounded-lg shadow-md">Licitação</span>
+                        <div class="px-2 py-1 text-xs font-semibold text-white bg-yellow-700 rounded-lg shadow-md">Licitação</div>
                     @endif
                 </x-table.td>
                 <x-table.td class="text-center">{{$item->title}}</x-table.td>

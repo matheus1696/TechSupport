@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Company\CompanyFinancialBlock;
 use Illuminate\Database\Seeder;
 
-class CompanyFinancialBlocksSeeder extends Seeder
+class CompanyFinancialBlockSeeder extends Seeder
 {
     /**
      * Run the database seeds.

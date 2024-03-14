@@ -28,8 +28,10 @@ class SupplyProcessStoreRequest extends FormRequest
             'requirements' => 'required|min:20',
             'measures_adopted' => 'required|min:20',
             'modality' => 'required',
-            'head_inspector_id' => 'required',
-            'deputy_inspector_id' => 'required',
+            'inspector_head_user_id' => 'required',
+            'inspector_deputy_user_id' => 'required',            
+            'demantant_user_id' => 'required',
+            'requesting_user_id' => 'required',
         ];
     }
 }

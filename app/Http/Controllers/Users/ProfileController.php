@@ -121,29 +121,4 @@ class ProfileController extends Controller
             return redirect(route('home'));
         };
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //Listando Usuário
-        $db = User::find($id);
-
-        //Excluindo Usuário
-        if ($db && $db->id === Auth::user()->id) {
-            $db->delete();
-
-            //Log do Sistema
-            Logger::updateProfileDestroy($db->name);
-
-            Auth::logout();
-            return redirect(route('login'));
-        } else {
-            //Log do Sistema
-            Logger::errorUserDiferentDestroy();
-
-            return redirect(route('home'));
-        };
-    }
 }

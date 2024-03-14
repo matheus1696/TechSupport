@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupplyProcess\SupplyProcessStoreRequest;
 use App\Http\Requests\SupplyProcess\SupplyProcessUpdateRequest;
-use App\Models\Company\CompanyOrganization;
 use App\Models\SupplyProcess\SupplyProcess;
 use App\Models\SupplyProcess\SupplyProcessItem;
 use App\Models\SupplyProcess\SupplyProcessStatus;
@@ -31,7 +30,7 @@ class SupplyProcessController extends Controller
     public function index(Request $request)
     {
         $db = SupplyProcess::select()->orderBy('due_date', 'DESC')->paginate(20);
-        $dbSupplyProcessItem = SupplyProcessItem::all();
+        $dbSupplyProcessItems = SupplyProcessItem::all();
 
         //Pesquisar Dados
         $search = $request->all();
@@ -48,7 +47,7 @@ class SupplyProcessController extends Controller
         return view('supply_process.supply_process.supply_process_index',[
             'search'=>$search,
             'db'=>$db,
-            'dbSupplyProcessItem'=>$dbSupplyProcessItem,
+            'dbSupplyProcessItems'=>$dbSupplyProcessItems,
         ]);
     }
 
@@ -57,16 +56,16 @@ class SupplyProcessController extends Controller
      */
     public function create()
     {
-        $dbOrganizational = CompanyOrganization::where('linked_users', '>', 0)->get();
         $dbUsers = User::where('registration', '!=',NULL)
             ->where('cpf', '!=',NULL)            
             ->where('organization_id', '!=',NULL)
+            ->with('CompanyOrganization')
             ->get();
 
         //Logs
         Logger::create();
 
-        return view('supply_process.supply_process.supply_process_create', compact('dbUsers','dbOrganizational'));
+        return view('supply_process.supply_process.supply_process_create', compact('dbUsers'));
     }
 
     /**
@@ -76,9 +75,43 @@ class SupplyProcessController extends Controller
     {
         //Dados dos Formulários
         $data = $request->all();
+
+        //Dados do Usuário
+        $dbDemantant = User::find($data['demantant_user_id']);
+        $dbRequesting = User::find($data['requesting_user_id']);
+        $dbInspectorHead = User::find($data['inspector_head_user_id']);
+        $dbInspectorDeputy = User::find($data['inspector_deputy_user_id']);
+
+        //Vinculando Demandante
+        $data['demantant_name'] = $dbDemantant->name;
+        $data['demantant_organization'] = $dbDemantant->CompanyOrganization->title;
+        $data['demantant_registration'] = $dbDemantant->registration;
+        $data['demantant_cpf'] = $dbDemantant->cpf;
+
+        //Vinculando Solicitante
+        $data['requesting_name'] = $dbRequesting->name;
+        $data['requesting_organization'] = $dbRequesting->CompanyOrganization->title;
+        $data['requesting_registration'] = $dbRequesting->registration;
+        $data['requesting_cpf'] = $dbRequesting->cpf;
+
+        //Vinculando Fiscal Titular
+        $data['inspector_head_name'] = $dbInspectorHead->name;
+        $data['inspector_head_organization'] = $dbInspectorHead->CompanyOrganization->title;
+        $data['inspector_head_registration'] = $dbInspectorHead->registration;
+        $data['inspector_head_cpf'] = $dbInspectorHead->cpf;
+
+        //Vinculando Fiscal Sunplente
+        $data['inspector_deputy_name'] = $dbInspectorDeputy->name;
+        $data['inspector_deputy_organization'] = $dbInspectorDeputy->CompanyOrganization->title;
+        $data['inspector_deputy_registration'] = $dbInspectorDeputy->registration;
+        $data['inspector_deputy_cpf'] = $dbInspectorDeputy->cpf;
+
+        //Vinculando Filtro e Usuário de realizou o cadastro                
+        $data['organization_id'] = $dbRequesting->id;
         $data['filter'] = StrtoLower($data['title']);
         $data['user_id'] = Auth::user()->id;
 
+        //Adicionando Status Padrão
         $dbSupplyProcessStatus = SupplyProcessStatus::where('default', TRUE)->first();
         $data['status_id'] = $dbSupplyProcessStatus->id;
 
@@ -99,14 +132,14 @@ class SupplyProcessController extends Controller
     {
         //Listagem de Dados
         $db = SupplyProcess::find($id);
-        $dbSupplyProcessItem = SupplyProcessItem::where('process_id', $id)->paginate(20);
+        $dbSupplyProcessItems = SupplyProcessItem::where('process_id', $id)->paginate(20);
 
         //Logs
         Logger::show($db->title);
 
         return view('supply_process.supply_process.supply_process_show',[
             'db'=>$db,
-            'dbSupplyProcessItem'=>$dbSupplyProcessItem,
+            'dbSupplyProcessItems'=>$dbSupplyProcessItems,
         ]);
     }
 
@@ -116,14 +149,17 @@ class SupplyProcessController extends Controller
     public function edit(string $id)
     {
         //Listagem de Dados
-        $db = SupplyProcess::find($id);
+        $db = SupplyProcess::find($id);        
+        $dbUsers = User::where('registration', '!=',NULL)
+            ->where('cpf', '!=',NULL)            
+            ->where('organization_id', '!=',NULL)
+            ->with('CompanyOrganization')
+            ->get();
 
         //Logs
         Logger::edit($db->title);
 
-        return view('supply_process.supply_process.supply_process_edit',[
-            'db'=>$db,
-        ]);
+        return view('supply_process.supply_process.supply_process_edit', compact('db','dbUsers'));
     }
 
     /**

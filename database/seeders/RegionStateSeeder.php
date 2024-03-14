@@ -6,7 +6,7 @@ use App\Models\Region\RegionState;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RegionStatesSeeder extends Seeder
+class RegionStateSeeder extends Seeder
 {
     /**
      * Run the database seeds.

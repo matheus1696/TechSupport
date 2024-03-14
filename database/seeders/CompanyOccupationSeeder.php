@@ -6,7 +6,7 @@ use App\Models\Company\CompanyOccupation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CompanyOccupationsSeeder extends Seeder
+class CompanyOccupationSeeder extends Seeder
 {
     /**
      * Run the database seeds.

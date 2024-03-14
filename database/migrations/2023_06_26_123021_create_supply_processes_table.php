@@ -20,30 +20,46 @@ return new class extends Migration
             $table->text('requirements');
             $table->text('measures_adopted');
             $table->string('modality');
+            $table->unsignedBigInteger('demantant_user_id');
+            $table->string('demantant_name');
+            $table->string('demantant_organization');
+            $table->string('demantant_registration');
+            $table->string('demantant_cpf');
+            $table->unsignedBigInteger('requesting_user_id');
+            $table->string('requesting_name');
+            $table->string('requesting_organization');
+            $table->string('requesting_registration');
+            $table->string('requesting_cpf');
             $table->string('code_process')->unique()->nullable();
             $table->string('code_auction')->unique()->nullable();
             $table->string('code_contract')->unique()->nullable();
             $table->string('code_price_registration')->unique()->nullable();
             $table->date('start_date')->nullable();
-            $table->date('due_date')->nullable();
+            $table->date('due_date')->nullable();            
+            $table->unsignedBigInteger('inspector_head_user_id');
+            $table->string('inspector_head_name');
+            $table->string('inspector_head_organization');
+            $table->string('inspector_head_registration');  
+            $table->string('inspector_head_cpf');         
+            $table->unsignedBigInteger('inspector_deputy_user_id');
+            $table->string('inspector_deputy_name');
+            $table->string('inspector_deputy_organization');
+            $table->string('inspector_deputy_registration'); 
+            $table->string('inspector_deputy_cpf');       
             $table->integer('validity')->nullable();
-            
-            $table->unsignedBigInteger('demantant_id');
-            $table->unsignedBigInteger('requesting_id');            
-            $table->unsignedBigInteger('inspector_head_id');
-            $table->unsignedBigInteger('inspector_deputy_id');
-            $table->unsignedBigInteger('organizations_id')->nullable();
+
+            $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('organizations_id')->references('id')->on('company_organizations');
             $table->foreign('status_id')->references('id')->on('supply_process_statuses');
-            $table->foreign('demantant_id')->references('id')->on('supply_process_demantants');
-            $table->foreign('requesting_id')->references('id')->on('supply_process_requestings');
-            $table->foreign('inspector_head_id')->references('id')->on('supply_process_inspector_heads');
-            $table->foreign('inspector_deputy_id')->references('id')->on('supply_process_inspector_deputies');
+            $table->foreign('organization_id')->references('id')->on('company_organizations');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('demantant_user_id')->references('id')->on('users');
+            $table->foreign('requesting_user_id')->references('id')->on('users');
+            $table->foreign('inspector_head_user_id')->references('id')->on('users');
+            $table->foreign('inspector_deputy_user_id')->references('id')->on('users');
             
         });
     }
