@@ -83,7 +83,7 @@ class UserSeeder extends Seeder
         ])->givePermissionTo('supply','user');
 
         User::create([
-            'name'=>'Fiscal T.I Titular',
+            'name'=>'Fiscal Titular 1',
             'filter'=>strtolower('fiscal titular'),
             'email'=>'fiscal.ti.titular@techsupport.com.br',
             'contact_1'=>'(81) 0000-0000',
@@ -96,7 +96,7 @@ class UserSeeder extends Seeder
         ])->givePermissionTo('supply','user');
 
         User::create([
-            'name'=>'Fiscal T.I Suplente',
+            'name'=>'Fiscal Suplente 2',
             'filter'=>strtolower('fiscal suplente'),
             'email'=>'fiscal.ti.suplente@techsupport.com.br',
             'contact_1'=>'(81) 0000-0000',
@@ -109,7 +109,7 @@ class UserSeeder extends Seeder
         ])->givePermissionTo('supply','user');
 
         User::create([
-            'name'=>'Fiscal ADM Titular',
+            'name'=>'Fiscal Titular 2',
             'filter'=>strtolower('fiscal titular'),
             'email'=>'fiscal.adm.titular@techsupport.com.br',
             'contact_1'=>'(81) 0000-0000',
@@ -122,7 +122,7 @@ class UserSeeder extends Seeder
         ])->givePermissionTo('supply','user');
         
         User::create([
-            'name'=>'Fiscal ADM Suplente',
+            'name'=>'Fiscal Suplente 2',
             'filter'=>strtolower('fiscal suplente'),
             'email'=>'fiscal.adm.suplente@techsupport.com.br',
             'contact_1'=>'(81) 0000-0000',

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('supply_id');
             $table->timestamps();
 
-            $table->foreign('organization_id')->on('id')->references('company_organizations');
-            $table->foreign('supply_id')->on('id')->references('supply_processes');
+            $table->foreign('organization_id')->references('id')->on('company_organizations');
+            $table->foreign('supply_id')->references('id')->on('supply_processes');
         });
     }
 
