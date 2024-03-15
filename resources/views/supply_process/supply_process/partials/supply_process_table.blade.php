@@ -1,6 +1,7 @@
 <x-table.table :db="$db">
     @slot('thead')
         <x-table.th class="w-40">Modalidade</x-table.th>
+        <x-table.th class="w-40">Data de Criação</x-table.th>
         <x-table.th>Titulo do Processo</x-table.th>
         <x-table.th class="w-28">Status</x-table.th>
         <x-table.th class="w-40"></x-table.th>
@@ -25,6 +26,7 @@
                         <div class="px-2 py-1 text-xs font-semibold text-white bg-yellow-700 rounded-lg shadow-md">Licitação</div>
                     @endif
                 </x-table.td>
+                <x-table.td class="text-center">{{date('d/m/Y',strtotime($item->created_at))}}</x-table.td>
                 <x-table.td class="text-center">{{$item->title}}</x-table.td>
                 <x-table.td class="text-center">
                     <span class="px-2 py-1 text-xs font-semibold text-white rounded-lg shadow-md {{$item->SupplyProcessStatus->color}}">{{$item->SupplyProcessStatus->title}}</span>

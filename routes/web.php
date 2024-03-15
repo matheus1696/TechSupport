@@ -22,6 +22,7 @@ use App\Http\Controllers\Dashboard\ViewDashboardController;
 use App\Http\Controllers\SupplyProcess\Admin\SupplyProcessStatusController;
 use App\Http\Controllers\SupplyProcess\SupplyProcessController;
 use App\Http\Controllers\SupplyProcess\SupplyProcessItemController;
+use App\Http\Controllers\SupplyProcess\SupplyProcessOrganizationController;
 use App\Http\Controllers\Ticket\Admin\TicketStatusController;
 use App\Http\Controllers\Ticket\Admin\TicketTypeCategoryController;
 use App\Http\Controllers\Ticket\Admin\TicketTypeServiceController;
@@ -70,7 +71,8 @@ Route::middleware('auth')->group(function () {
                     Route::get('organizations/organize',[CompanyOrganizationController::class,'organize'])->name('organizations.organize');
                     Route::put('organizations/status/{organization}',[CompanyOrganizationController::class,'status'])->name('organizations.status');
                     Route::resource('organizations',CompanyOrganizationController::class);
-
+                    
+                    //Rota de Vinculação de Usuário com Organização
                     Route::resource('organization_linked_users',CompanyOrganizationLinkedUserController::class);
                     
                 //Rota - Dados Ocupação (CBO)
@@ -158,6 +160,9 @@ Route::middleware('auth')->group(function () {
                     Route::put('supply_process_statuses/status/{supply_process_status}',[SupplyProcessStatusController::class,'status'])->name('supply_process_statuses.status');
                     Route::put('supply_process_statuses/default/{supply_process_status}',[SupplyProcessStatusController::class,'default'])->name('supply_process_statuses.default');
                     Route::resource('supply_process_statuses',SupplyProcessStatusController::class);
+
+                    //Rota de Vinculação de Setor com Processos
+                    Route::resource('supply_linked_organizations',SupplyProcessOrganizationController::class);
             });
         });        
 

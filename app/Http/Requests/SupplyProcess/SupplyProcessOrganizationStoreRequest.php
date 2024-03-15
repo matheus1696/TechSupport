@@ -11,7 +11,7 @@ class SupplyProcessOrganizationStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class SupplyProcessOrganizationStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'supply_id' => 'required',
+            'organization_id' => 'required',
         ];
     }
 }

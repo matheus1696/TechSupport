@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\SupplyProcess;
 
+use App\Http\Controllers\Controller;
 use App\Models\SupplyProcess\SupplyProcessOrganization;
-use App\Http\Requests\StoreSupplyProcessOrganizationRequest;
-use App\Http\Requests\UpdateSupplyProcessOrganizationRequest;
+use App\Http\Requests\SupplyProcess\SupplyProcessOrganizationStoreRequest;
+use App\Http\Requests\SupplyProcess\SupplyProcessOrganizationUpdateRequest;
 
 class SupplyProcessOrganizationController extends Controller
 {
@@ -27,9 +28,14 @@ class SupplyProcessOrganizationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSupplyProcessOrganizationRequest $request)
+    public function store(SupplyProcessOrganizationStoreRequest $request)
     {
         //
+        $data = $request->all();
+
+        SupplyProcessOrganization::create($data);
+
+        return redirect()->back()->with('success','Setor cadastrado com sucesso');
     }
 
     /**
@@ -51,7 +57,7 @@ class SupplyProcessOrganizationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSupplyProcessOrganizationRequest $request, SupplyProcessOrganization $supplyProcessOrganization)
+    public function update(SupplyProcessOrganizationUpdateRequest $request, SupplyProcessOrganization $supplyProcessOrganization)
     {
         //
     }
@@ -59,8 +65,11 @@ class SupplyProcessOrganizationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SupplyProcessOrganization $supplyProcessOrganization)
+    public function destroy(SupplyProcessOrganization $supplyProcessOrganization, string $id)
     {
-        //
+        $db = $supplyProcessOrganization->find($id);
+        $db->delete();
+
+        return redirect()->back()->with('success','Setor excluido com sucesso');
     }
 }

@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupplyProcess\SupplyProcessStoreRequest;
 use App\Http\Requests\SupplyProcess\SupplyProcessUpdateRequest;
+use App\Models\Company\CompanyOrganization;
 use App\Models\SupplyProcess\SupplyProcess;
 use App\Models\SupplyProcess\SupplyProcessItem;
+use App\Models\SupplyProcess\SupplyProcessOrganization;
 use App\Models\SupplyProcess\SupplyProcessStatus;
 use App\Models\User;
 use App\Services\Logger;
@@ -106,8 +108,7 @@ class SupplyProcessController extends Controller
         $data['inspector_deputy_registration'] = $dbInspectorDeputy->registration;
         $data['inspector_deputy_cpf'] = $dbInspectorDeputy->cpf;
 
-        //Vinculando Filtro e Usuário de realizou o cadastro                
-        $data['organization_id'] = $dbRequesting->id;
+        //Vinculando Filtro e Usuário de realizou o cadastro
         $data['filter'] = StrtoLower($data['title']);
         $data['user_id'] = Auth::user()->id;
 
@@ -116,7 +117,16 @@ class SupplyProcessController extends Controller
         $data['status_id'] = $dbSupplyProcessStatus->id;
 
         //Salvando Dados
-        SupplyProcess::create($data);
+        $dbSupplyProcess = SupplyProcess::create($data);
+        
+        //Vinculando Setores do demandante e solicitante
+        $dbLinkedDemantantOrganizations['supply_id'] = $dbSupplyProcess->id;
+        $dbLinkedDemantantOrganizations['organization_id'] = $dbDemantant->organization_id;
+        SupplyProcessOrganization::create($dbLinkedDemantantOrganizations);
+
+        $dbLinkedRequestingOrganizations['supply_id'] = $dbSupplyProcess->id;
+        $dbLinkedRequestingOrganizations['organization_id'] = $dbRequesting->organization_id;  
+        SupplyProcessOrganization::create($dbLinkedRequestingOrganizations);
 
         //Logs
         Logger::store($data['title']);
@@ -133,6 +143,8 @@ class SupplyProcessController extends Controller
         //Listagem de Dados
         $db = SupplyProcess::find($id);
         $dbSupplyProcessItems = SupplyProcessItem::where('process_id', $id)->paginate(20);
+        $dbOrganizations = CompanyOrganization::all();
+        $dbLinkedOrganizations = SupplyProcessOrganization::where('supply_id',$id)->get();
 
         //Logs
         Logger::show($db->title);
@@ -140,6 +152,8 @@ class SupplyProcessController extends Controller
         return view('supply_process.supply_process.supply_process_show',[
             'db'=>$db,
             'dbSupplyProcessItems'=>$dbSupplyProcessItems,
+            'dbOrganizations'=>$dbOrganizations,
+            'dbLinkedOrganizations'=>$dbLinkedOrganizations,
         ]);
     }
 

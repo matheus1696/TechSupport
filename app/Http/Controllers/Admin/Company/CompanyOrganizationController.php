@@ -81,7 +81,7 @@ class CompanyOrganizationController extends Controller
 
         //Listando Dados
         $db = CompanyOrganization::find($id);
-        $dbUsers = User::all();
+        $dbUsers = User::select()->orderBy('name')->get();
         $dbLinkedUsers = User::where('organization_id',$id)->get();
 
         

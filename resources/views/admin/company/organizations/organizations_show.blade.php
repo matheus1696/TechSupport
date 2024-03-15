@@ -15,7 +15,12 @@
                 
                     <x-form.select col="12" label="Usuário" id="user_id">
                         @foreach ($dbUsers as $dbUser)
-                            <option value="{{$dbUser->id}}">{{$dbUser->name}}</option>                           
+                            <option value="{{$dbUser->id}}">
+                                {{$dbUser->name}} 
+                                @isset ($dbUser->CompanyOrganization->acronym)
+                                    | {{$dbUser->CompanyOrganization->acronym}} - {{$dbUser->CompanyOrganization->title}}
+                                @endisset
+                            </option>                           
                         @endforeach
                     </x-form.select>
                 </x-form.form>
