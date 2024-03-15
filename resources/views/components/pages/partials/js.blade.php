@@ -7,15 +7,11 @@
 <script>
     // In your Javascript (external .js resource or <script> tag)
     $(document).ready(function() {
-        $('.select2').select2({
-            theme: "bootstrap4"
-        });
+        $('.select2').select2();
     });
 
     $(document).ready(function() {
-        $('.select2-multiple').select2({
-            theme: "bootstrap4"
-        });
+        $('.select2-multiple').select2();
     });
 </script>
 
