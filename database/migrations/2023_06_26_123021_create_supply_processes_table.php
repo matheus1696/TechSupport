@@ -47,14 +47,12 @@ return new class extends Migration
             $table->string('inspector_deputy_registration'); 
             $table->string('inspector_deputy_cpf');       
             $table->integer('validity')->nullable();
-
-            $table->unsignedBigInteger('organization_id');
+            
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('supply_process_statuses');
-            $table->foreign('organization_id')->references('id')->on('company_organizations');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('demantant_user_id')->references('id')->on('users');
             $table->foreign('requesting_user_id')->references('id')->on('users');

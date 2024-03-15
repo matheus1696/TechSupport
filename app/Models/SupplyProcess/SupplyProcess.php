@@ -47,7 +47,6 @@ class SupplyProcess extends Model
         'inspector_deputy_organization',
         'inspector_deputy_registration',
         'inspector_deputy_cpf',
-        'organization_id',
         'status_id',
         'user_id'
     ];
