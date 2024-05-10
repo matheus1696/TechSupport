@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('consumables', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique()->nullable();
-            $table->string('consumable');
+            $table->string('product');
             $table->string('filter');
             $table->string('description')->nullable();
             $table->string('status')->default(1);
-            $table->unsignedBigInteger('consumable_unit_id');
-            $table->unsignedBigInteger('consumable_type_id');
+            $table->unsignedBigInteger('product_unit_id');
+            $table->unsignedBigInteger('product_type_id');
             $table->timestamps();
 
-            $table->foreign('consumable_unit_id')->references('id')->on('consumable_units');
-            $table->foreign('consumable_type_id')->references('id')->on('consumable_types');
+            $table->foreign('product_unit_id')->references('id')->on('product_units');
+            $table->foreign('product_type_id')->references('id')->on('product_types');
 
 
         });

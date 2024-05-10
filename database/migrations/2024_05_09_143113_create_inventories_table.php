@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
-            $table->unsignedBigInteger('consumable_id');
+            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('establishment_id');
             $table->timestamps();
             
-            $table->foreign('consumable_id')->references('id')->on('consumables');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('establishment_id')->references('id')->on('company_establishments');
         });
     }
