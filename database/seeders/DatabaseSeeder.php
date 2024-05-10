@@ -41,6 +41,9 @@ class DatabaseSeeder extends Seeder
             TicketTypeServiceSeeder::class,
             TicketTypeSubServiceSeeder::class,
             SupplyProcessStatusSeeder::class,
+            ConsumableTypesSeeder::class,
+            ConsumableUnitsSeeder::class,
+            ConsumablesSeeder::class,
         ]);
     }
 }

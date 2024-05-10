@@ -227,5 +227,7 @@ class CompanyEstablishmentDepartmentSeeder extends Seeder
         CompanyEstablishmentDepartment::create([ 'department'=>'Vigilância Ambiental', 'filter'=>'vigilância', 'contact'=>'(81) 3101-0216', 'extension'=>'0216', 'type_contact'=>'Internal', 'establishment_id'=>87,]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Vigilância Sanitária', 'filter'=>'vigilância', 'contact'=>'(81) 3101-0215', 'extension'=>'0215', 'type_contact'=>'Internal', 'establishment_id'=>87,]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Recursos Humanos', 'filter'=>'recursos', 'contact'=>'(81) 3101-0218', 'extension'=>'0218', 'type_contact'=>'Internal', 'establishment_id'=>87,]);
+        
+        CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepcão', 'contact'=>'(81) 3101-0293', 'extension'=>'0293', 'type_contact'=>'Main', 'establishment_id'=>99,]);
     }
 }

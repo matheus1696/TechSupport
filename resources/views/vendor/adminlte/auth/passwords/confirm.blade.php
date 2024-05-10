@@ -47,7 +47,7 @@
 
                 <div class="input-group">
                     <input id="password" type="password" name="password"
-                           class="form-control text-sm @error('password') is-invalid @enderror"
+                           class="form-control @error('password') is-invalid @enderror"
                            placeholder="{{ __('adminlte::adminlte.password') }}" required autofocus>
 
                     <div class="input-group-append">
@@ -62,13 +62,13 @@
 
         {{-- Password error alert --}}
         @error('password')
-            <div class="text-center lockscreen-subitem" role="alert">
+            <div class="lockscreen-subitem text-center" role="alert">
                 <b class="text-danger">{{ $message }}</b>
             </div>
         @enderror
 
         {{-- Help block --}}
-        <div class="text-center help-block">
+        <div class="help-block text-center">
             {{ __('adminlte::adminlte.confirm_password_message') }}
         </div>
 

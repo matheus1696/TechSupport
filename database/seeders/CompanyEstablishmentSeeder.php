@@ -207,6 +207,8 @@ class CompanyEstablishmentSeeder extends Seeder
 
         CompanyEstablishment::create([ 'code'=>3497399, 'title'=>'SAMU Caruaru - Central de Regulação das Urgências de Caruaru', 'filter'=>'samu caruaru - central de regulação de urgências de caruaru', 'address'=>'Rua Azevedo Coutinho', 'number'=>'430', 'district'=>'Petropolis', 'city_id'=>'2604106', 'type_establishment_id'=>36, 'financial_block_id'=>2,]);
 
-        CompanyEstablishment::create([ 'code'=>0000000, 'title'=>'Complexo da Saúde Jaqueline', 'filter'=>'complexo da saúde jaqueline', 'address'=>'Rua Djalma Dutra', 'number'=>'S/N', 'district'=>'Nossa Senhora das Dores', 'city_id'=>'2604106', 'type_establishment_id'=>68, 'financial_block_id'=>1,]);
+        CompanyEstablishment::create([ 'code'=>0000000, 'title'=>'Complexo da Saúde Jaqueline', 'filter'=>'complexo da saúde jaqueline', 'address'=>'Rua Djalma Dutra', 'number'=>'S/N', 'district'=>'Nossa Senhora das Dores', 'city_id'=>'2604106', 'type_establishment_id'=>68, 'financial_block_id'=>1,]);        
+
+        CompanyEstablishment::create([ 'code'=>4437454, 'title'=>'AME do Salgado', 'filter'=>'ame do salgado', 'address'=>'Rua Presidente Artur Bernardes', 'number'=>'S/N', 'district'=>'Salgado', 'city_id'=>'2604106', 'latitude'=>'', 'longitude'=>'', 'type_establishment_id'=>36, 'financial_block_id'=>2,]);
     }
 }

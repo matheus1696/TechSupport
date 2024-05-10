@@ -302,6 +302,15 @@ return [
             'text'    => 'Buscar Menu',
         ],
 
+        //Perfil do Usuário
+        [
+            'text'    => 'Estoque',
+            'classes' => 'btn-sm',
+            'route'   => 'inventories.index',
+            'icon'    => 'fas fa-user',
+            'can'     => 'user'
+        ],
+
         //Solicitação de Chamados
         [
             'text'    => 'Solicitação de Chamados',
@@ -475,6 +484,43 @@ return [
                             'classes' => 'btn-sm',
                             'route'   => 'dashboards.index',
                             'icon'    => 'fas fa-chart-line',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                    ]
+                ],
+
+                //Configurações de Suprimentos
+                [
+                    'text'    => 'Suprimentos',
+                    'classes' => 'btn-sm',
+                    'icon'    => 'fas fa-globe-americas',
+                    'icon_color' => 'info',
+                    'can'     => ['sysadmin','admin'],
+                    'submenu' => [
+                        [
+                            'text'    => 'Cadastro de Suprimentos',
+                            'classes' => 'btn-sm',
+                            'route'   => 'consumables.index',
+                            'icon'    => 'fas fa-users',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+
+                        [
+                            'text'    => 'Tipos de Suprimentos',
+                            'classes' => 'btn-sm',
+                            'route'   => 'consumable_types.index',
+                            'icon'    => 'fas fa-users',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+
+                        [
+                            'text'    => 'Unidades de Apresentação',
+                            'classes' => 'btn-sm',
+                            'route'   => 'consumable_units.index',
+                            'icon'    => 'fas fa-users',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],

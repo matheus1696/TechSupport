@@ -18,8 +18,8 @@
         <input type="hidden" name="token" value="{{ $token }}">
 
         {{-- Email field --}}
-        <div class="mb-3 input-group">
-            <input type="email" name="email" class="form-control text-sm @error('email') is-invalid @enderror"
+        <div class="input-group mb-3">
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                    value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
 
             <div class="input-group-append">
@@ -36,8 +36,8 @@
         </div>
 
         {{-- Password field --}}
-        <div class="mb-3 input-group">
-            <input type="password" name="password" class="form-control text-sm @error('password') is-invalid @enderror"
+        <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                    placeholder="{{ __('adminlte::adminlte.password') }}">
 
             <div class="input-group-append">
@@ -54,9 +54,9 @@
         </div>
 
         {{-- Password confirmation field --}}
-        <div class="mb-3 input-group">
+        <div class="input-group mb-3">
             <input type="password" name="password_confirmation"
-                   class="form-control text-sm @error('password_confirmation') is-invalid @enderror"
+                   class="form-control @error('password_confirmation') is-invalid @enderror"
                    placeholder="{{ trans('adminlte::adminlte.retype_password') }}">
 
             <div class="input-group-append">

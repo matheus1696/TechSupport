@@ -2,6 +2,13 @@
 
 <div class="{{ $makeFormGroupClass() }}">
 
+    {{-- Input label --}}
+    @isset($label)
+        <label for="{{ $id }}" @isset($labelClass) class="{{ $labelClass }}" @endisset>
+            {{ $label }}
+        </label>
+    @endisset
+
     {{-- Input group --}}
     <div class="{{ $makeInputGroupClass() }}">
 
