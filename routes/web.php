@@ -17,8 +17,13 @@ use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
+use App\Http\Controllers\Consumable\ConsumablesController;
+use App\Http\Controllers\Consumable\ConsumableTypesController;
+use App\Http\Controllers\Consumable\ConsumableUnitsController;
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use App\Http\Controllers\Dashboard\ViewDashboardController;
+use App\Http\Controllers\Inventory\InventoryController;
+use App\Http\Controllers\Inventory\InventoryHistoryController;
 use App\Http\Controllers\SupplyProcess\Admin\SupplyProcessStatusController;
 use App\Http\Controllers\SupplyProcess\SupplyProcessController;
 use App\Http\Controllers\SupplyProcess\SupplyProcessItemController;
@@ -164,9 +169,27 @@ Route::middleware('auth')->group(function () {
                     //Rota de Vinculação de Setor com Processos
                     Route::resource('supply_linked_organizations',SupplyProcessOrganizationController::class);
             });
+
+            //Grupo de Rotas - Configuração de Localização
+            Route::prefix('consumable')->group(function (){
+
+                //Rota - Dados Paises
+                    Route::resource('consumable_units',ConsumableUnitsController::class);
+                //Rota - Dados Estados
+                    Route::resource('consumable_types',ConsumableTypesController::class);
+                //Rota - Dados Cidades
+                    Route::put('consumables/{consumable}',[ConsumablesController::class,'status'])->name('consumables.status');
+                    Route::resource('consumables',ConsumablesController::class);
+            });
         });        
 
     });
+
+            
+    
+        //Rotas de Inventário/Estoque
+        Route::resource('inventories', InventoryController::class);
+        Route::resource('inventory_histories', InventoryHistoryController::class);
 
     //Rotas de Perfil do Usuário
     Route::resource('profile', ProfileController::class);
