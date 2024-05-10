@@ -185,8 +185,6 @@ Route::middleware('auth')->group(function () {
         });        
 
     });
-
-            
     
         //Rotas de Inventário/Estoque
         Route::resource('inventories', InventoryController::class);

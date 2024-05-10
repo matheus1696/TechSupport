@@ -22,7 +22,10 @@ class StoreInventoryHistoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'date' => 'required',
+            'consumable_id' => 'required',
+            'movement' => 'required',
+            'quantity' => 'required',
         ];
     }
 }

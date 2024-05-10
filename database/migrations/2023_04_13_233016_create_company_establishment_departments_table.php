@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('filter');
             $table->string('contact')->nullable();
             $table->string('extension')->nullable();
-            $table->string('type_contact')->nullable()->default('Internal');
+            $table->string('type_contact')->default('Internal');
             $table->unsignedBigInteger('establishment_id');
             $table->timestamps();
 
