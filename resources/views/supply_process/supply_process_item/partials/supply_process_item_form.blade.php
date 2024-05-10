@@ -20,12 +20,6 @@
     @endforeach
 </x-form.select>
 
-<x-form.input col="2" type="number" label="ADM" id="amount_adm" value="{{$db->amount_adm ?? ''}}"/>
-<x-form.input col="2" type="number" label="ATB" id="amount_atb" value="{{$db->amount_atb ?? ''}}"/>
-<x-form.input col="2" type="number" label="MAC" id="amount_mac" value="{{$db->amount_mac ?? ''}}"/>
-<x-form.input col="2" type="number" label="VEPD" id="amount_vepd" value="{{$db->amount_vepd ?? ''}}"/>
-<x-form.input col="2" type="number" label="VSAN" id="amount_vsan" value="{{$db->amount_vsan ?? ''}}"/>
-
 <x-form.input col="12" type="number" label="Garantia (em Meses)" id="warranty" required="required" value="{{$db->warranty ?? ''}}" placeholder="Tempo de Garantia" />
 
 <x-form.input col="12" label="Modelo de Referência 1" id="reference_model_1" value="{{$db->reference_model_1 ?? ''}}"  placeholder="Modelo de Referência" />

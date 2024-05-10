@@ -14,12 +14,7 @@ return new class extends Migration
         Schema::create('supply_process_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('process_id');
-            $table->unsignedBigInteger('product_id');
-            $table->integer('amount_adm')->nullable();
-            $table->integer('amount_atb')->nullable();
-            $table->integer('amount_mac')->nullable();
-            $table->integer('amount_vsan')->nullable();
-            $table->integer('amount_vepd')->nullable();
+            $table->unsignedBigInteger('product_id');            
             $table->unsignedBigInteger('units_id');
             $table->text('warranty');
             $table->text('reference_model_1')->nullable();

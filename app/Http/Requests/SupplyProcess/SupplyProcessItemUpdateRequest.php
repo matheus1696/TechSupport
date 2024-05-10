@@ -24,11 +24,6 @@ class SupplyProcessItemUpdateRequest extends FormRequest
         return [
             'process_id' => 'required',
             'product_id' => 'required',
-            'amount_adm' => 'nullable|integer',
-            'amount_atb' => 'nullable|integer',
-            'amount_mac' => 'nullable|integer',
-            'amount_vsan' => 'nullable|integer',
-            'amount_vepd' => 'nullable|integer',
             'units_id' => 'required',
             'warranty' => 'required|integer',
             'reference_model_1' => 'nullable|min:6',

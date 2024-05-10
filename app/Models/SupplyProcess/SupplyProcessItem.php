@@ -2,8 +2,8 @@
 
 namespace App\Models\SupplyProcess;
 
-use App\Models\Product\ProductModel;
-use App\Models\Product\ProductUnitModel;
+use App\Models\Product\Product;
+use App\Models\Product\ProductUnit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,11 +16,6 @@ class SupplyProcessItem extends Model
     protected $fillable =[
         'process_id',
         'product_id',
-        'amount_adm',
-        'amount_atb',
-        'amount_mac',
-        'amount_vsan',
-        'amount_vepd',
         'units_id',
         'warranty',
         'reference_model_1',
@@ -33,10 +28,10 @@ class SupplyProcessItem extends Model
     }
 
     public function Product(){
-        return $this->belongsTo(ProductModel::class,'product_id','id');
+        return $this->belongsTo(Product::class,'product_id','id');
     }
 
     public function ProductUnit(){
-        return $this->belongsTo(ProductUnitModel::class,'units_id','id');
+        return $this->belongsTo(ProductUnit::class,'units_id','id');
     }
 }

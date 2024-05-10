@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             CompanyFinancialBlockSeeder::class,
             CompanyEstablishmentSeeder::class,
             CompanyEstablishmentDepartmentSeeder::class,
+            ProductSeeder::class,
             ProductUnitSeeder::class,
             DashboardSeeder::class,
             TicketStatusSeeder::class,
