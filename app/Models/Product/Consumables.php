@@ -19,11 +19,11 @@ class Consumables extends Model
         'consumable_type_id',
     ];
 
-    public function ConsumableTypes(){
+    public function ConsumableType(){
         return $this->belongsTo(ConsumableTypes::class,'consumable_type_id','id');
     }
 
-    public function ConsumableUnits(){
+    public function ConsumableUnit(){
         return $this->belongsTo(ConsumableUnits::class,'consumable_unit_id','id');
     }
 }

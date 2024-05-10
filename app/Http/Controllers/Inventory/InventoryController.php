@@ -40,7 +40,7 @@ class InventoryController extends Controller
         //Log do Sistema
         Logger::access();
 
-        return view('inventory.inventory_index',[
+        return view('inventory.inventory.inventory_index',[
             'search'=>$search,
             'db'=>$db,
         ]);
@@ -75,7 +75,7 @@ class InventoryController extends Controller
         //Log do Sistema
         Logger::show($db->title);
 
-        return view('inventory.inventory_show',[
+        return view('inventory.inventory.inventory_show',[
             'db'=>$db,
             'dbConsumables'=>$dbConsumables,
             'dbInventories'=>$dbInventories,

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreInventoryHistoryRequest;
 use App\Http\Requests\UpdateInventoryHistoryRequest;
 use App\Models\Inventory\Inventory;
 use App\Services\Logger;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class InventoryHistoryController extends Controller
@@ -66,9 +67,28 @@ class InventoryHistoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InventoryHistory $inventoryHistory)
+    public function show(Request $request, string $id)
     {
-        //
+        //Listagem de Dados
+        $db = InventoryHistory::where('establishment_id',$id)
+            ->paginate(40);
+
+        //Pesquisar Dados
+        $search = $request->all();
+        if (isset($search['searchName']) || isset($search['searchCod'])) {
+            $db = InventoryHistory::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
+                ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('title')
+                ->paginate(40);
+        }
+
+        //Log do Sistema
+        Logger::access();
+
+        return view('inventory.inventory_history.inventory_history_index',[
+            'search'=>$search,
+            'db'=>$db,
+        ]);
     }
 
     /**

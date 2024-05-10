@@ -307,7 +307,7 @@ return [
             'text'    => 'Estoque',
             'classes' => 'btn-sm',
             'route'   => 'inventories.index',
-            'icon'    => 'fas fa-user',
+            'icon'    => 'fas fa-boxes',
             'can'     => 'user'
         ],
 

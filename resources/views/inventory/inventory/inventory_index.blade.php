@@ -7,8 +7,8 @@
     
     <!-- Slot Body -->
     @slot('body')
-        @include('inventory.partials.inventory_search')
-        @include('inventory.partials.inventory_table')
+        @include('inventory.inventory.partials.inventory_search')
+        @include('inventory.inventory.partials.inventory_table')
     @endslot
     
 </x-pages.index>

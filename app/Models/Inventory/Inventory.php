@@ -15,9 +15,9 @@ class Inventory extends Model
         'quantity',
         'consumable_id',
         'establishment_id',
-    ];    
+    ];
 
-    public function Consumables(){
+    public function Consumable(){
         return $this->belongsTo(Consumables::class,'consumable_id','id');
     }
 }

@@ -10,8 +10,8 @@
         @slot('tbody')
             @foreach ($dbInventories as $dbInventory)
                 <x-table.tr>
-                    <x-table.td>{{$dbInventory->Consumables->consumable}}</x-table.td>
-                    <x-table.td>{{$dbInventory->Consumables->ConsumableUnits->title}}</x-table.td>
+                    <x-table.td>{{$dbInventory->Consumable->consumable}}</x-table.td>
+                    <x-table.td>{{$dbInventory->Consumable->ConsumableUnit->title}}</x-table.td>
                     <x-table.td>{{$dbInventory->quantity}}</x-table.td>
                 </x-table.tr>
             @endforeach
