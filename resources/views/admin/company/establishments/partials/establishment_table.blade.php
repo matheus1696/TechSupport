@@ -61,7 +61,6 @@
                         </div>
                     </x-button.minButtonModalInfo>
                     <x-button.minButtonShow route="{{route('establishments.show',['establishment'=>$item->id])}}" />
-                    <x-button.minButtonEdit route="{{route('establishments.edit',['establishment'=>$item->id])}}" />
                 </x-table.td>
             </x-table.tr>
         @endforeach

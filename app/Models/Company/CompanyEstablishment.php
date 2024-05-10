@@ -26,6 +26,7 @@ class CompanyEstablishment extends Model
         'longitude',
         'type_establishment_id',
         'financial_block_id',
+        'has_inventory',
         'status',
     ];
 

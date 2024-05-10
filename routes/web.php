@@ -84,7 +84,8 @@ Route::middleware('auth')->group(function () {
                     Route::resource('occupations',CompanyOccupationController::class);
                 //Rota - Dados Tipo de Estabelecimento
                     Route::resource('type_establishments',CompanyTypeEstablishmentController::class);
-                //Rota - Dados Estabelecimento de Saúde
+                //Rota - Dados Estabelecimento de Saúde 
+                    Route::put('establishments/inventory/{establishment}',[CompanyEstablishmentController::class,'hasInventory'])->name('establishments.hasInventory');
                     Route::put('establishments/status/{establishment}',[CompanyEstablishmentController::class,'status'])->name('establishments.status');
                     Route::resource('establishments',CompanyEstablishmentController::class);
                 //Rota - Dados do Contato Estabelecimento de Saúde

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('type_establishment_id');
             $table->unsignedBigInteger('financial_block_id');
             $table->text('description')->nullable();
+            $table->boolean('has_inventory')->default(false);
             $table->boolean('status')->default(true);
             $table->timestamps();
 

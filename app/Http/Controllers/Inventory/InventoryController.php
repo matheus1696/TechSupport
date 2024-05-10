@@ -20,7 +20,7 @@ class InventoryController extends Controller
     public function index(Request $request)
     {
         //Listagem de Dados
-        $db = CompanyEstablishment::select()
+        $db = CompanyEstablishment::where('has_inventory',TRUE)
             ->orderBy('status','DESC')
             ->orderBy('title')
             ->with('FinancialBlock')
