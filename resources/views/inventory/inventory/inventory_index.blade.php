@@ -2,7 +2,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Lista de Estoques" route="{{route('inventories.create')}}"/>
+        <x-header title="Lista de Estoques"/>
     @endslot
     
     <!-- Slot Body -->
