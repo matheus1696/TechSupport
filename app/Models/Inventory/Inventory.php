@@ -3,6 +3,7 @@
 namespace App\Models\Inventory;
 
 use App\Models\Product\Consumables;
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,6 @@ class Inventory extends Model
     ];
 
     public function Consumable(){
-        return $this->belongsTo(Consumables::class,'consumable_id','id');
+        return $this->belongsTo(Product::class,'consumable_id','id');
     }
 }

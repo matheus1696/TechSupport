@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateInventoryRequest;
 use App\Models\Company\CompanyEstablishment;
 use App\Models\Inventory\InventoryHistory;
 use App\Models\Product\Consumables;
+use App\Models\Product\Product;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 
@@ -69,7 +70,7 @@ class InventoryController extends Controller
     {
         //
         $db = CompanyEstablishment::find($id);
-        $dbConsumables = Consumables::all();
+        $dbConsumables = Product::all();
         $dbInventories = Inventory::where('establishment_id', $id)->get();
 
         //Log do Sistema
