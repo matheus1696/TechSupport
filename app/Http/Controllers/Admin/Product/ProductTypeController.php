@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product\Product;
-use App\Http\Requests\Product\StoreProductRequest;
-use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product\ProductType;
-use App\Models\Product\ProductUnit;
+use App\Http\Requests\Product\StoreProductTypeRequest;
+use App\Http\Requests\Product\UpdateProductTypeRequest;
 use App\Services\Logger;
 
-class ProductController extends Controller
+class ProductTypeController extends Controller
 {
     /*
      * Controller access permission resource.
@@ -26,12 +24,12 @@ class ProductController extends Controller
     public function index()
     {
         //Listagem de Dados
-        $db = Product::select()->orderBy('status','DESC')->orderBy('title')->paginate(20);
+        $db = ProductType::select()->orderBy('status','DESC')->orderBy('title')->paginate(20);
 
         //Log do Sistema
         Logger::access();
 
-        return view('admin.product.product.product_index',compact('db'));
+        return view('admin.product.product_type.product_type_index',compact('db'));
     }
 
     /**
@@ -39,36 +37,32 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
-        $dbProductUnits = ProductUnit::all();
-        $dbProductTypes = ProductType::all();
-
         //Log do Sistema
         Logger::create();
 
-        return view('admin.product.product.product_create', compact('dbProductUnits','dbProductTypes'));
+        return view('admin.product.product_type.product_type_create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductTypeRequest $request)
     {
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['title']);
+        $data['filter'] = StrtoLower($data['title']);        
 
-        Product::create($data);
+        ProductType::create($data);
 
         //Log do Sistema
         Logger::store($data['title']);
 
-        return redirect(route('products.index'));
+        return redirect(route('product_types.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $Product)
+    public function show(ProductType $ProductType)
     {
         //
     }
@@ -79,41 +73,39 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         //Listagem de Dados
-        $db = Product::find($id);        
-        $dbProductUnits = ProductUnit::all();
-        $dbProductTypes = ProductType::all();
+        $db = ProductType::find($id);
 
         //Log do Sistema
         Logger::edit($db->title);
 
-        return view('admin.product.product.product_edit',compact('db','dbProductUnits','dbProductTypes'));
+        return view('admin.product.product_type.product_type_edit',compact('db'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, string $id)
+    public function update(UpdateProductTypeRequest $request, string $id)
     {
         //Dados do Formulário
         $data = $request->all();
         $data['filter'] = StrtoLower($data['title']);
 
         //Listagem de Dados
-        $db = Product::find($id);
+        $db = ProductType::find($id);
         $db->update($data);
 
         //Log do Sistema
         Logger::update($db->title);
 
-        return redirect(route('products.index'))
+        return redirect(route('product_types.index'))
             ->with('success','Alteração realizada com sucesso');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $Product)
+    public function destroy(ProductType $ProductType)
     {
-        return redirect(route('products.index'));
+        return redirect(route('product_types.index'));
     }
 }

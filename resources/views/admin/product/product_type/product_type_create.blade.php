@@ -1,4 +1,4 @@
-<x-pages.forms method="create" route="{{route('products.store')}}" btnBack="{{route('products.index')}}">
+<x-pages.forms method="create" route="{{route('product_types.store')}}" btnBack="{{route('product_types.index')}}">
 
     <!-- Slot Header -->
     @slot('header')
@@ -7,7 +7,7 @@
 
     <!-- Slot Body -->
     @slot('body')        
-        @include('admin.product.product.partials.product_form')
+        @include('admin.product.product_type.partials.product_type_form')
     @endslot
     
 </x-pages.forms>

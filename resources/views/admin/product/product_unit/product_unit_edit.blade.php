@@ -1,5 +1,5 @@
 <!-- Inicio de Componentização Page Edit -->
-<x-pages.forms method="edit" route="{{route('products.update',['product'=>$db->id])}}" btnBack="{{route('products.index')}}">
+<x-pages.forms method="edit" route="{{route('product_units.update',['product_unit'=>$db->id])}}" btnBack="{{route('product_units.index')}}">
 
     <!-- Slot Header -->
     @slot('header')
@@ -8,6 +8,6 @@
 
     <!-- Slot Body -->
     @slot('body')        
-        @include('admin.product.product.partials.product_form')
+        @include('admin.product.product_unit.partials.product_unit_form')
     @endslot
 </x-pages.forms>

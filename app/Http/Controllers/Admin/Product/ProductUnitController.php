@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Product;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProdutUnitsStoreRequest;
-use App\Http\Requests\ProdutUnitsUpdateRequest;
 use App\Models\Product\ProductUnit;
+use App\Http\Requests\Product\StoreProductUnitRequest;
+use App\Http\Requests\Product\UpdateProductUnitRequest;
 use App\Services\Logger;
 
 class ProductUnitController extends Controller
@@ -22,28 +21,15 @@ class ProductUnitController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        //Listando Dados
-        $db = ProductUnit::select()
-            ->orderBy('status','desc')
-            ->orderBy('title')
-            ->paginate(20);
+        //Listagem de Dados
+        $db = ProductUnit::select()->orderBy('status','DESC')->orderBy('title')->paginate(20);
 
-        //Pesquisar Dados
-        $search = $request->all();
-        if (isset($search['searchName'])) {
-            $db = ProductUnit::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('title')
-                ->paginate(20);
-        }
-
+        //Log do Sistema
         Logger::access();
 
-        return view('admin.product.unit.unit_index',[
-            'search'=>$search,
-            'db'=>$db,
-        ]);
+        return view('admin.product.product_unit.product_unit_index',compact('db'));
     }
 
     /**
@@ -51,33 +37,32 @@ class ProductUnitController extends Controller
      */
     public function create()
     {
+        //Log do Sistema
         Logger::create();
 
-        return view('admin.product.unit.unit_create');
+        return view('admin.product.product_unit.product_unit_create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProdutUnitsStoreRequest $request)
+    public function store(StoreProductUnitRequest $request)
     {
-        //Dados dos Formulários
         $data = $request->all();
-        $data['filter'] = StrtoLower($data['title']);
+        $data['filter'] = StrtoLower($data['title']);    
 
-        //Salvando Dados
         ProductUnit::create($data);
 
+        //Log do Sistema
         Logger::store($data['title']);
 
-        return redirect(route('units.index'))
-            ->with('success','Cadastro salvo com sucesso');
+        return redirect(route('product_units.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(ProductUnit $ProductUnit)
     {
         //
     }
@@ -90,53 +75,37 @@ class ProductUnitController extends Controller
         //Listagem de Dados
         $db = ProductUnit::find($id);
 
+        //Log do Sistema
         Logger::edit($db->title);
 
-        return view('admin.product.unit.unit_edit',[
-            'db'=>$db,
-        ]);
+        return view('admin.product.product_unit.product_unit_edit',compact('db'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProdutUnitsUpdateRequest $request, string $id)
+    public function update(UpdateProductUnitRequest $request, string $id)
     {
         //Dados do Formulário
         $data = $request->all();
+        $data['filter'] = StrtoLower($data['title']);    
 
-        //Salvando Dados
+        //Listagem de Dados
         $db = ProductUnit::find($id);
         $db->update($data);
 
+        //Log do Sistema
         Logger::update($db->title);
 
-        return redirect(route('units.index'))
-            ->with('success','Atualização realizada com sucesso.');
+        return redirect(route('product_units.index'))
+            ->with('success','Alteração realizada com sucesso');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(ProductUnit $ProductUnit)
     {
-        //
-    }
-
-    /**
-     * Update the status of the specified item in storage.
-     */
-    public function status(Request $request, string $id)
-    {
-        //Dados dos Formulários
-        $data = $request->only('status');
-
-        //Salvando Dados
-        $db = ProductUnit::find($id);
-        $db->update($data);
-
-        Logger::status($db->id, $db->status);
-
-        return redirect(route('units.index'))->with('success','Status alterado com sucesso.');
+        return redirect(route('product_units.index'));
     }
 }

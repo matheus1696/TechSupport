@@ -33,17 +33,9 @@ class DatabaseSeeder extends Seeder
             CompanyFinancialBlockSeeder::class,
             CompanyEstablishmentSeeder::class,
             CompanyEstablishmentDepartmentSeeder::class,
-            ProductSeeder::class,
+            ProductTypeSeeder::class,
             ProductUnitSeeder::class,
-            DashboardSeeder::class,
-            TicketStatusSeeder::class,
-            TicketTypeCategorySeeder::class,
-            TicketTypeServiceSeeder::class,
-            TicketTypeSubServiceSeeder::class,
-            SupplyProcessStatusSeeder::class,
-            ConsumableTypesSeeder::class,
-            ConsumableUnitsSeeder::class,
-            ConsumablesSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }

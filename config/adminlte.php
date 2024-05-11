@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'TechSupport',
+    'title' => '',
     'title_prefix' => 'TechSupport',
     'title_postfix' => '',
 
@@ -302,21 +302,12 @@ return [
             'text'    => 'Buscar Menu',
         ],
 
-        //Perfil do Usuário
+        //Estoque
         [
-            'text'    => 'Estoque',
+            'text'    => 'Almoxarifado',
             'classes' => 'btn-sm',
             'route'   => 'inventories.index',
             'icon'    => 'fas fa-boxes',
-            'can'     => 'user'
-        ],
-
-        //Solicitação de Chamados
-        [
-            'text'    => 'Solicitação de Chamados',
-            'classes' => 'btn-sm',
-            'route'   => 'tickets.index',
-            'icon'    => 'fas fa-people-carry',
             'can'     => 'user'
         ],
         
@@ -335,24 +326,6 @@ return [
             'route'   => 'profile.index',
             'icon'    => 'fas fa-user',
             'can'     => 'user'
-        ],
-
-        //Dashboards
-        [
-            'text'    => 'Dashboard',
-            'classes' => 'btn-sm',
-            'route'   => 'view_dashboards.index',
-            'icon'    => 'fas fa-chart-pie',
-            'can'     => ['sysadmin','admin','dashboard'],
-        ],
-
-        //Processos de Fornecimentos
-        [
-            'text'    => 'Processos de Fornecimento',
-            'classes' => 'btn-sm',
-            'route'   => 'supply_processes.index',
-            'icon'    => 'fas fa-file-signature',
-            'can'     => ['sysadmin','admin','supply'],
         ],
 
         //Configurações
@@ -471,62 +444,6 @@ return [
                     ]
                 ],
 
-                //Configurações de Dashboards
-                [
-                    'text'    => 'Configurações de Dashboard',
-                    'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-chart-pie',
-                    'icon_color' => 'info',
-                    'can'     => ['sysadmin','admin'],
-                    'submenu' => [
-                        [
-                            'text'    => 'Dashboard PowerBI',
-                            'classes' => 'btn-sm',
-                            'route'   => 'dashboards.index',
-                            'icon'    => 'fas fa-chart-line',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                    ]
-                ],
-
-                //Configurações de Suprimentos
-                [
-                    'text'    => 'Suprimentos',
-                    'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-globe-americas',
-                    'icon_color' => 'info',
-                    'can'     => ['sysadmin','admin'],
-                    'submenu' => [
-                        [
-                            'text'    => 'Cadastro de Suprimentos',
-                            'classes' => 'btn-sm',
-                            'route'   => 'consumables.index',
-                            'icon'    => 'fas fa-users',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-
-                        [
-                            'text'    => 'Tipos de Suprimentos',
-                            'classes' => 'btn-sm',
-                            'route'   => 'consumable_types.index',
-                            'icon'    => 'fas fa-users',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-
-                        [
-                            'text'    => 'Unidades de Apresentação',
-                            'classes' => 'btn-sm',
-                            'route'   => 'consumable_units.index',
-                            'icon'    => 'fas fa-users',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                    ]
-                ],
-
                 //Configurações de Produtos
                 [
                     'text'    => 'Configurações de Produtos',
@@ -544,56 +461,18 @@ return [
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
-                            'text'    => 'Unidades de Medida',
+                            'text'    => 'Tipos de Produto',
                             'classes' => 'btn-sm',
-                            'route'   => 'units.index',
+                            'route'   => 'product_types.index',
+                            'icon'    => 'fas fa-users',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                        [
+                            'text'    => 'Apresentação',
+                            'classes' => 'btn-sm',
+                            'route'   => 'product_units.index',
                             'icon'    => 'fas fa-calculator',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                    ]
-                ],
-
-                //Configurações de Tickets
-                [
-                    'text'    => 'Configurações de Tickets',
-                    'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-ticket-alt',
-                    'icon_color' => 'info',
-                    'can'     => ['sysadmin','admin'],
-                    'submenu' => [
-                        [
-                            'text'    => 'Tipos de Status',
-                            'classes' => 'btn-sm',
-                            'route'   => 'ticket_statuses.index',
-                            'icon'    => 'fas fa-toggle-off',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                        [
-                            'text'    => 'Tipos de Categorias',
-                            'classes' => 'btn-sm',
-                            'route'   => 'ticket_type_categories.index',
-                            'icon'    => 'fas fa-vest',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                    ]
-                ],
-
-                //Configurações de Processos Licitatórios
-                [
-                    'text'    => 'Configurações de Processos',
-                    'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-file-signature',
-                    'icon_color' => 'info',
-                    'can'     => ['sysadmin','admin'],
-                    'submenu' => [
-                        [
-                            'text'    => 'Tipos de Status',
-                            'classes' => 'btn-sm',
-                            'route'   => 'supply_process_statuses.index',
-                            'icon'    => 'fas fa-toggle-off',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],

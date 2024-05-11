@@ -16,23 +16,10 @@ use App\Http\Controllers\Admin\Region\RegionCityController;
 use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
 use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\Admin\Product\ProductTypeController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
-use App\Http\Controllers\Consumable\ConsumablesController;
-use App\Http\Controllers\Consumable\ConsumableTypesController;
-use App\Http\Controllers\Consumable\ConsumableUnitsController;
-use App\Http\Controllers\Dashboard\Admin\DashboardController;
-use App\Http\Controllers\Dashboard\ViewDashboardController;
 use App\Http\Controllers\Inventory\InventoryController;
 use App\Http\Controllers\Inventory\InventoryHistoryController;
-use App\Http\Controllers\SupplyProcess\Admin\SupplyProcessStatusController;
-use App\Http\Controllers\SupplyProcess\SupplyProcessController;
-use App\Http\Controllers\SupplyProcess\SupplyProcessItemController;
-use App\Http\Controllers\SupplyProcess\SupplyProcessOrganizationController;
-use App\Http\Controllers\Ticket\Admin\TicketStatusController;
-use App\Http\Controllers\Ticket\Admin\TicketTypeCategoryController;
-use App\Http\Controllers\Ticket\Admin\TicketTypeServiceController;
-use App\Http\Controllers\Ticket\Admin\TicketTypeSubServiceController;
-use App\Http\Controllers\Ticket\TicketController;
 use App\Http\Controllers\Users\Admin\UsersController;
 use App\Http\Controllers\Users\ProfileController;
 
@@ -49,14 +36,6 @@ Route::middleware('auth')->group(function () {
 
         //Rota - Primeira Página
         Route::get('home', [HomeController::class, 'index'])->name('home');
-
-        //Rotas Tickets
-        Route::resource('tickets', TicketController::class);
-    
-        //Grupo de Rotas - Configuração de Dashbaord
-        Route::prefix('dashboards')->group(function (){
-            Route::resource('view_dashboards',ViewDashboardController::class);
-        });
 
         //Grupo de Rodas - Configurações do Sistema
         Route::prefix('admin')->group(function (){
@@ -110,77 +89,16 @@ Route::middleware('auth')->group(function () {
 
             });
 
-            //Grupo de Rotas - Configuração de Produtos
+            //Grupo de Rotas - Configuração de Localização
             Route::prefix('products')->group(function (){
 
-                //Rota - Dados dos Produtos
-                    Route::put('products/status/{product}',[ProductController::class,'status'])->name('products.status');
+                //Rota - Apresentação de Produtos
+                    Route::resource('product_units',ProductUnitController::class);
+                //Rota - Tipos de Produtos
+                    Route::resource('product_types',ProductTypeController::class);
+                //Rota - Produtos
+                    Route::put('products/{product}',[ProductController::class,'status'])->name('products.status');
                     Route::resource('products',ProductController::class);
-                //Rota - Dados Unidade de Médida
-                    Route::put('units/status/{unit}',[ProductUnitController::class,'status'])->name('units.status');
-                    Route::resource('units',ProductUnitController::class);
-
-            });            
-
-            //Grupo de Rotas - Configuração de Dashbaord
-            Route::prefix('dashboards')->group(function (){
-                Route::put('dashboards/status/{dashboard}',[DashboardController::class,'status'])->name('dashboards.status');
-                Route::resource('dashboards',DashboardController::class);
-            });
-
-            //Grupo de Rotas - Configuração do Ticket
-            Route::prefix('ticket')->group(function (){
-                
-                //Rotas do Status do Ticket
-                    Route::put('ticket_statuses/status/{ticket_status}',[TicketStatusController::class,'status'])->name('ticket_statuses.status');
-                    Route::put('ticket_statuses/default/{ticket_status}',[TicketStatusController::class,'default'])->name('ticket_statuses.default');
-                    Route::resource('ticket_statuses',TicketStatusController::class);
-
-                //Rotas de Tipos de Categorias do Ticket
-                    Route::put('ticket_type_categories/status/{ticket_type_category}',[TicketTypeCategoryController::class,'status'])->name('ticket_type_categories.status');
-                    Route::resource('ticket_type_categories',TicketTypeCategoryController::class);
-                
-                //Rotas de Tipos de Serviços do Ticket
-                    Route::put('ticket_type_services/status/{ticket_type_service}',[TicketTypeServiceController::class,'status'])->name('ticket_type_services.status');
-                    Route::resource('ticket_type_services',TicketTypeServiceController::class);
-                    
-                //Rotas de Sub-Tipos de Serviços do Ticket
-                    Route::put('ticket_type_sub_services/status/{ticket_type_sub_service}',[TicketTypeSubServiceController::class,'status'])->name('ticket_type_sub_services.status');
-                    Route::resource('ticket_type_sub_services',TicketTypeSubServiceController::class);
-                    
-            });
-
-            //Grupo de Rotas - Processos Licitatórios
-            Route::prefix('supply_processes')->group(function (){
-
-                //Grupo de Rotas - Configurações de Processos Licitatórios
-                    Route::put('supply_processes/status/{supply_process}',[SupplyProcessController::class,'status'])->name('supply_processes.status');
-                    Route::resource('supply_processes',SupplyProcessController::class);
-                //Grupo de Rotas - Configurações dos Itens dos Processos Licitatórios
-                    Route::get('{supply_process}/items/create/',[SupplyProcessItemController::class,'create'])->name('supply_process_items.create');
-                    Route::post('items/store',[SupplyProcessItemController::class,'store'])->name('supply_process_items.store');
-                    Route::get('itens/{supply_process_item}/edit',[SupplyProcessItemController::class,'edit'])->name('supply_process_items.edit');
-                    Route::put('itens/{supply_process_item}/update',[SupplyProcessItemController::class,'update'])->name('supply_process_items.update');
-                    Route::delete('itens/{supply_process_item}/destroy',[SupplyProcessItemController::class,'destroy'])->name('supply_process_items.destroy');
-
-                    Route::put('supply_process_statuses/status/{supply_process_status}',[SupplyProcessStatusController::class,'status'])->name('supply_process_statuses.status');
-                    Route::put('supply_process_statuses/default/{supply_process_status}',[SupplyProcessStatusController::class,'default'])->name('supply_process_statuses.default');
-                    Route::resource('supply_process_statuses',SupplyProcessStatusController::class);
-
-                    //Rota de Vinculação de Setor com Processos
-                    Route::resource('supply_linked_organizations',SupplyProcessOrganizationController::class);
-            });
-
-            //Grupo de Rotas - Configuração de Localização
-            Route::prefix('consumable')->group(function (){
-
-                //Rota - Dados Paises
-                    Route::resource('consumable_units',ConsumableUnitsController::class);
-                //Rota - Dados Estados
-                    Route::resource('consumable_types',ConsumableTypesController::class);
-                //Rota - Dados Cidades
-                    Route::put('consumables/{consumable}',[ConsumablesController::class,'status'])->name('consumables.status');
-                    Route::resource('consumables',ConsumablesController::class);
             });
         });        
 
