@@ -1,0 +1,1 @@
+<x-form.input col="12" label="Classificação do Medicamento" id="title" value="{{$db->title ?? ''}}" />

@@ -7,6 +7,7 @@ use App\Models\Product\ProductType;
 use App\Http\Requests\Product\StoreProductTypeRequest;
 use App\Http\Requests\Product\UpdateProductTypeRequest;
 use App\Services\Logger;
+use Illuminate\Http\Request;
 
 class ProductTypeController extends Controller
 {
@@ -107,5 +108,23 @@ class ProductTypeController extends Controller
     public function destroy(ProductType $ProductType)
     {
         return redirect(route('product_types.index'));
+    }
+
+    /**
+     * Update the status of the specified item in storage.
+     */
+    public function status(Request $request, string $id)
+    {
+        //Dados dos Formulários
+        $data = $request->only('status');
+
+        //Salvando Dados
+        $db = ProductType::find($id);
+        $db->update($data);
+
+        //Log do Sistema
+        Logger::status($db->id, $db->status);
+
+        return redirect(route('products.index'))->with('success','Status alterado com sucesso.');
     }
 }

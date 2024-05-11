@@ -7,6 +7,7 @@ use App\Models\Product\ProductUnit;
 use App\Http\Requests\Product\StoreProductUnitRequest;
 use App\Http\Requests\Product\UpdateProductUnitRequest;
 use App\Services\Logger;
+use Illuminate\Http\Request;
 
 class ProductUnitController extends Controller
 {
@@ -107,5 +108,23 @@ class ProductUnitController extends Controller
     public function destroy(ProductUnit $ProductUnit)
     {
         return redirect(route('product_units.index'));
+    }
+
+    /**
+     * Update the status of the specified item in storage.
+     */
+    public function status(Request $request, string $id)
+    {
+        //Dados dos Formulários
+        $data = $request->only('status');
+
+        //Salvando Dados
+        $db = ProductUnit::find($id);
+        $db->update($data);
+
+        //Log do Sistema
+        Logger::status($db->id, $db->status);
+
+        return redirect(route('products.index'))->with('success','Status alterado com sucesso.');
     }
 }

@@ -17,12 +17,13 @@ return new class extends Migration
             $table->string('title');
             $table->string('filter');
             $table->string('description')->nullable();
-            $table->string('material_classification')->nullable();
             $table->string('status')->default(1);
+            $table->unsignedBigInteger('product_classification_id');
             $table->unsignedBigInteger('product_unit_id');
             $table->unsignedBigInteger('product_type_id');
             $table->timestamps();
 
+            $table->foreign('product_classification_id')->references('id')->on('product_classifications');
             $table->foreign('product_unit_id')->references('id')->on('product_units');
             $table->foreign('product_type_id')->references('id')->on('product_types');
         });

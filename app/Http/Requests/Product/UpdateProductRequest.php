@@ -29,7 +29,7 @@ class UpdateProductRequest extends FormRequest
             ],
             'title' => 'required',
             'description' => 'nullable|min:20',
-            'material_classification' => 'required',
+            'product_classification_id' => 'required',
             'product_unit_id' => 'required',
             'product_type_id' => 'required',
         ];

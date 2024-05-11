@@ -3,7 +3,7 @@
         <x-table.th class="w-28">Sigla</x-table.th>
         <x-table.th>Apresentação</x-table.th>
         <x-table.th class="w-28">Status</x-table.th>
-        <x-table.th class="w-40"></x-table.th>
+        <x-table.th class="w-28"></x-table.th>
     @endslot
 
     @slot('tbody')
@@ -12,11 +12,10 @@
                 <x-table.td>{{$item->code}}</x-table.td>
                 <x-table.td>{{$item->title}}</x-table.td>
                 <x-table.td class="text-center">
-                    <x-button.buttonStatus condition="{{$item->status}}" route="{{route('product_units.update',['product_unit'=>$item->id])}}" name="status" />
+                    <x-button.buttonStatus condition="{{$item->status}}" route="{{route('product_units.status',['product_unit'=>$item->id])}}" name="status" />
                 </x-table.td>
                 <x-table.td>
                     <x-button.minButtonEdit route="{{route('product_units.edit',['product_unit'=>$item->id])}}" />
-                    <x-button.minButtonDelete route="{{route('product_units.destroy',['product_unit'=>$item->id])}}" />
                 </x-table.td>
             </x-table.tr>
         @endforeach

@@ -24,7 +24,7 @@ class StoreProductUnitRequest extends FormRequest
         return [
             //
             'code' => 'required|unique:product_units',
-            'title' => 'required',
+            'title' => 'required|unique:product_units',
             'description' => 'nullable|min:20',
         ];
     }

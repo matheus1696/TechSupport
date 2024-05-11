@@ -307,7 +307,7 @@ return [
             'text'    => 'Almoxarifado',
             'classes' => 'btn-sm',
             'route'   => 'inventories.index',
-            'icon'    => 'fas fa-boxes',
+            'icon'    => 'fas fa-boxes pr-2',
             'can'     => 'user'
         ],
         
@@ -316,7 +316,7 @@ return [
             'text'    => 'Lista Telefônica',
             'classes' => 'btn-sm',
             'route'   => 'contacts.index',
-            'icon'    => 'fas fa-phone-volume',
+            'icon'    => 'fas fa-phone-volume pr-2',
         ],
 
         //Perfil do Usuário
@@ -324,7 +324,7 @@ return [
             'text'    => 'Perfil',
             'classes' => 'btn-sm',
             'route'   => 'profile.index',
-            'icon'    => 'fas fa-user',
+            'icon'    => 'fas fa-user pr-2',
             'can'     => 'user'
         ],
 
@@ -332,7 +332,7 @@ return [
         [
             'text'    => 'Configurações do Sistema',
             'classes' => 'btn-sm',
-            'icon'    => 'fas fa-cogs',
+            'icon'    => 'fas fa-cogs pr-2',
             'can'     => ['sysadmin','admin'],
             'submenu' => [
 
@@ -340,7 +340,7 @@ return [
                 [
                     'text'    => 'Configurações de Perfil',
                     'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-users-cog',
+                    'icon'    => 'fas fa-users-cog pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
@@ -349,7 +349,7 @@ return [
                             'text'    => 'Usuários',
                             'classes' => 'btn-sm',
                             'route'   => 'users.index',
-                            'icon'    => 'fas fa-users',
+                            'icon'    => 'fas fa-users pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -359,9 +359,9 @@ return [
 
                 //Configurações de Empresas
                 [
-                    'text'    => 'Configurações da Empresa',
+                    'text'    => 'Empresa',
                     'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-building',
+                    'icon'    => 'fas fa-building pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
@@ -369,7 +369,7 @@ return [
                             'text'    => 'Estabelecimentos',
                             'classes' => 'btn-sm',
                             'route'   => 'establishments.index',
-                            'icon'    => 'fas fa-clinic-medical',
+                            'icon'    => 'fas fa-clinic-medical pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -377,7 +377,7 @@ return [
                             'text'    => 'Tipo de Estabelecimento',
                             'classes' => 'btn-sm',
                             'route'   => 'type_establishments.index',
-                            'icon'    => 'fas fa-grip-horizontal',
+                            'icon'    => 'fas fa-grip-horizontal pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -385,7 +385,7 @@ return [
                             'text'    => 'Blocos Financeiros',
                             'classes' => 'btn-sm',
                             'route'   => 'financial_blocks.index',
-                            'icon'    => 'fas fa-grip-lines-vertical',
+                            'icon'    => 'fas fa-grip-lines-vertical pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -393,7 +393,7 @@ return [
                             'text'    => 'Organograma',
                             'classes' => 'btn-sm',
                             'route'   => 'organizations.organize',
-                            'icon'    => 'fas fa-bezier-curve',
+                            'icon'    => 'fas fa-bezier-curve pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -401,7 +401,7 @@ return [
                             'text'    => 'Ocupações (CBO)',
                             'classes' => 'btn-sm',
                             'route'   => 'occupations.index',
-                            'icon'    => 'fas fa-id-badge',
+                            'icon'    => 'fas fa-id-badge pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -411,9 +411,9 @@ return [
 
                 //Configurações de Regiões
                 [
-                    'text'    => 'Configurações de Regiões',
+                    'text'    => 'Regiões',
                     'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-globe-americas',
+                    'icon'    => 'fas fa-globe-americas pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
@@ -421,7 +421,7 @@ return [
                             'text'    => 'Paises',
                             'classes' => 'btn-sm',
                             'route'   => 'countries.index',
-                            'icon'    => 'fas fa-map-marked-alt',
+                            'icon'    => 'fas fa-map-marked-alt pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -429,7 +429,7 @@ return [
                             'text'    => 'Estados',
                             'classes' => 'btn-sm',
                             'route'   => 'states.index',
-                            'icon'    => 'fas fa-map-marked-alt',
+                            'icon'    => 'fas fa-map-marked-alt pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -437,7 +437,7 @@ return [
                             'text'    => 'Cidades',
                             'classes' => 'btn-sm',
                             'route'   => 'cities.index',
-                            'icon'    => 'fas fa-map-marked-alt',
+                            'icon'    => 'fas fa-map-marked-alt pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -446,9 +446,9 @@ return [
 
                 //Configurações de Produtos
                 [
-                    'text'    => 'Configurações de Produtos',
+                    'text'    => 'Produtos',
                     'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-screwdriver',
+                    'icon'    => 'fas fa-screwdriver pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
@@ -456,7 +456,7 @@ return [
                             'text'    => 'Lista de Produtos',
                             'classes' => 'btn-sm',
                             'route'   => 'products.index',
-                            'icon'    => 'fas fa-screwdriver',
+                            'icon'    => 'fas fa-screwdriver pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -464,7 +464,15 @@ return [
                             'text'    => 'Tipos de Produto',
                             'classes' => 'btn-sm',
                             'route'   => 'product_types.index',
-                            'icon'    => 'fas fa-users',
+                            'icon'    => 'fas fa-list-ol pr-2',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                        [
+                            'text'    => 'Classificação de Produtos',
+                            'classes' => 'btn-sm',
+                            'route'   => 'product_classifications.index',
+                            'icon'    => 'fas fa-stream pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
@@ -472,7 +480,50 @@ return [
                             'text'    => 'Apresentação',
                             'classes' => 'btn-sm',
                             'route'   => 'product_units.index',
-                            'icon'    => 'fas fa-calculator',
+                            'icon'    => 'fas fa-ruler pr-2',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                    ]
+                ],
+
+                //Configurações de Medicamentos
+                [
+                    'text'    => 'Medicamentos',
+                    'classes' => 'btn-sm',
+                    'icon'    => 'fas fa-tablets pr-2',
+                    'icon_color' => 'info',
+                    'can'     => ['sysadmin','admin'],
+                    'submenu' => [
+                        [
+                            'text'    => 'Lista de Medicamentos',
+                            'classes' => 'btn-sm',
+                            'route'   => 'medications.index',
+                            'icon'    => 'fas fa-pills pr-2',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                        [
+                            'text'    => 'Tipos de Medicamento',
+                            'classes' => 'btn-sm',
+                            'route'   => 'medication_types.index',
+                            'icon'    => 'fas fa-list-ol pr-2',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                        [
+                            'text'    => 'Classificação Medicamento',
+                            'classes' => 'btn-sm',
+                            'route'   => 'medication_classifications.index',
+                            'icon'    => 'fas fa-stream pr-2',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                        [
+                            'text'    => 'Apresentação',
+                            'classes' => 'btn-sm',
+                            'route'   => 'medication_units.index',
+                            'icon'    => 'fas fa-ruler pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],

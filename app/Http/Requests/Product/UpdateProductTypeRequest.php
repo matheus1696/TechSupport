@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProductTypeRequest extends FormRequest
 {
@@ -23,7 +24,10 @@ class UpdateProductTypeRequest extends FormRequest
     {
         return [
             //
-            'title' => 'required',
+            'title' => [
+                'required',
+                Rule::unique('product_types')->ignore($this->product_type),
+            ],
             'description' => 'nullable|min:20',
         ];
     }

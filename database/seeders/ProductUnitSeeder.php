@@ -16,9 +16,7 @@ class ProductUnitSeeder extends Seeder
         //
         ProductUnit::create(['code'=>'UND', 'title'=>'Unidade', 'filter'=>'unidade' ]);
         ProductUnit::create(['code'=>'BNG', 'title'=>'Bisnaga', 'filter'=>'bisnaga' ]);
-        ProductUnit::create(['code'=>'COMP', 'title'=>'Comprimido', 'filter'=>'comprimido' ]);
         ProductUnit::create(['code'=>'FRAS', 'title'=>'Frasco', 'filter'=>'frasco' ]);
-        ProductUnit::create(['code'=>'AMP', 'title'=>'Ampola', 'filter'=>'ampola' ]);
         ProductUnit::create(['code'=>'LIQ', 'title'=>'Liquido', 'filter'=>'liguido' ]);
         ProductUnit::create(['code'=>'SCH', 'title'=>'Sachê', 'filter'=>'sachê' ]);
         ProductUnit::create(['code'=>'CX', 'title'=>'Caixa', 'filter'=>'caixa' ]);

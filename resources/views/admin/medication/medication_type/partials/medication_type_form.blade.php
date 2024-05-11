@@ -1,0 +1,2 @@
+<x-form.input col="12" label="Tipo do Medicamento" id="title" value="{{$db->title ?? ''}}" />    
+<x-form.textarea col="12" label="Descrição do Medicamento" id="description" value="{{$db->description ?? ''}}"/>

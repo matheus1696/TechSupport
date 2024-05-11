@@ -26,9 +26,12 @@ class UpdateProductUnitRequest extends FormRequest
             //
             'code' => [
                 'required',
-                Rule::unique('products')->ignore($this->product_type),
+                Rule::unique('product_units')->ignore($this->product_type),
             ],
-            'title' => 'required',
+            'title' => [
+                'required',
+                Rule::unique('product_units')->ignore($this->product_type),
+            ],
             'description' => 'nullable|min:20',
         ];
     }

@@ -15,11 +15,15 @@ class Product extends Model
         'title',
         'filter',
         'description',
-        'material_classification',
+        'product_classification_id',
         'product_unit_id',
         'product_type_id',
         'status'
     ];
+
+    public function ProductClassification(){
+        return $this->belongsTo(ProductClassification::class,'product_classification_id','id');
+    }
 
     public function ProductType(){
         return $this->belongsTo(ProductType::class,'product_type_id','id');

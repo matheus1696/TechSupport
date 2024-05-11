@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Product\Product;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Models\Product\ProductClassification;
 use App\Models\Product\ProductType;
 use App\Models\Product\ProductUnit;
 use App\Services\Logger;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -42,11 +44,12 @@ class ProductController extends Controller
         //
         $dbProductUnits = ProductUnit::all();
         $dbProductTypes = ProductType::all();
+        $dbProductClassifications = ProductClassification::all();
 
         //Log do Sistema
         Logger::create();
 
-        return view('admin.product.product.product_create', compact('dbProductUnits','dbProductTypes'));
+        return view('admin.product.product.product_create', compact('dbProductUnits','dbProductTypes', 'dbProductClassifications'));
     }
 
     /**
@@ -82,11 +85,12 @@ class ProductController extends Controller
         $db = Product::find($id);        
         $dbProductUnits = ProductUnit::all();
         $dbProductTypes = ProductType::all();
+        $dbProductClassifications = ProductClassification::all();
 
         //Log do Sistema
         Logger::edit($db->title);
 
-        return view('admin.product.product.product_edit',compact('db','dbProductUnits','dbProductTypes'));
+        return view('admin.product.product.product_edit',compact('db','dbProductUnits','dbProductTypes','dbProductClassifications'));
     }
 
     /**
@@ -115,5 +119,23 @@ class ProductController extends Controller
     public function destroy(Product $Product)
     {
         return redirect(route('products.index'));
+    }
+
+    /**
+     * Update the status of the specified item in storage.
+     */
+    public function status(Request $request, string $id)
+    {
+        //Dados dos Formulários
+        $data = $request->only('status');
+
+        //Salvando Dados
+        $db = Product::find($id);
+        $db->update($data);
+
+        //Log do Sistema
+        Logger::status($db->id, $db->status);
+
+        return redirect(route('products.index'))->with('success','Status alterado com sucesso.');
     }
 }

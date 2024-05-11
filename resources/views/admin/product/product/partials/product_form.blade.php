@@ -2,9 +2,12 @@
 <x-form.input col="9" label="Produto" id="title" value="{{$db->title ?? ''}}" />
 <x-form.textarea col="12" label="Descrição do Produto" id="description" value="{{$db->description ?? ''}}"/>
 
-<x-form.select col="4" label="Classificação" id="material_classification">
-        <option value="Permanente" @isset($db) @if ($db->material_classification == "Permanente") selected @endif @endisset>Permanente</option>
-        <option value="Consumo" @isset($db) @if ($db->material_classification == "Consumo") selected @endif @endisset>Consumo</option>
+<x-form.select col="4" label="Classificação" id="product_classification_id">
+    @foreach ($dbProductClassifications as $dbProductClassification)
+        <option value="{{$dbProductClassification->id}}" @isset($db) @if ($db->product_classification_id == $dbProductClassification->id) selected @endif @endisset>
+            {{$dbProductClassification->title}}
+        </option>
+    @endforeach
 </x-form.select>
 
 <x-form.select col="4" label="Apresentação" id="product_unit_id">

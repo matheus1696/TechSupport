@@ -15,11 +15,16 @@ use App\Http\Controllers\Admin\Company\CompanyTypeEstablishmentController;
 use App\Http\Controllers\Admin\Region\RegionCityController;
 use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
+use App\Http\Controllers\Admin\Product\ProductClassificationController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductTypeController;
 use App\Http\Controllers\Admin\Product\ProductUnitController;
 use App\Http\Controllers\Inventory\InventoryController;
 use App\Http\Controllers\Inventory\InventoryHistoryController;
+use App\Http\Controllers\Admin\Medication\MedicationClassificationController;
+use App\Http\Controllers\Admin\Medication\MedicationController;
+use App\Http\Controllers\Admin\Medication\MedicationTypeController;
+use App\Http\Controllers\Admin\Medication\MedicationUnitController;
 use App\Http\Controllers\Users\Admin\UsersController;
 use App\Http\Controllers\Users\ProfileController;
 
@@ -92,13 +97,35 @@ Route::middleware('auth')->group(function () {
             //Grupo de Rotas - Configuração de Localização
             Route::prefix('products')->group(function (){
 
-                //Rota - Apresentação de Produtos
-                    Route::resource('product_units',ProductUnitController::class);
-                //Rota - Tipos de Produtos
+                //Rota - Apresentação de Medicamentos
+                    Route::put('product_classifications/status/{product_classification}',[ProductClassificationController::class,'status'])->name('product_classifications.status');
+                    Route::resource('product_classifications',ProductClassificationController::class);
+                //Rota - Apresentação de Medicamentos                
+                    Route::put('product_units/status/{product_unit}',[ProductUnitController::class,'status'])->name('product_units.status');
+                    Route::resource('product_units',ProductUnitController::class);    
+                //Rota - Tipos de Medicamentos                    
+                    Route::put('product_types/status/{product_type}',[ProductTypeController::class,'status'])->name('product_types.status');
                     Route::resource('product_types',ProductTypeController::class);
-                //Rota - Produtos
-                    Route::put('products/{product}',[ProductController::class,'status'])->name('products.status');
+                //Rota - Medicamentos
+                    Route::put('products/status/{product}',[ProductController::class,'status'])->name('products.status');
                     Route::resource('products',ProductController::class);
+            });
+
+            //Grupo de Rotas - Configuração de Localização
+            Route::prefix('medication')->group(function (){
+
+                //Rota - Apresentação de Produtos
+                    Route::put('medication_classifications/status/{medication_classification}',[MedicationClassificationController::class,'status'])->name('medication_classifications.status');
+                    Route::resource('medication_classifications',MedicationClassificationController::class);                    
+                //Rota - Apresentação de Produtos
+                    Route::put('medication_units/status/{medication_unit}',[MedicationUnitController::class,'status'])->name('medication_units.status');
+                    Route::resource('medication_units',MedicationUnitController::class);
+                //Rota - Tipos de Produtos
+                    Route::put('medication_types/status/{medication_type}',[MedicationTypeController::class,'status'])->name('medication_types.status');
+                    Route::resource('medication_types',MedicationTypeController::class);
+                //Rota - Produtos
+                    Route::put('medications/status/{medication}',[MedicationController::class,'status'])->name('medications.status');
+                    Route::resource('medications',MedicationController::class);
             });
         });        
 

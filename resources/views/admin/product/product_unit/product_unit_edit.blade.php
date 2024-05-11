@@ -3,7 +3,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Editar de Tipos de Suprimentos: {{ $db->title }}"/>
+        <x-header title="Apresentação do Produto: {{ $db->title }}"/>
     @endslot
 
     <!-- Slot Body -->

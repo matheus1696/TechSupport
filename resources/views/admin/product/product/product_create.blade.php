@@ -2,7 +2,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Cadastro de Tipos de Suprimentos"/>
+        <x-header title="Cadastror Produto"/>
     @endslot
 
     <!-- Slot Body -->
