@@ -185,19 +185,4 @@ class CompanyEstablishmentController extends Controller
 
         return redirect(route('establishments.index'))->with('success','Status alterado com sucesso.');
     }
-
-    public function hasInventory(Request $request, string $id)
-    {
-        //Dados dos Formulários
-        $data = $request->only('has_inventory');
-
-        //Salvando Dados
-        $db = CompanyEstablishment::find($id);
-        $db->update($data);
-
-        //Log do Sistema
-        Logger::status($db->id, $db->status);
-
-        return redirect(route('establishments.show',['establishment'=>$id]))->with('success','Estoque alterado com sucesso.');
-    }
 }

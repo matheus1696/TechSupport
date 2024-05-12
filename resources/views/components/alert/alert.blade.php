@@ -28,6 +28,10 @@
     setTimeout( function relogio() {
         let = document.querySelector('.alert').classList.add('opacity-0')
     }, 3000)
+    setTimeout( function relogio() {
+    let = document.querySelector('.borderAlert').classList.remove('z-50')
+        let = document.querySelector('.alert').classList.add('-z-50')
+    }, 3200)
 </script>
 
 

@@ -304,12 +304,46 @@ return [
 
         //Estoque
         [
-            'text'    => 'Almoxarifado',
+            'text'    => 'Estoque',
             'classes' => 'btn-sm',
-            'route'   => 'inventories.index',
             'icon'    => 'fas fa-boxes pr-2',
-            'can'     => 'user'
+            'can'     => 'user',
+            'submenu' => [
+
+                //Estoque Almoxarifado
+                [
+                    'text'    => 'Almoxarifado',
+                    'classes' => 'btn-sm',
+                    'route'   => 'inventory_products.index',
+                    'icon'    => 'fas fa-cubes pr-2',
+                    'icon_color' => 'info',
+                    'can'     => 'user'
+                ],
+
+                //Estoque Farmácia
+                [
+                    'text'    => 'Farmácia',
+                    'classes' => 'btn-sm',
+                    'route'   => 'inventory_medications.index',
+                    'icon'    => 'fas fa-capsules pr-2',
+                    'icon_color' => 'info',
+                    'can'     => 'user'
+                ],
+
+                //Estoque Farmácia
+                [
+                    'text'    => 'Centro de Distribuição',
+                    'classes' => 'btn-sm',
+                    'route'   => 'inventory_warehouses.index',
+                    'icon'    => 'fas fa-truck pr-2',
+                    'icon_color' => 'info',
+                    'can'     => 'user'
+                ],
+
+            ]
         ],
+
+        
         
         //Lista Telefônica
         [

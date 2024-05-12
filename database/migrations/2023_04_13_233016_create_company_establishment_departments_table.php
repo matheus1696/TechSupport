@@ -17,8 +17,11 @@ return new class extends Migration
             $table->string('filter');
             $table->string('contact')->nullable();
             $table->string('extension')->nullable();
-            $table->string('type_contact')->default('Internal');
+            $table->string('type_contact')->nullable()->default('Without');
             $table->unsignedBigInteger('establishment_id');
+            $table->boolean('has_inventory_product')->default(false);
+            $table->boolean('has_inventory_medication')->default(false);
+            $table->boolean('has_inventory_central')->default(false);
             $table->timestamps();
 
             $table->foreign('establishment_id')->references('id')->on('company_establishments');

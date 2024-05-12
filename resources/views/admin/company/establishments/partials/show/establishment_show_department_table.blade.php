@@ -2,10 +2,13 @@
     <x-table.table>
         @slot('thead')
             <x-table.th>Setor</x-table.th>
-            <x-table.th class="w-40">Telefone</x-table.th>
+            <x-table.th class="w-32">Telefone</x-table.th>
             <x-table.th class="w-28">Ramal</x-table.th>
-            <x-table.th class="w-40">Tipo de contato</x-table.th>
-            <x-table.th class="w-40"></x-table.th>
+            <x-table.th class="w-32">Tipo de contato</x-table.th>
+            <x-table.th class="w-32">Estoque Produtos</x-table.th>
+            <x-table.th class="w-32">Estoque Farmácia</x-table.th>
+            <x-table.th class="w-32">Estoque Central</x-table.th>
+            <x-table.th class="w-32"></x-table.th>
         @endslot
     
         @slot('tbody')
@@ -15,20 +18,31 @@
                     <x-table.td class="text-center">{{$dbDepartment->contact}}</x-table.td>
                     <x-table.td class="text-center">{{$dbDepartment->extension}}</x-table.td>
                     <x-table.td class="text-center">                        
+                        @if($dbDepartment->type_contact == "Without") Sem Ramal @endif
                         @if($dbDepartment->type_contact == "Main") Contato Externo @endif
                         @if($dbDepartment->type_contact == "Internal") Ramal Interno @endif
+                    </x-table.td>                    
+                    <x-table.td>
+                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_product}}" name="has_inventory_product" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
+                    </x-table.td>                    
+                    <x-table.td>
+                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_medication}}" name="has_inventory_medication" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
+                    </x-table.td>                    
+                    <x-table.td>
+                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_central}}" name="has_inventory_central" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
                     </x-table.td>
                     <x-table.td class="text-center">
                         
                         <x-button.minButtonModalEdit id="Departamento{{$dbDepartment->id}}" title="{{$dbDepartment->department}}">
 
-                            <x-form.form route="{{route('establishment_contacts.update',['establishment_contact'=>$dbDepartment->id])}}" method="edit">
+                            <x-form.form route="{{route('establishment_departments.update',['establishment_department'=>$dbDepartment->id])}}" method="edit">
                                 
-                                <x-form.input col="5" label="Departamento" id="department" required="required" value="{{ $dbDepartment->department}}" />
-                                <x-form.input col="2" type="tel" label="Telefone" id="contact" value="{{ $dbDepartment->contact}}" />
+                                <x-form.input col="4" label="Departamento" id="department" required="required" value="{{ $dbDepartment->department}}" />
+                                <x-form.input col="3" type="tel" label="Telefone" id="contact" value="{{ $dbDepartment->contact}}" />
                                 <x-form.input col="2" type="number" label="Ramal" id="extension" value="{{ $dbDepartment->extension}}" />
                                 
                                 <x-form.select col="3" label="Tipo de Contato" id="type_contact{{$dbDepartment->id}}">
+                                    <option @if($dbDepartment->type_contact === "Without") selected @endif value="Without">Sem Ramal</option>
                                     <option @if($dbDepartment->type_contact === "Main") selected @endif value="Main">Contato Externo</option>
                                     <option @if($dbDepartment->type_contact === "Internal") selected @endif value="Internal">Ramal Interno</option>
                                 </x-form.select>
@@ -37,8 +51,7 @@
                             
                         </x-button.minButtonModalEdit>
 
-                        <x-button.minButtonDelete route="{{route('establishment_contacts.destroy',['establishment_contact'=>$dbDepartment->id])}}">
-                        </x-button.minButtonDelete>
+                        <x-button.minButtonDelete route="{{route('establishment_departments.destroy',['establishment_department'=>$dbDepartment->id])}}"></x-button.minButtonDelete>
                     </x-table.td>
                 </x-table.tr>
             @endforeach

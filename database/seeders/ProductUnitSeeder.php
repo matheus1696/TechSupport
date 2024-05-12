@@ -20,5 +20,6 @@ class ProductUnitSeeder extends Seeder
         ProductUnit::create(['code'=>'LIQ', 'title'=>'Liquido', 'filter'=>'liguido' ]);
         ProductUnit::create(['code'=>'SCH', 'title'=>'Sachê', 'filter'=>'sachê' ]);
         ProductUnit::create(['code'=>'CX', 'title'=>'Caixa', 'filter'=>'caixa' ]);
+        ProductUnit::create(['code'=>'RSM', 'title'=>'Resma', 'filter'=>'resma' ]);
     }
 }

@@ -14,7 +14,7 @@ class ProductTypeSeeder extends Seeder
     public function run(): void
     {
         //
-        ProductType::create(['title'=>'Medicamentos', 'filter'=>'medicamento' ]);
-        ProductType::create(['title'=>'Almoxarifado', 'filter'=>'almoxarifado' ]);
+        ProductType::create(['title'=>'Papelaria', 'filter'=>'papelaria' ]);
+        ProductType::create(['title'=>'Limpeza', 'filter'=>'limpeza' ]);
     }
 }

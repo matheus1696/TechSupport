@@ -41,6 +41,8 @@ class DatabaseSeeder extends Seeder
             MedicationTypeSeeder::class,
             MedicationUnitSeeder::class,
             MedicationSeeder::class,
+            InventoryMedicationSeeder::class,
+            InventoryProductSeeder::class,
         ]);
     }
 }

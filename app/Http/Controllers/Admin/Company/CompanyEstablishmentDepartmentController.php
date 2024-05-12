@@ -123,4 +123,19 @@ class CompanyEstablishmentDepartmentController extends Controller
                 ->with('errors','Existe setores vinculados a '.$db->title);
         }
     }
+
+    public function hasInventory(Request $request, string $id)
+    {
+        //Dados dos Formulários
+        $data = $request->only('has_inventory_product','has_inventory_medication','has_inventory_central');
+
+        //Salvando Dados
+        $db = CompanyEstablishmentDepartment::find($id);
+        $db->update($data);
+
+        //Log do Sistema
+        Logger::status($db->id, $db->status);
+
+        return redirect(route('establishments.show',['establishment'=>$db->establishment_id]))->with('success','Estoque alterado com sucesso.');
+    }
 }

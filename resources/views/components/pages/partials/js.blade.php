@@ -21,7 +21,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
                 $('.summernote').summernote({
-                    height: 200,
+                    height: 100,
                     toolbar: [
                         // [groupName, [list of button]]
                         ['style', ['bold', 'italic', 'underline', 'clear',]],

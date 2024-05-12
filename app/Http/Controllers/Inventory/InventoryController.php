@@ -7,8 +7,8 @@ use App\Models\Inventory\Inventory;
 use App\Http\Requests\StoreInventoryRequest;
 use App\Http\Requests\UpdateInventoryRequest;
 use App\Models\Company\CompanyEstablishment;
+use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Inventory\InventoryHistory;
-use App\Models\Product\Consumables;
 use App\Models\Product\Product;
 use App\Services\Logger;
 use Illuminate\Http\Request;
@@ -21,12 +21,8 @@ class InventoryController extends Controller
     public function index(Request $request)
     {
         //Listagem de Dados
-        $db = CompanyEstablishment::where('has_inventory',TRUE)
-            ->orderBy('status','DESC')
-            ->orderBy('title')
-            ->with('FinancialBlock')
-            ->with('TypeEstablishment')
-            ->with('RegionCity')
+        $db = CompanyEstablishmentDepartment::where('has_inventory_product',TRUE)
+            ->orderBy('department')
             ->paginate(20);
 
         //Pesquisar Dados

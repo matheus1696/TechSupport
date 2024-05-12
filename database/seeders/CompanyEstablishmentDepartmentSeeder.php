@@ -232,6 +232,6 @@ class CompanyEstablishmentDepartmentSeeder extends Seeder
 
         CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepcão', 'contact'=>'(81) 3101-0300', 'extension'=>'0300', 'type_contact'=>'Main', 'establishment_id'=>92,]);
 
-        CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepcão', 'contact'=>'192', 'extension'=>'192', 'type_contact'=>'Main', 'establishment_id'=>92,]);
+        CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepcão', 'contact'=>'192', 'extension'=>'192', 'type_contact'=>'Main', 'establishment_id'=>97,]);
     }
 }

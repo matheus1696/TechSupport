@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 //Controllers
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Public\ContactListsController;
 use App\Http\Controllers\Admin\Company\CompanyFinancialBlockController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentController;
 use App\Http\Controllers\Admin\Company\CompanyEstablishmentDepartmentController;
@@ -12,19 +11,26 @@ use App\Http\Controllers\Admin\Company\CompanyOccupationController;
 use App\Http\Controllers\Admin\Company\CompanyOrganizationController;
 use App\Http\Controllers\Admin\Company\CompanyOrganizationLinkedUserController;
 use App\Http\Controllers\Admin\Company\CompanyTypeEstablishmentController;
-use App\Http\Controllers\Admin\Region\RegionCityController;
-use App\Http\Controllers\Admin\Region\RegionCountryController;
-use App\Http\Controllers\Admin\Region\RegionStateController;
-use App\Http\Controllers\Admin\Product\ProductClassificationController;
-use App\Http\Controllers\Admin\Product\ProductController;
-use App\Http\Controllers\Admin\Product\ProductTypeController;
-use App\Http\Controllers\Admin\Product\ProductUnitController;
-use App\Http\Controllers\Inventory\InventoryController;
-use App\Http\Controllers\Inventory\InventoryHistoryController;
 use App\Http\Controllers\Admin\Medication\MedicationClassificationController;
 use App\Http\Controllers\Admin\Medication\MedicationController;
 use App\Http\Controllers\Admin\Medication\MedicationTypeController;
 use App\Http\Controllers\Admin\Medication\MedicationUnitController;
+use App\Http\Controllers\Admin\Product\ProductClassificationController;
+use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\Admin\Product\ProductTypeController;
+use App\Http\Controllers\Admin\Product\ProductUnitController;
+use App\Http\Controllers\Admin\Region\RegionCityController;
+use App\Http\Controllers\Admin\Region\RegionCountryController;
+use App\Http\Controllers\Admin\Region\RegionStateController;
+use App\Http\Controllers\Inventory\InventoryController;
+use App\Http\Controllers\Inventory\InventoryHistoryController;
+use App\Http\Controllers\Inventory\InventoryMedicationController;
+use App\Http\Controllers\Inventory\InventoryProductController;
+use App\Http\Controllers\Inventory\InventoryMedicationHistoryController;
+use App\Http\Controllers\Inventory\InventoryProductHistoryController;
+use App\Http\Controllers\Inventory\InventoryWarehouseController;
+use App\Http\Controllers\Inventory\InventoryWarehouseHistoryController;
+use App\Http\Controllers\Public\ContactListsController;
 use App\Http\Controllers\Users\Admin\UsersController;
 use App\Http\Controllers\Users\ProfileController;
 
@@ -69,11 +75,11 @@ Route::middleware('auth')->group(function () {
                 //Rota - Dados Tipo de Estabelecimento
                     Route::resource('type_establishments',CompanyTypeEstablishmentController::class);
                 //Rota - Dados Estabelecimento de Saúde 
-                    Route::put('establishments/inventory/{establishment}',[CompanyEstablishmentController::class,'hasInventory'])->name('establishments.hasInventory');
                     Route::put('establishments/status/{establishment}',[CompanyEstablishmentController::class,'status'])->name('establishments.status');
                     Route::resource('establishments',CompanyEstablishmentController::class);
-                //Rota - Dados do Contato Estabelecimento de Saúde
-                    Route::resource('establishment_contacts',CompanyEstablishmentDepartmentController::class);
+                //Rota - Dados dos Departamentos do Estabelecimento de Saúde
+                    Route::put('establishment_departments/inventory/{establishment_department}',[CompanyEstablishmentDepartmentController::class,'hasInventory'])->name('establishment_departments.hasInventory');
+                    Route::resource('establishment_departments',CompanyEstablishmentDepartmentController::class);
                 //Rota - Nível de Atenção
                     Route::resource('financial_blocks',CompanyFinancialBlockController::class);
 
@@ -131,9 +137,17 @@ Route::middleware('auth')->group(function () {
 
     });
     
-        //Rotas de Inventário/Estoque
-        Route::resource('inventories', InventoryController::class);
-        Route::resource('inventory_histories', InventoryHistoryController::class);
+    //Rotas de Inventário/Estoque de Produtos
+    Route::resource('inventory_products', InventoryProductController::class);
+    Route::resource('inventory_product_histories', InventoryProductHistoryController::class);
+    
+    //Rotas de Inventário/Estoque de Medicamentos
+    Route::resource('inventory_medications', InventoryMedicationController::class);
+    Route::resource('inventory_medication_histories', InventoryMedicationHistoryController::class);
+    
+    //Rotas de Inventário/Estoque de Centro de Distribuições
+    Route::resource('inventory_warehouses', InventoryWarehouseController::class);
+    Route::resource('inventory_warehouse_histories', InventoryWarehouseHistoryController::class);
 
     //Rotas de Perfil do Usuário
     Route::resource('profile', ProfileController::class);
