@@ -223,7 +223,7 @@ class CompanyEstablishmentDepartmentSeeder extends Seeder
         CompanyEstablishmentDepartment::create([ 'department'=>'Infocras', 'filter'=>'infocras', 'contact'=>'(81) 3101-0363', 'extension'=>'0363', 'type_contact'=>'Internal', 'establishment_id'=>89,]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0403', 'extension'=>'0403', 'type_contact'=>'Main', 'establishment_id'=>90,]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0364', 'extension'=>'0364', 'type_contact'=>'Main', 'establishment_id'=>96,]);
-        CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0217', 'extension'=>'0217', 'type_contact'=>'Internal', 'establishment_id'=>87,]);
+        CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0217', 'extension'=>'0217', 'type_contact'=>'Main', 'establishment_id'=>87,]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Vigilância Ambiental', 'filter'=>'vigilância', 'contact'=>'(81) 3101-0216', 'extension'=>'0216', 'type_contact'=>'Internal', 'establishment_id'=>87,]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Vigilância Sanitária', 'filter'=>'vigilância', 'contact'=>'(81) 3101-0215', 'extension'=>'0215', 'type_contact'=>'Internal', 'establishment_id'=>87,]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Recursos Humanos', 'filter'=>'recursos', 'contact'=>'(81) 3101-0218', 'extension'=>'0218', 'type_contact'=>'Internal', 'establishment_id'=>87,]);

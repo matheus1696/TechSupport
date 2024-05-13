@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>Tech</b>Support',
-    'logo_img' => 'assets/img/gest360Logo.png',
+    'logo_img' => 'assets/img/gest360_logo.png',
     'logo_img_class' => 'brand-image img-circle',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -168,11 +168,11 @@ return [
     */
 
     'classes_auth_card' => 'card-outline card-success elevation-2 text-sm',
-    'classes_auth_header' => '',
-    'classes_auth_body' => 'text-dark',
-    'classes_auth_footer' => 'text-center',
-    'classes_auth_icon' => 'text-success',
-    'classes_auth_btn' => 'btn btn-block btn-success elevation-1',
+    'classes_auth_header' => 'text-muted text-sm',
+    'classes_auth_body' => 'text-dark text-sm',
+    'classes_auth_footer' => 'text-center text-sm',
+    'classes_auth_icon' => 'text-success text-sm',
+    'classes_auth_btn' => 'btn btn-block btn-success elevation-1 text-sm',
 
     /*
     |--------------------------------------------------------------------------

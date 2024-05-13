@@ -22,8 +22,6 @@ use App\Http\Controllers\Admin\Product\ProductUnitController;
 use App\Http\Controllers\Admin\Region\RegionCityController;
 use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
-use App\Http\Controllers\Inventory\InventoryController;
-use App\Http\Controllers\Inventory\InventoryHistoryController;
 use App\Http\Controllers\Inventory\InventoryMedicationController;
 use App\Http\Controllers\Inventory\InventoryProductController;
 use App\Http\Controllers\Inventory\InventoryMedicationHistoryController;
