@@ -19,7 +19,7 @@
 
         {{-- Name field --}}
         <div class="mb-3 input-group">
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror text-sm"
                    value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
 
             <div class="input-group-append">
@@ -37,7 +37,7 @@
 
         {{-- Email field --}}
         <div class="mb-3 input-group">
-            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror text-sm"
                    value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}">
 
             <div class="input-group-append">
@@ -55,7 +55,7 @@
 
         {{-- Password field --}}
         <div class="mb-3 input-group">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror text-sm"
                    placeholder="{{ __('adminlte::adminlte.password') }}">
 
             <div class="input-group-append">
@@ -74,7 +74,7 @@
         {{-- Confirm password field --}}
         <div class="mb-3 input-group">
             <input type="password" name="password_confirmation"
-                   class="form-control @error('password_confirmation') is-invalid @enderror"
+                   class="form-control @error('password_confirmation') is-invalid @enderror text-sm"
                    placeholder="{{ __('adminlte::adminlte.retype_password') }}">
 
             <div class="input-group-append">
@@ -91,7 +91,7 @@
         </div>
 
         {{-- Register button --}}
-        <button type="submit" class="btn btn-block btn-warning {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+        <button type="submit" class="btn btn-block text-white text-sm {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
             {{ __('adminlte::adminlte.register') }}
         </button>
 
@@ -100,7 +100,7 @@
 
 @section('auth_footer')
     <p class="my-0">
-        <a href="{{ $login_url }}" class="btn btn-block btn-success">
+        <a href="{{ $login_url }}" class="text-sm btn btn-block btn-secondary">
             {{ __('adminlte::adminlte.i_already_have_a_membership') }}
         </a>
     </p>

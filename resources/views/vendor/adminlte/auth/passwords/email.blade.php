@@ -22,8 +22,8 @@
         @csrf
 
         {{-- Email field --}}
-        <div class="mb-3 input-group">
-            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+        <div class="input-group">
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror text-sm"
                    value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
 
             <div class="input-group-append">
@@ -38,12 +38,26 @@
                 </span>
             @enderror
         </div>
-
-        {{-- Send reset link button --}}
-        <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
-            {{ __('adminlte::adminlte.send_password_reset_link') }}
-        </button>
-
     </form>
+
+    @section('auth_footer')
+    <div class="pt-2 row">
+        
+        {{-- Send reset link button --}}
+        <div class="mb-3 col-md-12">
+            <button type="submit" class="btn btn-block text-sm {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+                {{ __('adminlte::adminlte.send_password_reset_link') }}
+            </button>
+        </div>
+        
+        {{-- Login link --}}
+        <p class="col-md-12">
+            <a href="{{ route('login') }}" class="text-sm btn btn-secondary btn-block">
+                Voltar
+            </a>
+        </p>
+        
+    </div>
+@stop
 
 @stop

@@ -167,12 +167,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-success elevation-2 text-sm',
+    'classes_auth_card' => 'card-outline card-success elevation-2',
     'classes_auth_header' => 'text-muted text-sm',
-    'classes_auth_body' => 'text-dark text-sm',
-    'classes_auth_footer' => 'text-center text-sm',
-    'classes_auth_icon' => 'text-success text-sm',
-    'classes_auth_btn' => 'btn btn-block btn-success elevation-1 text-sm',
+    'classes_auth_body' => 'text-dark',
+    'classes_auth_footer' => 'text-center',
+    'classes_auth_icon' => 'text-success',
+    'classes_auth_btn' => 'btn btn-block btn-success elevation-1',
 
     /*
     |--------------------------------------------------------------------------
@@ -194,7 +194,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-success elevation-5',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-white navbar-light text-sm',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 

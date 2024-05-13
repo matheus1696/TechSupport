@@ -26,7 +26,7 @@
 
         {{-- Email field --}}
         <div class="mb-3 input-group">
-            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror text-sm"
                    value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
 
             <div class="input-group-append">
@@ -44,7 +44,7 @@
 
         {{-- Password field --}}
         <div class="mb-3 input-group">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror text-sm"
                    placeholder="{{ __('adminlte::adminlte.password') }}">
 
             <div class="input-group-append">
@@ -64,7 +64,7 @@
         <div class="row">
 
             <div class="col-12">
-                <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+                <button type=submit class="btn btn-block text-sm {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
                     {{ __('adminlte::adminlte.sign_in') }}
                 </button>
             </div>
@@ -74,11 +74,11 @@
 @stop
 
 @section('auth_footer')
-    <div class="row">
+    <div class="pt-2 row">
         {{-- Password reset link --}}
         @if($password_reset_url)
             <p class="col-md-6">
-                <a href="{{ $password_reset_url }}" class="btn btn-secondary btn-block btn-sm">
+                <a href="{{ $password_reset_url }}" class="text-sm btn btn-secondary btn-block">
                     {{ __('adminlte::adminlte.i_forgot_my_password') }}
                 </a>
             </p>
@@ -87,7 +87,7 @@
         {{-- Register link --}}
         @if($register_url)
             <p class="col-md-6">
-                <a href="{{ $register_url }}" class="btn btn-warning btn-block btn-sm">
+                <a href="{{ $register_url }}" class="text-sm btn btn-warning btn-block">
                     {{ __('adminlte::adminlte.register_a_new_membership') }}
                 </a>
             </p>
