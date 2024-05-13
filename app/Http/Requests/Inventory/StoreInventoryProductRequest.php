@@ -23,6 +23,11 @@ class StoreInventoryProductRequest extends FormRequest
     {
         return [
             //
+            'title' => 'required|unique:products',
+            'description' => 'nullable|min:10',
+            'product_classification_id' => 'required',
+            'product_unit_id' => 'required',
+            'product_type_id' => 'required',
         ];
     }
 }

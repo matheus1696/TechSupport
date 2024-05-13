@@ -7,6 +7,8 @@ use App\Models\Inventory\InventoryMedicationHistory;
 use App\Http\Requests\Inventory\StoreInventoryMedicationHistoryRequest;
 use App\Http\Requests\Inventory\UpdateInventoryMedicationHistoryRequest;
 use App\Models\Inventory\InventoryMedication;
+use App\Services\Logger;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class InventoryMedicationHistoryController extends Controller
@@ -68,9 +70,31 @@ class InventoryMedicationHistoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InventoryMedicationHistory $InventoryMedicationHistory)
-    {
-        //
+    public function show(Request $request, string $id)
+    {        
+        //Listagem de Dados
+        $dbEstablishmentDepartment = InventoryMedicationHistory::where('establishment_department_id',$id)
+        ->first();
+        $db = InventoryMedicationHistory::where('establishment_department_id',$id)
+            ->paginate(40);
+
+        //Pesquisar Dados
+        $search = $request->all();
+        if (isset($search['searchName']) || isset($search['searchDate'])) {
+            $db = InventoryMedicationHistory::where('date','LIKE','%'.strtolower($search['searchDate']).'%')
+                //->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('date')
+                ->paginate(40);
+        }
+
+        //Log do Sistema
+        Logger::access();
+
+        return view('inventory.inventory_medication_history.inventory_medication_history_index',[
+            'search'=>$search,
+            'db'=>$db,
+            'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
+        ]);
     }
 
     /**

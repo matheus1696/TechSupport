@@ -14,7 +14,7 @@
     @slot('tbody')
         @foreach ($db as $item)
             <x-table.tr>
-                <x-table.td>{{$item->date}}</x-table.td>
+                <x-table.td>{{date('d/m/Y',strtotime($item->date))}}</x-table.td>
                 <x-table.td>{{$item->movement}}
                     @if ($item->movement === "Entrada")
                         <i class="px-2 text-green-500 rotate-45 fas fa-long-arrow-alt-up"></i>
@@ -23,11 +23,11 @@
                         <i class="px-2 text-red-500 rotate-45 fas fa-long-arrow-alt-down"></i>
                     @endif
                 </x-table.td>
-                <x-table.td>{{$item->Consumable->consumable}}</x-table.td>
+                <x-table.td>{{$item->Medication->title}}</x-table.td>
                 <x-table.td>{{$item->quantity}}</x-table.td>
                 <x-table.td>{{$item->User->name}}</x-table.td>
                 <x-table.td>
-                    <x-button.minButtonShow route="{{route('inventory_medications.edit',['inventory_medication'=>$item->id])}}" />
+                    <x-button.minButtonEdit route="{{route('inventory_product_histories.edit',['inventory_product_history'=>$item->id])}}" />
                 </x-table.td>
             </x-table.tr>
         @endforeach

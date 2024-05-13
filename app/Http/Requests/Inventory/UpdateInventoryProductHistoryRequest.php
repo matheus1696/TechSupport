@@ -23,6 +23,13 @@ class UpdateInventoryProductHistoryRequest extends FormRequest
     {
         return [
             //
+            'date' => 'required',
+            'title' => 'required',
+            'quantity' => 'required',
+            'movement' => 'required',
+            'product_id' => 'required',
+            'establishment_id' => 'required',
+            'establishment_department_id' => 'required',
         ];
     }
 }

@@ -23,6 +23,13 @@ class UpdateInventoryMedicationHistoryRequest extends FormRequest
     {
         return [
             //
+            'date' => 'required',
+            'title' => 'required',
+            'quantity' => 'required',
+            'movement' => 'required',
+            'medication_id' => 'required',
+            'establishment_id' => 'required',
+            'establishment_department_id' => 'required',
         ];
     }
 }

@@ -17,5 +17,5 @@
 
     <x-form.input col="2" label="Quantidade" type="number" id="quantity" value="{{$db->birthday}}" min="0" required="required"/>
 
-    <x-form.textarea col="12" label="Descrição do Setor" id="description" value="{{$db->description ?? ''}}"/>
+    <x-form.textarea col="12" label="Descrição da Movimentação" id="description" value="{{$db->description ?? ''}}"/>
 </x-form.form>

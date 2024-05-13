@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Inventory;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateInventoryProductRequest extends FormRequest
 {
@@ -23,6 +24,15 @@ class UpdateInventoryProductRequest extends FormRequest
     {
         return [
             //
+            'title' => [
+                'required',
+                'min:6',
+                Rule::unique('products')->ignore($this->title),
+            ],
+            'description' => 'nullable|min:10',
+            'product_classification_id' => 'required',
+            'product_unit_id' => 'required',
+            'product_type_id' => 'required',
         ];
     }
 }
