@@ -32,11 +32,6 @@ use App\Http\Controllers\Public\ContactListsController;
 use App\Http\Controllers\Users\Admin\UsersController;
 use App\Http\Controllers\Users\ProfileController;
 
-Route::get('/',function(){return view('index');});
-
-//Lista Telefônica
-Route::resource('contacts', ContactListsController::class);
-
 //Camada de Seguraça para Usuários Logados
 Route::middleware('auth')->group(function () {
 
@@ -131,25 +126,36 @@ Route::middleware('auth')->group(function () {
                     Route::put('medications/status/{medication}',[MedicationController::class,'status'])->name('medications.status');
                     Route::resource('medications',MedicationController::class);
             });
-        });        
+        });
+
+        //Grupo de Rodas - Configurações do Sistema
+        Route::prefix('admin')->group(function (){
+    
+            //Rotas de Inventário/Estoque de Produtos
+            Route::resource('inventory_products', InventoryProductController::class);
+            Route::resource('inventory_product_histories', InventoryProductHistoryController::class);
+            
+            //Rotas de Inventário/Estoque de Medicamentos
+            Route::resource('inventory_medications', InventoryMedicationController::class);
+            Route::resource('inventory_medication_histories', InventoryMedicationHistoryController::class);
+            
+            //Rotas de Inventário/Estoque de Centro de Distribuições
+            Route::resource('inventory_warehouses', InventoryWarehouseController::class);
+            Route::resource('inventory_warehouse_histories', InventoryWarehouseHistoryController::class);
+        });    
 
     });
-    
-    //Rotas de Inventário/Estoque de Produtos
-    Route::resource('inventory_products', InventoryProductController::class);
-    Route::resource('inventory_product_histories', InventoryProductHistoryController::class);
-    
-    //Rotas de Inventário/Estoque de Medicamentos
-    Route::resource('inventory_medications', InventoryMedicationController::class);
-    Route::resource('inventory_medication_histories', InventoryMedicationHistoryController::class);
-    
-    //Rotas de Inventário/Estoque de Centro de Distribuições
-    Route::resource('inventory_warehouses', InventoryWarehouseController::class);
-    Route::resource('inventory_warehouse_histories', InventoryWarehouseHistoryController::class);
 
     //Rotas de Perfil do Usuário
     Route::resource('profile', ProfileController::class);
 });
 
+Route::get('/',function(){return view('index');});
+
+//Lista Telefônica
+Route::resource('contacts', ContactListsController::class);
+
 //Rotas de Autenticação
 Auth::routes(['verify' => true]);
+
+
