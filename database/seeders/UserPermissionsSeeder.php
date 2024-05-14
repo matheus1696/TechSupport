@@ -25,13 +25,5 @@ class UserPermissionsSeeder extends Seeder
             'name'=>'user',
             'guard_name'=>'web'
         ]);
-        UserPermissions::create([
-            'name'=>'supply',
-            'guard_name'=>'web'
-        ]);
-        UserPermissions::create([
-            'name'=>'dashboard',
-            'guard_name'=>'web'
-        ]);
     }
 }

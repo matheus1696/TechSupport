@@ -78,7 +78,7 @@
         {{-- Password reset link --}}
         @if($password_reset_url)
             <p class="col-md-6">
-                <a href="{{ $password_reset_url }}" class="text-sm btn btn-secondary btn-block">
+                <a href="{{ $password_reset_url }}" class="text-sm btn btn-outline-secondary btn-block">
                     {{ __('adminlte::adminlte.i_forgot_my_password') }}
                 </a>
             </p>
@@ -87,7 +87,7 @@
         {{-- Register link --}}
         @if($register_url)
             <p class="col-md-6">
-                <a href="{{ $register_url }}" class="text-sm btn btn-warning btn-block">
+                <a href="{{ $register_url }}" class="text-sm btn btn-outline-secondary btn-block">
                     {{ __('adminlte::adminlte.register_a_new_membership') }}
                 </a>
             </p>
