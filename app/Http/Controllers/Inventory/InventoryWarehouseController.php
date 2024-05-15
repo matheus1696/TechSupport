@@ -66,7 +66,14 @@ class InventoryWarehouseController extends Controller
         $db = CompanyEstablishmentDepartment::find($id);
         $dbProducts = Product::all();
         $dbFinancialBlocks = CompanyFinancialBlock::all();
-        $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)->get();
+        $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)
+        ->orderBy('product_id')
+        ->orderBy('financial_block_id')
+        ->with('Product')
+        ->with('CompanyEstablishment')
+        ->with('CompanyEstablishmentDepartment')
+        ->with('CompanyFinancialBlock')
+        ->get();
 
         //Log do Sistema
         Logger::show($db->title);

@@ -7,6 +7,7 @@ use App\Models\Inventory\InventoryWarehouseHistory;
 use App\Http\Requests\Inventory\StoreInventoryWarehouseHistoryRequest;
 use App\Http\Requests\Inventory\UpdateInventoryWarehouseHistoryRequest;
 use App\Models\Inventory\InventoryWarehouse;
+use App\Models\Inventory\InventoryWarehouseEntry;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,29 +43,65 @@ class InventoryWarehouseHistoryController extends Controller
 
         InventoryWarehouseHistory::create($data);
 
-        $db = InventoryWarehouse::where('product_id',$data['product_id'])
-            ->where('establishment_department_id',$data['establishment_department_id'])
-            ->where('financial_block_id',$data['financial_block_id'])
-            ->first();
+        //Quantidade do Almoxarifado Geral
+            //Buscando Cadastro Único
+                $db = InventoryWarehouse::where('product_id',$data['product_id'])
+                    ->where('establishment_department_id',$data['establishment_department_id'])
+                    ->where('financial_block_id',$data['financial_block_id'])
+                    ->first();
 
-        if ($db == NULL) {
-            $db = InventoryWarehouse::create([
-                'quantity'=>0,
-                'establishment_id'=>$data['establishment_id'],
-                'establishment_department_id'=>$data['establishment_department_id'],
-                'product_id'=>$data['product_id'],
-                'financial_block_id'=>$data['financial_block_id'],
-            ]);
-        }
+            //Verificando se existe o cadastro produto cadastrado
+                if ($db == NULL) {
+                    $db = InventoryWarehouse::create([
+                        'quantity'=>0,
+                        'establishment_id'=>$data['establishment_id'],
+                        'establishment_department_id'=>$data['establishment_department_id'],
+                        'product_id'=>$data['product_id'],
+                        'financial_block_id'=>$data['financial_block_id'],
+                    ]);
+                }
+        
+            // Atualizar a quantidade no inventário com base no movimento
+                if ($data['movement'] === "Entrada") {
+                    $db->quantity += $data['quantity'];
+                } elseif ($data['movement'] === "Saída") {
+                    $db->quantity -= $data['quantity'];
+                }
+
+            //Salvando Alteração
+                $db->save();
+
+        //Quantidade de Entrada por Ordem de Fornecimento
+            //Buscando Cadastro Único
+                $dbEntry = InventoryWarehouseEntry::where('product_id',$data['product_id'])
+                    ->where('establishment_department_id',$data['establishment_department_id'])
+                    ->where('financial_block_id',$data['financial_block_id'])
+                    ->where('supply_order',$data['supply_order'])
+                    ->where('invoice',$data['invoice'])
+                    ->first();
+
+            //Verificando se existe o produto cadastrado
+                if ($dbEntry == NULL) {
+                    $dbEntry = InventoryWarehouseEntry::create([
+                        'invoice'=>$data['invoice'],
+                        'supply_order'=>$data['supply_order'],
+                        'supply_company'=>$data['supply_company'],
+                        'quantity'=>0,
+                        'product_id'=>$data['product_id'],
+                        'establishment_id'=>$data['establishment_id'],
+                        'establishment_department_id'=>$data['establishment_department_id'],
+                        'financial_block_id'=>$data['financial_block_id'],
+                    ]);
+                }
         
         // Atualizar a quantidade no inventário com base no movimento
         if ($data['movement'] === "Entrada") {
-            $db->quantity += $data['quantity'];
+            $dbEntry->quantity += $data['quantity'];
         } elseif ($data['movement'] === "Saída") {
-            $db->quantity -= $data['quantity'];
+            $dbEntry->quantity -= $data['quantity'];
         }
 
-        $db->save();
+        $dbEntry->save();
 
         return redirect()->route('inventory_warehouses.show',['inventory_warehouse' => $data['establishment_department_id']])
             ->with('success', 'Histórico de inventário criado com sucesso.');

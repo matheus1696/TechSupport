@@ -9,13 +9,18 @@ use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InventoryWarehouse extends Model
+class InventoryWarehouseEntry extends Model
 {
-    use HasFactory;    
+    use HasFactory;
 
     protected $fillable =
     [
+        'invoice',
+        'supply_order',
+        'supply_company',
         'quantity',
+        'quantity_minimum',
+        'quantity_maximum',
         'product_id',
         'financial_block_id',
         'establishment_id',

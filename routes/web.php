@@ -27,7 +27,8 @@ use App\Http\Controllers\Inventory\InventoryProductController;
 use App\Http\Controllers\Inventory\InventoryMedicationHistoryController;
 use App\Http\Controllers\Inventory\InventoryProductHistoryController;
 use App\Http\Controllers\Inventory\InventoryWarehouseController;
-use App\Http\Controllers\Inventory\InventoryWarehouseEntriesController;
+use App\Http\Controllers\Inventory\InventoryWarehouseEntryController;
+use App\Http\Controllers\Inventory\InventoryWarehouseExitsController;
 use App\Http\Controllers\Inventory\InventoryWarehouseHistoryController;
 use App\Http\Controllers\Public\ContactListsController;
 use App\Http\Controllers\Users\Admin\UsersController;
@@ -143,7 +144,8 @@ Route::middleware('auth')->group(function () {
             //Rotas de Inventário/Estoque de Centro de Distribuições
             Route::resource('inventory_warehouses', InventoryWarehouseController::class);
             Route::resource('inventory_warehouse_histories', InventoryWarehouseHistoryController::class);
-            Route::resource('inventory_warehouse_entries', InventoryWarehouseEntriesController::class);
+            Route::resource('inventory_warehouse_entries', InventoryWarehouseEntryController::class);
+            Route::resource('inventory_warehouse_exits', InventoryWarehouseExitsController::class);
         });    
 
     });
