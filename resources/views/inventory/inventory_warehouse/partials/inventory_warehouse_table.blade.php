@@ -2,7 +2,7 @@
 <x-table.table :db="$db">
     <!-- Components THead -->
     @slot('thead')
-        <x-table.th>Código</x-table.th>
+        <x-table.th>Setor</x-table.th>
         <x-table.th>Estabelecimento</x-table.th>
         <x-table.th>Bairro</x-table.th>
         <x-table.th class="w-40"></x-table.th>
@@ -12,11 +12,11 @@
     @slot('tbody')
         @foreach ($db as $item)
             <x-table.tr>
-                <x-table.td>{{$item->code}}</x-table.td>
-                <x-table.td>{{$item->title}}</x-table.td>
-                <x-table.td>{{$item->district}}</x-table.td>
+                <x-table.td>{{$item->department}}</x-table.td>
+                <x-table.td>{{$item->CompanyEstablishment->title}}</x-table.td>
+                <x-table.td>{{$item->CompanyEstablishment->district}}</x-table.td>
                 <x-table.td>
-                    <x-button.minButtonShow route="{{route('inventories.show',['inventory'=>$item->id])}}" />
+                    <x-button.minButtonShow route="{{route('inventory_warehouses.show',['inventory_warehouse'=>$item->id])}}" />
                 </x-table.td>
             </x-table.tr>
         @endforeach

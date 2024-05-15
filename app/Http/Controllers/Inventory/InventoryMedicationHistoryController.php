@@ -36,7 +36,7 @@ class InventoryMedicationHistoryController extends Controller
     {
         //
         $data = $request->all();
-        $data['code'] = time();
+        $data['code'] = "SMS".time();
         $data['user_id'] = Auth::user()->id;
 
         InventoryMedicationHistory::create($data);

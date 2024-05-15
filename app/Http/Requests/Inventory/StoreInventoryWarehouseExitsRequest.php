@@ -4,14 +4,14 @@ namespace App\Http\Requests\Inventory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreInventoryWarehouseHistoryRequest extends FormRequest
+class StoreInventoryWarehouseExitsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,15 +23,6 @@ class StoreInventoryWarehouseHistoryRequest extends FormRequest
     {
         return [
             //
-            'invoice' => 'required|min:1',
-            'supply_order' => 'required|min:8',
-            'supply_company' => 'required|min:8',
-            'date' => 'required',
-            'quantity' => 'required',
-            'product_id' => 'required',
-            'financial_block_id' => 'required',
-            'establishment_id' => 'required',
-            'establishment_department_id' => 'required',
         ];
     }
 }

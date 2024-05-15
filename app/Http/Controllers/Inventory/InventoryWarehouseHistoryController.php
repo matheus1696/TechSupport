@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inventory\InventoryProductHistory;
-use App\Http\Requests\Inventory\StoreInventoryProductHistoryRequest;
-use App\Http\Requests\Inventory\UpdateInventoryProductHistoryRequest;
-use App\Models\Inventory\InventoryProduct;
+use App\Models\Inventory\InventoryWarehouseHistory;
+use App\Http\Requests\Inventory\StoreInventoryWarehouseHistoryRequest;
+use App\Http\Requests\Inventory\UpdateInventoryWarehouseHistoryRequest;
+use App\Models\Inventory\InventoryWarehouse;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class InventoryProductHistoryController extends Controller
+class InventoryWarehouseHistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,25 +32,28 @@ class InventoryProductHistoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInventoryProductHistoryRequest $request)
+    public function store(StoreInventoryWarehouseHistoryRequest $request)
     {
         //
         $data = $request->all();
         $data['code'] = "SMS".time();
+        $data['movement'] = "Entrada";
         $data['user_id'] = Auth::user()->id;
 
-        InventoryProductHistory::create($data);
+        InventoryWarehouseHistory::create($data);
 
-        $db = InventoryProduct::where('product_id',$data['product_id'])
+        $db = InventoryWarehouse::where('product_id',$data['product_id'])
             ->where('establishment_department_id',$data['establishment_department_id'])
+            ->where('financial_block_id',$data['financial_block_id'])
             ->first();
 
         if ($db == NULL) {
-            $db = InventoryProduct::create([
+            $db = InventoryWarehouse::create([
                 'quantity'=>0,
                 'establishment_id'=>$data['establishment_id'],
                 'establishment_department_id'=>$data['establishment_department_id'],
                 'product_id'=>$data['product_id'],
+                'financial_block_id'=>$data['financial_block_id'],
             ]);
         }
         
@@ -63,25 +66,25 @@ class InventoryProductHistoryController extends Controller
 
         $db->save();
 
-        return redirect()->route('inventory_products.show',['inventory_product' => $data['establishment_department_id']])
+        return redirect()->route('inventory_warehouses.show',['inventory_warehouse' => $data['establishment_department_id']])
             ->with('success', 'Histórico de inventário criado com sucesso.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Request $request,string $id)
+    public function show(Request $request, string $id)
     {
         //Listagem de Dados
-        $dbEstablishmentDepartment = InventoryProductHistory::where('establishment_department_id',$id)
+        $dbEstablishmentDepartment = InventoryWarehouseHistory::where('establishment_department_id',$id)
         ->first();
-        $db = InventoryProductHistory::where('establishment_department_id',$id)
+        $db = InventoryWarehouseHistory::where('establishment_department_id',$id)
         ->paginate(40);
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName']) || isset($search['searchDate'])) {
-            $db = InventoryProductHistory::where('date','LIKE','%'.strtolower($search['searchDate']).'%')
+            $db = InventoryWarehouseHistory::where('date','LIKE','%'.strtolower($search['searchDate']).'%')
                 //->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('date')
                 ->paginate(40);
@@ -90,7 +93,7 @@ class InventoryProductHistoryController extends Controller
         //Log do Sistema
         Logger::access();
 
-        return view('inventory.inventory_product_history.inventory_product_history_index',[
+        return view('inventory.inventory_warehouse_history.inventory_warehouse_history_show',[
             'search'=>$search,
             'db'=>$db,
             'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
@@ -100,7 +103,7 @@ class InventoryProductHistoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InventoryProductHistory $inventoryProductHistory)
+    public function edit(InventoryWarehouseHistory $inventoryWarehouseHistory)
     {
         //
     }
@@ -108,7 +111,7 @@ class InventoryProductHistoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInventoryProductHistoryRequest $request, InventoryProductHistory $inventoryProductHistory)
+    public function update(UpdateInventoryWarehouseHistoryRequest $request, InventoryWarehouseHistory $inventoryWarehouseHistory)
     {
         //
     }
@@ -116,7 +119,7 @@ class InventoryProductHistoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InventoryProductHistory $inventoryProductHistory)
+    public function destroy(InventoryWarehouseHistory $inventoryWarehouseHistory)
     {
         //
     }

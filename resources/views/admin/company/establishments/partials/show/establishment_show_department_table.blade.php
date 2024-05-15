@@ -29,7 +29,7 @@
                         <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_medication}}" name="has_inventory_medication" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
                     </x-table.td>                    
                     <x-table.td>
-                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_central}}" name="has_inventory_central" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
+                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_warehouse}}" name="has_inventory_warehouse" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
                     </x-table.td>
                     <x-table.td class="text-center">
                         

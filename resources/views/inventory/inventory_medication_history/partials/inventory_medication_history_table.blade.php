@@ -6,7 +6,7 @@
         <x-table.th class="w-40">Movimentação</x-table.th>
         <x-table.th>Produto</x-table.th>
         <x-table.th class="w-28">Quantidade</x-table.th>
-        <x-table.th class="w-60">Pessoa Responsável</x-table.th>
+        <x-table.th class="w-60">Usuário Cadastrante</x-table.th>
         <x-table.th class="w-28"></x-table.th>
     @endslot
 

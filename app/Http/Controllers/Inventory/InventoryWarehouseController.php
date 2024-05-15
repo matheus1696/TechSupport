@@ -6,15 +6,39 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory\InventoryWarehouse;
 use App\Http\Requests\Inventory\StoreInventoryWarehouseRequest;
 use App\Http\Requests\Inventory\UpdateInventoryWarehouseRequest;
+use App\Models\Company\CompanyEstablishmentDepartment;
+use App\Models\Company\CompanyFinancialBlock;
+use App\Models\Product\Product;
+use App\Services\Logger;
+use Illuminate\Http\Request;
 
 class InventoryWarehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //Listagem de Dados
+        $db = CompanyEstablishmentDepartment::where('has_inventory_warehouse',TRUE)
+        ->orderBy('department')
+        ->paginate(20);
+
+        //Pesquisar Dados
+        $search = $request->all();
+        if (isset($search['searchName'])) {
+            $db = CompanyEstablishmentDepartment::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('department')
+                ->paginate(20);
+        }
+
+        //Log do Sistema
+        Logger::access();
+
+        return view('inventory.inventory_warehouse.inventory_warehouse_index',[
+            'search'=>$search,
+            'db'=>$db,
+        ]);
     }
 
     /**
@@ -36,9 +60,23 @@ class InventoryWarehouseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InventoryWarehouse $inventoryWarehouse)
+    public function show(string $id)
     {
         //
+        $db = CompanyEstablishmentDepartment::find($id);
+        $dbProducts = Product::all();
+        $dbFinancialBlocks = CompanyFinancialBlock::all();
+        $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)->get();
+
+        //Log do Sistema
+        Logger::show($db->title);
+
+        return view('inventory.inventory_warehouse.inventory_warehouse_show',[
+            'db'=>$db,
+            'dbProducts'=>$dbProducts,
+            'dbFinancialBlocks'=>$dbFinancialBlocks,
+            'dbInventories'=>$dbInventories,
+        ]);
     }
 
     /**

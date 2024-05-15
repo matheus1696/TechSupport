@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('establishment_id');
             $table->boolean('has_inventory_product')->default(false);
             $table->boolean('has_inventory_medication')->default(false);
-            $table->boolean('has_inventory_central')->default(false);
+            $table->boolean('has_inventory_warehouse')->default(false);
             $table->timestamps();
 
             $table->foreign('establishment_id')->references('id')->on('company_establishments');
