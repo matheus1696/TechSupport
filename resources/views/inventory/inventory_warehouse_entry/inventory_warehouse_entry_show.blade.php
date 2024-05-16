@@ -4,6 +4,7 @@
     @slot('header')
         <x-header 
             title="Entrada de Produto: {{$db->department}} - {{$db->CompanyEstablishment->title}}" 
+            routeJoker="{{route('inventory_products.index')}}" btnTitleJoker="Saídas" iconJoker="fas fa-minus"
             routeBack="{{route('inventory_warehouses.show',['inventory_warehouse'=>$db->id])}}"            
         />
     @endslot

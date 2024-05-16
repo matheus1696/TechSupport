@@ -5,6 +5,7 @@
         <x-header 
             title="Estoque Unidade: {{ $db->department }} - {{ $db->CompanyEstablishment->title }}"
             routeCreate="{{route('inventory_products.index')}}" btnTitleCreate="Solicitações"
+            routeJoker="{{route('inventory_products.index')}}" btnTitleJoker="Saídas" iconJoker="fas fa-minus"
             routeBack="{{route('inventory_products.index')}}"
         />
     @endslot

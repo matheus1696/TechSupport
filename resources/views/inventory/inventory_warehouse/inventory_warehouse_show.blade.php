@@ -5,13 +5,13 @@
         <x-header 
             title="Estoque: {{ $db->CompanyEstablishment->title }} - {{ $db->department }}"
             routeCreate="{{route('inventory_warehouse_entries.show',['inventory_warehouse_entry'=>$db->id])}}" btnTitleCreate="Entrada"
+            routeJoker="{{route('inventory_products.index')}}" btnTitleJoker="Saídas" iconJoker="fas fa-minus"
             routeBack="{{route('inventory_warehouses.index')}}"
         />
     @endslot
 
     <!-- Slot Body -->
     @slot('body')
-
         <div>
             @include('inventory.inventory_warehouse.partials.show.inventory_warehouse_show_search')
         </div>

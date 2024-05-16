@@ -24,5 +24,7 @@
         @endforeach
     </x-form.select>
 
-    <x-form.input col="2" label="Quantidade" type="number" id="quantity" value="{{$db->birthday}}" min="0" required="required"/>
+    <x-form.input col="2" label="Quantidade" type="number" id="quantity" value="{{$db->quantity}}" min="0" required="required"/>
+        
+    <x-form.textarea col="12" label="Descrição de Entrada" id="description" value="{{$db->description ?? ''}}"/>
 </x-form.form>
