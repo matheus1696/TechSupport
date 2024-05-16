@@ -153,6 +153,7 @@ class InventoryWarehouseController extends Controller
         $data = $request->all();
         $data['code'] = "SMS".time();
         $data['movement'] = "Entrada";
+        $data['pending'] = FALSE;
         $data['user_id'] = Auth::user()->id;
 
         InventoryWarehouseHistory::create($data);
@@ -314,22 +315,6 @@ class InventoryWarehouseController extends Controller
             // Atualizar a quantidade por Ordem de Fornecimento e Nota Fiscal
                 $dbEntry->quantity -= $data['quantity'];
                 $dbEntry->save();
-
-
-            //Entrada no Estoque Recebedor
-                $dbOrder = InventoryWarehouseHistory::find($dbHistory->id);
-
-                InventoryWarehouseOrder::create([
-                    'code'=>"SMS".time(),
-                    'inventory_warehouse_order_status_id'=>'3',
-                    'inventory_warehouse_history_id'=>$dbOrder->id,
-
-                    //Inversão de Saída para Entrada
-                    'establishment_entry_id'=>$dbOrder->establishment_exit_id,
-                    'establishment_department_entry_id'=>$dbOrder->establishment_department_exit_id,
-                    'establishment_exit_id'=>$dbOrder->establishment_exit_id,
-                    'establishment_department_exit_id'=>$dbOrder->establishment_department_exit_id,
-                ]);
 
         return redirect()->back()->with('success','Produto cadastrado com sucesso');
     }

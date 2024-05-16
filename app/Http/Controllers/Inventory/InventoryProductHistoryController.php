@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory\InventoryProductHistory;
 use App\Http\Requests\Inventory\StoreInventoryProductHistoryRequest;
 use App\Http\Requests\Inventory\UpdateInventoryProductHistoryRequest;
+use App\Models\Inventory\Inventory;
 use App\Models\Inventory\InventoryProduct;
+use App\Models\Inventory\InventoryWarehouseHistory;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +49,7 @@ class InventoryProductHistoryController extends Controller
         //
         $data = $request->all();
         $data['code'] = "SMS".time();
+        $data['date'] = date('Y-m-d');
         $data['user_id'] = Auth::user()->id;
 
         InventoryProductHistory::create($data);
@@ -72,6 +75,10 @@ class InventoryProductHistoryController extends Controller
         }
 
         $db->save();
+
+        $dbHistory = InventoryWarehouseHistory::find($data['inventary_history']);
+        $dbHistory->pending = FALSE;
+        $dbHistory->save();
 
         return redirect()->route('inventory_products.show',['inventory_product' => $data['establishment_department_id']])
             ->with('success', 'Histórico de inventário criado com sucesso.');

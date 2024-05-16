@@ -7,6 +7,8 @@ use App\Models\Inventory\InventoryProduct;
 use App\Http\Requests\Inventory\StoreInventoryProductRequest;
 use App\Http\Requests\Inventory\UpdateInventoryProductRequest;
 use App\Models\Company\CompanyEstablishmentDepartment;
+use App\Models\Inventory\Inventory;
+use App\Models\Inventory\InventoryWarehouseHistory;
 use App\Models\Inventory\InventoryWarehouseOrder;
 use App\Models\Product\Product;
 use App\Services\Logger;
@@ -76,7 +78,6 @@ class InventoryProductController extends Controller
         $db = CompanyEstablishmentDepartment::find($id);
         $dbProducts = Product::all();
         $dbInventories = InventoryProduct::where('establishment_department_id', $id)->get();
-        $dbOrders = InventoryWarehouseOrder::where('establishment_department_id', $id)->get();
 
         //Log do Sistema
         Logger::show($db->title);
@@ -85,17 +86,29 @@ class InventoryProductController extends Controller
             'db'=>$db,
             'dbProducts'=>$dbProducts,
             'dbInventories'=>$dbInventories,
-            'dbOrders'=>$dbOrders,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InventoryProduct $inventoryProduct)
+    public function edit(string $id)
     {
         //
-        return redirect()->route('login');
+        $db = CompanyEstablishmentDepartment::find($id);
+        $dbProducts = Product::all();
+        $dbInventories = InventoryProduct::where('establishment_department_id', $id)->get();
+        $dbInventoryHistories = InventoryWarehouseHistory::where('establishment_department_exit_id', $id)->paginate(20);
+
+        //Log do Sistema
+        Logger::show($db->title);
+
+        return view('inventory.inventory_product.inventory_product_edit',[
+            'db'=>$db,
+            'dbProducts'=>$dbProducts,
+            'dbInventories'=>$dbInventories,
+            'dbInventoryHistories'=>$dbInventoryHistories,
+        ]);
     }
 
     /**

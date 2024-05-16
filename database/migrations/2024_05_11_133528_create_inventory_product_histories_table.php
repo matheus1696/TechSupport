@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('inventory_product_histories', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->string('invoice');
-            $table->string('supply_order');
-            $table->string('supply_company');
+            $table->string('invoice')->nullable();;
+            $table->string('supply_order')->nullable();;
+            $table->string('supply_company')->nullable();;
             $table->date('date');
             $table->string('movement');
             $table->integer('quantity');        

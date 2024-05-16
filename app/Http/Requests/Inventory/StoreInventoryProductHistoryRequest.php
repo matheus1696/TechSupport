@@ -23,7 +23,6 @@ class StoreInventoryProductHistoryRequest extends FormRequest
     {
         return [
             //
-            'date' => 'required',
             'quantity' => 'required',
             'movement' => 'required',
             'product_id' => 'required',

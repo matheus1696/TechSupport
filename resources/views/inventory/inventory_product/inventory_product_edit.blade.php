@@ -3,14 +3,13 @@
     <!-- Slot Header -->
     @slot('header')
         <x-header 
-            title="Estoque Unidade: {{ $db->department }} - {{ $db->CompanyEstablishment->title }}"
-            routeCreate="{{route('inventory_products.edit',['inventory_product'=>$db->id])}}" btnTitleCreate="Solicitações"
+            routeCreate="" btnTitleCreate="Entrada Avulsa"
             routeBack="{{route('inventory_products.index')}}"
         />
     @endslot
-
+    
     <!-- Slot Body -->
-    @slot('body')   
+    @slot('body')
 
         @if ($errors->any())
             <div class="relative px-4 py-3 mb-3 text-red-700 bg-red-100 border border-red-400 rounded" role="alert">
@@ -23,13 +22,17 @@
             </div>
         @endif
         
-        <div>
-            @include('inventory.inventory_product.partials.show.inventory_product_show_department_table')
+        <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div>
+                <h3 class="mb-3 text-xl text-center">Preparado para Entrega</h3>
+                @include('inventory.inventory_product.partials.edit.inventory_product_edit_table')
+            </div>
+            <div>      
+                <h3 class="mb-3 text-xl text-center">Solicitações em análise</h3>          
+                @include('inventory.inventory_product.partials.edit.inventory_product_edit_table')
+            </div>
         </div>
-        <div>
-            <p class="pr-3 text-xs text-end">
-                <a href="{{route('inventory_product_histories.show',['inventory_product_history'=>$db->id])}}" class="text-gray-400 hover:text-gray-900">Verificar Histórico de Movimentação</a>
-            </p>
-        </div>
+        
     @endslot
+    
 </x-pages.index>

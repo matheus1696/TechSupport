@@ -22,10 +22,10 @@
                             <button 
                                 data-toggle="modal"
                                 data-target="#modalInfo{{$dbInventory->id}}"
-                                class="px-2 py-1 m-1 text-sm text-white bg-red-600 rounded-lg shadow-md hover:bg-red-500 flex items-center" 
+                                class="flex items-center px-2 py-1 m-1 text-sm text-white bg-red-600 rounded-lg shadow-md hover:bg-red-500" 
                                 type="button"
                             >
-                                <i class="pr-1 pt-1 text-white-500 rotate-45 fas fa-long-arrow-alt-down"></i>
+                                <i class="pt-1 pr-1 rotate-45 text-white-500 fas fa-long-arrow-alt-down"></i>
                                 <span>Saída</span>
                             </button>
                         
@@ -33,7 +33,7 @@
                                 <div class="text-left modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-lg font-semibold" id="Modal">Saída de Produto: {{$dbInventory->Product->title}}</h5>
+                                            <h5 class="text-lg font-semibold modal-title" id="Modal">Saída de Produto: {{$dbInventory->Product->title}}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -43,10 +43,13 @@
                                                 @csrf
                                             
                                                 <div class="grid grid-cols-12 gap-6">
-                                                    <input type="hidden" name="establishment_department_id" value="{{$db->id}}">
-                                                    <input type="hidden" name="establishment_id" value="{{$db->establishment_id}}">
-                                                    <input type="hidden" name="product_id" value="{{$dbInventory->product_id}}">
-                                                    <input type="hidden" name="movement" value="Saída">
+                                                    <input hidden name="invoice" value="{{$dbInventory->invoice}}">
+                                                    <input hidden name="supply_order" value="{{$dbInventory->supply_order}}">
+                                                    <input hidden name="supply_company" value="{{$dbInventory->supply_company}}">
+                                                    <input hidden name="establishment_department_id" value="{{$db->id}}">
+                                                    <input hidden name="establishment_id" value="{{$db->establishment_id}}">
+                                                    <input hidden name="product_id" value="{{$dbInventory->product_id}}">
+                                                    <input hidden name="movement" value="Saída">
 
                                                     <x-form.input col="12" label="Produto" id="disabled" value="{{$dbInventory->Product->title}}" disabled="disabled"/>
                                                 

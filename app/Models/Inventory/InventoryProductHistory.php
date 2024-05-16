@@ -16,6 +16,9 @@ class InventoryProductHistory extends Model
     protected $fillable =
     [
         'code',
+        'invoice',
+        'supply_order',
+        'supply_company',
         'date',
         'movement',
         'quantity',

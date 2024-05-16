@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('batch')->nullable();
             $table->string('due_date')->nullable();
             $table->text('description')->nullable();
+            $table->text('pending')->default(TRUE);
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('financial_block_id');
             $table->unsignedBigInteger('establishment_entry_id')->nullable();
