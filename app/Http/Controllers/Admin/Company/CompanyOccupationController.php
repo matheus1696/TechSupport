@@ -52,6 +52,7 @@ class CompanyOccupationController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -60,6 +61,7 @@ class CompanyOccupationController extends Controller
     public function store(Request $request)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -68,6 +70,7 @@ class CompanyOccupationController extends Controller
     public function show(string $id)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -76,6 +79,7 @@ class CompanyOccupationController extends Controller
     public function edit(string $id)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -104,5 +108,6 @@ class CompanyOccupationController extends Controller
     public function destroy(string $id)
     {
         //
+        return redirect()->route('login');
     }
 }

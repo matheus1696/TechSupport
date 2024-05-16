@@ -6,20 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory\InventoryWarehouseHistory;
 use App\Http\Requests\Inventory\StoreInventoryWarehouseHistoryRequest;
 use App\Http\Requests\Inventory\UpdateInventoryWarehouseHistoryRequest;
-use App\Models\Inventory\InventoryWarehouse;
-use App\Models\Inventory\InventoryWarehouseEntry;
 use App\Services\Logger;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class InventoryWarehouseHistoryController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:sysadmin|admin']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -28,6 +34,7 @@ class InventoryWarehouseHistoryController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -36,6 +43,7 @@ class InventoryWarehouseHistoryController extends Controller
     public function store(StoreInventoryWarehouseHistoryRequest $request)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -76,6 +84,7 @@ class InventoryWarehouseHistoryController extends Controller
     public function edit(InventoryWarehouseHistory $inventoryWarehouseHistory)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -84,6 +93,7 @@ class InventoryWarehouseHistoryController extends Controller
     public function update(UpdateInventoryWarehouseHistoryRequest $request, InventoryWarehouseHistory $inventoryWarehouseHistory)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -92,5 +102,6 @@ class InventoryWarehouseHistoryController extends Controller
     public function destroy(InventoryWarehouseHistory $inventoryWarehouseHistory)
     {
         //
+        return redirect()->route('login');
     }
 }

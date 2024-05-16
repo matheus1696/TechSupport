@@ -66,6 +66,7 @@ class ProductTypeController extends Controller
     public function show(ProductType $ProductType)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -107,7 +108,8 @@ class ProductTypeController extends Controller
      */
     public function destroy(ProductType $ProductType)
     {
-        return redirect(route('product_types.index'));
+        //
+        return redirect()->route('login');
     }
 
     /**

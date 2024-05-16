@@ -15,6 +15,7 @@ class CompanyEstablishmentDepartmentController extends Controller
     public function index()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -23,6 +24,7 @@ class CompanyEstablishmentDepartmentController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -50,6 +52,7 @@ class CompanyEstablishmentDepartmentController extends Controller
     public function show(string $id)
     {
         //
+        return redirect()->route('login');
     }
 
     /**

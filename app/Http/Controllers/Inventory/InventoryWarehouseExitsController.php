@@ -9,12 +9,21 @@ use App\Http\Requests\Inventory\UpdateInventoryWarehouseExitsRequest;
 
 class InventoryWarehouseExitsController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:sysadmin|admin']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -23,6 +32,7 @@ class InventoryWarehouseExitsController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -31,6 +41,7 @@ class InventoryWarehouseExitsController extends Controller
     public function store(StoreInventoryWarehouseExitsRequest $request)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -39,6 +50,7 @@ class InventoryWarehouseExitsController extends Controller
     public function show(InventoryWarehouseExits $inventoryWarehouseExits)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -47,6 +59,7 @@ class InventoryWarehouseExitsController extends Controller
     public function edit(InventoryWarehouseExits $inventoryWarehouseExits)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -55,6 +68,7 @@ class InventoryWarehouseExitsController extends Controller
     public function update(UpdateInventoryWarehouseExitsRequest $request, InventoryWarehouseExits $inventoryWarehouseExits)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -63,5 +77,6 @@ class InventoryWarehouseExitsController extends Controller
     public function destroy(InventoryWarehouseExits $inventoryWarehouseExits)
     {
         //
+        return redirect()->route('login');
     }
 }

@@ -28,6 +28,17 @@
                         </a>
                     </div>
                 @endisset
+                
+                @isset($routeJoker)                
+                    <div>
+                        <a href="{{$routeJoker}}">
+                            <span class="px-3 py-2 text-sm text-white rounded-full shadow-md bg-{{$colorJoker ?? 'sky'}}-700 hover:bg-{{$colorJoker ?? 'sky'}}-600">
+                                <i class="{{$iconJoker ?? 'fas fa-pen'}} pr-1"></i> 
+                                {{$btnTitleJoker ?? ""}}
+                            </span>
+                        </a>
+                    </div>
+                @endisset
 
                 @isset($routeBack)                
                     <div>

@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 
 class InventoryMedicationController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:sysadmin|admin']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -46,6 +54,7 @@ class InventoryMedicationController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -54,6 +63,7 @@ class InventoryMedicationController extends Controller
     public function store(StoreInventoryMedicationRequest $request)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -82,6 +92,7 @@ class InventoryMedicationController extends Controller
     public function edit(InventoryMedication $InventoryMedication)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -90,6 +101,7 @@ class InventoryMedicationController extends Controller
     public function update(UpdateInventoryMedicationRequest $request, InventoryMedication $InventoryMedication)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -98,5 +110,6 @@ class InventoryMedicationController extends Controller
     public function destroy(InventoryMedication $InventoryMedication)
     {
         //
+        return redirect()->route('login');
     }
 }

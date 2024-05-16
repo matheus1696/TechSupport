@@ -15,6 +15,7 @@ class CompanyOrganizationLinkedUserController extends Controller
     public function index()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -23,6 +24,7 @@ class CompanyOrganizationLinkedUserController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -45,6 +47,7 @@ class CompanyOrganizationLinkedUserController extends Controller
     public function show()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -53,6 +56,7 @@ class CompanyOrganizationLinkedUserController extends Controller
     public function edit()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -61,6 +65,7 @@ class CompanyOrganizationLinkedUserController extends Controller
     public function update(CompanyOrganizationLinkedUserUpdateRequest $request)
     {
         //
+        return redirect()->route('login');
     }
 
     /**

@@ -8,12 +8,21 @@ use App\Http\Requests\Inventory\StoreInventoryWarehouseRequest;
 use App\Http\Requests\Inventory\UpdateInventoryWarehouseRequest;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyFinancialBlock;
+use App\Models\Inventory\InventoryWarehouseEntry;
 use App\Models\Product\Product;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 
 class InventoryWarehouseController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:sysadmin|admin']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -47,6 +56,7 @@ class InventoryWarehouseController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -55,6 +65,7 @@ class InventoryWarehouseController extends Controller
     public function store(StoreInventoryWarehouseRequest $request)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -66,6 +77,15 @@ class InventoryWarehouseController extends Controller
         $db = CompanyEstablishmentDepartment::find($id);
         $dbProducts = Product::all();
         $dbFinancialBlocks = CompanyFinancialBlock::all();
+        $dbInventoryEntries = InventoryWarehouseEntry::where('establishment_department_id', $id)
+        ->orderBy('product_id')
+        ->orderBy('financial_block_id')
+        ->with('Product')
+        ->with('CompanyEstablishment')
+        ->with('CompanyEstablishmentDepartment')
+        ->with('CompanyFinancialBlock')
+        ->get();
+
         $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)
         ->orderBy('product_id')
         ->orderBy('financial_block_id')
@@ -83,6 +103,7 @@ class InventoryWarehouseController extends Controller
             'dbProducts'=>$dbProducts,
             'dbFinancialBlocks'=>$dbFinancialBlocks,
             'dbInventories'=>$dbInventories,
+            'dbInventoryEntries'=>$dbInventoryEntries,
         ]);
     }
 
@@ -92,6 +113,7 @@ class InventoryWarehouseController extends Controller
     public function edit(InventoryWarehouse $inventoryWarehouse)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -100,6 +122,7 @@ class InventoryWarehouseController extends Controller
     public function update(UpdateInventoryWarehouseRequest $request, InventoryWarehouse $inventoryWarehouse)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -108,5 +131,6 @@ class InventoryWarehouseController extends Controller
     public function destroy(InventoryWarehouse $inventoryWarehouse)
     {
         //
+        return redirect()->route('login');
     }
 }

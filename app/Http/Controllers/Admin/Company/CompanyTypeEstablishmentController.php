@@ -68,6 +68,7 @@ class CompanyTypeEstablishmentController extends Controller
     public function show(string $id)
     {
         //
+        return redirect()->route('login');
     }
 
     /**

@@ -41,6 +41,7 @@ class ProfileController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -49,6 +50,7 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -57,6 +59,7 @@ class ProfileController extends Controller
     public function show(string $id)
     {
         //
+        return redirect()->route('login');
     }
 
     /**

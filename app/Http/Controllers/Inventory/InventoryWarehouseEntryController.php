@@ -17,12 +17,21 @@ use Illuminate\Support\Facades\Auth;
 
 class InventoryWarehouseEntryController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:sysadmin|admin']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -31,6 +40,7 @@ class InventoryWarehouseEntryController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -137,6 +147,7 @@ class InventoryWarehouseEntryController extends Controller
     public function edit(InventoryWarehouseEntry $InventoryWarehouseEntry)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -145,6 +156,7 @@ class InventoryWarehouseEntryController extends Controller
     public function update(UpdateInventoryWarehouseEntryRequest $request, InventoryWarehouseEntry $InventoryWarehouseEntry)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -153,5 +165,6 @@ class InventoryWarehouseEntryController extends Controller
     public function destroy(InventoryWarehouseEntry $InventoryWarehouseEntry)
     {
         //
+        return redirect()->route('login');
     }
 }

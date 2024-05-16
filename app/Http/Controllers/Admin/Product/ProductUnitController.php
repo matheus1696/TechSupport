@@ -66,6 +66,7 @@ class ProductUnitController extends Controller
     public function show(ProductUnit $ProductUnit)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -107,7 +108,8 @@ class ProductUnitController extends Controller
      */
     public function destroy(ProductUnit $ProductUnit)
     {
-        return redirect(route('product_units.index'));
+        //        
+        return redirect()->route('login');
     }
 
     /**

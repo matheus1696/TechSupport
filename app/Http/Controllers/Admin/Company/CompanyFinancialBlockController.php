@@ -71,6 +71,7 @@ class CompanyFinancialBlockController extends Controller
     public function show(string $id)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -114,5 +115,6 @@ class CompanyFinancialBlockController extends Controller
     public function destroy(string $id)
     {
         //
+        return redirect()->route('login');
     }
 }

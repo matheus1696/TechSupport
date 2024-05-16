@@ -13,12 +13,21 @@ use Illuminate\Support\Facades\Auth;
 
 class InventoryProductHistoryController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:sysadmin|admin']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -27,6 +36,7 @@ class InventoryProductHistoryController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -103,6 +113,7 @@ class InventoryProductHistoryController extends Controller
     public function edit(InventoryProductHistory $inventoryProductHistory)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -111,6 +122,7 @@ class InventoryProductHistoryController extends Controller
     public function update(UpdateInventoryProductHistoryRequest $request, InventoryProductHistory $inventoryProductHistory)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -119,5 +131,6 @@ class InventoryProductHistoryController extends Controller
     public function destroy(InventoryProductHistory $inventoryProductHistory)
     {
         //
+        return redirect()->route('login');
     }
 }

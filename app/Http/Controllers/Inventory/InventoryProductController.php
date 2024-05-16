@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 
 class InventoryProductController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:sysadmin|admin']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -46,6 +54,7 @@ class InventoryProductController extends Controller
     public function create()
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -54,6 +63,7 @@ class InventoryProductController extends Controller
     public function store(StoreInventoryProductRequest $request)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -82,6 +92,7 @@ class InventoryProductController extends Controller
     public function edit(InventoryProduct $inventoryProduct)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -90,6 +101,7 @@ class InventoryProductController extends Controller
     public function update(UpdateInventoryProductRequest $request, InventoryProduct $inventoryProduct)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
@@ -98,5 +110,6 @@ class InventoryProductController extends Controller
     public function destroy(InventoryProduct $inventoryProduct)
     {
         //
+        return redirect()->route('login');
     }
 }

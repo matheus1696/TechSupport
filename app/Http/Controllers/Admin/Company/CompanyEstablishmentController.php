@@ -166,6 +166,7 @@ class CompanyEstablishmentController extends Controller
     public function destroy(string $id)
     {
         //
+        return redirect()->route('login');
     }
 
     /**
