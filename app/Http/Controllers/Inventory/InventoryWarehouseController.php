@@ -317,10 +317,18 @@ class InventoryWarehouseController extends Controller
 
 
             //Entrada no Estoque Recebedor
+                $dbOrder = InventoryWarehouseHistory::find($dbHistory->id);
+
                 InventoryWarehouseOrder::create([
                     'code'=>"SMS".time(),
                     'inventory_warehouse_order_status_id'=>'3',
-                    'inventory_warehouse_history_id'=>$dbHistory->id,
+                    'inventory_warehouse_history_id'=>$dbOrder->id,
+
+                    //Inversão de Saída para Entrada
+                    'establishment_entry_id'=>$dbOrder->establishment_exit_id,
+                    'establishment_department_entry_id'=>$dbOrder->establishment_department_exit_id,
+                    'establishment_exit_id'=>$dbOrder->establishment_exit_id,
+                    'establishment_department_exit_id'=>$dbOrder->establishment_department_exit_id,
                 ]);
 
         return redirect()->back()->with('success','Produto cadastrado com sucesso');

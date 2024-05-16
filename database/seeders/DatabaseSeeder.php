@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             MedicationSeeder::class,
             InventoryMedicationSeeder::class,
             InventoryProductSeeder::class,
+            InventoryWarehouseOrderStatusSeeder::class
         ]);
     }
 }

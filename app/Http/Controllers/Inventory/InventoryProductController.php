@@ -7,6 +7,7 @@ use App\Models\Inventory\InventoryProduct;
 use App\Http\Requests\Inventory\StoreInventoryProductRequest;
 use App\Http\Requests\Inventory\UpdateInventoryProductRequest;
 use App\Models\Company\CompanyEstablishmentDepartment;
+use App\Models\Inventory\InventoryWarehouseOrder;
 use App\Models\Product\Product;
 use App\Services\Logger;
 use Illuminate\Http\Request;
@@ -75,6 +76,7 @@ class InventoryProductController extends Controller
         $db = CompanyEstablishmentDepartment::find($id);
         $dbProducts = Product::all();
         $dbInventories = InventoryProduct::where('establishment_department_id', $id)->get();
+        $dbOrders = InventoryWarehouseOrder::where('establishment_department_id', $id)->get();
 
         //Log do Sistema
         Logger::show($db->title);
@@ -83,6 +85,7 @@ class InventoryProductController extends Controller
             'db'=>$db,
             'dbProducts'=>$dbProducts,
             'dbInventories'=>$dbInventories,
+            'dbOrders'=>$dbOrders,
         ]);
     }
 
