@@ -10,9 +10,7 @@
     
     <!-- Slot Body -->
     @slot('body')
-        @include('inventory.inventory_warehouse_entry.partials.show.inventory_warehouse_entry_show_form')
-        @include('inventory.inventory_warehouse_entry.partials.show.inventory_warehouse_entry_show_search')
-        @include('inventory.inventory_warehouse_entry.partials.show.inventory_warehouse_entry_show_table')
+        @include('inventory.inventory_warehouse_entry.partials.form.inventory_warehouse_entry_form')
     @endslot
     
 </x-pages.index>
