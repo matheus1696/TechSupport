@@ -27,8 +27,6 @@ use App\Http\Controllers\Inventory\InventoryProductController;
 use App\Http\Controllers\Inventory\InventoryMedicationHistoryController;
 use App\Http\Controllers\Inventory\InventoryProductHistoryController;
 use App\Http\Controllers\Inventory\InventoryWarehouseController;
-use App\Http\Controllers\Inventory\InventoryWarehouseEntryController;
-use App\Http\Controllers\Inventory\InventoryWarehouseExitsController;
 use App\Http\Controllers\Inventory\InventoryWarehouseHistoryController;
 use App\Http\Controllers\Public\ContactListsController;
 use App\Http\Controllers\Users\Admin\UsersController;
@@ -142,9 +140,14 @@ Route::middleware('auth')->group(function () {
             Route::resource('inventory_medication_histories', InventoryMedicationHistoryController::class);
             
             //Rotas de Inventário/Estoque de Centro de Distribuições
+            
+            Route::put('countries/status/{country}',[RegionCountryController::class,'status'])->name('countries.status');
+            Route::get('inventory_warehouses/entry/{inventory_warehouse}',[InventoryWarehouseController::class,'entryShow'])->name('inventory_warehouses.entryShow');
+            Route::post('inventory_warehouses/entry',[InventoryWarehouseController::class,'entryStore'])->name('inventory_warehouses.entryStore');
+            Route::get('inventory_warehouses/exit/{inventory_warehouse}',[InventoryWarehouseController::class,'exitShow'])->name('inventory_warehouses.exitShow');
+            Route::post('inventory_warehouses/exit',[InventoryWarehouseController::class,'exitStore'])->name('inventory_warehouses.exitStore');
+            Route::get('inventory_warehouses/history/{inventory_warehouse}',[InventoryWarehouseController::class,'history'])->name('inventory_warehouses.history');
             Route::resource('inventory_warehouses', InventoryWarehouseController::class);
-            Route::resource('inventory_warehouse_histories', InventoryWarehouseHistoryController::class);
-            Route::resource('inventory_warehouse_entries', InventoryWarehouseEntryController::class);
         });    
 
     });

@@ -30,8 +30,6 @@ class StoreInventoryWarehouseHistoryRequest extends FormRequest
             'quantity' => 'required',
             'product_id' => 'required',
             'financial_block_id' => 'required',
-            'establishment_id' => 'required',
-            'establishment_department_id' => 'required',
         ];
     }
 }

@@ -1,6 +1,6 @@
-<x-form.form method="create" route="{{route('inventory_warehouse_entries.store')}}">
-    <input type="hidden" name="establishment_department_id" value="{{$db->id}}">
-    <input type="hidden" name="establishment_id" value="{{$db->establishment_id}}">
+<x-form.form method="create" route="{{route('inventory_warehouses.entryStore')}}">
+    <input type="hidden" name="establishment_department_entry_id" value="{{$db->id}}">
+    <input type="hidden" name="establishment_entry_id" value="{{$db->establishment_id}}">
 
     <x-form.input col="2" label="Nota Fiscal" type="number" id="invoice" value="{{$db->invoice ?? ''}}" required="required" autofocus="autofocus"/>
     <x-form.input col="2" label="O.F." id="supply_order" value="{{$db->supply_order ?? ''}}" required="required"/>

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Inventory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreInventoryWarehouseEntryRequest extends FormRequest
+class StoreInventoryWarehouseExitRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,8 +30,7 @@ class StoreInventoryWarehouseEntryRequest extends FormRequest
             'quantity' => 'required',
             'product_id' => 'required',
             'financial_block_id' => 'required',
-            'establishment_entry_id' => 'required',
-            'establishment_department_entry_id' => 'required',
+            'establishment_department_exit_id' => 'required',
         ];
     }
 }

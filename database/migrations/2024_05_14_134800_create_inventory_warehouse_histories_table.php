@@ -25,14 +25,18 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('financial_block_id');
-            $table->unsignedBigInteger('establishment_id');
-            $table->unsignedBigInteger('establishment_department_id');
+            $table->unsignedBigInteger('establishment_entry_id')->nullable();
+            $table->unsignedBigInteger('establishment_department_entry_id')->nullable();
+            $table->unsignedBigInteger('establishment_exit_id')->nullable();
+            $table->unsignedBigInteger('establishment_department_exit_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
             
             $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('establishment_id')->references('id')->on('company_establishments');
-            $table->foreign('establishment_department_id')->references('id')->on('company_establishment_departments');
+            $table->foreign('establishment_entry_id')->references('id')->on('company_establishments');
+            $table->foreign('establishment_department_entry_id')->references('id')->on('company_establishment_departments');
+            $table->foreign('establishment_exit_id')->references('id')->on('company_establishments');
+            $table->foreign('establishment_department_exit_id')->references('id')->on('company_establishment_departments');
             $table->foreign('financial_block_id')->references('id')->on('company_financial_blocks');
             $table->foreign('user_id')->references('id')->on('users');
         });
