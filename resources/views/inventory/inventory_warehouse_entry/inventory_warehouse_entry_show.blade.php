@@ -2,16 +2,17 @@
 
     <!-- Slot Header -->
     @slot('header')
-    <x-header 
-        title="Centro de Distribuição: {{$dbEstablishmentDepartment->CompanyEstablishmentDepartment->department}} - {{$dbEstablishmentDepartment->CompanyEstablishment->title}}" 
-        route="{{route('inventory_warehouses.show',['inventory_warehouse'=>$dbEstablishmentDepartment->establishment_department_id])}}" 
-        btnTitle="Retornar"/>
+        <x-header 
+            title="Entrada de Produto: {{$db->department}} - {{$db->CompanyEstablishment->title}}" 
+            routeBack="{{route('inventory_warehouses.show',['inventory_warehouse'=>$db->id])}}"            
+        />
     @endslot
     
     <!-- Slot Body -->
     @slot('body')
-        @include('inventory.inventory_warehouse_entry.partials.show.inventory_warehouse_entry_show_form')
-        @include('inventory.inventory_warehouse_entry.partials.show.inventory_warehouse_entry_show_search')
+        <x-conteiner>            
+            @include('inventory.inventory_warehouse_entry.partials.show.inventory_warehouse_entry_show_form')
+        </x-conteiner>
         @include('inventory.inventory_warehouse_entry.partials.show.inventory_warehouse_entry_show_table')
     @endslot
     

@@ -36,75 +36,6 @@ class InventoryWarehouseHistoryController extends Controller
     public function store(StoreInventoryWarehouseHistoryRequest $request)
     {
         //
-        $data = $request->all();
-        $data['code'] = "SMS".time();
-        $data['movement'] = "Entrada";
-        $data['user_id'] = Auth::user()->id;
-
-        InventoryWarehouseHistory::create($data);
-
-        //Quantidade do Almoxarifado Geral
-            //Buscando Cadastro Único
-                $db = InventoryWarehouse::where('product_id',$data['product_id'])
-                    ->where('establishment_department_id',$data['establishment_department_id'])
-                    ->where('financial_block_id',$data['financial_block_id'])
-                    ->first();
-
-            //Verificando se existe o cadastro produto cadastrado
-                if ($db == NULL) {
-                    $db = InventoryWarehouse::create([
-                        'quantity'=>0,
-                        'establishment_id'=>$data['establishment_id'],
-                        'establishment_department_id'=>$data['establishment_department_id'],
-                        'product_id'=>$data['product_id'],
-                        'financial_block_id'=>$data['financial_block_id'],
-                    ]);
-                }
-        
-            // Atualizar a quantidade no inventário com base no movimento
-                if ($data['movement'] === "Entrada") {
-                    $db->quantity += $data['quantity'];
-                } elseif ($data['movement'] === "Saída") {
-                    $db->quantity -= $data['quantity'];
-                }
-
-            //Salvando Alteração
-                $db->save();
-
-        //Quantidade de Entrada por Ordem de Fornecimento
-            //Buscando Cadastro Único
-                $dbEntry = InventoryWarehouseEntry::where('product_id',$data['product_id'])
-                    ->where('establishment_department_id',$data['establishment_department_id'])
-                    ->where('financial_block_id',$data['financial_block_id'])
-                    ->where('supply_order',$data['supply_order'])
-                    ->where('invoice',$data['invoice'])
-                    ->first();
-
-            //Verificando se existe o produto cadastrado
-                if ($dbEntry == NULL) {
-                    $dbEntry = InventoryWarehouseEntry::create([
-                        'invoice'=>$data['invoice'],
-                        'supply_order'=>$data['supply_order'],
-                        'supply_company'=>$data['supply_company'],
-                        'quantity'=>0,
-                        'product_id'=>$data['product_id'],
-                        'establishment_id'=>$data['establishment_id'],
-                        'establishment_department_id'=>$data['establishment_department_id'],
-                        'financial_block_id'=>$data['financial_block_id'],
-                    ]);
-                }
-        
-        // Atualizar a quantidade no inventário com base no movimento
-        if ($data['movement'] === "Entrada") {
-            $dbEntry->quantity += $data['quantity'];
-        } elseif ($data['movement'] === "Saída") {
-            $dbEntry->quantity -= $data['quantity'];
-        }
-
-        $dbEntry->save();
-
-        return redirect()->route('inventory_warehouses.show',['inventory_warehouse' => $data['establishment_department_id']])
-            ->with('success', 'Histórico de inventário criado com sucesso.');
     }
 
     /**
@@ -115,7 +46,9 @@ class InventoryWarehouseHistoryController extends Controller
         //Listagem de Dados
         $dbEstablishmentDepartment = InventoryWarehouseHistory::where('establishment_department_id',$id)
         ->first();
+        
         $db = InventoryWarehouseHistory::where('establishment_department_id',$id)
+        ->orderBy('date','DESC')
         ->paginate(40);
 
         //Pesquisar Dados

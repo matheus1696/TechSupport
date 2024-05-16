@@ -2,10 +2,10 @@
 
     <!-- Slot Header -->
     @slot('header')
-    <x-header 
-        title="Histórico de Movimentação: {{$dbEstablishmentDepartment->CompanyEstablishmentDepartment->department}} - {{$dbEstablishmentDepartment->CompanyEstablishment->title}}" 
-        route="{{route('inventory_warehouses.show',['inventory_warehouse'=>$dbEstablishmentDepartment->establishment_department_id])}}" 
-        btnTitle="Retornar"/>
+        <x-header 
+            title="Histórico de Movimentação: {{$dbEstablishmentDepartment->CompanyEstablishmentDepartment->department}} - {{$dbEstablishmentDepartment->CompanyEstablishment->title}}"
+            routeBack="{{route('inventory_warehouses.show',['inventory_warehouse'=>$dbEstablishmentDepartment->establishment_department_id])}}"
+        />
     @endslot
     
     <!-- Slot Body -->

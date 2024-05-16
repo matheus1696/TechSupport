@@ -1,9 +1,8 @@
-<x-form.form method="create" route="{{route('inventory_warehouse_histories.store')}}">
+<x-form.form method="create" route="{{route('inventory_warehouse_entries.store')}}">
     <input type="hidden" name="establishment_department_id" value="{{$db->id}}">
     <input type="hidden" name="establishment_id" value="{{$db->establishment_id}}">
-    <input type="hidden" name="movement" value="Entrada">
 
-    <x-form.input col="2" label="Nota Fiscal" type="number" id="invoice" value="{{$db->invoice ?? ''}}" required="required"/>
+    <x-form.input col="2" label="Nota Fiscal" type="number" id="invoice" value="{{$db->invoice ?? ''}}" required="required" autofocus="autofocus"/>
     <x-form.input col="2" label="O.F." id="supply_order" value="{{$db->supply_order ?? ''}}" required="required"/>
     <x-form.input col="6" label="Fornecedor" id="supply_company" value="{{$db->supply_company ?? ''}}" required="required"/>
 

@@ -3,8 +3,8 @@
     <!-- Slot Header -->
     @slot('header')
         <x-header 
-            title="{{ $db->CompanyEstablishment->title }} - {{ $db->department }}"
-            routeCreate="{{route('inventory_warehouse_entries.store')}}" btnTitleCreate="Entrada"
+            title="Estoque: {{ $db->CompanyEstablishment->title }} - {{ $db->department }}"
+            routeCreate="{{route('inventory_warehouse_entries.show',['inventory_warehouse_entry'=>$db->id])}}" btnTitleCreate="Entrada"
             routeBack="{{route('inventory_warehouses.index')}}"
         />
     @endslot

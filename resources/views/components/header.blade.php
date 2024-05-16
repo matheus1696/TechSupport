@@ -3,7 +3,7 @@
     @isset($title)
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-2 px-2">
             <div class="flex-1">
-                <p class="font-semibold text-lg">{{$title}}</p>
+                <p class="font-semibold text-xl">{{$title}}</p>
             </div>
 
             <div class="flex items-center justify-center gap-4">
