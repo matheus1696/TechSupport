@@ -145,7 +145,6 @@ Route::middleware('auth')->group(function () {
             Route::resource('inventory_warehouses', InventoryWarehouseController::class);
             Route::resource('inventory_warehouse_histories', InventoryWarehouseHistoryController::class);
             Route::resource('inventory_warehouse_entries', InventoryWarehouseEntryController::class);
-            Route::resource('inventory_warehouse_exits', InventoryWarehouseExitsController::class);
         });    
 
     });

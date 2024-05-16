@@ -2,7 +2,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Lista de Estoques de Suprimentos"/>
+        <x-header title="Estoque das Unidades"/>
     @endslot
     
     <!-- Slot Body -->

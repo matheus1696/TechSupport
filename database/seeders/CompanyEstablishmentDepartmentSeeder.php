@@ -15,8 +15,9 @@ class CompanyEstablishmentDepartmentSeeder extends Seeder
     {
         //
         CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0351', 'extension'=>'0351', 'type_contact'=>'Main', 'establishment_id'=>1,]);
-        CompanyEstablishmentDepartment::create([ 'department'=>'Farmácia', 'filter'=>'farmácia', 'contact'=>'(81) 3101-0352', 'extension'=>'0352', 'type_contact'=>'Internal', 'establishment_id'=>1,]);
+        CompanyEstablishmentDepartment::create([ 'department'=>'Farmácia', 'filter'=>'farmácia', 'contact'=>'(81) 3101-0352', 'extension'=>'0352', 'type_contact'=>'Internal', 'establishment_id'=>1, 'has_inventory_medication'=>TRUE]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Infocras', 'filter'=>'infocras', 'contact'=>'(81) 3101-0353', 'extension'=>'0353', 'type_contact'=>'Internal', 'establishment_id'=>1,]);
+        CompanyEstablishmentDepartment::create([ 'department'=>'Almoxarifado', 'filter'=>'almoxarifado', 'establishment_id'=>1, 'has_inventory_product'=>TRUE]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Sala de Exames', 'filter'=>'sala de exames', 'contact'=>'(81) 3101-0356', 'extension'=>'0356', 'type_contact'=>'Main', 'establishment_id'=>2,]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0405', 'extension'=>'0405', 'type_contact'=>'Main', 'establishment_id'=>3,]);
         CompanyEstablishmentDepartment::create([ 'department'=>'Recepção', 'filter'=>'recepção', 'contact'=>'(81) 3101-0354', 'extension'=>'0354', 'type_contact'=>'Main', 'establishment_id'=>4,]);

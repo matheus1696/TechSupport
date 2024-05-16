@@ -2,7 +2,10 @@
     
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Estoque de Produtos: {{ $db->department }} - {{ $db->CompanyEstablishment->title }}" route="{{route('inventory_products.index')}}" btnTitle="Retornar"/>
+        <x-header 
+            title="Estoque Unidade: {{ $db->department }} - {{ $db->CompanyEstablishment->title }}"
+            routeBack="{{route('inventory_products.index')}}"
+        />
     @endslot
 
     <!-- Slot Body -->
