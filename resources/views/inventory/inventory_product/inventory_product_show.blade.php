@@ -4,18 +4,13 @@
     @slot('header')
         <x-header 
             title="Estoque Unidade: {{ $db->department }} - {{ $db->CompanyEstablishment->title }}"
+            routeCreate="{{route('inventory_products.index')}}" btnTitleCreate="Solicitações"
             routeBack="{{route('inventory_products.index')}}"
         />
     @endslot
 
     <!-- Slot Body -->
     @slot('body')
-        <x-conteiner>
-            <div>
-                @include('inventory.inventory_product.partials.show.inventory_product_show_department_form')
-            </div>
-        </x-conteiner>
-        <hr>
         <div>
             @include('inventory.inventory_product.partials.show.inventory_product_show_department_table')
         </div>
