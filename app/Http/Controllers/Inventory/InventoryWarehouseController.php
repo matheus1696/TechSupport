@@ -10,8 +10,10 @@ use App\Http\Requests\Inventory\StoreInventoryWarehouseRequest;
 use App\Http\Requests\Inventory\UpdateInventoryWarehouseRequest;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyFinancialBlock;
+use App\Models\Inventory\Inventory;
 use App\Models\Inventory\InventoryWarehouseEntry;
 use App\Models\Inventory\InventoryWarehouseHistory;
+use App\Models\Inventory\InventoryWarehouseOrder;
 use App\Models\Product\Product;
 use App\Services\Logger;
 use Illuminate\Http\Request;
@@ -220,6 +222,7 @@ class InventoryWarehouseController extends Controller
         $dbFinancialBlocks = CompanyFinancialBlock::all();
         $dbInventories = InventoryWarehouseHistory::where('establishment_department_entry_id', $id)
         ->where('created_at','>=',today()->subDay(7))
+        ->where('movement','Entrada')
         ->orderBy('date', 'DESC')
         ->orderBy('product_id')
         ->orderBy('financial_block_id')
@@ -253,13 +256,13 @@ class InventoryWarehouseController extends Controller
         $data['movement'] = "Saída";
         $data['user_id'] = Auth::user()->id;
 
-        $db = InventoryWarehouseHistory::create($data);
+        $dbHistory = InventoryWarehouseHistory::create($data);
 
         //Vinculando Almoxarifado que Recebe o Produto
         $dbEstablishmentDepartment = CompanyEstablishmentDepartment::find($data['establishment_department_exit_id']);
-        $db->establishment_department_exit_id = $dbEstablishmentDepartment->id;
-        $db->establishment_exit_id = $dbEstablishmentDepartment->establishment_id;
-        $db->save();
+        $dbHistory->establishment_department_exit_id = $dbEstablishmentDepartment->id;
+        $dbHistory->establishment_exit_id = $dbEstablishmentDepartment->establishment_id;
+        $dbHistory->save();
 
         //Quantidade do Estoque Geral
             //Buscando Cadastro
@@ -314,6 +317,11 @@ class InventoryWarehouseController extends Controller
 
 
             //Entrada no Estoque Recebedor
+                InventoryWarehouseOrder::create([
+                    'code'=>"SMS".time(),
+                    'inventory_warehouse_order_status_id'=>'3',
+                    'inventory_warehouse_history_id'=>$dbHistory->id,
+                ]);
 
         return redirect()->back()->with('success','Produto cadastrado com sucesso');
     }

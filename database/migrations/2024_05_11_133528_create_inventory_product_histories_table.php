@@ -14,9 +14,14 @@ return new class extends Migration
         Schema::create('inventory_product_histories', function (Blueprint $table) {
             $table->id();
             $table->string('code');
+            $table->string('invoice');
+            $table->string('supply_order');
+            $table->string('supply_company');
             $table->date('date');
             $table->string('movement');
-            $table->integer('quantity');
+            $table->integer('quantity');        
+            $table->string('batch')->nullable();
+            $table->string('due_date')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('establishment_id');

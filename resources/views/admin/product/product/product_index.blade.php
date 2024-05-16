@@ -1,7 +1,10 @@
 <x-pages.index>
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Produtos" route="{{ route('products.create') }}"/>
+        <x-header 
+            title="Produtos" 
+            routeCreate="{{ route('products.create') }}"  btnTitleCreate="Adicionar"
+        />
     @endslot
         
     <!-- Slot Body -->
