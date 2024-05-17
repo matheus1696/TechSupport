@@ -76,11 +76,13 @@ class InventoryProductHistoryController extends Controller
 
         $db->save();
 
-        $dbHistory = InventoryWarehouseHistory::find($data['inventary_history']);
-        $dbHistory->pending = FALSE;
-        $dbHistory->save();
+        if (isset($data['inventary_history'])) {
+            $dbHistory = InventoryWarehouseHistory::find($data['inventary_history']);
+            $dbHistory->pending = TRUE;
+            $dbHistory->save();
+        }
 
-        return redirect()->route('inventory_products.show',['inventory_product' => $data['establishment_department_id']])
+        return redirect()->back()
             ->with('success', 'Histórico de inventário criado com sucesso.');
     }
 

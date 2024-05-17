@@ -4,7 +4,7 @@
     @slot('header')
         <x-header 
             routeCreate="" btnTitleCreate="Entrada Avulsa"
-            routeBack="{{route('inventory_products.index')}}"
+            routeBack="{{route('inventory_products.show', ['inventory_product'=>$db->id])}}"
         />
     @endslot
     
