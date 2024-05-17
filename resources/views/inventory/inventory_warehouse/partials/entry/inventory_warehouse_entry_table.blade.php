@@ -1,5 +1,5 @@
 <!-- Components Table -->
-<x-table.table :db="$dbInventories">
+<x-table.table>
     <!-- Components THead -->
     @slot('thead')
         <x-table.th class="w-28">Data</x-table.th>

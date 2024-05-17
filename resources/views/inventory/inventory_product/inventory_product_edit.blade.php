@@ -24,7 +24,7 @@
         
         <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
             <div>
-                <h3 class="mb-3 text-xl text-center">Preparado para Entrega</h3>
+                <h3 class="mb-3 text-lg font-semibold text-center">Enviado para unidade</h3>
                 @include('inventory.inventory_product.partials.edit.inventory_product_edit_table')
             </div>
             <div>      

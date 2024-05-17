@@ -5,7 +5,7 @@
             <x-table.th class="w-32">Apresentação</x-table.th>
             <x-table.th class="w-32">Bloco Financeiro</x-table.th>
             <x-table.th class="w-32">Quantidade</x-table.th>
-            <x-table.th class="w-20"></x-table.th>
+            <x-table.th class="w-20">Ações</x-table.th>
         @endslot
     
         <!-- Components TBody -->
@@ -62,10 +62,8 @@
                                                                             </div>
                                                                             <div class="m-4 modal-body">
 
-                                                                                <form method="POST" action="{{route('inventory_warehouses.exitStore')}}">
-                                                                                    @csrf
-                                                                                
-                                                                                    <div class="grid grid-cols-12 gap-6">
+                                                                                <x-form.form method="create" route="{{route('inventory_warehouses.exitStore')}}">
+
                                                                                         <input type="hidden" name="establishment_department_entry_id" value="{{$dbInventoryEntry->establishment_department_id}}">
                                                                                         <input type="hidden" name="establishment_entry_id" value="{{$dbInventoryEntry->establishment_id}}">
                                                                                         <input type="hidden" name="financial_block_id" value="{{$dbInventoryEntry->financial_block_id}}">
@@ -100,12 +98,8 @@
                                                                                         <x-form.input col="3" label="Quantidade" type="number" id="quantity" min="0" required="required"/>
                                                                                     
                                                                                         <x-form.textarea col="12" label="Descrição da Movimentação" id="description" value="{{$db->description ?? ''}}"/>
-                                                                                    </div>
-
-                                                                                    <div class="w-full">
-                                                                                        <button type="submit" class="w-full my-2 text-sm text-white transition duration-300 rounded-lg shadow-md bg-sky-600 h-9 hover:bg-sky-700">Saída de Produto</button>
-                                                                                    </div>
-                                                                                </form>
+                                                                                            
+                                                                                </x-form.form>
                                                                             </div>
                                                                         </div>
                                                                     </div>

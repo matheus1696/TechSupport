@@ -39,35 +39,29 @@
                                             </button>
                                         </div>
                                         <div class="m-4 modal-body">
-                                            <form method="POST" action="{{route('inventory_product_histories.store')}}">
-                                                @csrf
+                                            <x-form.form method="create" route="{{route('inventory_product_histories.store')}}">
+                                                
+                                                <input hidden name="invoice" value="{{$dbInventory->invoice}}">
+                                                <input hidden name="supply_order" value="{{$dbInventory->supply_order}}">
+                                                <input hidden name="supply_company" value="{{$dbInventory->supply_company}}">
+                                                <input hidden name="establishment_department_id" value="{{$db->id}}">
+                                                <input hidden name="establishment_id" value="{{$db->establishment_id}}">
+                                                <input hidden name="product_id" value="{{$dbInventory->product_id}}">
+                                                <input hidden name="movement" value="Saída">
+
+                                                <x-form.input col="12" label="Produto" id="disabled" value="{{$dbInventory->Product->title}}" disabled="disabled"/>
                                             
-                                                <div class="grid grid-cols-12 gap-6">
-                                                    <input hidden name="invoice" value="{{$dbInventory->invoice}}">
-                                                    <input hidden name="supply_order" value="{{$dbInventory->supply_order}}">
-                                                    <input hidden name="supply_company" value="{{$dbInventory->supply_company}}">
-                                                    <input hidden name="establishment_department_id" value="{{$db->id}}">
-                                                    <input hidden name="establishment_id" value="{{$db->establishment_id}}">
-                                                    <input hidden name="product_id" value="{{$dbInventory->product_id}}">
-                                                    <input hidden name="movement" value="Saída">
+                                                <x-form.input col="3" label="Data" type="date" id="date" value="{{date('Y-m-d')}}" max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}" required="required"/>
 
-                                                    <x-form.input col="12" label="Produto" id="disabled" value="{{$dbInventory->Product->title}}" disabled="disabled"/>
+                                                <x-form.input col="3" label="Apresentação" id="disabled" value="{{$dbInventory->Product->ProductUnit->title}}" disabled="disabled"/>
+                                            
+                                                <x-form.input col="3" label="Quantidade Estoque" id="inventaryQuantity" value="{{$dbInventory->quantity}}" disabled="disabled"/>
                                                 
-                                                    <x-form.input col="3" label="Data" type="date" id="date" value="{{date('Y-m-d')}}" max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}" required="required"/>
-
-                                                    <x-form.input col="3" label="Apresentação" id="disabled" value="{{$dbInventory->Product->ProductUnit->title}}" disabled="disabled"/>
-                                                
-                                                    <x-form.input col="3" label="Quantidade Estoque" id="inventaryQuantity" value="{{$dbInventory->quantity}}" disabled="disabled"/>
-                                                    
-                                                    <x-form.input col="3" label="Quantidade" type="number" id="quantity" min="0" required="required"/>
-                                                
-                                                    <x-form.textarea col="12" label="Descrição da Movimentação" id="description" value="{{$db->description ?? ''}}"/>
-                                                </div>
-
-                                                <div class="w-full">
-                                                    <button type="submit" class="w-full my-2 text-sm text-white transition duration-300 rounded-lg shadow-md bg-sky-600 h-9 hover:bg-sky-700">Saída de Produto</button>
-                                                </div>
-                                            </form>
+                                                <x-form.input col="3" label="Quantidade" type="number" id="quantity" min="0" required="required"/>
+                                            
+                                                <x-form.textarea col="12" label="Descrição da Movimentação" id="description" value="{{$db->description ?? ''}}"/>
+                                            
+                                            </x-form.form>
                                         </div>
                                     </div>
                                 </div>

@@ -7,9 +7,7 @@ use App\Models\Inventory\InventoryProduct;
 use App\Http\Requests\Inventory\StoreInventoryProductRequest;
 use App\Http\Requests\Inventory\UpdateInventoryProductRequest;
 use App\Models\Company\CompanyEstablishmentDepartment;
-use App\Models\Inventory\Inventory;
 use App\Models\Inventory\InventoryWarehouseHistory;
-use App\Models\Inventory\InventoryWarehouseOrder;
 use App\Models\Product\Product;
 use App\Services\Logger;
 use Illuminate\Http\Request;
@@ -32,12 +30,20 @@ class InventoryProductController extends Controller
         //Listagem de Dados
         $db = CompanyEstablishmentDepartment::where('has_inventory_product',TRUE)
         ->orderBy('department')
-        ->paginate(20);
+        ->paginate(20);        
 
         //Pesquisar Dados
         $search = $request->all();
-        if (isset($search['searchName'])) {
-            $db = CompanyEstablishmentDepartment::where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+
+        if (isset($search['searchSector']) || isset($search['searchEstablishment'])) {
+            
+            if (isset($search['searchEstablishment']) == NULL) {
+                $search['searchEstablishment'] = 0;
+            };
+
+            $db = CompanyEstablishmentDepartment::where('filter','LIKE','%'.strtolower($search['searchSector']).'%')
+                ->orWhere('establishment_id',$search['searchEstablishment'])
+                ->where('has_inventory_product',TRUE)
                 ->orderBy('department')
                 ->paginate(20);
         }
