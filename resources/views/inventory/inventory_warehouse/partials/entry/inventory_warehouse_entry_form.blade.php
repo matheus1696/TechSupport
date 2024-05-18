@@ -1,4 +1,4 @@
-<x-form.form method="create" route="{{route('inventory_warehouses.entryStore')}}">
+<x-form.form method="create" route="{{route('inventory_warehouses.entryStore')}}" title="Adicionar ao estoque">
     <input type="hidden" name="establishment_department_entry_id" value="{{$db->id}}">
     <input type="hidden" name="establishment_entry_id" value="{{$db->establishment_id}}">
 

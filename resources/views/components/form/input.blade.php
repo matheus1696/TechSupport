@@ -1,10 +1,10 @@
-<x-form.formGroup col="{{$col ?? '6'}}">
+<div class="col-span-{{$col ?? '6'}}">
     @include('components.form.label')
     <input
         type="{{$type ?? "text"}}"
         name="{{$id}}"
         id="{{$id}}"
-        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-700 border-red-300 @else outline-green-700 border-gray-300 @enderror disabled:bg-gray-200"
+        class="px-2 py-2 text-sm rounded-md border @error($id) outline-red-700 border-red-300 @else outline-green-700 border-gray-300 @enderror disabled:bg-gray-200 w-full"
         @isset($min) min="{{$min}}" @endisset        
         @isset($max) max="{{$max}}" @endisset
         @isset($minlength) minlength="{{$minlength}}" @endisset
@@ -30,4 +30,4 @@
             {{$message}}
         </x-form.errors-message>
     @enderror
-</x-form.formGroup>
+</div>

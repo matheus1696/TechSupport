@@ -1,3 +1,6 @@
+
+<h3 class="py-3 text-lg font-semibold text-center">Últimos cadastros realizados</h3>
+
 <!-- Components Table -->
 <x-table.table>
     <!-- Components THead -->

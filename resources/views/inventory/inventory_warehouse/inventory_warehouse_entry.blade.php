@@ -17,7 +17,6 @@
         <hr>
 
         <div>
-            <h3 class="py-3 text-lg font-semibold text-center">Últimos Cadastros</h3>
             @include('inventory.inventory_warehouse.partials.entry.inventory_warehouse_entry_table')  
         </div>      
         

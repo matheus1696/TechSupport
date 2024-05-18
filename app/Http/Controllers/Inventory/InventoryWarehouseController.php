@@ -8,6 +8,7 @@ use App\Http\Requests\Inventory\StoreInventoryWarehouseExitRequest;
 use App\Models\Inventory\InventoryWarehouse;
 use App\Http\Requests\Inventory\StoreInventoryWarehouseRequest;
 use App\Http\Requests\Inventory\UpdateInventoryWarehouseRequest;
+use App\Models\Company\CompanyEstablishment;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyFinancialBlock;
 use App\Models\Inventory\InventoryWarehouseEntry;
@@ -16,7 +17,6 @@ use App\Models\Product\Product;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\Exists;
 
 class InventoryWarehouseController extends Controller
 {
@@ -38,9 +38,7 @@ class InventoryWarehouseController extends Controller
         ->orderBy('department')
         ->paginate(20);
 
-        $dbSearchs = CompanyEstablishmentDepartment::where('has_inventory_warehouse',TRUE)
-        ->orderBy('department')
-        ->paginate(20);
+        $dbEstablishments = CompanyEstablishment::all();
 
         //Pesquisar Dados
         $search = $request->all();
@@ -65,7 +63,7 @@ class InventoryWarehouseController extends Controller
         return view('inventory.inventory_warehouse.inventory_warehouse_index',[
             'search'=>$search,
             'db'=>$db,
-            'dbSearchs'=>$dbSearchs,
+            'dbEstablishments'=>$dbEstablishments,
         ]);
     }
 
@@ -95,42 +93,54 @@ class InventoryWarehouseController extends Controller
         // Recupera o departamento específico
         $db = CompanyEstablishmentDepartment::find($id);
 
-        // Recupera todos os produtos
+        // Recupera todos os produtos e bloco de financiamentos
         $dbProducts = Product::all();
+        $dbFinancialBlocks = CompanyFinancialBlock::all();
 
         // Recupera todos os departamentos com inventário de produtos
         $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_product', true)
+        ->join('company_establishments', 'company_establishment_departments.establishment_id', '=', 'company_establishments.id')
+        ->orderBy('company_establishments.title')
+        ->orderBy('department')
         ->with('CompanyEstablishment')
         ->get();
 
         // Consulta de entradas de inventário com quantidade maior que zero
         $dbInventoryEntries = InventoryWarehouseEntry::where('establishment_department_id', $id)
         ->where('quantity', '>', 0)
-        ->orderBy('product_id')
-        ->orderBy('financial_block_id')
+        ->join('products', 'inventory_warehouse_entries.product_id', '=', 'products.id')
+        ->orderBy('products.title')
+        ->orderBy('quantity')
+        ->join('company_financial_blocks', 'inventory_warehouse_entries.financial_block_id', '=', 'company_financial_blocks.id')
+        ->orderBy('company_financial_blocks.acronym')
         ->with(['Product','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
         ->get();
 
         // Consulta de inventário geral
         $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)
-        ->orderBy('product_id')
-        ->orderBy('financial_block_id')
+        ->join('products', 'inventory_warehouses.product_id', '=', 'products.id')
+        ->orderBy('products.title')
+        ->join('company_financial_blocks', 'inventory_warehouses.financial_block_id', '=', 'company_financial_blocks.id')
+        ->orderBy('company_financial_blocks.acronym')
         ->with(['Product','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
         ->get();       
 
         //Pesquisar Dados
         $search = $request->all();
         
-        if (isset($search['searchProduct']) || isset($search['searchFinancialBlock'])) {            
-            
-            if (isset($search['searchProduct']) == NULL) {
-                $search['searchProduct'] = '';
-            };
+        if (isset($search['searchProduct']) || isset($search['searchFinancialBlock'])) {
 
-            $db = InventoryWarehouse::where('product_id',$search['searchProduct'])
-                ->where('has_inventory_warehouse',TRUE)
-                ->orderBy('department')
-                ->paginate(20);
+            $query = InventoryWarehouse::query();
+        
+            if (!empty($search['searchProduct'])) {
+                $query->where('product_id', $search['searchProduct']);
+            }
+        
+            if (!empty($search['searchFinancialBlock'])) {
+                $query->where('financial_block_id', $search['searchFinancialBlock']);
+            }
+        
+            $dbInventories = $query->orderBy('quantity')->paginate(20);
         }
 
         //Log do Sistema
@@ -140,6 +150,7 @@ class InventoryWarehouseController extends Controller
             'db'=>$db,
             'search'=>$search,
             'dbProducts'=>$dbProducts,
+            'dbFinancialBlocks'=>$dbFinancialBlocks,
             'dbEstablishmentDepartments'=>$dbEstablishmentDepartments,
             'dbInventories'=>$dbInventories,
             'dbInventoryEntries'=>$dbInventoryEntries,
@@ -244,25 +255,24 @@ class InventoryWarehouseController extends Controller
     /**
      * Display the specified resource Entry Warehouse.
      */
-    public function entryShow(string $id)
+    public function entryCreate(string $id)
     {
         //
         $db = CompanyEstablishmentDepartment::find($id);
         $dbProducts = Product::all();
         $dbFinancialBlocks = CompanyFinancialBlock::all();
-        $dbInventories = InventoryWarehouseHistory::where('establishment_department_entry_id', $id)
-        ->where('created_at','>=',today()->subDay(7))
-        ->where('movement','Entrada')
-        ->orderBy('date', 'DESC')
-        ->orderBy('product_id')
-        ->orderBy('financial_block_id')
-        ->with('Product')
-        ->with('CompanyEstablishmentEntry')
-        ->with('CompanyEstablishmentDepartmentEntry')
-        ->with('CompanyEstablishmentExit')
-        ->with('CompanyEstablishmentDepartmentExit')
-        ->with('CompanyFinancialBlock')
-        ->limit(30)->get();
+        $dbInventories = InventoryWarehouseHistory::where('inventory_warehouse_histories.establishment_department_entry_id', $id)
+            ->where('inventory_warehouse_histories.created_at', '>=', now()->subDays(7))
+            ->where('inventory_warehouse_histories.movement', 'Entrada')
+            ->join('products', 'inventory_warehouse_histories.product_id', '=', 'products.id')
+            ->join('company_financial_blocks', 'inventory_warehouse_histories.financial_block_id', '=', 'company_financial_blocks.id')
+            ->orderBy('inventory_warehouse_histories.date', 'DESC')
+            ->orderBy('products.title')
+            ->orderBy('company_financial_blocks.acronym')
+            ->with(['Product', 'CompanyFinancialBlock', 'CompanyEstablishmentEntry', 'CompanyEstablishmentDepartmentEntry', 'CompanyEstablishmentExit', 'CompanyEstablishmentDepartmentExit'])
+            ->select('inventory_warehouse_histories.*')
+            ->limit(20)
+            ->get();
 
         //Log do Sistema
         Logger::show($db->title);
@@ -361,13 +371,24 @@ class InventoryWarehouseController extends Controller
         ->orderBy('date','DESC')
         ->paginate(40);
 
+        $dbProducts = Product::all();
+
         //Pesquisar Dados
         $search = $request->all();
-        if (isset($search['searchName']) || isset($search['searchDate'])) {
-            $db = InventoryWarehouseHistory::where('date','LIKE','%'.strtolower($search['searchDate']).'%')
-                //->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('date')
-                ->paginate(40);
+        
+        if (isset($search['searchProduct']) || isset($search['searchDate'])) {
+
+            $query = InventoryWarehouseHistory::query();   
+
+            if (!empty($search['searchProduct'])) {
+                $query->where('product_id', $search['searchProduct']);
+            }        
+
+            if (!empty($search['searchDate'])) {
+                $query->where('date', $search['searchDate']);
+            }        
+
+            $db = $query->orderBy('quantity')->paginate(40);
         }
 
         //Log do Sistema
@@ -376,6 +397,7 @@ class InventoryWarehouseController extends Controller
         return view('inventory.inventory_warehouse.inventory_warehouse_history',[
             'search'=>$search,
             'db'=>$db,
+            'dbProducts'=>$dbProducts,
             'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
         ]);
     }

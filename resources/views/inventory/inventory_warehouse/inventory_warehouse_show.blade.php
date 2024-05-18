@@ -4,7 +4,7 @@
     @slot('header')
         <x-header 
             title="Estoque: {{ $db->CompanyEstablishment->title }} - {{ $db->department }}"
-            routeCreate="{{route('inventory_warehouses.entryShow',['inventory_warehouse'=>$db->id])}}" btnTitleCreate="Entrada"
+            routeCreate="{{route('inventory_warehouses.entryCreate',['inventory_warehouse'=>$db->id])}}" btnTitleCreate="Entrada"
             routeBack="{{route('inventory_warehouses.index')}}"
         />
     @endslot
