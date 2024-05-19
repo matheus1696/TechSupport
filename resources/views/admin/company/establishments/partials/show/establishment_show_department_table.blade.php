@@ -37,11 +37,11 @@
 
                             <x-form.form route="{{route('establishment_departments.update',['establishment_department'=>$dbDepartment->id])}}" method="edit">
                                 
-                                <x-form.input col="4" label="Departamento" name="department" value="{{ $dbDepartment->department}}" required="required"/>
-                                <x-form.input col="3" type="tel" label="Telefone" name="contact" value="{{ $dbDepartment->contact}}" required="required"/>
-                                <x-form.input col="2" type="number" label="Ramal" name="extension" value="{{ $dbDepartment->extension}}" required="required"/>
+                                <x-form.input col="4" label="Departamento" id="department_{{$dbDepartment->id}}" name="department" value="{{ $dbDepartment->department}}" required="required"/>
+                                <x-form.input col="3" type="tel" label="Telefone" id="contact_{{$dbDepartment->id}}" name="contact" value="{{ $dbDepartment->contact}}" required="required"/>
+                                <x-form.input col="2" type="number" label="Ramal" id="extension_{{$dbDepartment->id}}" name="extension" value="{{ $dbDepartment->extension}}" required="required"/>
                                 
-                                <x-form.select col="3" label="Tipo de Contato" name="type_contact{{$dbDepartment->id}}">
+                                <x-form.select col="3" label="Tipo de Contato" id="type_contact_{{$dbDepartment->id}}" name="type_contact">
                                     <option @if($dbDepartment->type_contact === "Without") selected @endif value="Without">Sem Ramal</option>
                                     <option @if($dbDepartment->type_contact === "Main") selected @endif value="Main">Contato Externo</option>
                                     <option @if($dbDepartment->type_contact === "Internal") selected @endif value="Internal">Ramal Interno</option>
