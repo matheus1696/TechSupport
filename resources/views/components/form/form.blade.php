@@ -2,7 +2,7 @@
 <form method="POST" action="{{$route}}" class="preventForms">
     @csrf @if($method == "edit") @method('PUT') @endif
 
-    <div class="grid grid-cols-12 gap-6">
+    <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
         {{$slot}}
     </div>
 

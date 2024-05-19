@@ -38,7 +38,9 @@ class CompanyEstablishmentController extends Controller
             ->with('RegionCity')
             ->paginate(20);
 
-        $dbLists= CompanyEstablishmentDepartment::all();
+        $dbEstablishments = CompanyEstablishment::select()->orderBy('title')->get();
+
+        $dbEstablishmentDepartments= CompanyEstablishmentDepartment::all();
 
         //Pesquisar Dados
         $search = $request->all();
@@ -55,7 +57,8 @@ class CompanyEstablishmentController extends Controller
         return view('admin.company.establishments.establishments_index',[
             'search'=>$search,
             'db'=>$db,
-            'dbLists'=>$dbLists,
+            'dbEstablishments'=>$dbEstablishments,
+            'dbEstablishmentDepartments'=>$dbEstablishmentDepartments,
         ]);
     }
 
@@ -147,8 +150,6 @@ class CompanyEstablishmentController extends Controller
         //Dados dos Formulários
         $data = $request->all();
         $data['filter'] = StrtoLower($data['title']);
-
-        dd($data);
 
         //Salvando Dados
         $db = CompanyEstablishment::find($id);

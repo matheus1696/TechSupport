@@ -1,12 +1,20 @@
-<x-pages.forms method="edit" route="{{route('establishments.update',['establishment'=>$db->id])}}" btnBack="{{route('establishments.index')}}"> 
+<!-- Inicio de Componentização Page Index -->
+<x-pages.index>
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Lista de Estabelecimento: {{ $db->title }}"/>
+        <x-header 
+            title="Estabelecimento"
+            routeBack="{{route('establishments.show',['establishment'=>$db->id])}}"
+        />
     @endslot
-    
+
     <!-- Slot Body -->
     @slot('body')
-        @include('admin.company.establishments.partials.establishment_form')
+        <x-conteiner>
+            <x-form.form method="edit" route="{{route('establishments.update',['establishment'=>$db->id])}}">
+                @include('admin.company.establishments.partials.form.establishment_form')
+            </x-form.form>
+        </x-conteiner>
     @endslot
-</x-pages.forms>
+</x-pages.index>

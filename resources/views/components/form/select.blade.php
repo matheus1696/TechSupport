@@ -1,4 +1,4 @@
-<div class="col-span-{{$col ?? '6'}}">
+<div class="col-span-12 md:col-span-{{$col ?? '12'}}">
     @include('components.form.label')
     <select
         name="{{$name}}"

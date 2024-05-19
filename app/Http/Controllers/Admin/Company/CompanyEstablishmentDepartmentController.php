@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Company\CompanyEstablishmentDepartmentsStoreRequest;
+use App\Http\Requests\Company\CompanyEstablishmentDepartmentsUpdateRequest;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Services\Logger;
 
@@ -30,7 +32,7 @@ class CompanyEstablishmentDepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CompanyEstablishmentDepartmentsStoreRequest $request)
     {
         //Dados dos Formulários
         $data = $request->all();
@@ -75,7 +77,7 @@ class CompanyEstablishmentDepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CompanyEstablishmentDepartmentsUpdateRequest $request, string $id)
     {
         //Dados dos Formulários
         $data = $request->all();

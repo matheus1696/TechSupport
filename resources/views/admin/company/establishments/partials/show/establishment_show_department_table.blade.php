@@ -8,7 +8,7 @@
             <x-table.th class="w-32">Estoque Produtos</x-table.th>
             <x-table.th class="w-32">Estoque Farmácia</x-table.th>
             <x-table.th class="w-32">Estoque Central</x-table.th>
-            <x-table.th class="w-32"></x-table.th>
+            <x-table.th class="w-28"></x-table.th>
         @endslot
     
         @slot('tbody')
@@ -37,11 +37,11 @@
 
                             <x-form.form route="{{route('establishment_departments.update',['establishment_department'=>$dbDepartment->id])}}" method="edit">
                                 
-                                <x-form.input col="4" label="Departamento" id="department" required="required" value="{{ $dbDepartment->department}}" />
-                                <x-form.input col="3" type="tel" label="Telefone" id="contact" value="{{ $dbDepartment->contact}}" />
-                                <x-form.input col="2" type="number" label="Ramal" id="extension" value="{{ $dbDepartment->extension}}" />
+                                <x-form.input col="4" label="Departamento" name="department" value="{{ $dbDepartment->department}}" required="required"/>
+                                <x-form.input col="3" type="tel" label="Telefone" name="contact" value="{{ $dbDepartment->contact}}" required="required"/>
+                                <x-form.input col="2" type="number" label="Ramal" name="extension" value="{{ $dbDepartment->extension}}" required="required"/>
                                 
-                                <x-form.select col="3" label="Tipo de Contato" id="type_contact{{$dbDepartment->id}}">
+                                <x-form.select col="3" label="Tipo de Contato" name="type_contact{{$dbDepartment->id}}">
                                     <option @if($dbDepartment->type_contact === "Without") selected @endif value="Without">Sem Ramal</option>
                                     <option @if($dbDepartment->type_contact === "Main") selected @endif value="Main">Contato Externo</option>
                                     <option @if($dbDepartment->type_contact === "Internal") selected @endif value="Internal">Ramal Interno</option>
