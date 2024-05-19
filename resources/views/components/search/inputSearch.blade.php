@@ -7,6 +7,6 @@
         id="{{$id}}" 
         name="{{$id}}" 
         value="{{$value ?? ''}}"
-        class="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-full shadow-sm bg-gray-100/50 focus:bg-white focus:outline-none"
+        class="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-md focus:bg-white focus:outline-none"
     >
 </div>

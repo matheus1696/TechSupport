@@ -4,8 +4,8 @@
 <script src="{{asset('assets/js/maskregistration.js')}}"></script>
 
 <!-- Configuração do Select2 -->
-<script>
-    // In your Javascript (external .js resource or <script> tag)
+<script>   
+
     $(document).ready(function() {
         $('.select2').select2();
     });
