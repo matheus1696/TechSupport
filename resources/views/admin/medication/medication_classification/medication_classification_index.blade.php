@@ -1,7 +1,7 @@
 <x-pages.index>
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Classificação do Medicamentos" route="{{ route('medication_classifications.create') }}"/>
+        <x-header title="Classificação do Medicamentos" routeCreate="{{ route('medication_classifications.create') }}"/>
     @endslot
         
     <!-- Slot Body -->

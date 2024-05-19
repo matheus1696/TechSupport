@@ -1,13 +1,17 @@
-<!-- Inicio de Componentização Page Edit -->
-<x-pages.forms method="edit" route="{{route('medication_units.update',['medication_unit'=>$db->id])}}" btnBack="{{route('medication_units.index')}}">
+<x-pages.index>
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Apresentação de Medicamento: {{ $db->title }}"/>
-    @endslot
+        <x-header title="Apresentação de Medicamentos" routeBack="{{route('medication_units.index')}}"/>
+    @endslot        
 
     <!-- Slot Body -->
-    @slot('body')        
-        @include('admin.medication.medication_unit.partials.medication_unit_form')
+    @slot('body')
+        <x-conteiner>
+            <x-form.form method="edit" route="{{route('medication_units.update',['medication_unit'=>$db->id])}}">
+                @include('admin.medication.medication_unit.partials.medication_unit_form')
+            </x-form.form>
+        </x-conteiner>
     @endslot
-</x-pages.forms>
+    
+</x-pages.index>

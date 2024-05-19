@@ -1,13 +1,17 @@
-<x-pages.forms method="create" route="{{route('medication_types.store')}}" btnBack="{{route('medication_types.index')}}">
+<x-pages.index>
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Cadastrar Tipo de Medicamento"/>
-    @endslot
+        <x-header title="Tipo de Medicamentos" routeBack="{{route('medication_types.index')}}"/>
+    @endslot        
 
     <!-- Slot Body -->
-    @slot('body')        
-        @include('admin.medication.medication_type.partials.medication_type_form')
+    @slot('body')
+        <x-conteiner>
+            <x-form.form method="create" route="{{route('medication_types.store')}}">
+                @include('admin.medication.medication_type.partials.medication_type_form')
+            </x-form.form>
+        </x-conteiner>
     @endslot
     
-</x-pages.forms>
+</x-pages.index>

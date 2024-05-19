@@ -29,7 +29,7 @@ class UpdateMedicationRequest extends FormRequest
             ],
             'title' => 'required',
             'description' => 'nullable|min:20',
-            'medication_classification' => 'required',
+            'medication_classification_id' => 'required',
             'medication_unit_id' => 'required',
             'medication_type_id' => 'required',
         ];
