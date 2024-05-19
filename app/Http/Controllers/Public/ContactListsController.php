@@ -16,11 +16,9 @@ class ContactListsController extends Controller
      */
     public function index(Request $request)
     {            
-        $db = CompanyEstablishment::where('status',true)
-            ->orderBy('title')
-            ->get();
-
-        $dbContact = CompanyEstablishmentDepartment::where('contact','<>',NULL)->get();
+        $db = CompanyEstablishment::where('status',true)->orderBy('title')->get();
+        $dbEstablishments = CompanyEstablishment::select()->orderBy('title')->get();
+        $dbContacts = CompanyEstablishmentDepartment::where('contact','<>',NULL)->get();
 
         //Pesquisar Dados
         $search = $request->all();
@@ -32,8 +30,9 @@ class ContactListsController extends Controller
 
         return view('public.contacts.contacts_index',[
             'search'=>$search,
-            'db'=>$db,            
-            'dbContact'=>$dbContact,
+            'db'=>$db,           
+            'dbEstablishments'=>$dbEstablishments,             
+            'dbContacts'=>$dbContacts,
         ]);
     }
 

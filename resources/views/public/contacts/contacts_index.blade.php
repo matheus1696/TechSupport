@@ -13,7 +13,7 @@
             @endforeach
         </div>
 
-        <div>
+        <div class="mt-3">
             <p class="text-xs text-center text-secondary">Total de {{ $db->count() }} unidades.</p>
         </div>
 
