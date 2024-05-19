@@ -1,7 +1,9 @@
 <x-pages.index>
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Organograma" route="{{ route('organizations.create') }}" />
+        <x-header 
+        title="Organograma"
+        routeCreate="{{ route('organizations.create') }}" btnTitleCreate="Adicionar"/>
     @endslot
 
     <!-- Slot Body -->

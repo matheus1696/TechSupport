@@ -16,6 +16,11 @@
             {{$search ?? ""}}
         </div>
 
+        <!-- Inicio de Componentização do Search -->
+        <div class="pt-2">
+            {{$form ?? ""}}
+        </div>
+
         <!-- Inicio de Componentização do Conteiner -->
         <div class="pt-2">
             {{$body ?? ""}} 
