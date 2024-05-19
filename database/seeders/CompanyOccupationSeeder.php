@@ -4823,7 +4823,7 @@ class CompanyOccupationSeeder extends Seeder
 
         CompanyOccupation::create(['code'=>'811815','title'=>'Operador de máquina de fabricação de cosméticos','filter'=>'operador de máquina de fabricação de cosméticos',]);
 
-        CompanyOccupation::create(['code'=>'811820','title'=>'Operador de máquina de fabricação de produtos de higiene e limpeza (sabão, sabonete, detergente, absorvente, fraldas cotonetes e outros)','filter'=>'operador de máquina de fabricação de produtos de higiene e limpeza (sabão, sabonete, detergente, absorvente, fraldas cotonetes e outros)',]);
+        CompanyOccupation::create(['code'=>'811820','title'=>'Operador de máquina de fabricação de produtos de higiene e limpeza','filter'=>'operador de máquina de fabricação de produtos de higiene e limpeza',]);
 
         CompanyOccupation::create(['code'=>'812105','title'=>'Pirotécnico','filter'=>'pirotécnico',]);
 

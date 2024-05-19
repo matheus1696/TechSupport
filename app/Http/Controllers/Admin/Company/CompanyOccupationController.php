@@ -28,14 +28,21 @@ class CompanyOccupationController extends Controller
             ->orderBy('title')
             ->paginate(20);
 
-        //Pesquisar Dados
+        $dbCompanyOccupations = CompanyOccupation::select()->orderBy('title')->get();
+
+        //Pesquisa de Dados
         $search = $request->all();
+        
         if (isset($search['searchName']) || isset($search['searchCod'])) {
-            $db = CompanyOccupation::where('code','LIKE','%'.strtolower($search['searchCod']).'%')
-                ->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('code')
-                ->paginate(20);
-        }
+
+            $query = CompanyOccupation::query();
+
+            if (!empty($search['searchName'])) { $query->where('title', $search['searchName']);}
+
+            if (!empty($search['searchCod'])) {$query->where('code', $search['searchCod']);}
+
+            $db = $query->orderBy('title')->paginate(20);
+        }  
 
         //Log do Sistema
         Logger::access();
@@ -43,6 +50,7 @@ class CompanyOccupationController extends Controller
         return view('admin.company.occupations.occupations_index', [
             'search'=>$search,
             'db'=>$db,
+            'dbCompanyOccupations'=>$dbCompanyOccupations,
         ]);
     }
 
