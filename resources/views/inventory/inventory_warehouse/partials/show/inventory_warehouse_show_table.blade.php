@@ -43,7 +43,7 @@
                                                                 <!-- Modal toggle -->
                                                                 <button 
                                                                     data-toggle="modal"
-                                                                    data-target="#InventoryWarehouseExitModel{{$dbInventoryEntry->id}}"
+                                                                    data-target="#InventoryWarehouseExitModel_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}"
                                                                     class="flex items-center px-2 py-1 m-1 text-sm text-white bg-red-600 rounded-lg shadow-md hover:bg-red-500" 
                                                                     type="button"
                                                                 >
@@ -51,7 +51,7 @@
                                                                     <span>Saída</span>
                                                                 </button>
                                                             
-                                                                <div class="modal fade" id="InventoryWarehouseExitModel{{$dbInventoryEntry->id}}" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+                                                                <div class="modal fade" id="InventoryWarehouseExitModel_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
                                                                     <div class="text-left modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -80,7 +80,7 @@
 
                                                                                         <x-form.input col="6" label="Produto" name="disabled" id="disabled" value="{{$dbInventoryEntry->Product->title}}" disabled="disabled"/>
 
-                                                                                        <x-form.select col="6" label="Estabelecimento Recebedor" name="establishment_department_exit_id" id="establishment_department_exit_id_{{$dbInventoryEntry->id}}">
+                                                                                        <x-form.select col="6" label="Estabelecimento Recebedor" name="establishment_department_exit_id" id="establishment_department_exit_id_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}">
                                                                                             @foreach ($dbEstablishmentDepartments as $dbEstablishmentDepartment)
                                                                                                 <option value="{{$dbEstablishmentDepartment->id}}">
                                                                                                     {{$dbEstablishmentDepartment->CompanyEstablishment->title}} - 
@@ -95,7 +95,7 @@
                                                                                     
                                                                                         <x-form.input col="3" label="Quantidade Estoque" name="disabled" id="disabled" value="{{$dbInventoryEntry->quantity}}" disabled="disabled"/>
                                                                                         
-                                                                                        <x-form.input col="3" label="Quantidade" type="number" name="quantity" id="quantity" min="0" required="required"/>
+                                                                                        <x-form.input col="3" label="Quantidade" type="number" name="quantity" id="quantity" min="0" max="{{$dbInventoryEntry->quantity}}" required="required"/>
                                                                                     
                                                                                         <x-form.textarea col="12" label="Descrição da Movimentação" name="description" id="description" value="{{$db->description ?? ''}}"/>
                                                                                             

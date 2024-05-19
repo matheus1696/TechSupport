@@ -25,7 +25,7 @@ class StoreInventoryWarehouseExitRequest extends FormRequest
             //
             'invoice' => 'required|min:1',
             'supply_order' => 'required|min:8',
-            'supply_company' => 'required|min:8',
+            'supply_company' => 'required|min:1',
             'date' => 'required',
             'quantity' => 'required',
             'product_id' => 'required',
