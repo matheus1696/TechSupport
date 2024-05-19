@@ -22,14 +22,13 @@ use App\Http\Controllers\Admin\Product\ProductUnitController;
 use App\Http\Controllers\Admin\Region\RegionCityController;
 use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
+use App\Http\Controllers\Admin\User\UsersController;
 use App\Http\Controllers\Inventory\InventoryMedicationController;
 use App\Http\Controllers\Inventory\InventoryProductController;
 use App\Http\Controllers\Inventory\InventoryMedicationHistoryController;
 use App\Http\Controllers\Inventory\InventoryProductHistoryController;
 use App\Http\Controllers\Inventory\InventoryWarehouseController;
-use App\Http\Controllers\Inventory\InventoryWarehouseHistoryController;
 use App\Http\Controllers\Public\ContactListsController;
-use App\Http\Controllers\Users\Admin\UsersController;
 use App\Http\Controllers\Users\ProfileController;
 
 //Camada de Seguraça para Usuários Logados

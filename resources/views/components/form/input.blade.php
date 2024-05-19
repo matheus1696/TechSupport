@@ -11,7 +11,7 @@
         @isset($maxlength) maxlength="{{$maxlength}}" @endisset
         @error($id) value="{{old($id)}}" @enderror
         @if (empty($value)) value="{{old($id)}}" @else value="{{$value}}" @endif
-        @if (empty($placeholder)) placeholder="{{$label}}" @else placeholder="{{$placeholder}}" @endif
+        @if (empty($placeholder)) placeholder="{{$label ?? ""}}" @else placeholder="{{$placeholder}}" @endif
         {{$disabled ?? ""}}
         {{$required ?? ""}}
         {{$autofocus ?? ""}}

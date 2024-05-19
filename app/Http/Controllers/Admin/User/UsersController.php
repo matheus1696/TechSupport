@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Users\Admin;
+namespace App\Http\Controllers\Admin\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,28 +29,26 @@ class UsersController extends Controller
     {
         //Listando Dados
         $db = User::orderBy('name')->with('SexualOrientation')->paginate(20);
+        $dbUsers = User::select()->orderBy('name')->get();
         $dbPermissions= UserPermissions::all();
         $dbHasPermissions = UserHasPermissions::all();
         $dbCompanyOrganizational = CompanyOrganization::where('status',true)->orderBy('order')->get();
         $dbCompanyOccupations = CompanyOccupation::where('status',true)->orderBy('title')->get();
         $dbEstablishments = CompanyEstablishment::where('status',true)->orderBy('title')->get();
 
-        //Pesquisar Dados
+        //Pesquisa de Dados
         $search = $request->all();
+        
+        if (isset($search['searchName']) || isset($search['searchEmail'])) {
 
-        if (isset($search['searchName']) && isset($search['searchEmail'])) {
-            $db = User::where('filter','LIKE','%'.$search['searchName'].'%')
-                ->orWhere('email','LIKE','%'.$search['searchEmail'].'%')
-                ->orderBy('name')
-                ->with('SexualOrientations')
-                ->paginate(20);
-        } elseif (isset($search['searchName']) || isset($search['searchEmail'])) {
-            $db = User::where('filter','LIKE','%'.$search['searchName'].'%')
-                ->where('email','LIKE','%'.$search['searchEmail'].'%')
-                ->orderBy('name')
-                ->with('SexualOrientations')
-                ->paginate(20);
-        }       
+            $query = User::query();
+
+            if (!empty($search['searchName'])) { $query->where('name', $search['searchName']);}
+
+            if (!empty($search['searchEmail'])) {$query->where('email', $search['searchEmail']);}
+
+            $db = $query->orderBy('name')->paginate(20);
+        }      
 
         //Log do Sistema
         Logger::access();
@@ -58,6 +56,7 @@ class UsersController extends Controller
         return view('admin.users.users_index',[
             'search'=>$search,
             'db'=>$db,
+            'dbUsers'=>$dbUsers,
             'dbPermissions'=>$dbPermissions,
             'dbHasPermissions'=>$dbHasPermissions,
             'dbCompanyOrganizational'=>$dbCompanyOrganizational,

@@ -1,1 +1,1 @@
-<label for="{{$id}}" class="ml-1 text-sm">{{$label ?? ""}}:</label>
+<label for="{{$id}}" class="ml-1 text-sm">{{$label ?? ""}}</label>
