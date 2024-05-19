@@ -2,7 +2,10 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Lista de Blocos Financeiros" route="{{ route('financial_blocks.create') }}"/>
+        <x-header 
+            title="Lista de Blocos Financeiros" 
+            routeCreate="{{ route('financial_blocks.create') }}" btnTitleCreate="Adicionar"
+        />
     @endslot
     
     @slot('body')        
