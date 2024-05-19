@@ -1,5 +1,5 @@
-<x-form.input col="2" label="Sigla" name="acronym" value="{{$db->acronym ?? ''}}"/>
-<x-form.input col="10" label="Blocos Financeiros" name="title" value="{{$db->title ?? ''}}"/>
+<x-form.input col="2" label="Sigla" id="acronym" name="acronym" value="{{$db->acronym ?? ''}}"/>
+<x-form.input col="10" label="Blocos Financeiros" id="title" name="title" value="{{$db->title ?? ''}}"/>
 
 <div class="grid items-center justify-center grid-cols-12 col-span-12">    
     <label class="col-span-12">Cores:</label>
