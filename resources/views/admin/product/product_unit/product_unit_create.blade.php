@@ -1,13 +1,17 @@
-<x-pages.forms method="create" route="{{route('product_units.store')}}" btnBack="{{route('product_units.index')}}">
+<x-pages.index>
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Cadastrar Apresentação do Produto"/>
-    @endslot
+        <x-header title="Apresentação do Produto" routeBack="{{route('product_units.index')}}"/>
+    @endslot        
 
     <!-- Slot Body -->
-    @slot('body')        
-        @include('admin.product.product_unit.partials.product_unit_form')
+    @slot('body')
+        <x-conteiner>
+            <x-form.form method="create" route="{{route('product_units.store')}}">
+                @include('admin.product.product_unit.partials.product_unit_form')
+            </x-form.form>
+        </x-conteiner>
     @endslot
     
-</x-pages.forms>
+</x-pages.index>

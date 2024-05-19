@@ -3,7 +3,7 @@
     @slot('header')
         <x-header 
             title="Apresentação dos Produtos" 
-            routeCreate="{{ route('product_units.create') }}" btnTitleCreate="Adicionar"
+            routeCreate="{{ route('product_units.create') }}"
         />
     @endslot
         
