@@ -100,15 +100,25 @@
 
                         <!-- Inicio de Componentização do Modal Permissões -->
                         <x-button.minButtonModalUserPermission id="UserPermissionModal{{$item->id}}" title="Permissões">
-                            
+
                             <x-form.form method="edit" route="{{route('users.update',['user'=>$item->id])}}">
                                 @csrf @method('PUT')
-                                    @foreach ($dbPermissions as $permission)
-                                        <div class="col-span-3 grid grid-cols-3 items-end">
-                                            <x-form.input col="1" type="checkbox" name="{{$permission->name}}" id="{{$permission->id}}" value="{{$db->title ?? ''}}" />
-                                            <span class="col-span-2 pb-1">{{$permission->name}}</span>
-                                        </div>
-                                    @endforeach
+                                    <div class="col-span-12 flex gap-3">
+                                        @foreach ($dbPermissions as $permission)
+                                            <div>
+                                                <input type="checkbox" id="permission_{{$permission->id}}" name={{$permission->name}} value="{{$permission->id}}"
+                                                    @foreach ($dbHasPermissions as $hasPermission)
+                                                        @if ($hasPermission->permission_id == $permission->id)
+                                                            @if ($item->id == $hasPermission->model_id)
+                                                                checked
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                >
+                                                <label for="permission_{{$permission->id}}">{{$permission->name}}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                             </x-form.form>
                         </x-button.minButtonModalUserPermission>
                     </x-table.td>

@@ -110,7 +110,7 @@ class UsersController extends Controller
         $db = User::find($id);
 
         //Alterando Dados do Usuário
-        $data = $request->only('company_id','occupation_id','establishment_id');
+        $data = $request->only('organization_id','occupation_id','establishment_id');
         $db->update($data);
 
         //Log do Sistema
