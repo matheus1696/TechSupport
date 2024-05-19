@@ -3,6 +3,16 @@
 <script src="{{asset('assets/js/maskcpf.js')}}"></script>
 <script src="{{asset('assets/js/maskregistration.js')}}"></script>
 
+<!-- Scripts Proteção de envio do formulário -->
+<script>
+    document.querySelectorAll('.preventSubmitBtn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            this.disabled = true; // Desativa o botão
+            this.closest('form').submit(); // Envia o formulário mais próximo manualmente
+        });
+    });
+</script>
+
 <!-- Configuração do Select2 -->
 <script>   
 

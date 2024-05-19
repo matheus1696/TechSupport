@@ -72,32 +72,32 @@
                                                                                         <input type="hidden" name="supply_order" value="{{$dbInventoryEntry->supply_order}}">
                                                                                         <input type="hidden" name="supply_company" value="{{$dbInventoryEntry->supply_company}}">
 
-                                                                                        <x-form.input col="4" label="Nota Fiscal" id="disabled" value="{{$dbInventoryEntry->invoice}}" disabled="disabled"/>
+                                                                                        <x-form.input col="4" label="Nota Fiscal" name="disabled" id="disabled" value="{{$dbInventoryEntry->invoice}}" disabled="disabled"/>
 
-                                                                                        <x-form.input col="4" label="O.F." id="disabled" value="{{$dbInventoryEntry->supply_order}}" disabled="disabled"/>
+                                                                                        <x-form.input col="4" label="O.F." name="disabled" id="disabled" value="{{$dbInventoryEntry->supply_order}}" disabled="disabled"/>
 
-                                                                                        <x-form.input col="4" label="Fornecedor" id="disabled" value="{{$dbInventoryEntry->supply_company}}" disabled="disabled"/>
+                                                                                        <x-form.input col="4" label="Fornecedor" name="disabled" id="disabled" value="{{$dbInventoryEntry->supply_company}}" disabled="disabled"/>
 
-                                                                                        <x-form.input col="6" label="Produto" id="disabled" value="{{$dbInventoryEntry->Product->title}}" disabled="disabled"/>
+                                                                                        <x-form.input col="6" label="Produto" name="disabled" id="disabled" value="{{$dbInventoryEntry->Product->title}}" disabled="disabled"/>
 
-                                                                                        <x-form.selectBasic col="6" label="Estabelecimento Recebedor" id="establishment_department_exit_id">
+                                                                                        <x-form.select col="6" label="Estabelecimento Recebedor" name="establishment_department_exit_id" id="establishment_department_exit_id_{{$dbInventoryEntry->id}}">
                                                                                             @foreach ($dbEstablishmentDepartments as $dbEstablishmentDepartment)
                                                                                                 <option value="{{$dbEstablishmentDepartment->id}}">
                                                                                                     {{$dbEstablishmentDepartment->CompanyEstablishment->title}} - 
                                                                                                     {{$dbEstablishmentDepartment->department}}
                                                                                                 </option>
                                                                                             @endforeach
-                                                                                        </x-form.selectBasic>
+                                                                                        </x-form.select>
                                                                                     
-                                                                                        <x-form.input col="3" label="Data" type="date" id="date" value="{{date('Y-m-d')}}" max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}" required="required"/>
+                                                                                        <x-form.input col="3" label="Data" type="date" name="date" id="date" value="{{date('Y-m-d')}}" max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}" required="required"/>
 
-                                                                                        <x-form.input col="3" label="Apresentação" id="disabled" value="{{$dbInventoryEntry->Product->ProductUnit->title}}" disabled="disabled"/>
+                                                                                        <x-form.input col="3" label="Apresentação" name="disabled" id="disabled" value="{{$dbInventoryEntry->Product->ProductUnit->title}}" disabled="disabled"/>
                                                                                     
-                                                                                        <x-form.input col="3" label="Quantidade Estoque" id="inventaryQuantity" value="{{$dbInventoryEntry->quantity}}" disabled="disabled"/>
+                                                                                        <x-form.input col="3" label="Quantidade Estoque" name="disabled" id="disabled" value="{{$dbInventoryEntry->quantity}}" disabled="disabled"/>
                                                                                         
-                                                                                        <x-form.input col="3" label="Quantidade" type="number" id="quantity" min="0" required="required"/>
+                                                                                        <x-form.input col="3" label="Quantidade" type="number" name="quantity" id="quantity" min="0" required="required"/>
                                                                                     
-                                                                                        <x-form.textarea col="12" label="Descrição da Movimentação" id="description" value="{{$db->description ?? ''}}"/>
+                                                                                        <x-form.textarea col="12" label="Descrição da Movimentação" name="description" id="description" value="{{$db->description ?? ''}}"/>
                                                                                             
                                                                                 </x-form.form>
                                                                             </div>
