@@ -2,13 +2,13 @@
     <!-- Slot Header -->
     @slot('header')
         <x-header 
-            title="Produtos" 
-            routeCreate="{{ route('products.create') }}"
+            title="Suprimentos" 
+            routeCreate="{{ route('supplies.create') }}"
         />
     @endslot
         
     <!-- Slot Body -->
     @slot('body')
-        @include('admin.product.product.partials.product_table')
+        @include('admin.supply.supply.partials.supply_table')
     @endslot
 </x-pages.index>

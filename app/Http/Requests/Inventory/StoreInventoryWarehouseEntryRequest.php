@@ -28,7 +28,7 @@ class StoreInventoryWarehouseEntryRequest extends FormRequest
             'supply_company' => 'required|min:1',
             'date' => 'required',
             'quantity' => 'required',
-            'product_id' => 'required',
+            'supply_id' => 'required',
             'financial_block_id' => 'required',
             'establishment_entry_id' => 'required',
             'establishment_department_entry_id' => 'required',

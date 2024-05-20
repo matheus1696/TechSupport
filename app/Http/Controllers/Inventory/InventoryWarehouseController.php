@@ -120,10 +120,10 @@ class InventoryWarehouseController extends Controller
 
         // Consulta de inventário geral
         $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)
-        ->join('Supplies', 'inventory_warehouses.supply_id', '=', 'Supplies.id')
+        ->join('supplies', 'inventory_warehouses.supply_id', '=', 'supplies.id')
         ->join('company_financial_blocks', 'inventory_warehouses.financial_block_id', '=', 'company_financial_blocks.id')
-        ->select('inventory_warehouses.*', 'Supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
-        ->orderBy('Supplies.title')
+        ->select('inventory_warehouses.*', 'supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
+        ->orderBy('supplies.title')
         ->orderBy('company_financial_blocks.acronym')
         ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
         ->get();       

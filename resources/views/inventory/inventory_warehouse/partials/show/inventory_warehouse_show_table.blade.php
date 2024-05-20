@@ -30,7 +30,7 @@
 
                                     @slot('tbody')
                                         @foreach ($dbInventoryEntries as $dbInventoryEntry)
-                                            @if ($dbInventoryEntry->product_id === $dbInventory->product_id)
+                                            @if ($dbInventoryEntry->supply_id === $dbInventory->supply_id)
                                                 @if ($dbInventoryEntry->financial_block_id === $dbInventory->financial_block_id)
                                                     <x-table.tr>
                                                         <x-table.td>{{$dbInventoryEntry->invoice}}</x-table.td>
@@ -67,7 +67,7 @@
                                                                                         <input type="hidden" name="establishment_department_entry_id" value="{{$dbInventoryEntry->establishment_department_id}}">
                                                                                         <input type="hidden" name="establishment_entry_id" value="{{$dbInventoryEntry->establishment_id}}">
                                                                                         <input type="hidden" name="financial_block_id" value="{{$dbInventoryEntry->financial_block_id}}">
-                                                                                        <input type="hidden" name="product_id" value="{{$dbInventoryEntry->product_id}}">
+                                                                                        <input type="hidden" name="supply_id" value="{{$dbInventoryEntry->supply_id}}">
                                                                                         <input type="hidden" name="invoice" value="{{$dbInventoryEntry->invoice}}">
                                                                                         <input type="hidden" name="supply_order" value="{{$dbInventoryEntry->supply_order}}">
                                                                                         <input type="hidden" name="supply_company" value="{{$dbInventoryEntry->supply_company}}">

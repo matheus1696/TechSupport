@@ -65,7 +65,7 @@ class SupplyController extends Controller
         //Log do Sistema
         Logger::store($data['title']);
 
-        return redirect(route('supplys.index'));
+        return redirect(route('supplies.index'));
     }
 
     /**
@@ -110,7 +110,7 @@ class SupplyController extends Controller
         //Log do Sistema
         Logger::update($db->title);
 
-        return redirect(route('supplys.index'))
+        return redirect(route('supplies.index'))
             ->with('success','Alteração realizada com sucesso');
     }
 
@@ -138,6 +138,6 @@ class SupplyController extends Controller
         //Log do Sistema
         Logger::status($db->id, $db->status);
 
-        return redirect(route('supplys.index'))->with('success','Status alterado com sucesso.');
+        return redirect(route('supplies.index'))->with('success','Status alterado com sucesso.');
     }
 }

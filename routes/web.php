@@ -93,7 +93,7 @@ Route::middleware('auth')->group(function () {
             });
 
             //Grupo de Rotas - Configuração de Localização
-            Route::prefix('products')->group(function (){
+            Route::prefix('supply')->group(function (){
 
                 //Rota - Apresentação de Medicamentos
                     Route::put('supply_classifications/status/{supply_classification}',[SupplyClassificationController::class,'status'])->name('supply_classifications.status');

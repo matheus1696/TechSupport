@@ -11,13 +11,13 @@
         @foreach ($db as $item)
             <x-table.tr>
                 <x-table.td>{{$item->title}}</x-table.td>
-                <x-table.td>{{$item->ProductType->title}}</x-table.td>
-                <x-table.td>{{$item->ProductUnit->title}}</x-table.td>
+                <x-table.td>{{$item->SupplyType->title}}</x-table.td>
+                <x-table.td>{{$item->SupplyUnit->title}}</x-table.td>
                 <x-table.td class="text-center">
-                    <x-button.buttonStatus condition="{{$item->status}}" route="{{route('products.status',['product'=>$item->id])}}" name="status" />
+                    <x-button.buttonStatus condition="{{$item->status}}" route="{{route('supplies.status',['supply'=>$item->id])}}" name="status" />
                 </x-table.td>
                 <x-table.td>
-                    <x-button.minButtonEdit route="{{route('products.edit',['product'=>$item->id])}}" />
+                    <x-button.minButtonEdit route="{{route('supplies.edit',['supply'=>$item->id])}}" />
                 </x-table.td>
             </x-table.tr>
         @endforeach

@@ -2,14 +2,14 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Classificação dos Produtos" routeBack="{{route('product_classifications.index')}}"/>
+        <x-header title="Classificação de Suprimentos" routeBack="{{route('supply_classifications.index')}}"/>
     @endslot        
 
     <!-- Slot Body -->
     @slot('body')
         <x-conteiner>
-            <x-form.form method="create" route="{{route('product_classifications.store')}}">
-                @include('admin.product.product_classification.partials.product_classification_form')
+            <x-form.form method="create" route="{{route('supply_classifications.store')}}">
+                @include('admin.supply.supply_classification.partials.supply_classification_form')
             </x-form.form>
         </x-conteiner>
     @endslot

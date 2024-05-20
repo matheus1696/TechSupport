@@ -127,6 +127,6 @@ class SupplyTypeController extends Controller
         //Log do Sistema
         Logger::status($db->id, $db->status);
 
-        return redirect(route('supplys.index'))->with('success','Status alterado com sucesso.');
+        return redirect(route('supply_types.index'))->with('success','Status alterado com sucesso.');
     }
 }

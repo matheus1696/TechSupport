@@ -2,14 +2,14 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Produtos" routeBack="{{route('products.index')}}"/>
+        <x-header title="Suprimentos" routeBack="{{route('supplies.index')}}"/>
     @endslot        
 
     <!-- Slot Body -->
     @slot('body')
         <x-conteiner>
-            <x-form.form method="create" route="{{route('products.store')}}">
-                @include('admin.product.product.partials.product_form')
+            <x-form.form method="create" route="{{route('supplies.store')}}">
+                @include('admin.supply.supply.partials.supply_form')
             </x-form.form>
         </x-conteiner>
     @endslot

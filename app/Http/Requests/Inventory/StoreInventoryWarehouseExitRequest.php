@@ -28,7 +28,7 @@ class StoreInventoryWarehouseExitRequest extends FormRequest
             'supply_company' => 'required|min:1',
             'date' => 'required',
             'quantity' => 'required',
-            'product_id' => 'required',
+            'supply_id' => 'required',
             'financial_block_id' => 'required',
             'establishment_department_exit_id' => 'required',
         ];

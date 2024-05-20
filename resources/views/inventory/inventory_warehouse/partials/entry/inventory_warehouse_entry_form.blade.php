@@ -16,10 +16,10 @@
 
     <x-form.input col="2" label="Data" type="date" name="date" id="date" value="{{date('Y-m-d')}}" max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}" required="required"/>
 
-    <x-form.select col="8" label="Produto" name="product_id" id="product_id">
-        @foreach ($dbProducts as $dbProduct)
-            <option value="{{$dbProduct->id}}">
-                {{$dbProduct->title}}
+    <x-form.select col="8" label="Produto" name="supply_id" id="supply_id">
+        @foreach ($dbSupplies as $dbSupply)
+            <option value="{{$dbSupply->id}}">
+                {{$dbSupply->title}}
             </option>
         @endforeach
     </x-form.select>

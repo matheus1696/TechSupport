@@ -10,10 +10,10 @@
             <x-table.tr>
                 <x-table.td>{{$item->title}}</x-table.td>
                 <x-table.td class="text-center">
-                    <x-button.buttonStatus condition="{{$item->status}}" route="{{route('product_classifications.status',['product_classification'=>$item->id])}}" name="status" />
+                    <x-button.buttonStatus condition="{{$item->status}}" route="{{route('supply_classifications.status',['supply_classification'=>$item->id])}}" name="status" />
                 </x-table.td>
                 <x-table.td>
-                    <x-button.minButtonEdit route="{{route('product_classifications.edit',['product_classification'=>$item->id])}}" />
+                    <x-button.minButtonEdit route="{{route('supply_classifications.edit',['supply_classification'=>$item->id])}}" />
                 </x-table.td>
             </x-table.tr>
         @endforeach

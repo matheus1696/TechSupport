@@ -29,7 +29,7 @@ class UpdateInventoryWarehouseHistoryRequest extends FormRequest
             'date' => 'required',
             'quantity' => 'required',
             'movement' => 'required',
-            'product_id' => 'required',
+            'supply_id' => 'required',
             'financial_block_id' => 'required',
         ];
     }

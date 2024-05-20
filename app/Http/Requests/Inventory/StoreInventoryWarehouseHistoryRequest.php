@@ -28,7 +28,7 @@ class StoreInventoryWarehouseHistoryRequest extends FormRequest
             'supply_company' => 'required|min:8',
             'date' => 'required',
             'quantity' => 'required',
-            'product_id' => 'required',
+            'supply_id' => 'required',
             'financial_block_id' => 'required',
         ];
     }
