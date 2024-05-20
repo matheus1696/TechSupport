@@ -28,8 +28,7 @@
                 @include('inventory.inventory_product.partials.edit.inventory_product_edit_table')
             </div>
             <div>      
-                <h3 class="mb-3 text-xl text-center">Solicitações em análise</h3>          
-                @include('inventory.inventory_product.partials.edit.inventory_product_edit_table')
+                <h3 class="mb-3 text-lg font-semibold text-center">Pedidos de Suprimentos</h3>
             </div>
         </div>
         

@@ -106,6 +106,7 @@ class InventoryProductController extends Controller
         $dbInventories = InventoryProduct::where('establishment_department_id', $id)->get();
         $dbInventoryHistories = InventoryWarehouseHistory::where('establishment_department_exit_id', $id)
             ->where('pending', FALSE)
+            ->orderBy('date')
             ->paginate(20);
 
         //Log do Sistema

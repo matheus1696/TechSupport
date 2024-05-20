@@ -100,6 +100,7 @@ class InventoryWarehouseController extends Controller
         // Recupera todos os departamentos com inventário de produtos
         $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_product', true)
         ->join('company_establishments', 'company_establishment_departments.establishment_id', '=', 'company_establishments.id')
+        ->select('company_establishment_departments.*', 'company_establishments.title as establishment_title')
         ->orderBy('company_establishments.title')
         ->orderBy('department')
         ->with('CompanyEstablishment')
@@ -109,9 +110,10 @@ class InventoryWarehouseController extends Controller
         $dbInventoryEntries = InventoryWarehouseEntry::where('establishment_department_id', $id)
         ->where('quantity', '>', 0)
         ->join('products', 'inventory_warehouse_entries.product_id', '=', 'products.id')
+        ->join('company_financial_blocks', 'inventory_warehouse_entries.financial_block_id', '=', 'company_financial_blocks.id')
+        ->select('inventory_warehouse_entries.*', 'products.title as product_title', 'company_financial_blocks.acronym as financial_block_acronym')
         ->orderBy('products.title')
         ->orderBy('quantity')
-        ->join('company_financial_blocks', 'inventory_warehouse_entries.financial_block_id', '=', 'company_financial_blocks.id')
         ->orderBy('company_financial_blocks.acronym')
         ->with(['Product','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
         ->get();
@@ -119,8 +121,9 @@ class InventoryWarehouseController extends Controller
         // Consulta de inventário geral
         $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)
         ->join('products', 'inventory_warehouses.product_id', '=', 'products.id')
-        ->orderBy('products.title')
         ->join('company_financial_blocks', 'inventory_warehouses.financial_block_id', '=', 'company_financial_blocks.id')
+        ->select('inventory_warehouses.*', 'products.title as product_title', 'company_financial_blocks.acronym as financial_block_acronym')
+        ->orderBy('products.title')
         ->orderBy('company_financial_blocks.acronym')
         ->with(['Product','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
         ->get();       
@@ -266,6 +269,7 @@ class InventoryWarehouseController extends Controller
             ->where('inventory_warehouse_histories.movement', 'Entrada')
             ->join('products', 'inventory_warehouse_histories.product_id', '=', 'products.id')
             ->join('company_financial_blocks', 'inventory_warehouse_histories.financial_block_id', '=', 'company_financial_blocks.id')
+            ->select('inventory_warehouse_histories.*','products.title as product_title','company_financial_blocks.acronym as financial_block_acronym')
             ->orderBy('inventory_warehouse_histories.date', 'DESC')
             ->orderBy('products.title')
             ->orderBy('company_financial_blocks.acronym')

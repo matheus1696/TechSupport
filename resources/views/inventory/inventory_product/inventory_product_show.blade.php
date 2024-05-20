@@ -24,7 +24,7 @@
         @endif
         
         <div>
-            @include('inventory.inventory_product.partials.show.inventory_product_show_department_table')
+            @include('inventory.inventory_product.partials.show.inventory_product_show_table')
         </div>
         <div>
             <p class="pr-3 text-xs text-end">

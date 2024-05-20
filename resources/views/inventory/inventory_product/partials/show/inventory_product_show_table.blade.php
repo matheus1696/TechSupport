@@ -21,7 +21,7 @@
                             <!-- Modal toggle -->
                             <button 
                                 data-toggle="modal"
-                                data-target="#modalInfo{{$dbInventory->id}}"
+                                data-target="#modalInfo_{{$dbInventory->id}}"
                                 class="flex items-center px-2 py-1 m-1 text-sm text-white bg-red-600 rounded-lg shadow-md hover:bg-red-500" 
                                 type="button"
                             >
@@ -49,17 +49,17 @@
                                                 <input hidden name="product_id" value="{{$dbInventory->product_id}}">
                                                 <input hidden name="movement" value="Saída">
 
-                                                <x-form.input col="12" label="Produto" id="disabled" value="{{$dbInventory->Product->title}}" disabled="disabled"/>
+                                                <x-form.input col="12" label="Produto" name="disabled" value="{{$dbInventory->Product->title}}" disabled="disabled"/>
                                             
-                                                <x-form.input col="3" label="Data" type="date" id="date" value="{{date('Y-m-d')}}" max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}" required="required"/>
+                                                <x-form.input col="3" label="Data" type="date" id="date" name="date" value="{{date('Y-m-d')}}" max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}" required="required"/>
 
-                                                <x-form.input col="3" label="Apresentação" id="disabled" value="{{$dbInventory->Product->ProductUnit->title}}" disabled="disabled"/>
+                                                <x-form.input col="3" label="Apresentação" name="disabled" value="{{$dbInventory->Product->ProductUnit->title}}" disabled="disabled"/>
                                             
-                                                <x-form.input col="3" label="Quantidade Estoque" id="inventaryQuantity" value="{{$dbInventory->quantity}}" disabled="disabled"/>
+                                                <x-form.input col="3" label="Quantidade Estoque" name="inventaryQuantity" id="inventaryQuantity" value="{{$dbInventory->quantity}}" disabled="disabled"/>
                                                 
-                                                <x-form.input col="3" label="Quantidade" type="number" id="quantity" min="0" required="required"/>
+                                                <x-form.input col="3" label="Quantidade" type="number" id="quantity" name="quantity" min="0" required="required"/>
                                             
-                                                <x-form.textarea col="12" label="Descrição da Movimentação" id="description" value="{{$db->description ?? ''}}"/>
+                                                <x-form.textarea col="12" label="Descrição da Movimentação" id="description" name="description" value="{{$db->description ?? ''}}"/>
                                             
                                             </x-form.form>
                                         </div>
