@@ -3,7 +3,8 @@
     <!-- Slot Header -->
     @slot('header')
         <x-header 
-            routeCreate="" btnTitleCreate="Entrada Avulsa"
+            routeCreate="" btnTitleCreate="Abertura de Pedido"
+            routeJoker="" btnTitleJoker="Entrada Avulsa" iconJoker="fas fa-clipboard-list"
             routeBack="{{route('inventory_supplies.show', ['inventory_supply'=>$db->id])}}"
         />
     @endslot
@@ -23,12 +24,14 @@
         @endif
         
         <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <div>
-                <h3 class="mb-3 text-lg font-semibold text-center">Enviado para unidade</h3>
-                @include('inventory.inventory_supply.partials.edit.inventory_supply_edit_table')
-            </div>
             <div>      
-                <h3 class="mb-3 text-lg font-semibold text-center">Pedidos de Suprimentos</h3>
+                <h3 class="mb-3 text-lg font-semibold text-center">Pedidos de Realizados</h3>
+
+                <h3 class="text-center">Em construção</h3>
+            </div>
+            <div>
+                <h3 class="mb-3 text-lg font-semibold text-center">Enviado para entrega</h3>
+                @include('inventory.inventory_supply.partials.edit.inventory_supply_edit_table')
             </div>
         </div>
         
