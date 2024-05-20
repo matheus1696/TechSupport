@@ -11,24 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory_warehouse_entries', function (Blueprint $table) {
+        Schema::create('inventory_supplies', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice');
-            $table->string('supply_order');
-            $table->string('supply_company');
-            $table->integer('quantity')->nullable();
+            $table->integer('quantity');
             $table->integer('quantity_minimum')->nullable();
             $table->integer('quantity_maximum')->nullable();
             $table->unsignedBigInteger('supply_id');
             $table->unsignedBigInteger('establishment_id');
             $table->unsignedBigInteger('establishment_department_id');
-            $table->unsignedBigInteger('financial_block_id');
             $table->timestamps();
             
             $table->foreign('supply_id')->references('id')->on('supplies');
             $table->foreign('establishment_id')->references('id')->on('company_establishments');
             $table->foreign('establishment_department_id')->references('id')->on('company_establishment_departments');
-            $table->foreign('financial_block_id')->references('id')->on('company_financial_blocks');
         });
     }
 
@@ -37,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory_warehouse_entries');
+        Schema::dropIfExists('inventory_supplies');
     }
 };

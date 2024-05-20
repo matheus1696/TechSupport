@@ -11,24 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory_warehouse_entries', function (Blueprint $table) {
+        Schema::create('inventory_supply_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice');
-            $table->string('supply_order');
-            $table->string('supply_company');
-            $table->integer('quantity')->nullable();
-            $table->integer('quantity_minimum')->nullable();
-            $table->integer('quantity_maximum')->nullable();
+            $table->string('code');
+            $table->string('invoice')->nullable();;
+            $table->string('supply_order')->nullable();;
+            $table->string('supply_company')->nullable();;
+            $table->date('date');
+            $table->string('movement');
+            $table->integer('quantity');        
+            $table->string('batch')->nullable();
+            $table->string('due_date')->nullable();
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('supply_id');
             $table->unsignedBigInteger('establishment_id');
             $table->unsignedBigInteger('establishment_department_id');
-            $table->unsignedBigInteger('financial_block_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             
             $table->foreign('supply_id')->references('id')->on('supplies');
             $table->foreign('establishment_id')->references('id')->on('company_establishments');
             $table->foreign('establishment_department_id')->references('id')->on('company_establishment_departments');
-            $table->foreign('financial_block_id')->references('id')->on('company_financial_blocks');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -37,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory_warehouse_entries');
+        Schema::dropIfExists('inventory_supply_histories');
     }
 };

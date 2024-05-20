@@ -13,7 +13,7 @@ use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyFinancialBlock;
 use App\Models\Inventory\InventoryWarehouseEntry;
 use App\Models\Inventory\InventoryWarehouseHistory;
-use App\Models\Product\Product;
+use App\Models\Supply\Supply;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -94,11 +94,11 @@ class InventoryWarehouseController extends Controller
         $db = CompanyEstablishmentDepartment::find($id);
 
         // Recupera todos os produtos e bloco de financiamentos
-        $dbProducts = Product::all();
+        $dbSupplies = Supply::all();
         $dbFinancialBlocks = CompanyFinancialBlock::all();
 
         // Recupera todos os departamentos com inventário de produtos
-        $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_product', true)
+        $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_supply', true)
         ->join('company_establishments', 'company_establishment_departments.establishment_id', '=', 'company_establishments.id')
         ->select('company_establishment_departments.*', 'company_establishments.title as establishment_title')
         ->orderBy('company_establishments.title')
@@ -109,34 +109,34 @@ class InventoryWarehouseController extends Controller
         // Consulta de entradas de inventário com quantidade maior que zero
         $dbInventoryEntries = InventoryWarehouseEntry::where('establishment_department_id', $id)
         ->where('quantity', '>', 0)
-        ->join('products', 'inventory_warehouse_entries.product_id', '=', 'products.id')
+        ->join('supplies', 'inventory_warehouse_entries.supply_id', '=', 'supplies.id')
         ->join('company_financial_blocks', 'inventory_warehouse_entries.financial_block_id', '=', 'company_financial_blocks.id')
-        ->select('inventory_warehouse_entries.*', 'products.title as product_title', 'company_financial_blocks.acronym as financial_block_acronym')
-        ->orderBy('products.title')
+        ->select('inventory_warehouse_entries.*', 'supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
+        ->orderBy('supplies.title')
         ->orderBy('quantity')
         ->orderBy('company_financial_blocks.acronym')
-        ->with(['Product','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
+        ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
         ->get();
 
         // Consulta de inventário geral
         $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)
-        ->join('products', 'inventory_warehouses.product_id', '=', 'products.id')
+        ->join('Supplies', 'inventory_warehouses.supply_id', '=', 'Supplies.id')
         ->join('company_financial_blocks', 'inventory_warehouses.financial_block_id', '=', 'company_financial_blocks.id')
-        ->select('inventory_warehouses.*', 'products.title as product_title', 'company_financial_blocks.acronym as financial_block_acronym')
-        ->orderBy('products.title')
+        ->select('inventory_warehouses.*', 'Supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
+        ->orderBy('Supplies.title')
         ->orderBy('company_financial_blocks.acronym')
-        ->with(['Product','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
+        ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
         ->get();       
 
         //Pesquisar Dados
         $search = $request->all();
         
-        if (isset($search['searchProduct']) || isset($search['searchFinancialBlock'])) {
+        if (isset($search['searchSupply']) || isset($search['searchFinancialBlock'])) {
 
             $query = InventoryWarehouse::query();
         
-            if (!empty($search['searchProduct'])) {
-                $query->where('product_id', $search['searchProduct']);
+            if (!empty($search['searchSupply'])) {
+                $query->where('supply_id', $search['searchSupply']);
             }
         
             if (!empty($search['searchFinancialBlock'])) {
@@ -152,7 +152,7 @@ class InventoryWarehouseController extends Controller
         return view('inventory.inventory_warehouse.inventory_warehouse_show',[
             'db'=>$db,
             'search'=>$search,
-            'dbProducts'=>$dbProducts,
+            'dbSupplies'=>$dbSupplies,
             'dbFinancialBlocks'=>$dbFinancialBlocks,
             'dbEstablishmentDepartments'=>$dbEstablishmentDepartments,
             'dbInventories'=>$dbInventories,
@@ -203,7 +203,7 @@ class InventoryWarehouseController extends Controller
 
         //Quantidade do Estoque Geral
             //Buscando Cadastro
-                $db = InventoryWarehouse::where('product_id',$data['product_id'])
+                $db = InventoryWarehouse::where('supply_id',$data['supply_id'])
                     ->where('establishment_department_id',$data['establishment_department_entry_id'])
                     ->where('financial_block_id',$data['financial_block_id'])
                     ->first();
@@ -215,7 +215,7 @@ class InventoryWarehouseController extends Controller
                         'quantity'=>0,
                         'establishment_id'=>$data['establishment_entry_id'],
                         'establishment_department_id'=>$data['establishment_department_entry_id'],
-                        'product_id'=>$data['product_id'],
+                        'supply_id'=>$data['supply_id'],
                         'financial_block_id'=>$data['financial_block_id'],
                     ]);
                 }
@@ -226,7 +226,7 @@ class InventoryWarehouseController extends Controller
 
         //Quantidade por Ordem de Fornecimento e Nota Fiscal
             //Buscando Cadastro
-                $dbEntry = InventoryWarehouseEntry::where('product_id',$data['product_id'])
+                $dbEntry = InventoryWarehouseEntry::where('supply_id',$data['supply_id'])
                     ->where('establishment_department_id',$data['establishment_department_entry_id'])
                     ->where('financial_block_id',$data['financial_block_id'])
                     ->where('supply_order',$data['supply_order'])
@@ -241,7 +241,7 @@ class InventoryWarehouseController extends Controller
                         'supply_order'=>$data['supply_order'],
                         'supply_company'=>$data['supply_company'],
                         'quantity'=>0,
-                        'product_id'=>$data['product_id'],
+                        'supply_id'=>$data['supply_id'],
                         'establishment_id'=>$data['establishment_entry_id'],
                         'establishment_department_id'=>$data['establishment_department_entry_id'],
                         'financial_block_id'=>$data['financial_block_id'],
@@ -262,18 +262,18 @@ class InventoryWarehouseController extends Controller
     {
         //
         $db = CompanyEstablishmentDepartment::find($id);
-        $dbProducts = Product::all();
+        $dbSupplies = Supply::all();
         $dbFinancialBlocks = CompanyFinancialBlock::all();
         $dbInventories = InventoryWarehouseHistory::where('inventory_warehouse_histories.establishment_department_entry_id', $id)
             ->where('inventory_warehouse_histories.created_at', '>=', now()->subDays(7))
             ->where('inventory_warehouse_histories.movement', 'Entrada')
-            ->join('products', 'inventory_warehouse_histories.product_id', '=', 'products.id')
+            ->join('supplies', 'inventory_warehouse_histories.supply_id', '=', 'supplies.id')
             ->join('company_financial_blocks', 'inventory_warehouse_histories.financial_block_id', '=', 'company_financial_blocks.id')
-            ->select('inventory_warehouse_histories.*','products.title as product_title','company_financial_blocks.acronym as financial_block_acronym')
+            ->select('inventory_warehouse_histories.*','supplies.title as supply_title','company_financial_blocks.acronym as financial_block_acronym')
             ->orderBy('inventory_warehouse_histories.date', 'DESC')
-            ->orderBy('products.title')
+            ->orderBy('supplies.title')
             ->orderBy('company_financial_blocks.acronym')
-            ->with(['Product', 'CompanyFinancialBlock', 'CompanyEstablishmentEntry', 'CompanyEstablishmentDepartmentEntry', 'CompanyEstablishmentExit', 'CompanyEstablishmentDepartmentExit'])
+            ->with(['Supply', 'CompanyFinancialBlock', 'CompanyEstablishmentEntry', 'CompanyEstablishmentDepartmentEntry', 'CompanyEstablishmentExit', 'CompanyEstablishmentDepartmentExit'])
             ->select('inventory_warehouse_histories.*')
             ->limit(20)
             ->get();
@@ -283,7 +283,7 @@ class InventoryWarehouseController extends Controller
 
         return view('inventory.inventory_warehouse.inventory_warehouse_entry',[
             'db'=>$db,
-            'dbProducts'=>$dbProducts,
+            'dbSupplies'=>$dbSupplies,
             'dbFinancialBlocks'=>$dbFinancialBlocks,
             'dbInventories'=>$dbInventories,
         ]);
@@ -310,7 +310,7 @@ class InventoryWarehouseController extends Controller
 
         //Quantidade do Estoque Geral
             //Buscando Cadastro
-                $db = InventoryWarehouse::where('product_id',$data['product_id'])
+                $db = InventoryWarehouse::where('supply_id',$data['supply_id'])
                     ->where('establishment_department_id',$data['establishment_department_entry_id'])
                     ->where('financial_block_id',$data['financial_block_id'])
                     ->first();
@@ -322,7 +322,7 @@ class InventoryWarehouseController extends Controller
                         'quantity'=>0,
                         'establishment_id'=>$data['establishment_id'],
                         'establishment_department_id'=>$data['establishment_department_entry_id'],
-                        'product_id'=>$data['product_id'],
+                        'supply_id'=>$data['supply_id'],
                         'financial_block_id'=>$data['financial_block_id'],
                     ]);
                 }
@@ -333,7 +333,7 @@ class InventoryWarehouseController extends Controller
 
         //Quantidade por Ordem de Fornecimento e Nota Fiscal
             //Buscando Cadastro
-                $dbEntry = InventoryWarehouseEntry::where('product_id',$data['product_id'])
+                $dbEntry = InventoryWarehouseEntry::where('supply_id',$data['supply_id'])
                     ->where('establishment_department_id',$data['establishment_department_entry_id'])
                     ->where('financial_block_id',$data['financial_block_id'])
                     ->where('supply_order',$data['supply_order'])
@@ -348,7 +348,7 @@ class InventoryWarehouseController extends Controller
                         'supply_order'=>$data['supply_order'],
                         'supply_company'=>$data['supply_company'],
                         'quantity'=>0,
-                        'product_id'=>$data['product_id'],
+                        'supply_id'=>$data['supply_id'],
                         'establishment_id'=>$data['establishment_id'],
                         'establishment_department_id'=>$data['establishment_department_entry_id'],
                         'financial_block_id'=>$data['financial_block_id'],
@@ -375,17 +375,17 @@ class InventoryWarehouseController extends Controller
         ->orderBy('date','DESC')
         ->paginate(40);
 
-        $dbProducts = Product::all();
+        $dbSupplies = Supply::all();
 
         //Pesquisar Dados
         $search = $request->all();
         
-        if (isset($search['searchProduct']) || isset($search['searchDate'])) {
+        if (isset($search['searchsupply']) || isset($search['searchDate'])) {
 
             $query = InventoryWarehouseHistory::query();   
 
-            if (!empty($search['searchProduct'])) {
-                $query->where('product_id', $search['searchProduct']);
+            if (!empty($search['searchSupply'])) {
+                $query->where('supply_id', $search['searchSupply']);
             }        
 
             if (!empty($search['searchDate'])) {
@@ -401,7 +401,7 @@ class InventoryWarehouseController extends Controller
         return view('inventory.inventory_warehouse.inventory_warehouse_history',[
             'search'=>$search,
             'db'=>$db,
-            'dbProducts'=>$dbProducts,
+            'dbSupplies'=>$dbSupplies,
             'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
         ]);
     }

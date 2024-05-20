@@ -15,18 +15,18 @@ use App\Http\Controllers\Admin\Medication\MedicationClassificationController;
 use App\Http\Controllers\Admin\Medication\MedicationController;
 use App\Http\Controllers\Admin\Medication\MedicationTypeController;
 use App\Http\Controllers\Admin\Medication\MedicationUnitController;
-use App\Http\Controllers\Admin\Product\ProductClassificationController;
-use App\Http\Controllers\Admin\Product\ProductController;
-use App\Http\Controllers\Admin\Product\ProductTypeController;
-use App\Http\Controllers\Admin\Product\ProductUnitController;
+use App\Http\Controllers\Admin\Supply\SupplyClassificationController;
+use App\Http\Controllers\Admin\Supply\SupplyController;
+use App\Http\Controllers\Admin\Supply\SupplyTypeController;
+use App\Http\Controllers\Admin\Supply\SupplyUnitController;
 use App\Http\Controllers\Admin\Region\RegionCityController;
 use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
 use App\Http\Controllers\Admin\User\UsersController;
 use App\Http\Controllers\Inventory\InventoryMedicationController;
-use App\Http\Controllers\Inventory\InventoryProductController;
 use App\Http\Controllers\Inventory\InventoryMedicationHistoryController;
-use App\Http\Controllers\Inventory\InventoryProductHistoryController;
+use App\Http\Controllers\Inventory\InventorySupplyController;
+use App\Http\Controllers\Inventory\InventorySupplyHistoryController;
 use App\Http\Controllers\Inventory\InventoryWarehouseController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Public\ContactListsController;
@@ -96,17 +96,17 @@ Route::middleware('auth')->group(function () {
             Route::prefix('products')->group(function (){
 
                 //Rota - Apresentação de Medicamentos
-                    Route::put('product_classifications/status/{product_classification}',[ProductClassificationController::class,'status'])->name('product_classifications.status');
-                    Route::resource('product_classifications',ProductClassificationController::class);
+                    Route::put('supply_classifications/status/{supply_classification}',[SupplyClassificationController::class,'status'])->name('supply_classifications.status');
+                    Route::resource('supply_classifications',SupplyClassificationController::class);
                 //Rota - Apresentação de Medicamentos                
-                    Route::put('product_units/status/{product_unit}',[ProductUnitController::class,'status'])->name('product_units.status');
-                    Route::resource('product_units',ProductUnitController::class);    
+                    Route::put('supply_units/status/{supply_unit}',[SupplyUnitController::class,'status'])->name('supply_units.status');
+                    Route::resource('supply_units',SupplyUnitController::class);    
                 //Rota - Tipos de Medicamentos                    
-                    Route::put('product_types/status/{product_type}',[ProductTypeController::class,'status'])->name('product_types.status');
-                    Route::resource('product_types',ProductTypeController::class);
+                    Route::put('supply_types/status/{supply_type}',[SupplyTypeController::class,'status'])->name('supply_types.status');
+                    Route::resource('supply_types',SupplyTypeController::class);
                 //Rota - Medicamentos
-                    Route::put('products/status/{product}',[ProductController::class,'status'])->name('products.status');
-                    Route::resource('products',ProductController::class);
+                    Route::put('supplies/status/{supply}',[SupplyController::class,'status'])->name('supplies.status');
+                    Route::resource('supplies',SupplyController::class);
             });
 
             //Grupo de Rotas - Configuração de Localização
@@ -131,8 +131,8 @@ Route::middleware('auth')->group(function () {
         Route::prefix('inventory')->group(function (){
     
             //Rotas de Inventário/Estoque de Produtos
-            Route::resource('inventory_products', InventoryProductController::class);
-            Route::resource('inventory_product_histories', InventoryProductHistoryController::class);
+            Route::resource('inventory_supplies', InventorySupplyController::class);
+            Route::resource('inventory_supply_histories', InventorySupplyHistoryController::class);
             
             //Rotas de Inventário/Estoque de Medicamentos
             Route::resource('inventory_medications', InventoryMedicationController::class);

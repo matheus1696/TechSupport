@@ -33,16 +33,14 @@ class DatabaseSeeder extends Seeder
             CompanyFinancialBlockSeeder::class,
             CompanyEstablishmentSeeder::class,
             CompanyEstablishmentDepartmentSeeder::class,
-            ProductClassificationSeeder::class,
-            ProductTypeSeeder::class,
-            ProductUnitSeeder::class,
-            ProductSeeder::class,
+            SupplyClassificationSeeder::class,
+            SupplyTypeSeeder::class,
+            SupplyUnitSeeder::class,
+            SupplySeeder::class,
             MedicationClassificationSeeder::class,
             MedicationTypeSeeder::class,
             MedicationUnitSeeder::class,
             MedicationSeeder::class,
-            InventoryMedicationSeeder::class,
-            InventoryProductSeeder::class,
         ]);
     }
 }

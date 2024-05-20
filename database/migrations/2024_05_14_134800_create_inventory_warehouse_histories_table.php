@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('due_date')->nullable();
             $table->text('description')->nullable();
             $table->text('pending')->default(FALSE);
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('supply_id');
             $table->unsignedBigInteger('financial_block_id');
             $table->unsignedBigInteger('establishment_entry_id')->nullable();
             $table->unsignedBigInteger('establishment_department_entry_id')->nullable();
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
             
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('supply_id')->references('id')->on('supplies');
             $table->foreign('establishment_entry_id')->references('id')->on('company_establishments');
             $table->foreign('establishment_department_entry_id')->references('id')->on('company_establishment_departments');
             $table->foreign('establishment_exit_id')->references('id')->on('company_establishments');

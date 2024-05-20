@@ -314,7 +314,7 @@ return [
                 [
                     'text'    => 'Almoxarifado',
                     'classes' => 'btn-sm',
-                    'route'   => 'inventory_products.index',
+                    'route'   => 'inventory_supplies.index',
                     'icon'    => 'fas fa-cubes pr-2',
                     'icon_color' => 'info',
                     'can'     => 'user'
@@ -480,32 +480,32 @@ return [
 
                 //Configurações de Produtos
                 [
-                    'text'    => 'Produtos',
+                    'text'    => 'Suprimentos',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-screwdriver pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
                         [
-                            'text'    => 'Lista de Produtos',
+                            'text'    => 'Lista de Suprimentos',
                             'classes' => 'btn-sm',
-                            'route'   => 'products.index',
+                            'route'   => 'supplies.index',
                             'icon'    => 'fas fa-screwdriver pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
-                            'text'    => 'Tipos de Produto',
+                            'text'    => 'Tipo de Suprimentos',
                             'classes' => 'btn-sm',
-                            'route'   => 'product_types.index',
+                            'route'   => 'supply_types.index',
                             'icon'    => 'fas fa-list-ol pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
-                            'text'    => 'Classificação de Produtos',
+                            'text'    => 'Classificação de Suprimentos',
                             'classes' => 'btn-sm',
-                            'route'   => 'product_classifications.index',
+                            'route'   => 'supply_classifications.index',
                             'icon'    => 'fas fa-stream pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
@@ -513,7 +513,7 @@ return [
                         [
                             'text'    => 'Apresentação',
                             'classes' => 'btn-sm',
-                            'route'   => 'product_units.index',
+                            'route'   => 'supply_units.index',
                             'icon'    => 'fas fa-ruler pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
