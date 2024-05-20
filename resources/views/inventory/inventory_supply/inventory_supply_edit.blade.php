@@ -4,7 +4,7 @@
     @slot('header')
         <x-header 
             routeCreate="" btnTitleCreate="Entrada Avulsa"
-            routeBack="{{route('inventory_products.show', ['inventory_product'=>$db->id])}}"
+            routeBack="{{route('inventory_supplies.show', ['inventory_supply'=>$db->id])}}"
         />
     @endslot
     
@@ -25,7 +25,7 @@
         <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
             <div>
                 <h3 class="mb-3 text-lg font-semibold text-center">Enviado para unidade</h3>
-                @include('inventory.inventory_product.partials.edit.inventory_product_edit_table')
+                @include('inventory.inventory_supply.partials.edit.inventory_supply_edit_table')
             </div>
             <div>      
                 <h3 class="mb-3 text-lg font-semibold text-center">Pedidos de Suprimentos</h3>

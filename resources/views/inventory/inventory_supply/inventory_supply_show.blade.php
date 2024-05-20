@@ -4,8 +4,8 @@
     @slot('header')
         <x-header 
             title="Estoque Unidade: {{ $db->department }} - {{ $db->CompanyEstablishment->title }}"
-            routeCreate="{{route('inventory_products.edit',['inventory_product'=>$db->id])}}" btnTitleCreate="Solicitações"
-            routeBack="{{route('inventory_products.index')}}"
+            routeCreate="{{route('inventory_supplies.edit',['inventory_supply'=>$db->id])}}" btnTitleCreate="Solicitações"
+            routeBack="{{route('inventory_supplies.index')}}"
         />
     @endslot
 
@@ -24,11 +24,11 @@
         @endif
         
         <div>
-            @include('inventory.inventory_product.partials.show.inventory_product_show_table')
+            @include('inventory.inventory_supply.partials.show.inventory_supply_show_table')
         </div>
         <div>
             <p class="pr-3 text-xs text-end">
-                <a href="{{route('inventory_product_histories.show',['inventory_product_history'=>$db->id])}}" class="text-gray-400 hover:text-gray-900">Verificar Histórico de Movimentação</a>
+                <a href="{{route('inventory_supply_histories.show',['inventory_supply_history'=>$db->id])}}" class="text-gray-400 hover:text-gray-900">Verificar Histórico de Movimentação</a>
             </p>
         </div>
     @endslot

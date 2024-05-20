@@ -11,7 +11,7 @@
         <x-table.th class="w-28">O.F.</x-table.th>
         <x-table.th class="w-40">Fornecedor</x-table.th>
         <x-table.th class="w-40">Bloco Financeiro</x-table.th>
-        <x-table.th>Produto</x-table.th>
+        <x-table.th>Suprimento</x-table.th>
         <x-table.th class="w-28">Quantidade</x-table.th>
     @endslot
 
@@ -32,7 +32,7 @@
                 <x-table.td>{{$item->supply_order}}</x-table.td>
                 <x-table.td>{{$item->supply_company}}</x-table.td>
                 <x-table.td>{{$item->CompanyFinancialBlock->acronym}}</x-table.td>
-                <x-table.td>{{$item->Product->title}}</x-table.td>
+                <x-table.td>{{$item->Supply->title}}</x-table.td>
                 <x-table.td>{{$item->quantity}}</x-table.td>
             </x-table.tr>
         @endforeach

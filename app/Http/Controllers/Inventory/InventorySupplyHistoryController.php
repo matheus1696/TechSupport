@@ -53,7 +53,7 @@ class InventorySupplyHistoryController extends Controller
 
         InventorySupplyHistory::create($data);
 
-        $db = InventorySupply::where('product_id',$data['product_id'])
+        $db = InventorySupply::where('supply_id',$data['supply_id'])
             ->where('establishment_department_id',$data['establishment_department_id'])
             ->first();
 
@@ -62,7 +62,7 @@ class InventorySupplyHistoryController extends Controller
                 'quantity'=>0,
                 'establishment_id'=>$data['establishment_id'],
                 'establishment_department_id'=>$data['establishment_department_id'],
-                'product_id'=>$data['product_id'],
+                'supply_id'=>$data['supply_id'],
             ]);
         }
         
@@ -108,7 +108,7 @@ class InventorySupplyHistoryController extends Controller
         //Log do Sistema
         Logger::access();
 
-        return view('inventory.inventory_product_history.inventory_product_history_index',[
+        return view('inventory.inventory_supply_history.inventory_supply_history_index',[
             'search'=>$search,
             'db'=>$db,
             'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,

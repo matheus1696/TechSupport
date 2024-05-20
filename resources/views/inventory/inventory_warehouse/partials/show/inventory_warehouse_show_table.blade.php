@@ -12,12 +12,12 @@
         @slot('tbody')
             @foreach ($dbInventories as $dbInventory)
                 <x-table.tr>
-                    <x-table.td>{{$dbInventory->Product->title}}</x-table.td>
-                    <x-table.td>{{$dbInventory->Product->ProductUnit->title}}</x-table.td>
+                    <x-table.td>{{$dbInventory->Supply->title}}</x-table.td>
+                    <x-table.td>{{$dbInventory->Supply->SupplyUnit->title}}</x-table.td>
                     <x-table.td>{{$dbInventory->CompanyFinancialBlock->acronym}}</x-table.td>
                     <x-table.td>{{$dbInventory->quantity}}</x-table.td>
                     <x-table.td>
-                        <x-button.minButtonModalInfo id="InventoryWarehouseModel{{$dbInventory->id}}" title="Descrição do Produto no Estoque: {{$dbInventory->Product->title}}">
+                        <x-button.minButtonModalInfo id="InventoryWarehouseModel{{$dbInventory->id}}" title="Descrição do Produto no Estoque: {{$dbInventory->Supply->title}}">
                             <div>
                                 <x-table.table>
                                     @slot('thead')
@@ -55,7 +55,7 @@
                                                                     <div class="text-left modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="text-lg font-semibold modal-title" id="Modal">Saída de Produto: {{$dbInventory->Product->title}}</h5>
+                                                                                <h5 class="text-lg font-semibold modal-title" id="Modal">Saída de Produto: {{$dbInventory->Supply->title}}</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -78,7 +78,7 @@
 
                                                                                         <x-form.input col="4" label="Fornecedor" name="disabled" id="disabled" value="{{$dbInventoryEntry->supply_company}}" disabled="disabled"/>
 
-                                                                                        <x-form.input col="6" label="Produto" name="disabled" id="disabled" value="{{$dbInventoryEntry->Product->title}}" disabled="disabled"/>
+                                                                                        <x-form.input col="6" label="Produto" name="disabled" id="disabled" value="{{$dbInventoryEntry->Supply->title}}" disabled="disabled"/>
 
                                                                                         <x-form.select col="6" label="Estabelecimento Recebedor" name="establishment_department_exit_id" id="establishment_department_exit_id_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}">
                                                                                             @foreach ($dbEstablishmentDepartments as $dbEstablishmentDepartment)
@@ -91,7 +91,7 @@
                                                                                     
                                                                                         <x-form.input col="3" label="Data" type="date" name="date" id="date" value="{{date('Y-m-d')}}" max="{{date('Y-m-d')}}" min="{{date('1900-01-01')}}" required="required"/>
 
-                                                                                        <x-form.input col="3" label="Apresentação" name="disabled" id="disabled" value="{{$dbInventoryEntry->Product->ProductUnit->title}}" disabled="disabled"/>
+                                                                                        <x-form.input col="3" label="Apresentação" name="disabled" id="disabled" value="{{$dbInventoryEntry->Supply->SupplyUnit->title}}" disabled="disabled"/>
                                                                                     
                                                                                         <x-form.input col="3" label="Quantidade Estoque" name="disabled" id="disabled" value="{{$dbInventoryEntry->quantity}}" disabled="disabled"/>
                                                                                         
