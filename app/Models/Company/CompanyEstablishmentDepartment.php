@@ -17,7 +17,7 @@ class CompanyEstablishmentDepartment extends Model
         'contact',
         'extension',
         'type_contact',
-        'has_inventory_product',
+        'has_inventory_supply',
         'has_inventory_medication',
         'has_inventory_warehouse',
         'establishment_id'

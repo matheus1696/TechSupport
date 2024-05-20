@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Inventory\StoreInventoryWarehouseEntryRequest;
 use App\Http\Requests\Inventory\StoreInventoryWarehouseExitRequest;
 use App\Models\Inventory\InventoryWarehouse;
-use App\Http\Requests\Inventory\StoreInventoryWarehouseRequest;
-use App\Http\Requests\Inventory\UpdateInventoryWarehouseRequest;
 use App\Models\Company\CompanyEstablishment;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyFinancialBlock;
@@ -79,7 +77,7 @@ class InventoryWarehouseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInventoryWarehouseRequest $request)
+    public function store()
     {
         //
         return redirect()->route('login');
@@ -172,7 +170,7 @@ class InventoryWarehouseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInventoryWarehouseRequest $request, InventoryWarehouse $inventoryWarehouse)
+    public function update()
     {
         //
         return redirect()->route('login');
@@ -380,7 +378,7 @@ class InventoryWarehouseController extends Controller
         //Pesquisar Dados
         $search = $request->all();
         
-        if (isset($search['searchsupply']) || isset($search['searchDate'])) {
+        if (isset($search['searchSupply']) || isset($search['searchDate'])) {
 
             $query = InventoryWarehouseHistory::query();   
 

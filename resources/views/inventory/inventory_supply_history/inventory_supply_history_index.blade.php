@@ -2,13 +2,15 @@
 
     <!-- Slot Header -->
     @slot('header')
-    <x-header title="Histório de Estoque de Produtos: {{$dbEstablishmentDepartment->CompanyEstablishment->title ?? ''}}" route="{{route('inventory_products.show',['inventory_product'=>$dbEstablishmentDepartment->id])}}" btnTitle="Retornar"/>
+    <x-header
+        title="Histório de Estoque de Produtos"
+        routeBack="{{route('inventory_supplies.show',['inventory_supply'=>$dbEstablishmentDepartment->id])}}"/>
     @endslot
     
     <!-- Slot Body -->
     @slot('body')
-        @include('inventory.inventory_product_history.partials.inventory_product_history_search')
-        @include('inventory.inventory_product_history.partials.inventory_product_history_table')
+        @include('inventory.inventory_supply_history.partials.inventory_supply_history_search')
+        @include('inventory.inventory_supply_history.partials.inventory_supply_history_table')
     @endslot
     
 </x-pages.index>

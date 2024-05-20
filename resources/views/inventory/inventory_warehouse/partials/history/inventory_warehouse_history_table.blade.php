@@ -8,7 +8,7 @@
         <x-table.th class="w-24">Nota Fiscal</x-table.th>
         <x-table.th class="w-24">O.F.</x-table.th>
         <x-table.th class="w-24">B.F</x-table.th>
-        <x-table.th>Produto</x-table.th>
+        <x-table.th>Suprimento</x-table.th>
         <x-table.th class="w-24">Quantidade</x-table.th>
         <x-table.th class="w-40">Usuário Cadastrante</x-table.th>
     @endslot
@@ -38,7 +38,7 @@
                 <x-table.td>{{$item->invoice}}</x-table.td>
                 <x-table.td>{{$item->supply_order}}</x-table.td>
                 <x-table.td>{{$item->CompanyFinancialBlock->acronym}}</x-table.td>
-                <x-table.td>{{$item->Product->title}}</x-table.td>
+                <x-table.td>{{$item->Supply->title}}</x-table.td>
                 <x-table.td>{{$item->quantity}}</x-table.td>
                 <x-table.td>{{$item->User->name}}</x-table.td>
             </x-table.tr>
