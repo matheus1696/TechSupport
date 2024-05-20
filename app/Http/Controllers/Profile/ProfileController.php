@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Profile;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Profile\ProfileUpdateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Company\CompanyEstablishment;
+use App\Models\Profile\Profile;
 use App\Models\User;
 use App\Models\User\UserSex;
 use App\Services\Logger;
@@ -29,7 +31,7 @@ class ProfileController extends Controller
     {
         //Redirecionando para Perfil
         if (Auth::user()) {
-            return redirect(route('profile.edit',[Auth::user()->id]));
+            return redirect(route('profiless.edit',[Auth::user()->id]));
         }
 
         return redirect(route('login'));
@@ -68,7 +70,7 @@ class ProfileController extends Controller
     public function edit(string $id)
     {
         //Listando Dados
-        $db = User::find($id);
+        $db = Profile::find($id);
         $dbUserSex = UserSex::where('status',true)->orderBy('sex')->get();
         $dbEstablishments = CompanyEstablishment::select()->orderBy('title')->get();
 
@@ -95,32 +97,44 @@ class ProfileController extends Controller
     public function update(UserUpdateRequest $request, string $id)
     {
         //Listando Usuário
-        $db = User::find($id);
+        $db = Profile::find($id);
 
         if ($db && $db->id === Auth::user()->id) {
             //Alterando Dados do Usuário
             $data = $request->all();
             $db->update($data);
-
-            //Alterando Senha
-            if ($request['password'] != "") {
-                $db->password = Hash::make($request['password']);
-                $db->save();
-
-                //Log do Sistema
-                Logger::updateUserProfilePassword($db->name);
-            }
-
+            
             //Log do Sistema
             Logger::updateUserProfileData($db->name);
 
-            return redirect(route('profile.edit',['profile'=>$id]))
+            return redirect(route('profiles.edit',['profile'=>$id]))
                 ->with('success','Alteração dos dados realizada com sucesso.');
 
         } else {
-            //Log do Sistema
-            Logger::errorUserDiferentDestroy();
+            return redirect(route('home'));
+        };
+    }
 
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updatePassword(ProfileUpdateRequest $request, string $id)
+    {
+        //Listando Usuário
+        $db = Profile::find($id);
+
+        if ($db && $db->id === Auth::user()->id) {
+
+            $db->password = Hash::make($request['password']);
+            $db->save();
+
+            //Log do Sistema
+            Logger::updateUserProfilePassword($db->name);
+
+            return redirect(route('profiles.edit',['profile'=>$id]))
+                ->with('success','Alteração de senha realizada com sucesso.');
+
+        } else {
             return redirect(route('home'));
         };
     }

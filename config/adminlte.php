@@ -357,7 +357,7 @@ return [
         [
             'text'    => 'Perfil',
             'classes' => 'btn-sm',
-            'route'   => 'profile.index',
+            'route'   => 'profiles.index',
             'icon'    => 'fas fa-user pr-2',
             'can'     => 'user'
         ],

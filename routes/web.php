@@ -28,8 +28,8 @@ use App\Http\Controllers\Inventory\InventoryProductController;
 use App\Http\Controllers\Inventory\InventoryMedicationHistoryController;
 use App\Http\Controllers\Inventory\InventoryProductHistoryController;
 use App\Http\Controllers\Inventory\InventoryWarehouseController;
+use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Public\ContactListsController;
-use App\Http\Controllers\Users\ProfileController;
 
 //Camada de Seguraça para Usuários Logados
 Route::middleware('auth')->group(function () {
@@ -151,8 +151,9 @@ Route::middleware('auth')->group(function () {
 
     });
 
-    //Rotas de Perfil do Usuário
-    Route::resource('profile', ProfileController::class);
+    //Rotas de Perfil do Usuário    
+    Route::put('profiles/password/{profile}',[ProfileController::class,'updatePassword'])->name('profiles.updatePassword');
+    Route::resource('profiles', ProfileController::class);
 });
 
 Route::get('/',function(){return view('index');});

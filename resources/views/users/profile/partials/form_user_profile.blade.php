@@ -2,7 +2,7 @@
 <x-conteiner>
     <h3 class="mb-3 text-lg font-semibold text-center">Dados do Pessoais</h3>
 
-    <x-form.form method="edit" route="{{route('profile.update',['profile'=>$db->id])}}">
+    <x-form.form method="edit" route="{{route('profiles.update',['profile'=>$db->id])}}">
             
             <x-form.input col="12" label="Nome Completo" name="name" id="name" value="{{$db->name}}" required="required" placeholder="Fulano da Pereira da Silva Dómino"/>
 
@@ -15,13 +15,7 @@
                 @endforeach
             </x-form.select>
 
-            <x-form.input col="6" label="CPF" name="cpf" id="cpf" value="{{$db->cpf}}" maxlength="14" minlength="14" placeholder="000.000.000-00"/>                
-            
-            <x-form.input col="6" label="Matricula" name="registration" id="registration" value="{{$db->registration}}" maxlength="8" minlength="8" placeholder="99.999-2"/>
-
-            <x-form.input col="12" label="Estabelecimento" name="disabled" id="disabled" value="{{$db->CompanyEstablishment->title ?? ''}}" disabled="disabled" />
-
-            <x-form.input col="12" label="Cargo" name="disabled" id="disabled" value="{{$db->CompanyOccupation->title ?? ''}}" disabled="disabled" />
+            <x-form.input col="6" label="CPF" name="cpf" id="cpf" value="{{$db->cpf}}" maxlength="14" minlength="14" placeholder="000.000.000-00"/>
             
             <x-form.input col="6" label="Contato 1" type="tel" name="contact_1" id="contact_1" value="{{$db->contact_1}}" maxlength="15" minlength="13" placeholder="(00) 00000-0000"/>
                 
