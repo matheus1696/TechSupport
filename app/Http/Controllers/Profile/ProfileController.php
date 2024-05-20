@@ -31,7 +31,7 @@ class ProfileController extends Controller
     {
         //Redirecionando para Perfil
         if (Auth::user()) {
-            return redirect(route('profiless.edit',[Auth::user()->id]));
+            return redirect(route('profiles.edit',[Auth::user()->id]));
         }
 
         return redirect(route('login'));
