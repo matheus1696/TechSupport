@@ -12,7 +12,6 @@ use App\Models\Inventory\InventorySupplyHistory;
 use App\Models\Inventory\InventoryWarehouseHistory;
 use App\Models\Supply\Supply;
 use App\Services\Logger;
-use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -86,6 +85,14 @@ class InventorySupplyController extends Controller
     {
         //
         $db = CompanyEstablishmentDepartment::find($id);
+
+        if (!$db->has_inventory_supply) {
+            //Log do Sistema
+            Logger::error($db->title);
+
+            return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
+        }
+        
         $dbSupplies = Supply::all();
         $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
 
@@ -105,23 +112,6 @@ class InventorySupplyController extends Controller
     public function edit(string $id)
     {
         //
-        $db = CompanyEstablishmentDepartment::find($id);
-        $dbSupplies = Supply::all();
-        $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
-        $dbInventoryHistories = InventoryWarehouseHistory::where('establishment_department_exit_id', $id)
-            ->where('pending', FALSE)
-            ->orderBy('date')
-            ->paginate(20);
-
-        //Log do Sistema
-        Logger::show($db->title);
-
-        return view('inventory.inventory_supply.inventory_supply_request',[
-            'db'=>$db,
-            'dbSupplies'=>$dbSupplies,
-            'dbInventories'=>$dbInventories,
-            'dbInventoryHistories'=>$dbInventoryHistories,
-        ]);
     }
 
     /**
@@ -148,7 +138,15 @@ class InventorySupplyController extends Controller
     public function request(string $id)
     {
         //
-        $db = CompanyEstablishmentDepartment::find($id);
+        $db = CompanyEstablishmentDepartment::find($id);       
+
+        if (!$db->has_inventory_supply) {
+            //Log do Sistema
+            Logger::error($db->title);
+
+            return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
+        }
+        
         $dbSupplies = Supply::all();
         $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
         $dbInventoryHistories = InventoryWarehouseHistory::where('establishment_department_exit_id', $id)
@@ -173,7 +171,15 @@ class InventorySupplyController extends Controller
     public function entryCreate(string $id)
     {
         //
-        $db = CompanyEstablishmentDepartment::find($id);
+        $db = CompanyEstablishmentDepartment::find($id);      
+
+        if (!$db->has_inventory_supply) {
+            //Log do Sistema
+            Logger::error($db->title);
+
+            return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
+        }
+
         $dbSupplies = Supply::all();
         $dbInventoryHistories = InventorySupplyHistory::where('loose',TRUE)->orderBy('created_at')->limit(20)->get();
 
@@ -245,6 +251,15 @@ class InventorySupplyController extends Controller
         $data['movement'] = 'Saída';
         $data['user_id'] = Auth::user()->id;
 
+        //Verificando se existe estoque para realizar a saída
+        $InventoryQuantitySupply = InventorySupply::where('establishment_department_id',$data['establishment_department_id'])
+            ->where('supply_id', $data['supply_id'])
+            ->first();
+
+        if ($InventoryQuantitySupply->quantity < $data['quantity']) {
+            return redirect()->back()->with('error','Quantidade informada para saída não compatível com a quantidade no estoque atual');
+        }
+
         InventorySupplyHistory::create($data);
 
         $db = InventorySupply::where('supply_id',$data['supply_id'])
@@ -274,7 +289,15 @@ class InventorySupplyController extends Controller
     {
         //Listagem de Dados
         $dbEstablishmentDepartment = InventorySupplyHistory::where('establishment_department_id',$id)
-        ->first();
+        ->first();             
+
+        if (!$dbEstablishmentDepartment->has_inventory_supply) {
+            //Log do Sistema
+            Logger::error($dbEstablishmentDepartment->title);
+
+            return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
+        }
+
         $db = InventorySupplyHistory::where('establishment_department_id',$id)
         ->orderBy('created_at','DESC')
         ->paginate(40);

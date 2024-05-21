@@ -91,6 +91,13 @@ class InventoryWarehouseController extends Controller
         // Recupera o departamento específico
         $db = CompanyEstablishmentDepartment::find($id);
 
+        if (!$db->has_inventory_warehouse) {
+            //Log do Sistema
+            Logger::error($db->title);
+
+            return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
+        }
+
         // Recupera todos os produtos e bloco de financiamentos
         $dbSupplies = Supply::select()->orderBy('title')->get();
         $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();
@@ -259,7 +266,15 @@ class InventoryWarehouseController extends Controller
     public function entryCreate(string $id)
     {
         //
-        $db = CompanyEstablishmentDepartment::find($id);
+        $db = CompanyEstablishmentDepartment::find($id);        
+
+        if (!$db->has_inventory_warehouse) {
+            //Log do Sistema
+            Logger::error($db->title);
+
+            return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
+        }
+
         $dbSupplies = Supply::select()->orderBy('title')->get();;
         $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();;
         $dbInventories = InventoryWarehouseHistory::where('inventory_warehouse_histories.establishment_department_entry_id', $id)
@@ -297,6 +312,16 @@ class InventoryWarehouseController extends Controller
         $data['code'] = "SMS".time();
         $data['movement'] = "Saída";
         $data['user_id'] = Auth::user()->id;
+
+        //Verificando se existe estoque para realizar a saída
+        $InventoryQuantitySupply = InventoryWarehouse::where('establishment_department_id',$data['establishment_department_entry_id'])
+            ->where('supply_id', $data['supply_id'])
+            ->where('financial_block_id', $data['financial_block_id'])
+            ->first();
+
+        if ($InventoryQuantitySupply->quantity < $data['quantity']) {
+            return redirect()->back()->with('error','Quantidade informada para saída não compatível com a quantidade no estoque atual');
+        }
 
         $dbHistory = InventoryWarehouseHistory::create($data);
 
@@ -371,7 +396,14 @@ class InventoryWarehouseController extends Controller
         
         $db = InventoryWarehouseHistory::where('establishment_department_entry_id',$id)
         ->orderBy('created_at','DESC')
-        ->paginate(40);
+        ->paginate(40);        
+
+        if (!$dbEstablishmentDepartment->has_inventory_warehouse) {
+            //Log do Sistema
+            Logger::error($db->title);
+
+            return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
+        }
 
         $dbSupplies = Supply::select()->orderBy('title')->get();
 
