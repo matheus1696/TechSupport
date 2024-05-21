@@ -16,7 +16,7 @@
     @slot('tbody')
         @foreach ($dbInventoryHistories as $dbInventoryHistory)
             <x-table.tr>
-                <x-table.td>{{date('d/m/Y h:m:s',strtotime($dbInventoryHistory->created_at))}}</x-table.td>
+                <x-table.td>{{date('d/m/Y',strtotime($dbInventoryHistory->date))}}</x-table.td>
                 <x-table.td>{{$dbInventoryHistory->movement}}
                     @if ($dbInventoryHistory->movement === "Entrada")
                         <i class="px-2 text-green-500 rotate-45 fas fa-long-arrow-alt-up"></i>
