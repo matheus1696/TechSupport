@@ -26,7 +26,6 @@ use App\Http\Controllers\Admin\User\UsersController;
 use App\Http\Controllers\Inventory\InventoryMedicationController;
 use App\Http\Controllers\Inventory\InventoryMedicationHistoryController;
 use App\Http\Controllers\Inventory\InventorySupplyController;
-use App\Http\Controllers\Inventory\InventorySupplyHistoryController;
 use App\Http\Controllers\Inventory\InventoryWarehouseController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Public\ContactListsController;
@@ -149,11 +148,11 @@ Route::middleware('auth')->group(function () {
             Route::post('inventory_warehouses/exit',[InventoryWarehouseController::class,'exitStore'])->name('inventory_warehouses.exitStore');
             Route::get('inventory_warehouses/history/{inventory_warehouse}',[InventoryWarehouseController::class,'history'])->name('inventory_warehouses.history');
             Route::resource('inventory_warehouses', InventoryWarehouseController::class);
-        });    
+        }); 
 
     });
 
-    //Rotas de Perfil do Usuário    
+    //Rotas de Perfil do Usuário
     Route::put('profiles/password/{profile}',[ProfileController::class,'updatePassword'])->name('profiles.updatePassword');
     Route::resource('profiles', ProfileController::class);
 });

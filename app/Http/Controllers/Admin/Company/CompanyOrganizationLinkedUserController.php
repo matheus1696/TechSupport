@@ -9,6 +9,14 @@ use App\Models\User;
 
 class CompanyOrganizationLinkedUserController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:sysadmin|admin']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

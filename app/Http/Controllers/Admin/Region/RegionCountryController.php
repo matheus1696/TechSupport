@@ -14,7 +14,7 @@ class RegionCountryController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['permission:sysadmin']);
+        $this->middleware(['permission:sysadmin|admin']);
     }
 
     /**
