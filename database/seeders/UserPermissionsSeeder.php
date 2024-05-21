@@ -13,17 +13,11 @@ class UserPermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        UserPermissions::create([
-            'name'=>'sysadmin',
-            'guard_name'=>'web'
-        ]);
-        UserPermissions::create([
-            'name'=>'admin',
-            'guard_name'=>'web'
-        ]);
-        UserPermissions::create([
-            'name'=>'user',
-            'guard_name'=>'web'
-        ]);
+        UserPermissions::create(['name'=>'sysadmin','guard_name'=>'web']);
+        UserPermissions::create(['name'=>'admin','guard_name'=>'web']);
+        UserPermissions::create(['name'=>'user','guard_name'=>'web']);
+        UserPermissions::create(['name'=>'inventory_pharmacy','guard_name'=>'web']);
+        UserPermissions::create(['name'=>'inventory_supply','guard_name'=>'web']);
+        UserPermissions::create(['name'=>'inventory_warehouse','guard_name'=>'web']);
     }
 }
