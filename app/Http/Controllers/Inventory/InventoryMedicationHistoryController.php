@@ -18,7 +18,7 @@ class InventoryMedicationHistoryController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['permission:sysadmin|admin']);
+        $this->middleware(['permission:sysadmin|admin|inventory_pharmacy']);
     }
 
     /**

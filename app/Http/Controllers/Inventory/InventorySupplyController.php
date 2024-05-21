@@ -22,7 +22,7 @@ class InventorySupplyController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['permission:sysadmin|admin']);
+        $this->middleware(['permission:sysadmin|admin|inventory_supply']);
     }
 
     /**
@@ -91,19 +91,24 @@ class InventorySupplyController extends Controller
             Logger::error($db->title);
 
             return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
-        }
-        
-        $dbSupplies = Supply::all();
-        $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
+        }        
 
-        //Log do Sistema
-        Logger::show($db->title);
+        if ($db->establishment_id == Auth::user()->establishment_id) {
 
-        return view('inventory.inventory_supply.inventory_supply_show',[
-            'db'=>$db,
-            'dbSupplies'=>$dbSupplies,
-            'dbInventories'=>$dbInventories,
-        ]);
+            $dbSupplies = Supply::all();
+            $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
+    
+            //Log do Sistema
+            Logger::show($db->title);
+    
+            return view('inventory.inventory_supply.inventory_supply_show',[
+                'db'=>$db,
+                'dbSupplies'=>$dbSupplies,
+                'dbInventories'=>$dbInventories,
+            ]);
+        }        
+
+        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -145,24 +150,30 @@ class InventorySupplyController extends Controller
             Logger::error($db->title);
 
             return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
-        }
-        
-        $dbSupplies = Supply::all();
-        $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
-        $dbInventoryHistories = InventoryWarehouseHistory::where('establishment_department_exit_id', $id)
-            ->where('pending', FALSE)
-            ->orderBy('date')
-            ->paginate(20);
+        }        
 
-        //Log do Sistema
-        Logger::show($db->title);
+        if ($db->establishment_id == Auth::user()->establishment_id) {
+            
+            $dbSupplies = Supply::all();
+            $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
+            $dbInventoryHistories = InventoryWarehouseHistory::where('establishment_department_exit_id', $id)
+                ->where('pending', FALSE)
+                ->orderBy('date')
+                ->paginate(20);
+    
+            //Log do Sistema
+            Logger::show($db->title);
+    
+            return view('inventory.inventory_supply.inventory_supply_request',[
+                'db'=>$db,
+                'dbSupplies'=>$dbSupplies,
+                'dbInventories'=>$dbInventories,
+                'dbInventoryHistories'=>$dbInventoryHistories,
+            ]);
 
-        return view('inventory.inventory_supply.inventory_supply_request',[
-            'db'=>$db,
-            'dbSupplies'=>$dbSupplies,
-            'dbInventories'=>$dbInventories,
-            'dbInventoryHistories'=>$dbInventoryHistories,
-        ]);
+        }        
+
+        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -178,19 +189,25 @@ class InventorySupplyController extends Controller
             Logger::error($db->title);
 
             return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
-        }
+        }        
 
-        $dbSupplies = Supply::all();
-        $dbInventoryHistories = InventorySupplyHistory::where('loose',TRUE)->orderBy('created_at')->limit(20)->get();
+        if ($db->establishment_id == Auth::user()->establishment_id) {
 
-        //Log do Sistema
-        Logger::show($db->title);
+            $dbSupplies = Supply::all();
+            $dbInventoryHistories = InventorySupplyHistory::where('loose',TRUE)->orderBy('created_at')->limit(20)->get();
 
-        return view('inventory.inventory_supply.inventory_supply_create',[
-            'db'=>$db,
-            'dbSupplies'=>$dbSupplies,
-            'dbInventoryHistories'=>$dbInventoryHistories,
-        ]);
+            //Log do Sistema
+            Logger::show($db->title);
+
+            return view('inventory.inventory_supply.inventory_supply_create',[
+                'db'=>$db,
+                'dbSupplies'=>$dbSupplies,
+                'dbInventoryHistories'=>$dbInventoryHistories,
+            ]);
+            
+        }        
+
+        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -296,35 +313,41 @@ class InventorySupplyController extends Controller
             Logger::error($dbEstablishmentDepartment->title);
 
             return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
-        }
+        }       
 
-        $db = InventorySupplyHistory::where('establishment_department_id',$id)
-        ->orderBy('created_at','DESC')
-        ->paginate(40);
+        if ($dbEstablishmentDepartment->establishment_id == Auth::user()->establishment_id) {
 
-        $dbSupplies = Supply::select()->orderBy('title')->get();
-
-        //Pesquisar Dados
-        $search = $request->all();
-        if (isset($search['searchSupply']) || isset($search['searchDate'])) {
-            $query = InventoryWarehouseHistory::query();
-            if (!empty($search['searchSupply'])) {
-                $query->where('supply_id', $search['searchSupply']);
+            $db = InventorySupplyHistory::where('establishment_department_id',$id)
+            ->orderBy('created_at','DESC')
+            ->paginate(40);
+    
+            $dbSupplies = Supply::select()->orderBy('title')->get();
+    
+            //Pesquisar Dados
+            $search = $request->all();
+            if (isset($search['searchSupply']) || isset($search['searchDate'])) {
+                $query = InventoryWarehouseHistory::query();
+                if (!empty($search['searchSupply'])) {
+                    $query->where('supply_id', $search['searchSupply']);
+                }
+                if (!empty($search['searchDate'])) {
+                    $query->where('date', $search['searchDate']);
+                }
+                $db = $query->orderBy('quantity')->paginate(40);
             }
-            if (!empty($search['searchDate'])) {
-                $query->where('date', $search['searchDate']);
-            }
-            $db = $query->orderBy('quantity')->paginate(40);
-        }
+    
+            //Log do Sistema
+            Logger::access();
+    
+            return view('inventory.inventory_supply.inventory_supply_history',[
+                'search'=>$search,
+                'db'=>$db,
+                'dbSupplies'=>$dbSupplies,
+                'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
+            ]);
+            
+        }        
 
-        //Log do Sistema
-        Logger::access();
-
-        return view('inventory.inventory_supply.inventory_supply_history',[
-            'search'=>$search,
-            'db'=>$db,
-            'dbSupplies'=>$dbSupplies,
-            'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
-        ]);
+        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
     }
 }

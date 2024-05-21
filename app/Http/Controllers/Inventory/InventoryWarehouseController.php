@@ -23,7 +23,7 @@ class InventoryWarehouseController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['permission:sysadmin|admin']);
+        $this->middleware(['permission:sysadmin|admin|inventory_warehouse']);
     }
 
     /**
@@ -98,71 +98,76 @@ class InventoryWarehouseController extends Controller
             return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        // Recupera todos os produtos e bloco de financiamentos
-        $dbSupplies = Supply::select()->orderBy('title')->get();
-        $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();
+        if ($db->establishment_id == Auth::user()->establishment_id) {           
 
-        // Recupera todos os departamentos com inventário de produtos
-        $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_supply', true)
-        ->join('company_establishments', 'company_establishment_departments.establishment_id', '=', 'company_establishments.id')
-        ->select('company_establishment_departments.*', 'company_establishments.title as establishment_title')
-        ->orderBy('company_establishments.title')
-        ->orderBy('department')
-        ->with('CompanyEstablishment')
-        ->get();
+            // Recupera todos os produtos e bloco de financiamentos
+            $dbSupplies = Supply::select()->orderBy('title')->get();
+            $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();
 
-        // Consulta de entradas de inventário com quantidade maior que zero
-        $dbInventoryEntries = InventoryWarehouseEntry::where('establishment_department_id', $id)
-        ->where('quantity', '>', 0)
-        ->join('supplies', 'inventory_warehouse_entries.supply_id', '=', 'supplies.id')
-        ->join('company_financial_blocks', 'inventory_warehouse_entries.financial_block_id', '=', 'company_financial_blocks.id')
-        ->select('inventory_warehouse_entries.*', 'supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
-        ->orderBy('supplies.title')
-        ->orderBy('quantity')
-        ->orderBy('company_financial_blocks.acronym')
-        ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
-        ->get();
+            // Recupera todos os departamentos com inventário de produtos
+            $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_supply', true)
+            ->join('company_establishments', 'company_establishment_departments.establishment_id', '=', 'company_establishments.id')
+            ->select('company_establishment_departments.*', 'company_establishments.title as establishment_title')
+            ->orderBy('company_establishments.title')
+            ->orderBy('department')
+            ->with('CompanyEstablishment')
+            ->get();
 
-        // Consulta de inventário geral
-        $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)
-        ->join('supplies', 'inventory_warehouses.supply_id', '=', 'supplies.id')
-        ->join('company_financial_blocks', 'inventory_warehouses.financial_block_id', '=', 'company_financial_blocks.id')
-        ->select('inventory_warehouses.*', 'supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
-        ->orderBy('supplies.title')
-        ->orderBy('company_financial_blocks.acronym')
-        ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
-        ->get();       
+            // Consulta de entradas de inventário com quantidade maior que zero
+            $dbInventoryEntries = InventoryWarehouseEntry::where('establishment_department_id', $id)
+            ->where('quantity', '>', 0)
+            ->join('supplies', 'inventory_warehouse_entries.supply_id', '=', 'supplies.id')
+            ->join('company_financial_blocks', 'inventory_warehouse_entries.financial_block_id', '=', 'company_financial_blocks.id')
+            ->select('inventory_warehouse_entries.*', 'supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
+            ->orderBy('supplies.title')
+            ->orderBy('quantity')
+            ->orderBy('company_financial_blocks.acronym')
+            ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
+            ->get();
 
-        //Pesquisar Dados
-        $search = $request->all();
-        
-        if (isset($search['searchSupply']) || isset($search['searchFinancialBlock'])) {
+            // Consulta de inventário geral
+            $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)
+            ->join('supplies', 'inventory_warehouses.supply_id', '=', 'supplies.id')
+            ->join('company_financial_blocks', 'inventory_warehouses.financial_block_id', '=', 'company_financial_blocks.id')
+            ->select('inventory_warehouses.*', 'supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
+            ->orderBy('supplies.title')
+            ->orderBy('company_financial_blocks.acronym')
+            ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
+            ->get();       
 
-            $query = InventoryWarehouse::query();
-        
-            if (!empty($search['searchSupply'])) {
-                $query->where('supply_id', $search['searchSupply']);
+            //Pesquisar Dados
+            $search = $request->all();
+            
+            if (isset($search['searchSupply']) || isset($search['searchFinancialBlock'])) {
+
+                $query = InventoryWarehouse::query();
+            
+                if (!empty($search['searchSupply'])) {
+                    $query->where('supply_id', $search['searchSupply']);
+                }
+            
+                if (!empty($search['searchFinancialBlock'])) {
+                    $query->where('financial_block_id', $search['searchFinancialBlock']);
+                }
+            
+                $dbInventories = $query->orderBy('quantity')->paginate(20);
             }
-        
-            if (!empty($search['searchFinancialBlock'])) {
-                $query->where('financial_block_id', $search['searchFinancialBlock']);
-            }
-        
-            $dbInventories = $query->orderBy('quantity')->paginate(20);
-        }
 
-        //Log do Sistema
-        Logger::show($db->title);
+            //Log do Sistema
+            Logger::show($db->title);
 
-        return view('inventory.inventory_warehouse.inventory_warehouse_show',[
-            'db'=>$db,
-            'search'=>$search,
-            'dbSupplies'=>$dbSupplies,
-            'dbFinancialBlocks'=>$dbFinancialBlocks,
-            'dbEstablishmentDepartments'=>$dbEstablishmentDepartments,
-            'dbInventories'=>$dbInventories,
-            'dbInventoryEntries'=>$dbInventoryEntries,
-        ]);
+            return view('inventory.inventory_warehouse.inventory_warehouse_show',[
+                'db'=>$db,
+                'search'=>$search,
+                'dbSupplies'=>$dbSupplies,
+                'dbFinancialBlocks'=>$dbFinancialBlocks,
+                'dbEstablishmentDepartments'=>$dbEstablishmentDepartments,
+                'dbInventories'=>$dbInventories,
+                'dbInventoryEntries'=>$dbInventoryEntries,
+            ]);
+        }        
+
+        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -275,31 +280,37 @@ class InventoryWarehouseController extends Controller
             return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        $dbSupplies = Supply::select()->orderBy('title')->get();;
-        $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();;
-        $dbInventories = InventoryWarehouseHistory::where('inventory_warehouse_histories.establishment_department_entry_id', $id)
-            ->where('inventory_warehouse_histories.created_at', '>=', now()->subDays(7))
-            ->where('inventory_warehouse_histories.movement', 'Entrada')
-            ->join('supplies', 'inventory_warehouse_histories.supply_id', '=', 'supplies.id')
-            ->join('company_financial_blocks', 'inventory_warehouse_histories.financial_block_id', '=', 'company_financial_blocks.id')
-            ->select('inventory_warehouse_histories.*','supplies.title as supply_title','company_financial_blocks.acronym as financial_block_acronym')
-            ->orderBy('inventory_warehouse_histories.date', 'DESC')
-            ->orderBy('supplies.title')
-            ->orderBy('company_financial_blocks.acronym')
-            ->with(['Supply', 'CompanyFinancialBlock', 'CompanyEstablishmentEntry', 'CompanyEstablishmentDepartmentEntry', 'CompanyEstablishmentExit', 'CompanyEstablishmentDepartmentExit'])
-            ->select('inventory_warehouse_histories.*')
-            ->limit(20)
-            ->get();
+        if ($db->establishment_id == Auth::user()->establishment_id) {
 
-        //Log do Sistema
-        Logger::show($db->title);
+            $dbSupplies = Supply::select()->orderBy('title')->get();;
+            $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();;
+            $dbInventories = InventoryWarehouseHistory::where('inventory_warehouse_histories.establishment_department_entry_id', $id)
+                ->where('inventory_warehouse_histories.created_at', '>=', now()->subDays(7))
+                ->where('inventory_warehouse_histories.movement', 'Entrada')
+                ->join('supplies', 'inventory_warehouse_histories.supply_id', '=', 'supplies.id')
+                ->join('company_financial_blocks', 'inventory_warehouse_histories.financial_block_id', '=', 'company_financial_blocks.id')
+                ->select('inventory_warehouse_histories.*','supplies.title as supply_title','company_financial_blocks.acronym as financial_block_acronym')
+                ->orderBy('inventory_warehouse_histories.date', 'DESC')
+                ->orderBy('supplies.title')
+                ->orderBy('company_financial_blocks.acronym')
+                ->with(['Supply', 'CompanyFinancialBlock', 'CompanyEstablishmentEntry', 'CompanyEstablishmentDepartmentEntry', 'CompanyEstablishmentExit', 'CompanyEstablishmentDepartmentExit'])
+                ->select('inventory_warehouse_histories.*')
+                ->limit(20)
+                ->get();
+    
+            //Log do Sistema
+            Logger::show($db->title);
+    
+            return view('inventory.inventory_warehouse.inventory_warehouse_entry',[
+                'db'=>$db,
+                'dbSupplies'=>$dbSupplies,
+                'dbFinancialBlocks'=>$dbFinancialBlocks,
+                'dbInventories'=>$dbInventories,
+            ]);
+            
+        }        
 
-        return view('inventory.inventory_warehouse.inventory_warehouse_entry',[
-            'db'=>$db,
-            'dbSupplies'=>$dbSupplies,
-            'dbFinancialBlocks'=>$dbFinancialBlocks,
-            'dbInventories'=>$dbInventories,
-        ]);
+        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -405,34 +416,39 @@ class InventoryWarehouseController extends Controller
             return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        $dbSupplies = Supply::select()->orderBy('title')->get();
+        if ($db->establishment_id == Auth::user()->establishment_id) {
+            
+            $dbSupplies = Supply::select()->orderBy('title')->get();
 
-        //Pesquisar Dados
-        $search = $request->all();
-        
-        if (isset($search['searchSupply']) || isset($search['searchDate'])) {
+            //Pesquisar Dados
+            $search = $request->all();
+            
+            if (isset($search['searchSupply']) || isset($search['searchDate'])) {
+    
+                $query = InventoryWarehouseHistory::query();   
+    
+                if (!empty($search['searchSupply'])) {
+                    $query->where('supply_id', $search['searchSupply']);
+                }        
+    
+                if (!empty($search['searchDate'])) {
+                    $query->where('date', $search['searchDate']);
+                }        
+    
+                $db = $query->orderBy('quantity')->paginate(40);
+            }
+    
+            //Log do Sistema
+            Logger::access();
+    
+            return view('inventory.inventory_warehouse.inventory_warehouse_history',[
+                'search'=>$search,
+                'db'=>$db,
+                'dbSupplies'=>$dbSupplies,
+                'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
+            ]);
+        }        
 
-            $query = InventoryWarehouseHistory::query();   
-
-            if (!empty($search['searchSupply'])) {
-                $query->where('supply_id', $search['searchSupply']);
-            }        
-
-            if (!empty($search['searchDate'])) {
-                $query->where('date', $search['searchDate']);
-            }        
-
-            $db = $query->orderBy('quantity')->paginate(40);
-        }
-
-        //Log do Sistema
-        Logger::access();
-
-        return view('inventory.inventory_warehouse.inventory_warehouse_history',[
-            'search'=>$search,
-            'db'=>$db,
-            'dbSupplies'=>$dbSupplies,
-            'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
-        ]);
+        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
     }
 }

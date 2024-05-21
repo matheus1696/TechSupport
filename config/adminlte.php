@@ -307,7 +307,7 @@ return [
             'text'    => 'Estoque',
             'classes' => 'btn-sm',
             'icon'    => 'fas fa-boxes pr-2',
-            'can'     => 'user',
+            'can'     => ['sysadmin','admin','inventory_pharmacy','inventory_supply','inventory_warehouse'],
             'submenu' => [
 
                 //Estoque Almoxarifado
@@ -317,7 +317,7 @@ return [
                     'route'   => 'inventory_supplies.index',
                     'icon'    => 'fas fa-cubes pr-2',
                     'icon_color' => 'info',
-                    'can'     => 'user'
+                    'can'     => ['sysadmin','admin','inventory_supply']
                 ],
 
                 //Estoque Farmácia
@@ -327,7 +327,7 @@ return [
                     'route'   => 'inventory_medications.index',
                     'icon'    => 'fas fa-capsules pr-2',
                     'icon_color' => 'info',
-                    'can'     => 'user'
+                    'can'     => ['sysadmin','admin','inventory_pharmacy']
                 ],
 
                 //Estoque Farmácia
@@ -337,13 +337,11 @@ return [
                     'route'   => 'inventory_warehouses.index',
                     'icon'    => 'fas fa-truck pr-2',
                     'icon_color' => 'info',
-                    'can'     => 'user'
+                    'can'     => ['sysadmin','admin','inventory_warehouse']
                 ],
 
             ]
-        ],
-
-        
+        ],        
         
         //Lista Telefônica
         [

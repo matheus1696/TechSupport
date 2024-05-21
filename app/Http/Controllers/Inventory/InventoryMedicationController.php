@@ -10,6 +10,7 @@ use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Medication\Medication;
 use App\Services\Logger;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InventoryMedicationController extends Controller
 {
@@ -18,7 +19,7 @@ class InventoryMedicationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['permission:sysadmin|admin']);
+        $this->middleware(['permission:sysadmin|admin|inventory_pharmacy']);
     }
 
     /**
@@ -73,17 +74,25 @@ class InventoryMedicationController extends Controller
     {
         //
         $db = CompanyEstablishmentDepartment::find($id);
-        $dbMedications = Medication::all();
-        $dbInventories = InventoryMedication::where('establishment_department_id', $id)->get();
+
+        if ($db->establishment_id == Auth::user()->establishment_id) {
+            $dbMedications = Medication::all();
+            $dbInventories = InventoryMedication::where('establishment_department_id', $id)->get();
+
+            //Log do Sistema
+            Logger::show($db->title);
+
+            return view('inventory.inventory_medication.inventory_medication_show',[
+                'db'=>$db,
+                'dbMedications'=>$dbMedications,
+                'dbInventories'=>$dbInventories,
+            ]);
+        }
 
         //Log do Sistema
-        Logger::show($db->title);
+        Logger::error('Usuário sem permissão de acessar esse estoque');
 
-        return view('inventory.inventory_medication.inventory_medication_show',[
-            'db'=>$db,
-            'dbMedications'=>$dbMedications,
-            'dbInventories'=>$dbInventories,
-        ]);
+        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
