@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
             //Grupo de Rotas - Configuração dos Perfis dos Usuários
             Route::prefix('user')->group(function (){
                 //Rota - Dados dos Usuários Cadastrados
+                    Route::put('users/permission/{user}',[UsersController::class,'permission'])->name('users.permission');
                     Route::get('users/verify/{user}',[UsersController::class,'verify'])->name('users.verify');
                     Route::resource('users',UsersController::class);
 

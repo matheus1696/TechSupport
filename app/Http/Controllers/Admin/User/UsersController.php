@@ -115,6 +115,18 @@ class UsersController extends Controller
 
         //Log do Sistema
         Logger::updateUserProfileData($db->name);
+        
+        return(redirect(route('users.index'))
+            ->with('success',`Permissão do Usuário Alteradas`));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function permission(Request $request, string $id)
+    {
+        //Listando Dados Usuário
+        $db = User::find($id);
 
         //Alterando Permissão do Usuário
             //Listando Permissões

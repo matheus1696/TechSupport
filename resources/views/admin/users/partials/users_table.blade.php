@@ -28,7 +28,7 @@
                     <x-table.td>
                         <!-- Inicio de Componentização do ModalShow -->
                         <x-button.minButtonModalEdit id="UserModal{{$item->id}}" title="Dados do Perfil">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 -mt-5 mb-3">
+                            <div class="grid grid-cols-1 gap-3 mb-3 -mt-5 md:grid-cols-2">
                                 <p><strong>Nome: </strong>{{$item->name}}</p>
                                 <p><strong>Email: </strong>{{$item->email}}</p>
                                 <p><strong>Data de Nascimento: </strong>@if($item->birthday)
@@ -79,7 +79,7 @@
                                 </x-form.form>
                             </div>
                             
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center -my-5 md:-my-10">
+                            <div class="grid items-center grid-cols-1 gap-3 -my-5 md:grid-cols-2 md:-my-10">
                                 <a href="{{route('users.verify',['user'=>$item->id])}}" class="w-full">
                                     <div class="w-full py-2 text-sm text-center text-white transition duration-300 bg-gray-600 rounded-lg shadow-md hover:bg-gray-700">
                                         Solicitar Verificação de Conta
@@ -101,9 +101,9 @@
                         <!-- Inicio de Componentização do Modal Permissões -->
                         <x-button.minButtonModalUserPermission id="UserPermissionModal{{$item->id}}" title="Permissões">
 
-                            <x-form.form method="edit" route="{{route('users.update',['user'=>$item->id])}}">
+                            <x-form.form method="edit" route="{{route('users.permission',['user'=>$item->id])}}">
                                 @csrf @method('PUT')
-                                    <div class="col-span-12 flex gap-3">
+                                    <div class="flex col-span-12 gap-3">
                                         @foreach ($dbPermissions as $permission)
                                             <div>
                                                 <input type="checkbox" id="permission_{{$permission->id}}" name={{$permission->name}} value="{{$permission->id}}"
