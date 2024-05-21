@@ -93,7 +93,7 @@ class InventoryWarehouseController extends Controller
 
         if (!$db->has_inventory_warehouse) {
             //Log do Sistema
-            Logger::error($db->title);
+            Logger::error('Centro de Distribuição não liberado para este departamento');
 
             return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
@@ -275,7 +275,7 @@ class InventoryWarehouseController extends Controller
 
         if (!$db->has_inventory_warehouse) {
             //Log do Sistema
-            Logger::error($db->title);
+            Logger::error('Centro de Distribuição não liberado para este departamento');
 
             return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
@@ -409,9 +409,9 @@ class InventoryWarehouseController extends Controller
         ->orderBy('created_at','DESC')
         ->paginate(40);        
 
-        if (!$dbEstablishmentDepartment->CompanyEstablishmentDepartment->has_inventory_warehouse) {
+        if (!$dbEstablishmentDepartment->CompanyEstablishmentEntry->has_inventory_warehouse) {
             //Log do Sistema
-            Logger::error($db->title);
+            Logger::error('Centro de Distribuição não liberado para este departamento');
 
             return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
