@@ -1,3 +1,7 @@
+
+<h3 class="pt-3 text-lg font-semibold text-center">Estoque Atual</h3>
+
+
 <div class="my-3">
     <x-table.table>
         @slot('thead')

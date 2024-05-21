@@ -9,9 +9,6 @@
     @slot('body')
         @include('inventory.inventory_medication_history.partials.inventory_medication_history_search')
         @include('inventory.inventory_medication_history.partials.inventory_medication_history_table')
-        <div>
-            <p class="text-end">Verificar Histórico</p>
-        </div>
     @endslot
     
 </x-pages.index>

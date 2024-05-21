@@ -7,7 +7,6 @@
         <x-table.th>Produto</x-table.th>
         <x-table.th class="w-28">Quantidade</x-table.th>
         <x-table.th class="w-60">Usuário Cadastrante</x-table.th>
-        <x-table.th class="w-28"></x-table.th>
     @endslot
 
     <!-- Components TBody -->
@@ -26,9 +25,6 @@
                 <x-table.td>{{$item->Medication->title}}</x-table.td>
                 <x-table.td>{{$item->quantity}}</x-table.td>
                 <x-table.td>{{$item->User->name}}</x-table.td>
-                <x-table.td>
-                    <x-button.minButtonEdit route="{{route('inventory_product_histories.edit',['inventory_product_history'=>$item->id])}}" />
-                </x-table.td>
             </x-table.tr>
         @endforeach
     @endslot

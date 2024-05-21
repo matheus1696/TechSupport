@@ -23,11 +23,11 @@ class StoreInventoryMedicationRequest extends FormRequest
     {
         return [
             //
-            'title' => 'required|unique:medications',
+            'date' => 'required',
+            'medication_id' => 'required',
             'description' => 'nullable|min:10',
-            'medication_classification_id' => 'required',
-            'medication_unit_id' => 'required',
-            'medication_type_id' => 'required',
+            'moviment' => 'required',
+            'quantity' => 'required',
         ];
     }
 }
