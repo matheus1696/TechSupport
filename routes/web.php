@@ -130,19 +130,19 @@ Route::middleware('auth')->group(function () {
         //Grupo de Rodas - Configurações do Sistema
         Route::prefix('inventory')->group(function (){
     
-            //Rotas de Inventário/Estoque de Produtos
-            
+            //Rotas de Inventário/Estoque de Produtos        
+            Route::post('inventory_supplies/exit',[InventorySupplyController::class,'exitStore'])->name('inventory_supplies.exitStore');           
+            Route::post('inventory_supplies/entry',[InventorySupplyController::class,'entryStore'])->name('inventory_supplies.entryStore');
+            Route::post('inventory_supplies/entry/{inventory_supply}',[InventorySupplyController::class,'entry'])->name('inventory_supplies.entryCreate');
             Route::get('inventory_supplies/history/{inventory_supply}',[InventorySupplyController::class,'history'])->name('inventory_supplies.history');
             Route::get('inventory_supplies/request/{inventory_supply}',[InventorySupplyController::class,'request'])->name('inventory_supplies.request');
             Route::resource('inventory_supplies', InventorySupplyController::class);
-            Route::resource('inventory_supply_histories', InventorySupplyHistoryController::class);
             
             //Rotas de Inventário/Estoque de Medicamentos
             Route::resource('inventory_medications', InventoryMedicationController::class);
             Route::resource('inventory_medication_histories', InventoryMedicationHistoryController::class);
             
-            //Rotas de Inventário/Estoque de Centro de Distribuições
-            
+            //Rotas de Inventário/Estoque de Centro de Distribuições            
             Route::get('inventory_warehouses/entry/{inventory_warehouse}',[InventoryWarehouseController::class,'entryShow'])->name('inventory_warehouses.entryShow');
             Route::post('inventory_warehouses/entry',[InventoryWarehouseController::class,'entryStore'])->name('inventory_warehouses.entryStore');
             Route::get('inventory_warehouses/exit/{inventory_warehouse}',[InventoryWarehouseController::class,'entryCreate'])->name('inventory_warehouses.entryCreate');

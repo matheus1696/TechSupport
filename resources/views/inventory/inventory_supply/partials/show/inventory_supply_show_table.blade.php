@@ -39,7 +39,7 @@
                                             </button>
                                         </div>
                                         <div class="m-4 modal-body">
-                                            <x-form.form method="create" route="{{route('inventory_supply_histories.store')}}">
+                                            <x-form.form method="create" route="{{route('inventory_supplies.exitStore')}}">
                                                 
                                                 <input hidden name="invoice" value="{{$dbInventory->invoice}}">
                                                 <input hidden name="supply_order" value="{{$dbInventory->supply_order}}">
@@ -47,7 +47,6 @@
                                                 <input hidden name="establishment_department_id" value="{{$db->id}}">
                                                 <input hidden name="establishment_id" value="{{$db->establishment_id}}">
                                                 <input hidden name="supply_id" value="{{$dbInventory->supply_id}}">
-                                                <input hidden name="movement" value="Saída">
 
                                                 <x-form.input col="12" label="Suprimento" name="disabled" value="{{$dbInventory->Supply->title}}" disabled="disabled"/>
                                             

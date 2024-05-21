@@ -24,7 +24,6 @@ class StoreInventorySupplyHistoryRequest extends FormRequest
         return [
             //
             'quantity' => 'required',
-            'movement' => 'required',
             'supply_id' => 'required',
             'establishment_id' => 'required',
             'establishment_department_id' => 'required',

@@ -25,7 +25,7 @@
                 <x-table.td>{{$dbInventoryHistory->quantity}}</x-table.td>                                 
                 <x-table.td>
                     @if (strtotime($dbInventoryHistory->date) < strtotime(date('Y-m-d')))                    
-                        <x-button.buttonStatus condition="False" name="has_inventory_supply" route="{{route('inventory_supply_histories.store')}}" title="Indicar Recebimento" btnColor="yellow" method="create">
+                        <x-button.buttonStatus condition="False" name="has_inventory_supply" route="{{route('inventory_supplies.entryStore')}}" title="Indicar Recebimento" btnColor="yellow" method="create">
                             <input name="inventary_history" value="{{$dbInventoryHistory->id}}" hidden>
                             <input name="invoice" value="{{$dbInventoryHistory->invoice}}" hidden>
                             <input name="supply_order" value="{{$dbInventoryHistory->supply_order}}" hidden>
@@ -37,7 +37,7 @@
                             <input name="establishment_department_id" value="{{$dbInventoryHistory->establishment_department_exit_id}}" hidden>
                         </x-button.buttonStatus> 
                     @else
-                        <x-button.buttonStatus condition="False" name="has_inventory_supply" route="{{route('inventory_supply_histories.store')}}" title="Indicar Recebimento" method="create">
+                        <x-button.buttonStatus condition="False" name="has_inventory_supply" route="{{route('inventory_supplies.entryStore')}}" title="Indicar Recebimento" method="create">
                             <input name="inventary_history" value="{{$dbInventoryHistory->id}}" hidden>
                             <input name="invoice" value="{{$dbInventoryHistory->invoice}}" hidden>
                             <input name="supply_order" value="{{$dbInventoryHistory->supply_order}}" hidden>

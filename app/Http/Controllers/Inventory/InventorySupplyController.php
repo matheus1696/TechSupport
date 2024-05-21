@@ -167,6 +167,86 @@ class InventorySupplyController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     */
+    public function entryStore(StoreInventorySupplyHistoryRequest $request)
+    {
+        //
+        $data = $request->all();
+        $data['code'] = "SMS".time();
+        $data['date'] = date('Y-m-d');
+        $data['movement'] = 'Entrada';
+        $data['user_id'] = Auth::user()->id;
+
+        InventorySupplyHistory::create($data);
+
+        $db = InventorySupply::where('supply_id',$data['supply_id'])
+            ->where('establishment_department_id',$data['establishment_department_id'])
+            ->first();
+
+        if ($db == NULL) {
+            $db = InventorySupply::create([
+                'quantity'=>0,
+                'establishment_id'=>$data['establishment_id'],
+                'establishment_department_id'=>$data['establishment_department_id'],
+                'supply_id'=>$data['supply_id'],
+            ]);
+        }
+        
+        // Atualizar a quantidade no inventário com base no movimento
+        if ($data['movement'] === "Entrada") {
+            $db->quantity += $data['quantity'];
+        } elseif ($data['movement'] === "Saída") {
+            $db->quantity -= $data['quantity'];
+        }
+
+        $db->save();
+
+        if (isset($data['inventary_history'])) {
+            $dbHistory = InventoryWarehouseHistory::find($data['inventary_history']);
+            $dbHistory->pending = TRUE;
+            $dbHistory->save();
+        }
+
+        return redirect()->back()
+            ->with('success', 'Histórico de inventário criado com sucesso.');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function exitStore(StoreInventorySupplyHistoryRequest $request)
+    {
+        //
+        $data = $request->all();
+        $data['code'] = "SMS".time();
+        $data['date'] = date('Y-m-d');
+        $data['movement'] = 'Saída';
+        $data['user_id'] = Auth::user()->id;
+
+        InventorySupplyHistory::create($data);
+
+        $db = InventorySupply::where('supply_id',$data['supply_id'])
+            ->where('establishment_department_id',$data['establishment_department_id'])
+            ->first();
+
+        if ($db == NULL) {
+            $db = InventorySupply::create([
+                'quantity'=>0,
+                'establishment_id'=>$data['establishment_id'],
+                'establishment_department_id'=>$data['establishment_department_id'],
+                'supply_id'=>$data['supply_id'],
+            ]);
+        }
+
+        $db->quantity -= $data['quantity'];
+        $db->save();
+
+        return redirect()->back()
+            ->with('success', 'Saída realizada com sucesso.');
+    }
+
+    /**
      * Display the specified resource.
      */
     public function history(Request $request,string $id)
