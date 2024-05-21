@@ -133,7 +133,7 @@ Route::middleware('auth')->group(function () {
             //Rotas de Inventário/Estoque de Produtos        
             Route::post('inventory_supplies/exit',[InventorySupplyController::class,'exitStore'])->name('inventory_supplies.exitStore');           
             Route::post('inventory_supplies/entry',[InventorySupplyController::class,'entryStore'])->name('inventory_supplies.entryStore');
-            Route::post('inventory_supplies/entry/{inventory_supply}',[InventorySupplyController::class,'entry'])->name('inventory_supplies.entryCreate');
+            Route::get('inventory_supplies/entry/{inventory_supply}',[InventorySupplyController::class,'entryCreate'])->name('inventory_supplies.entryCreate');
             Route::get('inventory_supplies/history/{inventory_supply}',[InventorySupplyController::class,'history'])->name('inventory_supplies.history');
             Route::get('inventory_supplies/request/{inventory_supply}',[InventorySupplyController::class,'request'])->name('inventory_supplies.request');
             Route::resource('inventory_supplies', InventorySupplyController::class);

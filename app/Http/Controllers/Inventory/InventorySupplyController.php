@@ -167,6 +167,24 @@ class InventorySupplyController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     */
+    public function entryCreate(string $id)
+    {
+        //
+        $db = CompanyEstablishmentDepartment::find($id);
+        $dbSupplies = Supply::all();
+
+        //Log do Sistema
+        Logger::show($db->title);
+
+        return view('inventory.inventory_supply.inventory_supply_create',[
+            'db'=>$db,
+            'dbSupplies'=>$dbSupplies,
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function entryStore(StoreInventorySupplyHistoryRequest $request)

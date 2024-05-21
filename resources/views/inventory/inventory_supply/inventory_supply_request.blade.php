@@ -3,7 +3,7 @@
     <!-- Slot Header -->
     @slot('header')
         <x-header 
-            routeJoker="" btnTitleJoker="Entrada Avulsa" iconJoker="fas fa-clipboard-list"
+            routeJoker="{{route('inventory_supplies.entryCreate', ['inventory_supply'=>$db->id])}}" btnTitleJoker="Entrada Avulsa" iconJoker="fas fa-clipboard-list"
             routeBack="{{route('inventory_supplies.show', ['inventory_supply'=>$db->id])}}"
         />
     @endslot
