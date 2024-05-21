@@ -92,7 +92,7 @@ class InventoryMedicationController extends Controller
         //Log do Sistema
         Logger::error('Usuário sem permissão de acessar esse estoque');
 
-        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_medications.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**

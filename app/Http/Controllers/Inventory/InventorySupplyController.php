@@ -108,7 +108,7 @@ class InventorySupplyController extends Controller
             ]);
         }        
 
-        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_supplies.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -173,7 +173,7 @@ class InventorySupplyController extends Controller
 
         }        
 
-        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_supplies.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -207,7 +207,7 @@ class InventorySupplyController extends Controller
             
         }        
 
-        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_supplies.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -348,6 +348,6 @@ class InventorySupplyController extends Controller
             
         }        
 
-        return redirect()->back()->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_supplies.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 }
