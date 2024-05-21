@@ -2,7 +2,8 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Histório de Estoque Medicamentos: {{$dbEstablishmentDepartment->CompanyEstablishment->title ?? ''}}" route="{{route('inventory_medications.show',['inventory_medication'=>$dbEstablishmentDepartment->id])}}" btnTitle="Retornar"/>
+        <x-header title="Histório de Estoque Medicamentos: {{$dbEstablishmentDepartment->CompanyEstablishment->title ?? ''}}" 
+            routeBack="{{route('inventory_medications.show',['inventory_medication'=>$dbEstablishmentDepartment->id])}}"/>
     @endslot
     
     <!-- Slot Body -->
