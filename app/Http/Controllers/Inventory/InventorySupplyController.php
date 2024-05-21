@@ -306,9 +306,9 @@ class InventorySupplyController extends Controller
     {
         //Listagem de Dados
         $dbEstablishmentDepartment = InventorySupplyHistory::where('establishment_department_id',$id)
-        ->first();             
+        ->first();
 
-        if (!$dbEstablishmentDepartment->has_inventory_supply) {
+        if (!$dbEstablishmentDepartment->CompanyEstablishmentDepartment->has_inventory_supply) {
             //Log do Sistema
             Logger::error($dbEstablishmentDepartment->title);
 

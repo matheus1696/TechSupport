@@ -409,7 +409,7 @@ class InventoryWarehouseController extends Controller
         ->orderBy('created_at','DESC')
         ->paginate(40);        
 
-        if (!$dbEstablishmentDepartment->has_inventory_warehouse) {
+        if (!$dbEstablishmentDepartment->CompanyEstablishmentDepartment->has_inventory_warehouse) {
             //Log do Sistema
             Logger::error($db->title);
 
