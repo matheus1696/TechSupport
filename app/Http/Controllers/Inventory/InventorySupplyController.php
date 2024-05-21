@@ -279,13 +279,19 @@ class InventorySupplyController extends Controller
         ->orderBy('created_at','DESC')
         ->paginate(40);
 
+        $dbSupplies = Supply::select()->orderBy('title')->get();
+
         //Pesquisar Dados
         $search = $request->all();
-        if (isset($search['searchName']) || isset($search['searchDate'])) {
-            $db = InventorySupplyHistory::where('date','LIKE','%'.strtolower($search['searchDate']).'%')
-                //->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
-                ->orderBy('date')
-                ->paginate(40);
+        if (isset($search['searchSupply']) || isset($search['searchDate'])) {
+            $query = InventoryWarehouseHistory::query();
+            if (!empty($search['searchSupply'])) {
+                $query->where('supply_id', $search['searchSupply']);
+            }
+            if (!empty($search['searchDate'])) {
+                $query->where('date', $search['searchDate']);
+            }
+            $db = $query->orderBy('quantity')->paginate(40);
         }
 
         //Log do Sistema
@@ -294,6 +300,7 @@ class InventorySupplyController extends Controller
         return view('inventory.inventory_supply.inventory_supply_history',[
             'search'=>$search,
             'db'=>$db,
+            'dbSupplies'=>$dbSupplies,
             'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
         ]);
     }
