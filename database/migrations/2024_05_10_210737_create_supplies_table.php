@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('filter');
             $table->string('description')->nullable();
-            $table->string('status')->default(1);
+            $table->boolean('status')->default(TRUE);
             $table->unsignedBigInteger('supply_classification_id');
             $table->unsignedBigInteger('supply_unit_id');
             $table->unsignedBigInteger('supply_type_id');

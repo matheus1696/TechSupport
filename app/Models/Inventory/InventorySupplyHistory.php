@@ -23,6 +23,7 @@ class InventorySupplyHistory extends Model
         'movement',
         'quantity',
         'description',
+        'loose',
         'supply_id',
         'establishment_id',
         'establishment_department_id',

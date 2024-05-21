@@ -12,6 +12,7 @@ use App\Models\Inventory\InventorySupplyHistory;
 use App\Models\Inventory\InventoryWarehouseHistory;
 use App\Models\Supply\Supply;
 use App\Services\Logger;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -174,6 +175,7 @@ class InventorySupplyController extends Controller
         //
         $db = CompanyEstablishmentDepartment::find($id);
         $dbSupplies = Supply::all();
+        $dbInventoryHistories = InventorySupplyHistory::where('loose',TRUE)->orderBy('created_at')->limit(20)->get();
 
         //Log do Sistema
         Logger::show($db->title);
@@ -181,6 +183,7 @@ class InventorySupplyController extends Controller
         return view('inventory.inventory_supply.inventory_supply_create',[
             'db'=>$db,
             'dbSupplies'=>$dbSupplies,
+            'dbInventoryHistories'=>$dbInventoryHistories,
         ]);
     }
 

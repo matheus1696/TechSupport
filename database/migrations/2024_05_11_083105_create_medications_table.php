@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('filter');
             $table->string('description')->nullable();
-            $table->string('status')->default(1);
+            $table->boolean('status')->default(TRUE);
             $table->unsignedBigInteger('medication_classification_id')->nullable();
             $table->unsignedBigInteger('medication_unit_id');
             $table->unsignedBigInteger('medication_type_id');

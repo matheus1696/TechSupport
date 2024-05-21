@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('batch')->nullable();
             $table->string('due_date')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('loose')->default(FALSE);
             $table->unsignedBigInteger('supply_id');
             $table->unsignedBigInteger('establishment_id');
             $table->unsignedBigInteger('establishment_department_id');

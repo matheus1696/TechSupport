@@ -1,8 +1,19 @@
+@if ($errors->any())
+    <div class="relative px-4 py-3 mb-3 text-red-700 bg-red-100 border border-red-400 rounded" role="alert">
+        <span class="block sm:inline">Houve alguns problema ao realizar a movimentação.</span>
+        <ul class="mt-3 text-sm text-red-600 list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <!-- Inicio do Formulário -->
 <form method="POST" action="{{$route}}" class="preventForms">
     @csrf @if($method == "edit") @method('PUT') @endif
 
-    <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
         {{$slot}}
     </div>
 
