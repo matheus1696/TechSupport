@@ -133,6 +133,7 @@ Route::middleware('auth')->group(function () {
             //Rotas de Inventário/Estoque de Produtos
             
             Route::get('inventory_supplies/history/{inventory_supply}',[InventorySupplyController::class,'history'])->name('inventory_supplies.history');
+            Route::get('inventory_supplies/request/{inventory_supply}',[InventorySupplyController::class,'request'])->name('inventory_supplies.request');
             Route::resource('inventory_supplies', InventorySupplyController::class);
             Route::resource('inventory_supply_histories', InventorySupplyHistoryController::class);
             

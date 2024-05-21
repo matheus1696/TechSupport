@@ -115,7 +115,7 @@ class InventorySupplyController extends Controller
         //Log do Sistema
         Logger::show($db->title);
 
-        return view('inventory.inventory_supply.inventory_supply_edit',[
+        return view('inventory.inventory_supply.inventory_supply_request',[
             'db'=>$db,
             'dbSupplies'=>$dbSupplies,
             'dbInventories'=>$dbInventories,
@@ -139,6 +139,31 @@ class InventorySupplyController extends Controller
     {
         //
         return redirect()->route('login');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function request(string $id)
+    {
+        //
+        $db = CompanyEstablishmentDepartment::find($id);
+        $dbSupplies = Supply::all();
+        $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
+        $dbInventoryHistories = InventoryWarehouseHistory::where('establishment_department_exit_id', $id)
+            ->where('pending', FALSE)
+            ->orderBy('date')
+            ->paginate(20);
+
+        //Log do Sistema
+        Logger::show($db->title);
+
+        return view('inventory.inventory_supply.inventory_supply_request',[
+            'db'=>$db,
+            'dbSupplies'=>$dbSupplies,
+            'dbInventories'=>$dbInventories,
+            'dbInventoryHistories'=>$dbInventoryHistories,
+        ]);
     }
 
     /**
