@@ -92,8 +92,8 @@ class InventoryWarehouseController extends Controller
         $db = CompanyEstablishmentDepartment::find($id);
 
         // Recupera todos os produtos e bloco de financiamentos
-        $dbSupplies = Supply::all();
-        $dbFinancialBlocks = CompanyFinancialBlock::all();
+        $dbSupplies = Supply::select()->orderBy('title')->get();
+        $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();
 
         // Recupera todos os departamentos com inventário de produtos
         $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_supply', true)
@@ -260,8 +260,8 @@ class InventoryWarehouseController extends Controller
     {
         //
         $db = CompanyEstablishmentDepartment::find($id);
-        $dbSupplies = Supply::all();
-        $dbFinancialBlocks = CompanyFinancialBlock::all();
+        $dbSupplies = Supply::select()->orderBy('title')->get();;
+        $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();;
         $dbInventories = InventoryWarehouseHistory::where('inventory_warehouse_histories.establishment_department_entry_id', $id)
             ->where('inventory_warehouse_histories.created_at', '>=', now()->subDays(7))
             ->where('inventory_warehouse_histories.movement', 'Entrada')
@@ -373,7 +373,7 @@ class InventoryWarehouseController extends Controller
         ->orderBy('date','DESC')
         ->paginate(40);
 
-        $dbSupplies = Supply::all();
+        $dbSupplies = Supply::select()->orderBy('title')->get();
 
         //Pesquisar Dados
         $search = $request->all();

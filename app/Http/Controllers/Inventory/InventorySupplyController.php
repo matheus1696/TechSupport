@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Inventory\StoreInventorySupplyHistoryRequest;
 use App\Models\Inventory\InventorySupply;
 use App\Http\Requests\Inventory\StoreInventorySupplyRequest;
 use App\Http\Requests\Inventory\UpdateInventorySupplyRequest;
 use App\Models\Company\CompanyEstablishmentDepartment;
+use App\Models\Inventory\InventorySupplyHistory;
 use App\Models\Inventory\InventoryWarehouseHistory;
 use App\Models\Supply\Supply;
 use App\Services\Logger;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InventorySupplyController extends Controller
 {
@@ -136,5 +139,35 @@ class InventorySupplyController extends Controller
     {
         //
         return redirect()->route('login');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function history(Request $request,string $id)
+    {
+        //Listagem de Dados
+        $dbEstablishmentDepartment = InventorySupplyHistory::where('establishment_department_id',$id)
+        ->first();
+        $db = InventorySupplyHistory::where('establishment_department_id',$id)
+        ->paginate(40);
+
+        //Pesquisar Dados
+        $search = $request->all();
+        if (isset($search['searchName']) || isset($search['searchDate'])) {
+            $db = InventorySupplyHistory::where('date','LIKE','%'.strtolower($search['searchDate']).'%')
+                //->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
+                ->orderBy('date')
+                ->paginate(40);
+        }
+
+        //Log do Sistema
+        Logger::access();
+
+        return view('inventory.inventory_supply.inventory_supply_history',[
+            'search'=>$search,
+            'db'=>$db,
+            'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
+        ]);
     }
 }

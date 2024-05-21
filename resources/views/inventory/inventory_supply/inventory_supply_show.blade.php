@@ -28,7 +28,7 @@
         </div>
         <div>
             <p class="pr-3 text-xs text-end">
-                <a href="{{route('inventory_supply_histories.show',['inventory_supply_history'=>$db->id])}}" class="text-gray-400 hover:text-gray-900">Verificar Histórico de Movimentação</a>
+                <a href="{{route('inventory_supplies.history',['inventory_supply'=>$db->id])}}" class="text-gray-400 hover:text-gray-900">Verificar Histórico de Movimentação</a>
             </p>
         </div>
     @endslot

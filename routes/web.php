@@ -131,6 +131,8 @@ Route::middleware('auth')->group(function () {
         Route::prefix('inventory')->group(function (){
     
             //Rotas de Inventário/Estoque de Produtos
+            
+            Route::get('inventory_supplies/history/{inventory_supply}',[InventorySupplyController::class,'history'])->name('inventory_supplies.history');
             Route::resource('inventory_supplies', InventorySupplyController::class);
             Route::resource('inventory_supply_histories', InventorySupplyHistoryController::class);
             
@@ -140,7 +142,6 @@ Route::middleware('auth')->group(function () {
             
             //Rotas de Inventário/Estoque de Centro de Distribuições
             
-            Route::put('countries/status/{country}',[RegionCountryController::class,'status'])->name('countries.status');
             Route::get('inventory_warehouses/entry/{inventory_warehouse}',[InventoryWarehouseController::class,'entryShow'])->name('inventory_warehouses.entryShow');
             Route::post('inventory_warehouses/entry',[InventoryWarehouseController::class,'entryStore'])->name('inventory_warehouses.entryStore');
             Route::get('inventory_warehouses/exit/{inventory_warehouse}',[InventoryWarehouseController::class,'entryCreate'])->name('inventory_warehouses.entryCreate');

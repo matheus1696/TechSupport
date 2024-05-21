@@ -1,7 +1,7 @@
 <!-- Search -->
 <x-search.formSearch>
     
-    <x-search.selectSearch label="Produtos" id="searchSupply" class="flex-1">
+    <x-search.selectSearch label="Suprimentos" id="searchSupply" class="flex-1">
         @foreach ($dbSupplies as $dbSupply)
             @foreach ($dbInventories as $dbInventory)
                 @if ($dbSupply->id == $dbInventory->supply_id)
@@ -22,7 +22,7 @@
     <x-search.selectSearch label="Bloco Financeiro" id="searchFinancialBlock" class="flex-1">
         @foreach ($dbFinancialBlocks as $dbFinancialBlock)
             @foreach ($dbInventories as $dbInventory)
-                @if ($dbFinancialBlock->id == $dbInventory->supply_id)
+                @if ($dbFinancialBlock->id == $dbInventory->financial_block_id)
                     <option 
                         value="{{$dbFinancialBlock->id}}"
                         @isset($search['searchFinancialBlock'])
