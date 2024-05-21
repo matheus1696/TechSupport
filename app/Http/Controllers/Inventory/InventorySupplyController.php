@@ -255,6 +255,7 @@ class InventorySupplyController extends Controller
         $dbEstablishmentDepartment = InventorySupplyHistory::where('establishment_department_id',$id)
         ->first();
         $db = InventorySupplyHistory::where('establishment_department_id',$id)
+        ->orderBy('created_at','DESC')
         ->paginate(40);
 
         //Pesquisar Dados

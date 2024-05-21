@@ -2,7 +2,7 @@
 <x-table.table :db="$db">
     <!-- Components THead -->
     @slot('thead')
-        <x-table.th class="w-28">Data</x-table.th>
+        <x-table.th class="w-40">Data</x-table.th>
         <x-table.th class="w-40">Movimentação</x-table.th>
         <x-table.th>Produto</x-table.th>
         <x-table.th class="w-28">Quantidade</x-table.th>
@@ -13,7 +13,7 @@
     @slot('tbody')
         @foreach ($db as $item)
             <x-table.tr>
-                <x-table.td>{{date('d/m/Y',strtotime($item->date))}}</x-table.td>
+                <x-table.td>{{date('d/m/Y h:m:s',strtotime($item->created_at))}}</x-table.td>
                 <x-table.td>{{$item->movement}}
                     @if ($item->movement === "Entrada")
                         <i class="px-2 text-green-500 rotate-45 fas fa-long-arrow-alt-up"></i>

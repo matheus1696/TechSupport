@@ -17,7 +17,7 @@
     @slot('tbody')
         @foreach ($db as $item)
             <x-table.tr>
-                <x-table.td>{{date('d/m/Y',strtotime($item->date))}}</x-table.td>                
+                <x-table.td>{{date('d/m/Y h:m:s',strtotime($item->created_at))}}</x-table.td>              
                 <x-table.td>
                     {{$item->movement}}
                     @if ($item->movement === "Entrada")

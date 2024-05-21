@@ -370,7 +370,7 @@ class InventoryWarehouseController extends Controller
         ->first();
         
         $db = InventoryWarehouseHistory::where('establishment_department_entry_id',$id)
-        ->orderBy('date','DESC')
+        ->orderBy('created_at','DESC')
         ->paginate(40);
 
         $dbSupplies = Supply::select()->orderBy('title')->get();
