@@ -358,36 +358,71 @@ return [
             'route'   => 'profiles.index',
             'icon'    => 'fas fa-user pr-2',
             'can'     => 'user'
-        ],
+        ],        
 
-        //Configurações
+        //Configurações de Perfil
+        [
+            'text'    => 'Configurações de Perfil',
+            'classes' => 'btn-sm',
+            'icon'    => 'fas fa-users-cog pr-2',
+            'can'     => ['sysadmin','admin'],
+            'submenu' => [
+
+                //Dados dos Usuários e Permissões dos Módulos
+                [
+                    'text'    => 'Usuários',
+                    'classes' => 'btn-sm',
+                    'route'   => 'users.index',
+                    'icon'    => 'fas fa-users pr-2',
+                    'icon_color' => 'teal',
+                    'can'     => ['sysadmin','admin'],
+                ],
+
+                //Permissões de Acesso aos Estoques
+                [
+                    'text'    => 'Permissões Estoques',
+                    'classes' => 'btn-sm',
+                    'icon'    => 'fas fa-user-lock pr-2',
+                    'icon_color' => 'info',
+                    'can'     => ['sysadmin','admin'],
+                    'submenu' => [
+                        [
+                            'text'    => 'Almoxarifado',
+                            'classes' => 'btn-sm',
+                            'route'   => 'home',
+                            'icon'    => 'fas fa-cubes pr-2',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                        [
+                            'text'    => 'Farmácia',
+                            'classes' => 'btn-sm',
+                            'route'   => 'home',
+                            'icon'    => 'fas fa-capsules pr-2',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                        [
+                            'text'    => 'Centros de Distribuições',
+                            'classes' => 'btn-sm',
+                            'route'   => 'home',
+                            'icon'    => 'fas fa-truck pr-2',
+                            'icon_color' => 'teal',
+                            'can'     => ['sysadmin','admin'],
+                        ],
+                    ]
+                ],
+
+            ]
+        ], 
+
+        //Configurações de Sistema
         [
             'text'    => 'Configurações do Sistema',
             'classes' => 'btn-sm',
             'icon'    => 'fas fa-cogs pr-2',
             'can'     => ['sysadmin','admin'],
             'submenu' => [
-
-                //Configurações de Perfil
-                [
-                    'text'    => 'Configurações de Perfil',
-                    'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-users-cog pr-2',
-                    'icon_color' => 'info',
-                    'can'     => ['sysadmin','admin'],
-                    'submenu' => [
-
-                        [
-                            'text'    => 'Usuários',
-                            'classes' => 'btn-sm',
-                            'route'   => 'users.index',
-                            'icon'    => 'fas fa-users pr-2',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-
-                    ]
-                ],
 
                 //Configurações de Empresas
                 [
@@ -474,90 +509,93 @@ return [
                             'can'     => ['sysadmin','admin'],
                         ],
                     ]
-                ],
+                ],                
 
-                //Configurações de Produtos
+                //Configuração de Estoque
                 [
-                    'text'    => 'Suprimentos',
+                    'text'    => 'Configuração de Itens',
                     'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-screwdriver pr-2',
+                    'icon'    => 'fas fa-boxes pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
+
+                        //Configurações de Produtos
                         [
-                            'text'    => 'Lista de Suprimentos',
+                            'text'    => 'Suprimentos',
                             'classes' => 'btn-sm',
-                            'route'   => 'supplies.index',
                             'icon'    => 'fas fa-screwdriver pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
+                            'submenu' => [
+                                [
+                                    'text'    => 'Lista de Suprimentos',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'supplies.index',
+                                    'icon'    => 'fas fa-screwdriver pr-2',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                                [
+                                    'text'    => 'Tipo de Suprimentos',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'supply_types.index',
+                                    'icon'    => 'fas fa-list-ol pr-2',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                                [
+                                    'text'    => 'Classificação de Suprimentos',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'supply_classifications.index',
+                                    'icon'    => 'fas fa-stream pr-2',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                                [
+                                    'text'    => 'Apresentação',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'supply_units.index',
+                                    'icon'    => 'fas fa-ruler pr-2',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                            ]
                         ],
-                        [
-                            'text'    => 'Tipo de Suprimentos',
-                            'classes' => 'btn-sm',
-                            'route'   => 'supply_types.index',
-                            'icon'    => 'fas fa-list-ol pr-2',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                        [
-                            'text'    => 'Classificação de Suprimentos',
-                            'classes' => 'btn-sm',
-                            'route'   => 'supply_classifications.index',
-                            'icon'    => 'fas fa-stream pr-2',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                        [
-                            'text'    => 'Apresentação',
-                            'classes' => 'btn-sm',
-                            'route'   => 'supply_units.index',
-                            'icon'    => 'fas fa-ruler pr-2',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                    ]
-                ],
 
-                //Configurações de Medicamentos
-                [
-                    'text'    => 'Medicamentos',
-                    'classes' => 'btn-sm',
-                    'icon'    => 'fas fa-tablets pr-2',
-                    'icon_color' => 'info',
-                    'can'     => ['sysadmin','admin'],
-                    'submenu' => [
+                        //Configurações de Medicamentos
                         [
-                            'text'    => 'Lista de Medicamentos',
+                            'text'    => 'Medicamentos',
                             'classes' => 'btn-sm',
-                            'route'   => 'medications.index',
-                            'icon'    => 'fas fa-pills pr-2',
+                            'icon'    => 'fas fa-tablets pr-2',
                             'icon_color' => 'teal',
                             'can'     => ['sysadmin','admin'],
-                        ],
-                        [
-                            'text'    => 'Tipos de Medicamento',
-                            'classes' => 'btn-sm',
-                            'route'   => 'medication_types.index',
-                            'icon'    => 'fas fa-list-ol pr-2',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                        [
-                            'text'    => 'Classificação Medicamento',
-                            'classes' => 'btn-sm',
-                            'route'   => 'medication_classifications.index',
-                            'icon'    => 'fas fa-stream pr-2',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                        [
-                            'text'    => 'Apresentação',
-                            'classes' => 'btn-sm',
-                            'route'   => 'medication_units.index',
-                            'icon'    => 'fas fa-ruler pr-2',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
+                            'submenu' => [
+                                [
+                                    'text'    => 'Lista de Medicamentos',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'medications.index',
+                                    'icon'    => 'fas fa-pills pr-2',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                                [
+                                    'text'    => 'Tipos de Medicamento',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'medication_types.index',
+                                    'icon'    => 'fas fa-list-ol pr-2',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                                [
+                                    'text'    => 'Classificação Medicamento',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'medication_classifications.index',
+                                    'icon'    => 'fas fa-stream pr-2',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                                [
+                                    'text'    => 'Apresentação',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'medication_units.index',
+                                    'icon'    => 'fas fa-ruler pr-2',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                            ]
                         ],
                     ]
                 ],
