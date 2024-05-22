@@ -4,7 +4,7 @@
             <div class="px-4 py-3 text-white bg-green-800 ">
                 <span class="text-sm">{!! \Session::get('success') !!}</span>
             </div>
-            <div class="w-full h-1 transition-all duration-1000 bg-green-900 borderAlert"></div>
+            <div class="w-full h-2 transition-all duration-1000 bg-green-900 borderAlert"></div>
         </div>
     </div>
 @endif
@@ -15,7 +15,7 @@
             <div class="px-4 py-3 text-white bg-red-800 ">
                 <span class="text-sm">{!! \Session::get('error') !!}</span>
             </div>
-            <div class="w-full h-1 transition-all duration-1000 bg-red-900 borderAlert"></div>
+            <div class="w-full h-2 transition-all duration-1000 bg-red-900 borderAlert"></div>
         </div>
     </div>
 @endif
@@ -31,7 +31,7 @@
     setTimeout( function relogio() {
     let = document.querySelector('.borderAlert').classList.remove('z-50')
         let = document.querySelector('.alert').classList.add('-z-50')
-    }, 3200)
+    }, 3300)
 </script>
 
 

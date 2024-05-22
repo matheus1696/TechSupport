@@ -31,7 +31,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
                 $('.summernote').summernote({
-                    height: 100,
+                    height: 75,
                     toolbar: [
                         // [groupName, [list of button]]
                         ['style', ['bold', 'italic', 'underline', 'clear',]],
@@ -47,5 +47,3 @@
                 });
             });
 </script>
-
-<script src="https://cdn.tailwindcss.com"></script>
