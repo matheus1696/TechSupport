@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InventoryMedicationHistory extends Model
+class InventoryPharmacyHistory extends Model
 {
     use HasFactory;
 

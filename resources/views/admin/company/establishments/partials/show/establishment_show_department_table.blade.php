@@ -5,9 +5,9 @@
             <x-table.th class="w-32">Telefone</x-table.th>
             <x-table.th class="w-28">Ramal</x-table.th>
             <x-table.th class="w-32">Tipo de contato</x-table.th>
-            <x-table.th class="w-32">Estoque Produtos</x-table.th>
+            <x-table.th class="w-32">Estoque Suprimentos</x-table.th>
             <x-table.th class="w-32">Estoque Farmácia</x-table.th>
-            <x-table.th class="w-32">Estoque Central</x-table.th>
+            <x-table.th class="w-32">Centro de Distribuição</x-table.th>
             <x-table.th class="w-28"></x-table.th>
         @endslot
     
@@ -26,7 +26,7 @@
                         <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_supply}}" name="has_inventory_supply" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
                     </x-table.td>                    
                     <x-table.td>
-                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_medication}}" name="has_inventory_medication" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
+                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_pharmacy}}" name="has_inventory_pharmacy" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
                     </x-table.td>                    
                     <x-table.td>
                         <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_warehouse}}" name="has_inventory_warehouse" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />

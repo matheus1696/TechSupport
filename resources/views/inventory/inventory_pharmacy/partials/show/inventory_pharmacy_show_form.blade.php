@@ -1,4 +1,4 @@
-<x-form.form method="create" route="{{route('inventory_medication_histories.store')}}">
+<x-form.form method="create" route="{{route('inventory_pharmacy_histories.store')}}">
     <input type="hidden" name="establishment_department_id" value="{{$db->id}}">
     <input type="hidden" name="establishment_id" value="{{$db->establishment_id}}">
 

@@ -23,8 +23,8 @@ use App\Http\Controllers\Admin\Region\RegionCityController;
 use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
 use App\Http\Controllers\Admin\User\UsersController;
-use App\Http\Controllers\Inventory\InventoryMedicationController;
-use App\Http\Controllers\Inventory\InventoryMedicationHistoryController;
+use App\Http\Controllers\Inventory\InventoryPharmacyController;
+use App\Http\Controllers\Inventory\InventoryPharmacyHistoryController;
 use App\Http\Controllers\Inventory\InventorySupplyController;
 use App\Http\Controllers\Inventory\InventoryWarehouseController;
 use App\Http\Controllers\Profile\ProfileController;
@@ -139,8 +139,8 @@ Route::middleware('auth')->group(function () {
             Route::resource('inventory_supplies', InventorySupplyController::class);
             
             //Rotas de Inventário/Estoque de Medicamentos
-            Route::resource('inventory_medications', InventoryMedicationController::class);
-            Route::resource('inventory_medication_histories', InventoryMedicationHistoryController::class);
+            Route::resource('inventory_pharmacies', InventoryPharmacyController::class);
+            Route::resource('inventory_pharmacy_histories', InventoryPharmacyHistoryController::class);
             
             //Rotas de Inventário/Estoque de Centro de Distribuições            
             Route::get('inventory_warehouses/entry/{inventory_warehouse}',[InventoryWarehouseController::class,'entryShow'])->name('inventory_warehouses.entryShow');

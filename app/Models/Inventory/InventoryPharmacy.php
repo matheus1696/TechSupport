@@ -6,7 +6,7 @@ use App\Models\Medication\Medication;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InventoryMedication extends Model
+class InventoryPharmacy extends Model
 {
     use HasFactory;
 

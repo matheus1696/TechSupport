@@ -140,7 +140,7 @@ class CompanyEstablishmentDepartmentController extends Controller
     public function hasInventory(Request $request, string $id)
     {
         //Dados dos Formulários
-        $data = $request->only('has_inventory_supply','has_inventory_medication','has_inventory_warehouse');
+        $data = $request->only('has_inventory_supply','has_inventory_pharmacy','has_inventory_warehouse');
 
         //Salvando Dados
         $db = CompanyEstablishmentDepartment::find($id);

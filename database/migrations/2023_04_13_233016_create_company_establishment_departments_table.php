@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('type_contact')->nullable()->default('Without');
             $table->unsignedBigInteger('establishment_id');
             $table->boolean('has_inventory_supply')->default(false);
-            $table->boolean('has_inventory_medication')->default(false);
+            $table->boolean('has_inventory_pharmacy')->default(false);
             $table->boolean('has_inventory_warehouse')->default(false);
             $table->timestamps();
 

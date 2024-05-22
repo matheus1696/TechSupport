@@ -11,19 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory_medications', function (Blueprint $table) {
+        Schema::create('inventory_pharmacy_histories', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
+            $table->date('date');
+            $table->string('movement');
             $table->integer('quantity');
-            $table->integer('quantity_minimum')->nullable();
-            $table->integer('quantity_maximum')->nullable();
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('medication_id');
             $table->unsignedBigInteger('establishment_id');
             $table->unsignedBigInteger('establishment_department_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             
             $table->foreign('medication_id')->references('id')->on('medications');
             $table->foreign('establishment_id')->references('id')->on('company_establishments');
             $table->foreign('establishment_department_id')->references('id')->on('company_establishment_departments');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory_medications');
+        Schema::dropIfExists('inventory_pharmacy_histories');
     }
 };

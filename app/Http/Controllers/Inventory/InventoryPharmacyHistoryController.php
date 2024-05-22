@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inventory\InventoryMedicationHistory;
-use App\Http\Requests\Inventory\StoreInventoryMedicationHistoryRequest;
-use App\Http\Requests\Inventory\UpdateInventoryMedicationHistoryRequest;
-use App\Models\Inventory\InventoryMedication;
+use App\Models\Inventory\InventoryPharmacyHistory;
+use App\Http\Requests\Inventory\StoreInventoryPharmacyHistoryRequest;
+use App\Http\Requests\Inventory\UpdateInventoryPharmacyHistoryRequest;
+use App\Models\Inventory\InventoryPharmacy;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class InventoryMedicationHistoryController extends Controller
+class InventoryPharmacyHistoryController extends Controller
 {
     /*
      * Controller access permission resource.
@@ -42,21 +42,21 @@ class InventoryMedicationHistoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInventoryMedicationHistoryRequest $request)
+    public function store(StoreInventoryPharmacyHistoryRequest $request)
     {
         //
         $data = $request->all();
         $data['code'] = "SMS".time();
         $data['user_id'] = Auth::user()->id;
 
-        InventoryMedicationHistory::create($data);
+        InventoryPharmacyHistory::create($data);
 
-        $db = InventoryMedication::where('medication_id',$data['medication_id'])
+        $db = InventoryPharmacy::where('medication_id',$data['medication_id'])
             ->where('establishment_department_id',$data['establishment_department_id'])
             ->first();
 
         if ($db == NULL) {
-            $db = InventoryMedication::create([
+            $db = InventoryPharmacy::create([
                 'quantity'=>0,
                 'establishment_id'=>$data['establishment_id'],
                 'establishment_department_id'=>$data['establishment_department_id'],
@@ -73,7 +73,7 @@ class InventoryMedicationHistoryController extends Controller
 
         $db->save();
 
-        return redirect()->route('inventory_medications.show',['inventory_medication' => $data['establishment_department_id']])
+        return redirect()->route('inventory_pharmacies.show',['inventory_pharmacy' => $data['establishment_department_id']])
             ->with('success', 'Histórico de inventário criado com sucesso.');
     }
 
@@ -83,15 +83,15 @@ class InventoryMedicationHistoryController extends Controller
     public function show(Request $request, string $id)
     {        
         //Listagem de Dados
-        $dbEstablishmentDepartment = InventoryMedicationHistory::where('establishment_department_id',$id)
+        $dbEstablishmentDepartment = InventoryPharmacyHistory::where('establishment_department_id',$id)
         ->first();
-        $db = InventoryMedicationHistory::where('establishment_department_id',$id)
+        $db = InventoryPharmacyHistory::where('establishment_department_id',$id)
             ->paginate(40);
 
         //Pesquisar Dados
         $search = $request->all();
         if (isset($search['searchName']) || isset($search['searchDate'])) {
-            $db = InventoryMedicationHistory::where('date','LIKE','%'.strtolower($search['searchDate']).'%')
+            $db = InventoryPharmacyHistory::where('date','LIKE','%'.strtolower($search['searchDate']).'%')
                 //->where('filter','LIKE','%'.strtolower($search['searchName']).'%')
                 ->orderBy('date')
                 ->paginate(40);
@@ -110,7 +110,7 @@ class InventoryMedicationHistoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InventoryMedicationHistory $InventoryMedicationHistory)
+    public function edit(InventoryPharmacyHistory $InventoryPharmacyHistory)
     {
         //
         return redirect()->route('login');
@@ -119,7 +119,7 @@ class InventoryMedicationHistoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInventoryMedicationHistoryRequest $request, InventoryMedicationHistory $InventoryMedicationHistory)
+    public function update(UpdateInventoryPharmacyHistoryRequest $request, InventoryPharmacyHistory $InventoryPharmacyHistory)
     {
         //
         return redirect()->route('login');
@@ -128,7 +128,7 @@ class InventoryMedicationHistoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InventoryMedicationHistory $InventoryMedicationHistory)
+    public function destroy(InventoryPharmacyHistory $InventoryPharmacyHistory)
     {
         //
         return redirect()->route('login');

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Inventory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreInventoryMedicationRequest extends FormRequest
+class StoreInventoryPharmacyHistoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,11 @@ class StoreInventoryMedicationRequest extends FormRequest
         return [
             //
             'date' => 'required',
-            'medication_id' => 'required',
-            'description' => 'nullable|min:10',
-            'moviment' => 'required',
             'quantity' => 'required',
+            'movement' => 'required',
+            'medication_id' => 'required',
+            'establishment_id' => 'required',
+            'establishment_department_id' => 'required',
         ];
     }
 }

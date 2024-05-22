@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inventory\InventoryMedication;
-use App\Http\Requests\Inventory\StoreInventoryMedicationRequest;
-use App\Http\Requests\Inventory\UpdateInventoryMedicationRequest;
+use App\Models\Inventory\InventoryPharmacy;
+use App\Http\Requests\Inventory\StoreInventoryPharmacyRequest;
+use App\Http\Requests\Inventory\UpdateInventoryPharmacyRequest;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Medication\Medication;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class InventoryMedicationController extends Controller
+class InventoryPharmacyController extends Controller
 {
     /*
      * Controller access permission resource.
@@ -28,7 +28,7 @@ class InventoryMedicationController extends Controller
     public function index(Request $request)
     {
         //Listagem de Dados
-        $db = CompanyEstablishmentDepartment::where('has_inventory_medication',TRUE)
+        $db = CompanyEstablishmentDepartment::where('has_inventory_pharmacy',TRUE)
         ->orderBy('department')
         ->paginate(20);
 
@@ -43,7 +43,7 @@ class InventoryMedicationController extends Controller
         //Log do Sistema
         Logger::access();
 
-        return view('inventory.inventory_medication.inventory_medication_index',[
+        return view('inventory.inventory_pharmacy.inventory_pharmacy_index',[
             'search'=>$search,
             'db'=>$db,
         ]);
@@ -61,7 +61,7 @@ class InventoryMedicationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInventoryMedicationRequest $request)
+    public function store(StoreInventoryPharmacyRequest $request)
     {
         //
         return redirect()->route('login');
@@ -77,12 +77,12 @@ class InventoryMedicationController extends Controller
 
         if ($db->establishment_id == Auth::user()->establishment_id) {
             $dbMedications = Medication::all();
-            $dbInventories = InventoryMedication::where('establishment_department_id', $id)->get();
+            $dbInventories = InventoryPharmacy::where('establishment_department_id', $id)->get();
 
             //Log do Sistema
             Logger::show($db->title);
 
-            return view('inventory.inventory_medication.inventory_medication_show',[
+            return view('inventory.inventory_pharmacy.inventory_pharmacy_show',[
                 'db'=>$db,
                 'dbMedications'=>$dbMedications,
                 'dbInventories'=>$dbInventories,
@@ -92,13 +92,13 @@ class InventoryMedicationController extends Controller
         //Log do Sistema
         Logger::error('Usuário sem permissão de acessar esse estoque');
 
-        return redirect()->route('inventory_medications.index')->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_pharmacies.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InventoryMedication $InventoryMedication)
+    public function edit(InventoryPharmacy $InventoryPharmacy)
     {
         //
         return redirect()->route('login');
@@ -107,7 +107,7 @@ class InventoryMedicationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInventoryMedicationRequest $request, InventoryMedication $InventoryMedication)
+    public function update(UpdateInventoryPharmacyRequest $request, InventoryPharmacy $InventoryPharmacy)
     {
         //
         return redirect()->route('login');
@@ -116,7 +116,7 @@ class InventoryMedicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InventoryMedication $InventoryMedication)
+    public function destroy(InventoryPharmacy $InventoryPharmacy)
     {
         //
         return redirect()->route('login');

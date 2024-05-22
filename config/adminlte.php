@@ -324,7 +324,7 @@ return [
                 [
                     'text'    => 'Farmácia',
                     'classes' => 'btn-sm',
-                    'route'   => 'inventory_medications.index',
+                    'route'   => 'inventory_pharmacies.index',
                     'icon'    => 'fas fa-capsules pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin','inventory_pharmacy']
