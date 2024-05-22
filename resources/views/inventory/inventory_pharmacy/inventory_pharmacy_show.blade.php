@@ -4,7 +4,9 @@
     @slot('header')
         <x-header 
             title="Estoque de Medicamentos: {{ $db->department }} - {{ $db->CompanyEstablishment->title }}" 
-            routeBack="{{route('inventory_pharmacies.index')}}"/>
+            routeCreate={{'inventory_pharmacies.entryCreate'}}
+            routeBack="{{route('inventory_pharmacies.index')}}"
+        />
     @endslot
 
     <!-- Slot Body -->

@@ -138,7 +138,8 @@ Route::middleware('auth')->group(function () {
             Route::get('inventory_supplies/request/{inventory_supply}',[InventorySupplyController::class,'request'])->name('inventory_supplies.request');
             Route::resource('inventory_supplies', InventorySupplyController::class);
             
-            //Rotas de Inventário/Estoque de Medicamentos
+            //Rotas de Inventário/Estoque Farmacêutico
+            Route::get('inventory_pharmacies/entry/{inventory_pharmacy}',[InventoryPharmacyController::class,'entryCreate'])->name('inventory_pharmacies.entryCreate');
             Route::resource('inventory_pharmacies', InventoryPharmacyController::class);
             Route::resource('inventory_pharmacy_histories', InventoryPharmacyHistoryController::class);
             
