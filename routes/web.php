@@ -139,6 +139,7 @@ Route::middleware('auth')->group(function () {
             Route::resource('inventory_supplies', InventorySupplyController::class);
             
             //Rotas de Inventário/Estoque Farmacêutico
+            Route::post('inventory_pharmacies/entry',[InventoryPharmacyController::class,'entryStore'])->name('inventory_pharmacies.entryStore');
             Route::get('inventory_pharmacies/entry/{inventory_pharmacy}',[InventoryPharmacyController::class,'entryCreate'])->name('inventory_pharmacies.entryCreate');
             Route::resource('inventory_pharmacies', InventoryPharmacyController::class);
             Route::resource('inventory_pharmacy_histories', InventoryPharmacyHistoryController::class);

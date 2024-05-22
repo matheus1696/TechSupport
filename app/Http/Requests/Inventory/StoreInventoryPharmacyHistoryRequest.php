@@ -25,7 +25,6 @@ class StoreInventoryPharmacyHistoryRequest extends FormRequest
             //
             'date' => 'required',
             'quantity' => 'required',
-            'movement' => 'required',
             'medication_id' => 'required',
             'establishment_id' => 'required',
             'establishment_department_id' => 'required',
