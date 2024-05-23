@@ -304,7 +304,7 @@ return [
 
         //Estoque
         [
-            'text'    => 'Estoque',
+            'text'    => 'Estoques',
             'classes' => 'btn-sm',
             'icon'    => 'fas fa-boxes pr-2',
             'can'     => ['sysadmin','admin','inventory_pharmacy','inventory_supply','inventory_warehouse'],
@@ -312,7 +312,7 @@ return [
 
                 //Estoque Almoxarifado
                 [
-                    'text'    => 'Almoxarifado',
+                    'text'    => 'Almoxarifados',
                     'classes' => 'btn-sm',
                     'route'   => 'inventory_supplies.index',
                     'icon'    => 'fas fa-cubes pr-2',
@@ -322,7 +322,7 @@ return [
 
                 //Estoque Farmácia
                 [
-                    'text'    => 'Farmácia',
+                    'text'    => 'Farmácias',
                     'classes' => 'btn-sm',
                     'route'   => 'inventory_pharmacies.index',
                     'icon'    => 'fas fa-capsules pr-2',
@@ -330,18 +330,29 @@ return [
                     'can'     => ['sysadmin','admin','inventory_pharmacy']
                 ],
 
-                //Estoque Farmácia
+            ]
+        ],    
+        
+        //Centros de Distribuições
+        [
+            'text'    => 'Centros de Distribuição',
+            'classes' => 'btn-sm',
+            'icon'    => 'fas fa-truck pr-2',
+            'can'     => ['sysadmin','admin','inventory_pharmacy','inventory_supply','inventory_warehouse'],
+            'submenu' => [
+
+                //Almoxarifado Central
                 [
-                    'text'    => 'Centro de Distribuição',
+                    'text'    => 'Almoxarifados Centrais',
                     'classes' => 'btn-sm',
                     'route'   => 'inventory_warehouses.index',
-                    'icon'    => 'fas fa-truck pr-2',
+                    'icon'    => 'fas fa-truck-loading pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin','inventory_warehouse']
                 ],
 
             ]
-        ],        
+        ], 
         
         //Lista Telefônica
         [
@@ -362,7 +373,7 @@ return [
 
         //Configurações de Perfil
         [
-            'text'    => 'Configurações de Perfil',
+            'text'    => 'Configurações de Perfis',
             'classes' => 'btn-sm',
             'icon'    => 'fas fa-users-cog pr-2',
             'can'     => ['sysadmin','admin'],
@@ -403,7 +414,7 @@ return [
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
-                            'text'    => 'Centros de Distribuições',
+                            'text'    => 'Almoxarifado Central',
                             'classes' => 'btn-sm',
                             'route'   => 'home',
                             'icon'    => 'fas fa-truck pr-2',
@@ -441,7 +452,7 @@ return [
                             'can'     => ['sysadmin','admin'],
                         ],
                         [
-                            'text'    => 'Tipo de Estabelecimento',
+                            'text'    => 'Tipo de Estabelecimentos',
                             'classes' => 'btn-sm',
                             'route'   => 'type_establishments.index',
                             'icon'    => 'fas fa-grip-horizontal pr-2',
@@ -513,7 +524,7 @@ return [
 
                 //Configuração de Estoque
                 [
-                    'text'    => 'Configuração de Itens',
+                    'text'    => 'Configuração dos Itens',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-boxes pr-2',
                     'icon_color' => 'info',
@@ -536,21 +547,21 @@ return [
                                     'can'     => ['sysadmin','admin'],
                                 ],
                                 [
-                                    'text'    => 'Tipo de Suprimentos',
+                                    'text'    => 'Tipos de Suprimentos',
                                     'classes' => 'btn-sm',
                                     'route'   => 'supply_types.index',
                                     'icon'    => 'fas fa-list-ol pr-2',
                                     'can'     => ['sysadmin','admin'],
                                 ],
                                 [
-                                    'text'    => 'Classificação de Suprimentos',
+                                    'text'    => 'Classificações de Suprimentos',
                                     'classes' => 'btn-sm',
                                     'route'   => 'supply_classifications.index',
                                     'icon'    => 'fas fa-stream pr-2',
                                     'can'     => ['sysadmin','admin'],
                                 ],
                                 [
-                                    'text'    => 'Apresentação',
+                                    'text'    => 'Apresentações',
                                     'classes' => 'btn-sm',
                                     'route'   => 'supply_units.index',
                                     'icon'    => 'fas fa-ruler pr-2',
@@ -575,21 +586,21 @@ return [
                                     'can'     => ['sysadmin','admin'],
                                 ],
                                 [
-                                    'text'    => 'Tipos de Medicamento',
+                                    'text'    => 'Tipos de Medicamentos',
                                     'classes' => 'btn-sm',
                                     'route'   => 'medication_types.index',
                                     'icon'    => 'fas fa-list-ol pr-2',
                                     'can'     => ['sysadmin','admin'],
                                 ],
                                 [
-                                    'text'    => 'Classificação Medicamento',
+                                    'text'    => 'Classificações de Medicamentos',
                                     'classes' => 'btn-sm',
                                     'route'   => 'medication_classifications.index',
                                     'icon'    => 'fas fa-stream pr-2',
                                     'can'     => ['sysadmin','admin'],
                                 ],
                                 [
-                                    'text'    => 'Apresentação',
+                                    'text'    => 'Apresentações',
                                     'classes' => 'btn-sm',
                                     'route'   => 'medication_units.index',
                                     'icon'    => 'fas fa-ruler pr-2',
