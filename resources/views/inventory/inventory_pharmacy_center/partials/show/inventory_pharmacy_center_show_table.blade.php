@@ -17,7 +17,7 @@
                     <x-table.td>{{$dbInventory->CompanyFinancialBlock->acronym}}</x-table.td>
                     <x-table.td>{{$dbInventory->quantity}}</x-table.td>
                     <x-table.td>
-                        <x-button.minButtonModalInfo id="InventoryWarehouseModel{{$dbInventory->id}}" title="Descrição do Produto no Estoque: {{$dbInventory->Medication->title}}">
+                        <x-button.minButtonModalInfo id="InventoryPharmacyCentersModel{{$dbInventory->id}}" title="Descrição do Medicamento no Estoque: {{$dbInventory->Medication->title}}">
                             <div>
                                 <x-table.table>
                                     @slot('thead')
@@ -43,7 +43,7 @@
                                                                 <!-- Modal toggle -->
                                                                 <button 
                                                                     data-toggle="modal"
-                                                                    data-target="#InventoryWarehouseExitModel_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}"
+                                                                    data-target="#InventoryPharmacyCentersExitModel_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}"
                                                                     class="flex items-center px-2 py-1 m-1 text-sm text-white bg-red-600 rounded-lg shadow-md hover:bg-red-500" 
                                                                     type="button"
                                                                 >
@@ -51,7 +51,7 @@
                                                                     <span>Saída</span>
                                                                 </button>
                                                             
-                                                                <div class="modal fade" id="InventoryWarehouseExitModel_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+                                                                <div class="modal fade" id="InventoryPharmacyCentersExitModel_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
                                                                     <div class="text-left modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -62,7 +62,7 @@
                                                                             </div>
                                                                             <div class="m-4 modal-body">
 
-                                                                                <x-form.form method="create" route="{{route('inventory_warehouses.exitStore')}}">
+                                                                                <x-form.form method="create" route="{{route('inventory_pharmacy_centers.exitStore')}}">
 
                                                                                         <input type="hidden" name="establishment_department_entry_id" value="{{$dbInventoryEntry->establishment_department_id}}">
                                                                                         <input type="hidden" name="establishment_entry_id" value="{{$dbInventoryEntry->establishment_id}}">

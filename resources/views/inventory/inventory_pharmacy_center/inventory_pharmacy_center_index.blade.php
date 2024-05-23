@@ -2,7 +2,7 @@
 
     <!-- Slot Header -->
     @slot('header')
-        <x-header title="Centros de Distribuições"/>
+        <x-header title="Central de Abastecimento Farmacêutico"/>
     @endslot
     
     <!-- Slot Body -->

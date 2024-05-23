@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Inventory\PharmacyCenter;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Inventory\PharmacyCenter\StoreInventoryPharmacyCenterEntryRequest;
-use App\Http\Requests\Inventory\StoreInventoryPharmacyCenterExitRequest;
+use App\Http\Requests\Inventory\PharmacyCenter\StoreInventoryPharmacyCenterExitRequest;
 use App\Models\Inventory\InventoryPharmacyCenter;
 use App\Models\Company\CompanyEstablishment;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyFinancialBlock;
 use App\Models\Inventory\InventoryPharmacyCenterEntry;
 use App\Models\Inventory\InventoryPharmacyCenterHistory;
-use App\Models\Supply\Supply;
+use App\Models\Medication\Medication;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -101,11 +101,11 @@ class InventoryPharmacyCenterController extends Controller
         if ($db->establishment_id == Auth::user()->establishment_id) {           
 
             // Recupera todos os produtos e bloco de financiamentos
-            $dbMedications = Supply::select()->orderBy('title')->get();
+            $dbMedications = Medication::select()->orderBy('title')->get();
             $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();
 
             // Recupera todos os departamentos com inventário de produtos
-            $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_supply', true)
+            $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_pharmacy', true)
             ->join('company_establishments', 'company_establishment_departments.establishment_id', '=', 'company_establishments.id')
             ->select('company_establishment_departments.*', 'company_establishments.title as establishment_title')
             ->orderBy('company_establishments.title')
@@ -118,32 +118,32 @@ class InventoryPharmacyCenterController extends Controller
             ->where('quantity', '>', 0)
             ->join('medications', 'inventory_pharmacy_center_entries.medication_id', '=', 'medications.id')
             ->join('company_financial_blocks', 'inventory_pharmacy_center_entries.financial_block_id', '=', 'company_financial_blocks.id')
-            ->select('inventory_pharmacy_center_entries.*', 'medications.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
+            ->select('inventory_pharmacy_center_entries.*', 'medications.title as medication_title', 'company_financial_blocks.acronym as financial_block_acronym')
             ->orderBy('medications.title')
             ->orderBy('quantity')
             ->orderBy('company_financial_blocks.acronym')
-            ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
+            ->with(['Medication','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
             ->get();
 
             // Consulta de inventário geral
             $dbInventories = InventoryPharmacyCenter::where('establishment_department_id', $id)
             ->join('medications', 'inventory_pharmacy_centers.medication_id', '=', 'medications.id')
             ->join('company_financial_blocks', 'inventory_pharmacy_centers.financial_block_id', '=', 'company_financial_blocks.id')
-            ->select('inventory_pharmacy_centers.*', 'medications.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
+            ->select('inventory_pharmacy_centers.*', 'medications.title as medication_title', 'company_financial_blocks.acronym as financial_block_acronym')
             ->orderBy('medications.title')
             ->orderBy('company_financial_blocks.acronym')
-            ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
+            ->with(['Medication','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
             ->get();       
 
             //Pesquisar Dados
             $search = $request->all();
             
-            if (isset($search['searchSupply']) || isset($search['searchFinancialBlock'])) {
+            if (isset($search['searchMedication']) || isset($search['searchFinancialBlock'])) {
 
                 $query = InventoryPharmacyCenter::query();
             
-                if (!empty($search['searchSupply'])) {
-                    $query->where('medication_id', $search['searchSupply']);
+                if (!empty($search['searchMedication'])) {
+                    $query->where('medication_id', $search['searchMedication']);
                 }
             
                 if (!empty($search['searchFinancialBlock'])) {
@@ -282,18 +282,18 @@ class InventoryPharmacyCenterController extends Controller
 
         if ($db->establishment_id == Auth::user()->establishment_id) {
 
-            $dbMedications = Supply::select()->orderBy('title')->get();;
+            $dbMedications = Medication::select()->orderBy('title')->get();;
             $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();;
             $dbInventories = InventoryPharmacyCenterHistory::where('inventory_pharmacy_center_histories.establishment_department_entry_id', $id)
                 ->where('inventory_pharmacy_center_histories.created_at', '>=', now()->subDays(7))
                 ->where('inventory_pharmacy_center_histories.movement', 'Entrada')
                 ->join('medications', 'inventory_pharmacy_center_histories.medication_id', '=', 'medications.id')
                 ->join('company_financial_blocks', 'inventory_pharmacy_center_histories.financial_block_id', '=', 'company_financial_blocks.id')
-                ->select('inventory_pharmacy_center_histories.*','medications.title as supply_title','company_financial_blocks.acronym as financial_block_acronym')
+                ->select('inventory_pharmacy_center_histories.*','medications.title as medication_title','company_financial_blocks.acronym as financial_block_acronym')
                 ->orderBy('inventory_pharmacy_center_histories.date', 'DESC')
                 ->orderBy('medications.title')
                 ->orderBy('company_financial_blocks.acronym')
-                ->with(['Supply', 'CompanyFinancialBlock', 'CompanyEstablishmentEntry', 'CompanyEstablishmentDepartmentEntry', 'CompanyEstablishmentExit', 'CompanyEstablishmentDepartmentExit'])
+                ->with(['Medication', 'CompanyFinancialBlock', 'CompanyEstablishmentEntry', 'CompanyEstablishmentDepartmentEntry', 'CompanyEstablishmentExit', 'CompanyEstablishmentDepartmentExit'])
                 ->select('inventory_pharmacy_center_histories.*')
                 ->limit(20)
                 ->get();
@@ -325,12 +325,12 @@ class InventoryPharmacyCenterController extends Controller
         $data['user_id'] = Auth::user()->id;
 
         //Verificando se existe estoque para realizar a saída
-        $InventoryQuantitySupply = InventoryPharmacyCenter::where('establishment_department_id',$data['establishment_department_entry_id'])
+        $InventoryQuantityMedication = InventoryPharmacyCenter::where('establishment_department_id',$data['establishment_department_entry_id'])
             ->where('medication_id', $data['medication_id'])
             ->where('financial_block_id', $data['financial_block_id'])
             ->first();
 
-        if ($InventoryQuantitySupply->quantity < $data['quantity']) {
+        if ($InventoryQuantityMedication->quantity < $data['quantity']) {
             return redirect()->back()->with('error','Quantidade informada para saída não compatível com a quantidade no estoque atual');
         }
 
@@ -409,26 +409,26 @@ class InventoryPharmacyCenterController extends Controller
         ->orderBy('created_at','DESC')
         ->paginate(40);        
 
-        if (!$dbEstablishmentDepartment->CompanyEstablishmentEntry->has_inventory_pharmacy_center) {
+        if ($dbEstablishmentDepartment->has_inventory_pharmacy_center) {
             //Log do Sistema
-            Logger::error('Centro de Distribuição não liberado para este departamento');
+            Logger::error('Central de Abastecimento Farmacêutico não liberado para este departamento');
 
-            return redirect()->route('inventory_pharmacy_centers.index')->with('error','Centro de Distribuição não liberado para este departamento');
+            return redirect()->route('inventory_pharmacy_centers.index')->with('error','Central de Abastecimento Farmacêutico não liberado para este departamento');
         }
 
-        if ($db->establishment_id == Auth::user()->establishment_id) {
+        if ($dbEstablishmentDepartment->id) {
             
-            $dbMedications = Supply::select()->orderBy('title')->get();
+            $dbMedications = Medication::select()->orderBy('title')->get();
 
             //Pesquisar Dados
             $search = $request->all();
             
-            if (isset($search['searchSupply']) || isset($search['searchDate'])) {
+            if (isset($search['searchMedication']) || isset($search['searchDate'])) {
     
                 $query = InventoryPharmacyCenterHistory::query();   
     
-                if (!empty($search['searchSupply'])) {
-                    $query->where('medication_id', $search['searchSupply']);
+                if (!empty($search['searchMedication'])) {
+                    $query->where('medication_id', $search['searchMedication']);
                 }        
     
                 if (!empty($search['searchDate'])) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Inventory;
+namespace App\Http\Requests\Inventory\PharmacyCenter;
 
 use Illuminate\Foundation\Http\FormRequest;
 

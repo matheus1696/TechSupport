@@ -139,11 +139,11 @@ Route::middleware('auth')->group(function () {
             Route::resource('inventory_pharmacies', InventoryPharmacyController::class);
             
             //Rotas de Inventário/Estoque de Centro de Distribuições            
-            Route::get('inventory_pharmacy_centers/entry/{inventory_warehouse}',[InventoryPharmacyCenterController::class,'entryShow'])->name('inventory_pharmacy_centers.entryShow');
+            Route::get('inventory_pharmacy_centers/entry/{inventory_pharmacy_center}',[InventoryPharmacyCenterController::class,'entryShow'])->name('inventory_pharmacy_centers.entryShow');
             Route::post('inventory_pharmacy_centers/entry',[InventoryPharmacyCenterController::class,'entryStore'])->name('inventory_pharmacy_centers.entryStore');
-            Route::get('inventory_pharmacy_centers/exit/{inventory_warehouse}',[InventoryPharmacyCenterController::class,'entryCreate'])->name('inventory_pharmacy_centers.entryCreate');
+            Route::get('inventory_pharmacy_centers/entry/{inventory_pharmacy_center}',[InventoryPharmacyCenterController::class,'entryCreate'])->name('inventory_pharmacy_centers.entryCreate');
             Route::post('inventory_pharmacy_centers/exit',[InventoryPharmacyCenterController::class,'exitStore'])->name('inventory_pharmacy_centers.exitStore');
-            Route::get('inventory_pharmacy_centers/history/{inventory_warehouse}',[InventoryPharmacyCenterController::class,'history'])->name('inventory_pharmacy_centers.history');
+            Route::get('inventory_pharmacy_centers/history/{inventory_pharmacy_center}',[InventoryPharmacyCenterController::class,'history'])->name('inventory_pharmacy_centers.history');
             Route::resource('inventory_pharmacy_centers', InventoryPharmacyCenterController::class);
     
             //Rotas de Inventário/Estoque de Produtos        
@@ -157,7 +157,7 @@ Route::middleware('auth')->group(function () {
             //Rotas de Inventário/Estoque de Centro de Distribuições            
             Route::get('inventory_warehouses/entry/{inventory_warehouse}',[InventoryWarehouseController::class,'entryShow'])->name('inventory_warehouses.entryShow');
             Route::post('inventory_warehouses/entry',[InventoryWarehouseController::class,'entryStore'])->name('inventory_warehouses.entryStore');
-            Route::get('inventory_warehouses/exit/{inventory_warehouse}',[InventoryWarehouseController::class,'entryCreate'])->name('inventory_warehouses.entryCreate');
+            Route::get('inventory_warehouses/entry/{inventory_warehouse}',[InventoryWarehouseController::class,'entryCreate'])->name('inventory_warehouses.entryCreate');
             Route::post('inventory_warehouses/exit',[InventoryWarehouseController::class,'exitStore'])->name('inventory_warehouses.exitStore');
             Route::get('inventory_warehouses/history/{inventory_warehouse}',[InventoryWarehouseController::class,'history'])->name('inventory_warehouses.history');
             Route::resource('inventory_warehouses', InventoryWarehouseController::class);

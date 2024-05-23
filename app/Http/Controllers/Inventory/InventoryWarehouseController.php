@@ -98,7 +98,7 @@ class InventoryWarehouseController extends Controller
             return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        if ($db->establishment_id == Auth::user()->establishment_id) {           
+        if ($db->establishment_id) {           
 
             // Recupera todos os produtos e bloco de financiamentos
             $dbSupplies = Supply::select()->orderBy('title')->get();
@@ -280,7 +280,7 @@ class InventoryWarehouseController extends Controller
             return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        if ($db->establishment_id == Auth::user()->establishment_id) {
+        if ($db->establishment_id) {
 
             $dbSupplies = Supply::select()->orderBy('title')->get();;
             $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();;
@@ -409,14 +409,14 @@ class InventoryWarehouseController extends Controller
         ->orderBy('created_at','DESC')
         ->paginate(40);        
 
-        if (!$dbEstablishmentDepartment->CompanyEstablishmentEntry->has_inventory_warehouse) {
+        if (!$dbEstablishmentDepartment->has_inventory_warehouse) {
             //Log do Sistema
             Logger::error('Centro de Distribuição não liberado para este departamento');
 
             return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        if ($db->establishment_id == Auth::user()->establishment_id) {
+        if ($dbEstablishmentDepartment->establishment_id) {
             
             $dbSupplies = Supply::select()->orderBy('title')->get();
 

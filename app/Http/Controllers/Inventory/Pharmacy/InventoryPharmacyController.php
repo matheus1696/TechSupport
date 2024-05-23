@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Inventory\Pharmacy\StoreInventoryPharmacyHistoryRequest;
 use App\Http\Requests\Inventory\Pharmacy\StoreInventoryPharmacyRequest;
 use App\Http\Requests\Inventory\Pharmacy\UpdateInventoryPharmacyRequest;
-use App\Http\Requests\Inventory\StoreInventoryPharmacyCenterHistoryRequest;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Inventory\InventoryPharmacy;
 use App\Models\Inventory\InventoryPharmacyCenterHistory;
@@ -322,7 +321,7 @@ class InventoryPharmacyController extends Controller
             ->orderBy('created_at','DESC')
             ->paginate(40);
     
-            $dbMedications = InventoryPharmacyHistory::select()->orderBy('title')->get();
+            $dbMedications = Medication::select()->orderBy('title')->get();
     
             //Pesquisar Dados
             $search = $request->all();

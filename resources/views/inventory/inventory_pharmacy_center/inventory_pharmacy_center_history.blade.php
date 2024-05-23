@@ -3,7 +3,7 @@
     <!-- Slot Header -->
     @slot('header')
         <x-header 
-            title="Histórico de Movimentação"
+            title="Central de Abastecimento Farmacêutico"
             routeBack="{{route('inventory_pharmacy_centers.show',['inventory_pharmacy_center'=>$dbEstablishmentDepartment->establishment_department_entry_id])}}"
         />
     @endslot
