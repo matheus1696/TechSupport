@@ -23,10 +23,10 @@ use App\Http\Controllers\Admin\Region\RegionCityController;
 use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
 use App\Http\Controllers\Admin\User\UsersController;
-use App\Http\Controllers\Inventory\InventoryPharmacyController;
-use App\Http\Controllers\Inventory\InventoryPharmacyHistoryController;
+use App\Http\Controllers\Inventory\PharmacyCenter\InventoryPharmacyCenterController;
 use App\Http\Controllers\Inventory\InventorySupplyController;
 use App\Http\Controllers\Inventory\InventoryWarehouseController;
+use App\Http\Controllers\Inventory\Pharmacy\InventoryPharmacyController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Public\ContactListsController;
 
@@ -129,6 +129,22 @@ Route::middleware('auth')->group(function () {
 
         //Grupo de Rodas - Configurações do Sistema
         Route::prefix('inventory')->group(function (){
+
+            //Rotas de Inventário/Estoque de Produtos        
+            Route::post('inventory_pharmacies/exit',[InventoryPharmacyController::class,'exitStore'])->name('inventory_pharmacies.exitStore');           
+            Route::post('inventory_pharmacies/entry',[InventoryPharmacyController::class,'entryStore'])->name('inventory_pharmacies.entryStore');
+            Route::get('inventory_pharmacies/entry/{inventory_pharmacy}',[InventoryPharmacyController::class,'entryCreate'])->name('inventory_pharmacies.entryCreate');
+            Route::get('inventory_pharmacies/history/{inventory_pharmacy}',[InventoryPharmacyController::class,'history'])->name('inventory_pharmacies.history');
+            Route::get('inventory_pharmacies/request/{inventory_pharmacy}',[InventoryPharmacyController::class,'request'])->name('inventory_pharmacies.request');
+            Route::resource('inventory_pharmacies', InventoryPharmacyController::class);
+            
+            //Rotas de Inventário/Estoque de Centro de Distribuições            
+            Route::get('inventory_pharmacy_centers/entry/{inventory_warehouse}',[InventoryPharmacyCenterController::class,'entryShow'])->name('inventory_pharmacy_centers.entryShow');
+            Route::post('inventory_pharmacy_centers/entry',[InventoryPharmacyCenterController::class,'entryStore'])->name('inventory_pharmacy_centers.entryStore');
+            Route::get('inventory_pharmacy_centers/exit/{inventory_warehouse}',[InventoryPharmacyCenterController::class,'entryCreate'])->name('inventory_pharmacy_centers.entryCreate');
+            Route::post('inventory_pharmacy_centers/exit',[InventoryPharmacyCenterController::class,'exitStore'])->name('inventory_pharmacy_centers.exitStore');
+            Route::get('inventory_pharmacy_centers/history/{inventory_warehouse}',[InventoryPharmacyCenterController::class,'history'])->name('inventory_pharmacy_centers.history');
+            Route::resource('inventory_pharmacy_centers', InventoryPharmacyCenterController::class);
     
             //Rotas de Inventário/Estoque de Produtos        
             Route::post('inventory_supplies/exit',[InventorySupplyController::class,'exitStore'])->name('inventory_supplies.exitStore');           
@@ -137,12 +153,6 @@ Route::middleware('auth')->group(function () {
             Route::get('inventory_supplies/history/{inventory_supply}',[InventorySupplyController::class,'history'])->name('inventory_supplies.history');
             Route::get('inventory_supplies/request/{inventory_supply}',[InventorySupplyController::class,'request'])->name('inventory_supplies.request');
             Route::resource('inventory_supplies', InventorySupplyController::class);
-            
-            //Rotas de Inventário/Estoque Farmacêutico
-            Route::post('inventory_pharmacies/entry',[InventoryPharmacyController::class,'entryStore'])->name('inventory_pharmacies.entryStore');
-            Route::get('inventory_pharmacies/entry/{inventory_pharmacy}',[InventoryPharmacyController::class,'entryCreate'])->name('inventory_pharmacies.entryCreate');
-            Route::resource('inventory_pharmacies', InventoryPharmacyController::class);
-            Route::resource('inventory_pharmacy_histories', InventoryPharmacyHistoryController::class);
             
             //Rotas de Inventário/Estoque de Centro de Distribuições            
             Route::get('inventory_warehouses/entry/{inventory_warehouse}',[InventoryWarehouseController::class,'entryShow'])->name('inventory_warehouses.entryShow');

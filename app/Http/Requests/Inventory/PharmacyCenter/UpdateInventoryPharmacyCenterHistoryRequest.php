@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Inventory;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateInventoryPharmacyRequest extends FormRequest
+class UpdateInventoryPharmacyCenterHistoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +23,14 @@ class UpdateInventoryPharmacyRequest extends FormRequest
     {
         return [
             //
-            'title' => [
-                'required',
-                'min:6',
-                Rule::unique('medications')->ignore($this->title),
-            ],
-            'description' => 'nullable|min:10',
-            'medication_classification_id' => 'required',
-            'medication_unit_id' => 'required',
-            'medication_type_id' => 'required',
+            'invoice' => 'required',
+            'supply_order' => 'required',
+            'supply_company' => 'required',
+            'date' => 'required',
+            'quantity' => 'required',
+            'movement' => 'required',
+            'medication_id' => 'required',
+            'financial_block_id' => 'required',
         ];
     }
 }

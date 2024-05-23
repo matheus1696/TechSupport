@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Inventory;
+namespace App\Http\Requests\Inventory\PharmacyCenter;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreInventoryPharmacyRequest extends FormRequest
+class StoreInventoryPharmacyCenterEntryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,15 @@ class StoreInventoryPharmacyRequest extends FormRequest
     {
         return [
             //
+            'invoice' => 'required|min:1',
+            'supply_order' => 'required|min:8',
+            'supply_company' => 'required|min:1',
             'date' => 'required',
-            'medication_id' => 'required',
-            'description' => 'nullable|min:10',
-            'moviment' => 'required',
             'quantity' => 'required',
+            'medication_id' => 'required',
+            'financial_block_id' => 'required',
+            'establishment_entry_id' => 'required',
+            'establishment_department_entry_id' => 'required',
         ];
     }
 }

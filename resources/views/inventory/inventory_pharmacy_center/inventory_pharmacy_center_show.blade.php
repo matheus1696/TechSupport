@@ -3,9 +3,9 @@
     <!-- Slot Header -->
     @slot('header')
         <x-header 
-            title="Estoque Unidade: {{ $db->department }} - {{ $db->CompanyEstablishment->title }}"
-            routeCreate="{{route('inventory_pharmacies.request',['inventory_pharmacy'=>$db->id])}}" btnTitleCreate="Pedidos/Entregas"
-            routeBack="{{route('inventory_pharmacies.index')}}"
+            title="Estoque: {{ $db->CompanyEstablishment->title }} - {{ $db->department }}"
+            routeCreate="{{route('inventory_pharmacy_centers.entryCreate',['inventory_pharmacy_center'=>$db->id])}}" btnTitleCreate="Entrada"
+            routeBack="{{route('inventory_pharmacy_centers.index')}}"
         />
     @endslot
 
@@ -22,13 +22,18 @@
                 </ul>
             </div>
         @endif
+
+        <div>
+            @include('inventory.inventory_pharmacy_center.partials.show.inventory_pharmacy_center_show_search')
+        </div>
+
+        <div>
+            @include('inventory.inventory_pharmacy_center.partials.show.inventory_pharmacy_center_show_table')
+        </div>
         
         <div>
-            @include('inventory.inventory_pharmacy.partials.show.inventory_pharmacy_show_table')
-        </div>
-        <div>
             <p class="pr-3 text-xs text-end">
-                <a href="{{route('inventory_pharmacies.history',['inventory_pharmacy'=>$db->id])}}" class="text-gray-400 hover:text-gray-900">Verificar Histórico de Movimentação</a>
+                <a href="{{route('inventory_pharmacy_centers.history',['inventory_pharmacy_center'=>$db->id])}}" class="text-gray-400 hover:text-gray-900">Verificar Histórico de Movimentação</a>
             </p>
         </div>
     @endslot
