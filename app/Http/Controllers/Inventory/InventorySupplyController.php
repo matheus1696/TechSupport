@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Inventory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Inventory\StoreInventorySupplyHistoryRequest;
 use App\Models\Inventory\InventorySupply;
-use App\Http\Requests\Inventory\StoreInventorySupplyRequest;
-use App\Http\Requests\Inventory\UpdateInventorySupplyRequest;
+use App\Models\Company\CompanyEstablishment;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Inventory\InventorySupplyHistory;
 use App\Models\Inventory\InventoryWarehouseHistory;
@@ -31,24 +30,17 @@ class InventorySupplyController extends Controller
     public function index(Request $request)
     {
         //Listagem de Dados
-        $db = CompanyEstablishmentDepartment::where('has_inventory_supply',TRUE)
-        ->orderBy('department')
-        ->paginate(20);        
+        $query = CompanyEstablishmentDepartment::query();
+        $db = $query->where('has_inventory_supply',TRUE)->orderBy('department')->paginate(20);
+        $dbEstablishments = CompanyEstablishment::all();
 
         //Pesquisar Dados
         $search = $request->all();
-
         if (isset($search['searchSector']) || isset($search['searchEstablishment'])) {
-            
-            if (isset($search['searchEstablishment']) == NULL) {
-                $search['searchEstablishment'] = 0;
-            };
-
-            $db = CompanyEstablishmentDepartment::where('filter','LIKE','%'.strtolower($search['searchSector']).'%')
-                ->orWhere('establishment_id',$search['searchEstablishment'])
-                ->where('has_inventory_supply',TRUE)
-                ->orderBy('department')
-                ->paginate(20);
+            if (!empty($search['searchSector'])) { $query->where('filter','LIKE','%'.strtolower($search['searchSector']).'%');}    
+            if (!empty($search['searchEstablishment'])) { $query->where('establishment_id', $search['searchEstablishment']);}
+            $query ->where('has_inventory_supply',TRUE);
+            $db = $query->orderBy('department')->paginate(20);
         }
 
         //Log do Sistema
@@ -57,33 +49,25 @@ class InventorySupplyController extends Controller
         return view('inventory.inventory_supply.inventory_supply_index',[
             'search'=>$search,
             'db'=>$db,
+            'dbEstablishments'=>$dbEstablishments,
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-        return redirect()->route('login');
-    }
+    public function create(){ return redirect()->route('login');}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInventorySupplyRequest $request)
-    {
-        //
-        return redirect()->route('login');
-    }
+    public function store(){ return redirect()->route('login');}
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
         $db = CompanyEstablishmentDepartment::find($id);
 
         if (!$db->has_inventory_supply) {
@@ -93,7 +77,7 @@ class InventorySupplyController extends Controller
             return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
         }        
 
-        if ($db->establishment_id == Auth::user()->establishment_id) {
+        if ($db->establishment_id) {
 
             $dbSupplies = Supply::all();
             $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
@@ -114,45 +98,34 @@ class InventorySupplyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(){ return redirect()->route('login');}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInventorySupplyRequest $request, InventorySupply $inventorySupply)
-    {
-        //
-        return redirect()->route('login');
-    }
+    public function update(){ return redirect()->route('login');}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InventorySupply $inventorySupply)
-    {
-        //
-        return redirect()->route('login');
-    }
+    public function destroy(){ return redirect()->route('login');}
 
     /**
      * Show the form for editing the specified resource.
      */
     public function request(string $id)
     {
-        //
         $db = CompanyEstablishmentDepartment::find($id);       
 
         if (!$db->has_inventory_supply) {
+
             //Log do Sistema
             Logger::error($db->title);
 
             return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
         }        
 
-        if ($db->establishment_id == Auth::user()->establishment_id) {
+        if ($db->establishment_id) {
             
             $dbSupplies = Supply::all();
             $dbInventories = InventorySupply::where('establishment_department_id', $id)->get();
@@ -181,7 +154,6 @@ class InventorySupplyController extends Controller
      */
     public function entryCreate(string $id)
     {
-        //
         $db = CompanyEstablishmentDepartment::find($id);      
 
         if (!$db->has_inventory_supply) {
@@ -191,7 +163,7 @@ class InventorySupplyController extends Controller
             return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
         }        
 
-        if ($db->establishment_id == Auth::user()->establishment_id) {
+        if ($db->establishment_id) {
 
             $dbSupplies = Supply::all();
             $dbInventoryHistories = InventorySupplyHistory::where('loose',TRUE)->orderBy('created_at')->limit(20)->get();
@@ -204,7 +176,6 @@ class InventorySupplyController extends Controller
                 'dbSupplies'=>$dbSupplies,
                 'dbInventoryHistories'=>$dbInventoryHistories,
             ]);
-            
         }        
 
         return redirect()->route('inventory_supplies.index')->with('error','Usuário sem permissão de acessar esse estoque');
@@ -215,7 +186,6 @@ class InventorySupplyController extends Controller
      */
     public function entryStore(StoreInventorySupplyHistoryRequest $request)
     {
-        //
         $data = $request->all();
         $data['code'] = "SMS".time();
         $data['date'] = date('Y-m-d');
@@ -238,13 +208,8 @@ class InventorySupplyController extends Controller
         }
         
         // Atualizar a quantidade no inventário com base no movimento
-        if ($data['movement'] === "Entrada") {
             $db->quantity += $data['quantity'];
-        } elseif ($data['movement'] === "Saída") {
-            $db->quantity -= $data['quantity'];
-        }
-
-        $db->save();
+            $db->save();
 
         if (isset($data['inventary_history'])) {
             $dbHistory = InventoryWarehouseHistory::find($data['inventary_history']);
@@ -261,21 +226,22 @@ class InventorySupplyController extends Controller
      */
     public function exitStore(StoreInventorySupplyHistoryRequest $request)
     {
-        //
         $data = $request->all();
         $data['code'] = "SMS".time();
         $data['date'] = date('Y-m-d');
         $data['movement'] = 'Saída';
         $data['user_id'] = Auth::user()->id;
-
-        //Verificando se existe estoque para realizar a saída
+        
+        /* //Verificando se existe estoque para realizar a saída
         $InventoryQuantitySupply = InventorySupply::where('establishment_department_id',$data['establishment_department_id'])
             ->where('supply_id', $data['supply_id'])
             ->first();
 
         if ($InventoryQuantitySupply->quantity < $data['quantity']) {
-            return redirect()->back()->with('error','Quantidade informada para saída não compatível com a quantidade no estoque atual');
+            return redirect()->back()
+                ->with('error','Quantidade informada para saída não compatível com a quantidade no estoque atual');
         }
+        */
 
         InventorySupplyHistory::create($data);
 
@@ -305,34 +271,30 @@ class InventorySupplyController extends Controller
     public function history(Request $request,string $id)
     {
         //Listagem de Dados
-        $dbEstablishmentDepartment = InventorySupplyHistory::where('establishment_department_id',$id)
-        ->first();
+        $dbEstablishmentDepartment = CompanyEstablishmentDepartment::find($id);
 
-        if (!$dbEstablishmentDepartment->CompanyEstablishmentDepartment->has_inventory_supply) {
+        if (!$dbEstablishmentDepartment->has_inventory_supply) {
             //Log do Sistema
             Logger::error($dbEstablishmentDepartment->title);
 
             return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
         }       
 
-        if ($dbEstablishmentDepartment->establishment_id == Auth::user()->establishment_id) {
+        if ($dbEstablishmentDepartment->establishment_id) {
 
             $db = InventorySupplyHistory::where('establishment_department_id',$id)
             ->orderBy('created_at','DESC')
             ->paginate(40);
     
             $dbSupplies = Supply::select()->orderBy('title')->get();
-    
+
             //Pesquisar Dados
             $search = $request->all();
-            if (isset($search['searchSupply']) || isset($search['searchDate'])) {
-                $query = InventoryWarehouseHistory::query();
-                if (!empty($search['searchSupply'])) {
-                    $query->where('supply_id', $search['searchSupply']);
-                }
-                if (!empty($search['searchDate'])) {
-                    $query->where('date', $search['searchDate']);
-                }
+            if (isset($search['searchSupply']) || isset($search['searchDate']) || isset($search['searchMovement'])) {                
+                $query = InventoryWarehouseHistory::query();                
+                if (!empty($search['searchDate'])) { $query->where('date', $search['searchDate']);}    
+                if (!empty($search['searchMovement'])) { $query->where('movement', $search['searchMovement']);}   
+                if (!empty($search['searchSupply'])) { $query->where('supply_id', $search['searchSupply']);}
                 $db = $query->orderBy('quantity')->paginate(40);
             }
     

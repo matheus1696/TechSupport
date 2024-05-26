@@ -3,19 +3,14 @@
     
     <x-search.selectSearch label="Suprimentos" id="searchSupply" class="flex-1">
         @foreach ($dbSupplies as $dbSupply)
-            @foreach ($dbInventories as $dbInventory)
-                @if ($dbSupply->id == $dbInventory->supply_id)
-                    <option 
-                        value="{{$dbSupply->id}}"
-                        @isset($search['searchSupply'])
-                            @if($dbSupply->id == $search['searchSupply']) selected @endif
-                        @endisset
-                    >
-                        {{$dbSupply->title}}
-                        @break
-                    </option>
-                @endif
-            @endforeach
+            <option 
+                value="{{$dbSupply->id}}"
+                @isset($search['searchSupply'])
+                    @if($dbSupply->id == $search['searchSupply']) selected @endif
+                @endisset
+            >
+                {{$dbSupply->title}}
+            </option>
         @endforeach
     </x-search.selectSearch>
 
