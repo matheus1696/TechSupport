@@ -1,6 +1,6 @@
 <!-- Search -->
 <x-search.formSearch>
-    <x-search.inputSearch label="Data" type="date" id="searchDate" value="{{ $search['searchDate'] ?? '' }}"/>
+    <x-search.inputSearch label="Data" type="date" id="searchDate" value="{{ $search['searchDate'] ?? '' }}"/>    
 
     <x-search.selectSearch label="Movimentação" id="searchMovement">
         <option 

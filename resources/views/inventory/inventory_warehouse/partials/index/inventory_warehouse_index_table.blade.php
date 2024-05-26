@@ -2,7 +2,7 @@
 <x-table.table :db="$db">
     <!-- Components THead -->
     @slot('thead')
-        <x-table.th>Setor</x-table.th>
+        <x-table.th>Departamento</x-table.th>
         <x-table.th>Estabelecimento</x-table.th>
         <x-table.th>Bairro</x-table.th>
         <x-table.th class="w-28">Acesso</x-table.th>

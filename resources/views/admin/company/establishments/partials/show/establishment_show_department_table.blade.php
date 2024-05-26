@@ -23,14 +23,17 @@
                         @if($dbDepartment->type_contact == "Internal") Ramal Interno @endif
                     </x-table.td>                    
                     <x-table.td>
-                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_supply}}" name="has_inventory_supply" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
-                    </x-table.td>                    
+                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_warehouse}}" name="has_inventory_warehouse" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
+                    </x-table.td>                     
+                    <x-table.td>
+                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_warehouse}}" name="has_inventory_warehouse_center" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
+                    </x-table.td>                  
                     <x-table.td>
                         <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_pharmacy}}" name="has_inventory_pharmacy" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
-                    </x-table.td>                    
+                    </x-table.td>                  
                     <x-table.td>
-                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_warehouse}}" name="has_inventory_warehouse" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
-                    </x-table.td>
+                        <x-button.buttonStatus condition="{{$dbDepartment->has_inventory_pharmacy_center}}" name="has_inventory_pharmacy_center" route="{{route('establishment_departments.hasInventory',['establishment_department'=>$dbDepartment->id])}}" />
+                    </x-table.td> 
                     <x-table.td class="text-center">
                         
                         <x-button.minButtonModalEdit id="Departamento{{$dbDepartment->id}}" title="{{$dbDepartment->department}}">

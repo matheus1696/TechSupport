@@ -15,18 +15,18 @@ use App\Http\Controllers\Admin\Medication\MedicationClassificationController;
 use App\Http\Controllers\Admin\Medication\MedicationController;
 use App\Http\Controllers\Admin\Medication\MedicationTypeController;
 use App\Http\Controllers\Admin\Medication\MedicationUnitController;
-use App\Http\Controllers\Admin\Supply\SupplyClassificationController;
-use App\Http\Controllers\Admin\Supply\SupplyController;
-use App\Http\Controllers\Admin\Supply\SupplyTypeController;
-use App\Http\Controllers\Admin\Supply\SupplyUnitController;
+use App\Http\Controllers\Admin\Consumable\ConsumableClassificationController;
+use App\Http\Controllers\Admin\Consumable\ConsumableController;
+use App\Http\Controllers\Admin\Consumable\ConsumableTypeController;
+use App\Http\Controllers\Admin\Consumable\ConsumableUnitController;
 use App\Http\Controllers\Admin\Region\RegionCityController;
 use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
 use App\Http\Controllers\Admin\User\UsersController;
-use App\Http\Controllers\Inventory\PharmacyCenter\InventoryPharmacyCenterController;
-use App\Http\Controllers\Inventory\InventorySupplyController;
-use App\Http\Controllers\Inventory\InventoryWarehouseController;
+use App\Http\Controllers\Inventory\Warehouse\InventoryWarehouseController;
+use App\Http\Controllers\Inventory\WarehouseCenter\InventoryWarehouseCenterController;
 use App\Http\Controllers\Inventory\Pharmacy\InventoryPharmacyController;
+use App\Http\Controllers\Inventory\PharmacyCenter\InventoryPharmacyCenterController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Public\ContactListsController;
 
@@ -93,20 +93,20 @@ Route::middleware('auth')->group(function () {
             });
 
             //Grupo de Rotas - Configuração de Localização
-            Route::prefix('supply')->group(function (){
+            Route::prefix('consumable')->group(function (){
 
                 //Rota - Apresentação de Medicamentos
-                    Route::put('supply_classifications/status/{supply_classification}',[SupplyClassificationController::class,'status'])->name('supply_classifications.status');
-                    Route::resource('supply_classifications',SupplyClassificationController::class);
+                    Route::put('consumable_classifications/status/{consumable_classification}',[ConsumableClassificationController::class,'status'])->name('consumable_classifications.status');
+                    Route::resource('consumable_classifications',ConsumableClassificationController::class);
                 //Rota - Apresentação de Medicamentos                
-                    Route::put('supply_units/status/{supply_unit}',[SupplyUnitController::class,'status'])->name('supply_units.status');
-                    Route::resource('supply_units',SupplyUnitController::class);    
+                    Route::put('consumable_units/status/{consumable_unit}',[ConsumableUnitController::class,'status'])->name('consumable_units.status');
+                    Route::resource('consumable_units',ConsumableUnitController::class);    
                 //Rota - Tipos de Medicamentos                    
-                    Route::put('supply_types/status/{supply_type}',[SupplyTypeController::class,'status'])->name('supply_types.status');
-                    Route::resource('supply_types',SupplyTypeController::class);
+                    Route::put('consumable_types/status/{consumable_type}',[ConsumableTypeController::class,'status'])->name('consumable_types.status');
+                    Route::resource('consumable_types',ConsumableTypeController::class);
                 //Rota - Medicamentos
-                    Route::put('supplies/status/{supply}',[SupplyController::class,'status'])->name('supplies.status');
-                    Route::resource('supplies',SupplyController::class);
+                    Route::put('consumables/status/{consumable}',[ConsumableController::class,'status'])->name('consumables.status');
+                    Route::resource('consumables',ConsumableController::class);
             });
 
             //Grupo de Rotas - Configuração de Localização
@@ -147,20 +147,20 @@ Route::middleware('auth')->group(function () {
             Route::resource('inventory_pharmacy_centers', InventoryPharmacyCenterController::class);
     
             //Rotas de Inventário/Estoque de Produtos        
-            Route::post('inventory_supplies/exit',[InventorySupplyController::class,'exitStore'])->name('inventory_supplies.exitStore');           
-            Route::post('inventory_supplies/entry',[InventorySupplyController::class,'entryStore'])->name('inventory_supplies.entryStore');
-            Route::get('inventory_supplies/entry/{inventory_supply}',[InventorySupplyController::class,'entryCreate'])->name('inventory_supplies.entryCreate');
-            Route::get('inventory_supplies/history/{inventory_supply}',[InventorySupplyController::class,'history'])->name('inventory_supplies.history');
-            Route::get('inventory_supplies/request/{inventory_supply}',[InventorySupplyController::class,'request'])->name('inventory_supplies.request');
-            Route::resource('inventory_supplies', InventorySupplyController::class);
-            
-            //Rotas de Inventário/Estoque de Centro de Distribuições            
-            Route::get('inventory_warehouses/entry/{inventory_warehouse}',[InventoryWarehouseController::class,'entryShow'])->name('inventory_warehouses.entryShow');
+            Route::post('inventory_warehouses/exit',[InventoryWarehouseController::class,'exitStore'])->name('inventory_warehouses.exitStore');           
             Route::post('inventory_warehouses/entry',[InventoryWarehouseController::class,'entryStore'])->name('inventory_warehouses.entryStore');
             Route::get('inventory_warehouses/entry/{inventory_warehouse}',[InventoryWarehouseController::class,'entryCreate'])->name('inventory_warehouses.entryCreate');
-            Route::post('inventory_warehouses/exit',[InventoryWarehouseController::class,'exitStore'])->name('inventory_warehouses.exitStore');
             Route::get('inventory_warehouses/history/{inventory_warehouse}',[InventoryWarehouseController::class,'history'])->name('inventory_warehouses.history');
+            Route::get('inventory_warehouses/request/{inventory_warehouse}',[InventoryWarehouseController::class,'request'])->name('inventory_warehouses.request');
             Route::resource('inventory_warehouses', InventoryWarehouseController::class);
+            
+            //Rotas de Inventário/Estoque de Centro de Distribuições            
+            Route::get('inventory_warehouse_centers/entry/{inventory_warehouse_center}',[InventoryWarehouseCenterController::class,'entryShow'])->name('inventory_warehouse_centers.entryShow');
+            Route::post('inventory_warehouse_centers/entry',[InventoryWarehouseCenterController::class,'entryStore'])->name('inventory_warehouse_centers.entryStore');
+            Route::get('inventory_warehouse_centers/entry/{inventory_warehouse_center}',[InventoryWarehouseCenterController::class,'entryCreate'])->name('inventory_warehouse_centers.entryCreate');
+            Route::post('inventory_warehouse_centers/exit',[InventoryWarehouseCenterController::class,'exitStore'])->name('inventory_warehouse_centers.exitStore');
+            Route::get('inventory_warehouse_centers/history/{inventory_warehouse_center}',[InventoryWarehouseCenterController::class,'history'])->name('inventory_warehouse_centers.history');
+            Route::resource('inventory_warehouse_centers', InventoryWarehouseCenterController::class);
         }); 
 
     });

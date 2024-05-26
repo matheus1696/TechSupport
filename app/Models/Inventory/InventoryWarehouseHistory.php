@@ -4,7 +4,6 @@ namespace App\Models\Inventory;
 
 use App\Models\Company\CompanyEstablishment;
 use App\Models\Company\CompanyEstablishmentDepartment;
-use App\Models\Company\CompanyFinancialBlock;
 use App\Models\Supply\Supply;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,15 +22,11 @@ class InventoryWarehouseHistory extends Model
         'date',
         'movement',
         'quantity',
-        'batch',
-        'due_date',
         'description',
+        'loose',
         'supply_id',
-        'financial_block_id',
-        'establishment_entry_id',
-        'establishment_department_entry_id',
-        'establishment_exit_id',
-        'establishment_department_exit_id',
+        'establishment_id',
+        'establishment_department_id',
         'user_id'
     ];
 
@@ -43,23 +38,11 @@ class InventoryWarehouseHistory extends Model
         return $this->belongsTo(Supply::class,'supply_id','id');
     }
 
-    public function CompanyFinancialBlock(){
-        return $this->belongsTo(CompanyFinancialBlock::class,'financial_block_id','id');
+    public function CompanyEstablishment(){
+        return $this->belongsTo(CompanyEstablishment::class,'establishment_id','id');
     }
 
-    public function CompanyEstablishmentEntry(){
-        return $this->belongsTo(CompanyEstablishment::class,'establishment_entry_id','id');
-    }
-
-    public function CompanyEstablishmentDepartmentEntry(){
-        return $this->belongsTo(CompanyEstablishmentDepartment::class,'establishment_department_entry_id','id');
-    }
-
-    public function CompanyEstablishmentExit(){
-        return $this->belongsTo(CompanyEstablishment::class,'establishment_exit_id','id');
-    }
-
-    public function CompanyEstablishmentDepartmentExit(){
-        return $this->belongsTo(CompanyEstablishmentDepartment::class,'establishment_department_exit_id','id');
+    public function CompanyEstablishmentDepartment(){
+        return $this->belongsTo(CompanyEstablishmentDepartment::class,'establishment_department_id','id');
     }
 }

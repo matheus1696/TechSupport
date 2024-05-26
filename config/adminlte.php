@@ -307,22 +307,22 @@ return [
             'text'    => 'Estoques',
             'classes' => 'btn-sm',
             'icon'    => 'fas fa-boxes pr-2',
-            'can'     => ['sysadmin','admin','inventory_pharmacy','inventory_supply','inventory_warehouse'],
+            'can'     => ['sysadmin','admin','inventory_pharmacy','inventory_warehouse'],
             'submenu' => [
 
                 //Estoque Almoxarifado
                 [
-                    'text'    => 'Almoxarifados',
+                    'text'    => 'Almoxarifado',
                     'classes' => 'btn-sm',
-                    'route'   => 'inventory_supplies.index',
+                    'route'   => 'inventory_warehouses.index',
                     'icon'    => 'fas fa-cubes pr-2',
                     'icon_color' => 'info',
-                    'can'     => ['sysadmin','admin','inventory_supply']
+                    'can'     => ['sysadmin','admin','inventory_warehouse']
                 ],
 
                 //Estoque Farmácia
                 [
-                    'text'    => 'Farmácias',
+                    'text'    => 'Farmácia',
                     'classes' => 'btn-sm',
                     'route'   => 'inventory_pharmacies.index',
                     'icon'    => 'fas fa-capsules pr-2',
@@ -338,17 +338,17 @@ return [
             'text'    => 'Centros de Distribuição',
             'classes' => 'btn-sm',
             'icon'    => 'fas fa-truck pr-2',
-            'can'     => ['sysadmin','admin','inventory_pharmacy','inventory_supply','inventory_warehouse'],
+            'can'     => ['sysadmin','admin','inventory_warehouse_center','inventory_pharmacy_center'],
             'submenu' => [
 
                 //Almoxarifado Central
                 [
-                    'text'    => 'Almoxarifados Centrais',
+                    'text'    => 'Almoxarifado Central',
                     'classes' => 'btn-sm',
-                    'route'   => 'inventory_warehouses.index',
+                    'route'   => 'inventory_warehouse_centers.index',
                     'icon'    => 'fas fa-truck-loading pr-2',
                     'icon_color' => 'info',
-                    'can'     => ['sysadmin','admin','inventory_warehouse']
+                    'can'     => ['sysadmin','admin','inventory_warehouse_center']
                 ],
 
                 //Central de Abastecimento Farmacêutico
@@ -358,7 +358,7 @@ return [
                     'route'   => 'inventory_pharmacy_centers.index',
                     'icon'    => 'fas fa-truck-loading pr-2',
                     'icon_color' => 'info',
-                    'can'     => ['sysadmin','admin','inventory_warehouse']
+                    'can'     => ['sysadmin','admin','inventory_pharmacy_center']
                 ],
 
             ]
@@ -552,28 +552,28 @@ return [
                                 [
                                     'text'    => 'Lista de Suprimentos',
                                     'classes' => 'btn-sm',
-                                    'route'   => 'supplies.index',
+                                    'route'   => 'consumables.index',
                                     'icon'    => 'fas fa-screwdriver pr-2',
                                     'can'     => ['sysadmin','admin'],
                                 ],
                                 [
                                     'text'    => 'Tipos de Suprimentos',
                                     'classes' => 'btn-sm',
-                                    'route'   => 'supply_types.index',
+                                    'route'   => 'consumable_types.index',
                                     'icon'    => 'fas fa-list-ol pr-2',
                                     'can'     => ['sysadmin','admin'],
                                 ],
                                 [
                                     'text'    => 'Classificações de Suprimentos',
                                     'classes' => 'btn-sm',
-                                    'route'   => 'supply_classifications.index',
+                                    'route'   => 'consumable_classifications.index',
                                     'icon'    => 'fas fa-stream pr-2',
                                     'can'     => ['sysadmin','admin'],
                                 ],
                                 [
                                     'text'    => 'Apresentações',
                                     'classes' => 'btn-sm',
-                                    'route'   => 'supply_units.index',
+                                    'route'   => 'consumable_units.index',
                                     'icon'    => 'fas fa-ruler pr-2',
                                     'can'     => ['sysadmin','admin'],
                                 ],
