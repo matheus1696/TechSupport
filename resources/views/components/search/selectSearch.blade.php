@@ -1,8 +1,5 @@
 <div class="flex items-center gap-2 {{$class ?? ''}} w-full lg:w-auto">
-    
-    <div>        
-        <label for="{{$id}}" class="pt-2 text-sm font-semibold">{{$label ?? ""}}:</label>
-    </div>
+    @include('components.search.labelSearch')
     <select
         id="{{$id}}" 
         name="{{$id}}" 
