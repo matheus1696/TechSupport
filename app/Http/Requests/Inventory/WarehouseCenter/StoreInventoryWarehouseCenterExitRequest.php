@@ -28,9 +28,9 @@ class StoreInventoryWarehouseCenterExitRequest extends FormRequest
             'supply_company' => 'required|min:1',
             'date' => 'required',
             'quantity' => 'required',
-            'supply_id' => 'required',
+            'consumable_id' => 'required',
             'financial_block_id' => 'required',
-            'establishment_department_exit_id' => 'required',
+            'department_exit_id' => 'required',
         ];
     }
 }

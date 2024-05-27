@@ -103,7 +103,7 @@
 
                             <x-form.form method="edit" route="{{route('users.permission',['user'=>$item->id])}}">
                                 @csrf @method('PUT')
-                                    <div class="flex col-span-12 gap-3">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 col-span-12 gap-3">
                                         @foreach ($dbPermissions as $permission)
                                             <div>
                                                 <input type="checkbox" id="permission_{{$permission->id}}" name={{$permission->name}} value="{{$permission->id}}"

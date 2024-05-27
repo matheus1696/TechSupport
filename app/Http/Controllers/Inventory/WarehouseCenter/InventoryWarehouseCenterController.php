@@ -8,10 +8,10 @@ use App\Http\Requests\Inventory\WarehouseCenter\StoreInventoryWarehouseCenterExi
 use App\Models\Company\CompanyEstablishment;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyFinancialBlock;
+use App\Models\Consumable\Consumable;
 use App\Models\Inventory\InventoryWarehouseCenter;
 use App\Models\Inventory\InventoryWarehouseCenterEntry;
 use App\Models\Inventory\InventoryWarehouseCenterHistory;
-use App\Models\Supply\Supply;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +23,7 @@ class InventoryWarehouseCenterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['permission:sysadmin|admin|inventory_warehouse']);
+        $this->middleware(['permission:sysadmin|admin|inventory_warehouse_center']);
     }
 
     /**
@@ -33,7 +33,7 @@ class InventoryWarehouseCenterController extends Controller
     {
         //Listagem de Dados
         $query = CompanyEstablishmentDepartment::query();
-        $db = $query->where('has_inventory_warehouse',TRUE)->orderBy('department')->paginate(20);
+        $db = $query->where('has_inventory_warehouse_center',TRUE)->orderBy('department')->paginate(20);
         $dbEstablishments = CompanyEstablishment::all();
 
         //Pesquisar Dados
@@ -41,14 +41,14 @@ class InventoryWarehouseCenterController extends Controller
         if (isset($search['searchSector']) || isset($search['searchEstablishment'])) {
             if (!empty($search['searchSector'])) { $query->where('filter','LIKE','%'.strtolower($search['searchSector']).'%');}    
             if (!empty($search['searchEstablishment'])) { $query->where('establishment_id', $search['searchEstablishment']);}
-            $query ->where('has_inventory_warehouse',TRUE);
+            $query ->where('has_inventory_warehouse_center',TRUE);
             $db = $query->orderBy('department')->paginate(20);
         }
 
         //Log do Sistema
         Logger::access();
 
-        return view('inventory.inventory_warehouse.inventory_warehouse_index',[
+        return view('inventory.inventory_warehouse_center.inventory_warehouse_center_index',[
             'search'=>$search,
             'db'=>$db,
             'dbEstablishments'=>$dbEstablishments,
@@ -74,21 +74,21 @@ class InventoryWarehouseCenterController extends Controller
         $db = CompanyEstablishmentDepartment::find($id);
 
         //Proteção de Acesso somente para setores com liberação de almoxarifado central
-        if (!$db->has_inventory_warehouse) {
+        if (!$db->has_inventory_warehouse_center) {
             //Log do Sistema
             Logger::error('Centro de Distribuição não liberado para este departamento');
 
-            return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
+            return redirect()->route('inventory_warehouse_centers.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
         if ($db->establishment_id) {           
 
             // Recupera todos os dados dos produtos e do bloco de financiamento
-            $dbSupplies = Supply::select()->orderBy('title')->get();
+            $dbConsumables = Consumable::select()->orderBy('title')->get();
             $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();
 
             // Recupera todos os departamentos com inventário de produtos
-            $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_supply', true)
+            $dbEstablishmentDepartments = CompanyEstablishmentDepartment::where('has_inventory_warehouse', true)
             ->join('company_establishments', 'company_establishment_departments.establishment_id', '=', 'company_establishments.id')
             ->select('company_establishment_departments.*', 'company_establishments.title as establishment_title')
             ->orderBy('company_establishments.title')
@@ -99,30 +99,30 @@ class InventoryWarehouseCenterController extends Controller
             // Consulta de entradas de inventário com quantidade maior que zero
             $dbInventoryEntries = InventoryWarehouseCenterEntry::where('establishment_department_id', $id)
             ->where('quantity', '>', 0)
-            ->join('supplies', 'inventory_warehouse_entries.supply_id', '=', 'supplies.id')
-            ->join('company_financial_blocks', 'inventory_warehouse_entries.financial_block_id', '=', 'company_financial_blocks.id')
-            ->select('inventory_warehouse_entries.*', 'supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
-            ->orderBy('supplies.title')
+            ->join('consumables', 'inventory_warehouse_center_entries.consumable_id', '=', 'consumables.id')
+            ->join('company_financial_blocks', 'inventory_warehouse_center_entries.financial_block_id', '=', 'company_financial_blocks.id')
+            ->select('inventory_warehouse_center_entries.*', 'consumables.title as consumable_title', 'company_financial_blocks.acronym as financial_block_acronym')
+            ->orderBy('consumables.title')
             ->orderBy('quantity')
             ->orderBy('company_financial_blocks.acronym')
-            ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
+            ->with(['Consumable','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
             ->get();
 
             // Consulta de inventário geral            
             $query = InventoryWarehouseCenter::query();
             $dbInventories = $query->where('establishment_department_id', $id)
-                ->join('supplies', 'inventory_warehouses.supply_id', '=', 'supplies.id')
-                ->join('company_financial_blocks', 'inventory_warehouses.financial_block_id', '=', 'company_financial_blocks.id')
-                ->select('inventory_warehouses.*', 'supplies.title as supply_title', 'company_financial_blocks.acronym as financial_block_acronym')
-                ->orderBy('supplies.title')
+                ->join('consumables', 'inventory_warehouse_centers.consumable_id', '=', 'consumables.id')
+                ->join('company_financial_blocks', 'inventory_warehouse_centers.financial_block_id', '=', 'company_financial_blocks.id')
+                ->select('inventory_warehouse_centers.*', 'consumables.title as consumable_title', 'company_financial_blocks.acronym as financial_block_acronym')
+                ->orderBy('consumables.title')
                 ->orderBy('company_financial_blocks.acronym')
-                ->with(['Supply','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
+                ->with(['Consumable','CompanyEstablishment','CompanyEstablishmentDepartment','CompanyFinancialBlock'])
                 ->paginate(30);      
 
             //Pesquisar Dados
             $search = $request->all();
-            if (isset($search['searchSupply']) || isset($search['searchFinancialBlock'])) {            
-                if (!empty($search['searchSupply'])) { $query->where('supply_id', $search['searchSupply']);}
+            if (isset($search['searchConsumable']) || isset($search['searchFinancialBlock'])) {            
+                if (!empty($search['searchConsumable'])) { $query->where('consumable_id', $search['searchConsumable']);}
                 if (!empty($search['searchFinancialBlock'])) { $query->where('financial_block_id', $search['searchFinancialBlock']);}            
                 $dbInventories = $query->orderBy('quantity','DESC')->paginate(30);
             }
@@ -130,10 +130,10 @@ class InventoryWarehouseCenterController extends Controller
             //Log do Sistema
             Logger::show($db->title);
 
-            return view('inventory.inventory_warehouse.inventory_warehouse_show',[
+            return view('inventory.inventory_warehouse_center.inventory_warehouse_center_show',[
                 'db'=>$db,
                 'search'=>$search,
-                'dbSupplies'=>$dbSupplies,
+                'dbConsumables'=>$dbConsumables,
                 'dbFinancialBlocks'=>$dbFinancialBlocks,
                 'dbEstablishmentDepartments'=>$dbEstablishmentDepartments,
                 'dbInventories'=>$dbInventories,
@@ -141,7 +141,7 @@ class InventoryWarehouseCenterController extends Controller
             ]);
         }        
 
-        return redirect()->route('inventory_warehouses.index')->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_warehouse_centers.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -174,8 +174,8 @@ class InventoryWarehouseCenterController extends Controller
 
         //Quantidade do Estoque Geral
             //Buscando Cadastro
-                $db = InventoryWarehouseCenter::where('supply_id',$data['supply_id'])
-                    ->where('establishment_department_id',$data['establishment_department_entry_id'])
+                $db = InventoryWarehouseCenter::where('consumable_id',$data['consumable_id'])
+                    ->where('establishment_department_id',$data['department_entry_id'])
                     ->where('financial_block_id',$data['financial_block_id'])
                     ->first();
 
@@ -185,8 +185,8 @@ class InventoryWarehouseCenterController extends Controller
                     $db = InventoryWarehouseCenter::create([
                         'quantity'=>0,
                         'establishment_id'=>$data['establishment_entry_id'],
-                        'establishment_department_id'=>$data['establishment_department_entry_id'],
-                        'supply_id'=>$data['supply_id'],
+                        'establishment_department_id'=>$data['department_entry_id'],
+                        'consumable_id'=>$data['consumable_id'],
                         'financial_block_id'=>$data['financial_block_id'],
                     ]);
                 }
@@ -197,8 +197,8 @@ class InventoryWarehouseCenterController extends Controller
 
         //Quantidade por Ordem de Fornecimento e Nota Fiscal
             //Buscando Cadastro
-                $dbEntry = InventoryWarehouseCenterEntry::where('supply_id',$data['supply_id'])
-                    ->where('establishment_department_id',$data['establishment_department_entry_id'])
+                $dbEntry = InventoryWarehouseCenterEntry::where('consumable_id',$data['consumable_id'])
+                    ->where('establishment_department_id',$data['department_entry_id'])
                     ->where('financial_block_id',$data['financial_block_id'])
                     ->where('supply_order',$data['supply_order'])
                     ->where('invoice',$data['invoice'])
@@ -212,9 +212,9 @@ class InventoryWarehouseCenterController extends Controller
                         'supply_order'=>$data['supply_order'],
                         'supply_company'=>$data['supply_company'],
                         'quantity'=>0,
-                        'supply_id'=>$data['supply_id'],
+                        'consumable_id'=>$data['consumable_id'],
                         'establishment_id'=>$data['establishment_entry_id'],
-                        'establishment_department_id'=>$data['establishment_department_entry_id'],
+                        'establishment_department_id'=>$data['department_entry_id'],
                         'financial_block_id'=>$data['financial_block_id'],
                     ]);
                 }
@@ -234,43 +234,43 @@ class InventoryWarehouseCenterController extends Controller
         $db = CompanyEstablishmentDepartment::find($id);     
 
         //Proteção de Acesso somente para setores com liberação de almoxarifado central
-        if (!$db->has_inventory_warehouse) {
+        if (!$db->has_inventory_warehouse_center) {
             //Log do Sistema
             Logger::error('Centro de Distribuição não liberado para este departamento');
 
-            return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
+            return redirect()->route('inventory_warehouse_centers.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
         if ($db->establishment_id) {
-            $dbSupplies = Supply::select()->orderBy('title')->get();;
+            $dbConsumables = Consumable::select()->orderBy('title')->get();;
             $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();;
-            $dbInventories = InventoryWarehouseCenterHistory::where('inventory_warehouse_histories.establishment_department_entry_id', $id)
-                ->where('inventory_warehouse_histories.created_at', '>=', now()->subDays(7))
-                ->where('inventory_warehouse_histories.movement', 'Entrada')
-                ->join('supplies', 'inventory_warehouse_histories.supply_id', '=', 'supplies.id')
-                ->join('company_financial_blocks', 'inventory_warehouse_histories.financial_block_id', '=', 'company_financial_blocks.id')
-                ->select('inventory_warehouse_histories.*','supplies.title as supply_title','company_financial_blocks.acronym as financial_block_acronym')
-                ->orderBy('inventory_warehouse_histories.date', 'DESC')
-                ->orderBy('supplies.title')
+            $dbInventories = InventoryWarehouseCenterHistory::where('inventory_warehouse_center_histories.department_entry_id', $id)
+                ->where('inventory_warehouse_center_histories.created_at', '>=', now()->subDays(7))
+                ->where('inventory_warehouse_center_histories.movement', 'Entrada')
+                ->join('consumables', 'inventory_warehouse_center_histories.consumable_id', '=', 'consumables.id')
+                ->join('company_financial_blocks', 'inventory_warehouse_center_histories.financial_block_id', '=', 'company_financial_blocks.id')
+                ->select('inventory_warehouse_center_histories.*','consumables.title as consumable_title','company_financial_blocks.acronym as financial_block_acronym')
+                ->orderBy('inventory_warehouse_center_histories.date', 'DESC')
+                ->orderBy('consumables.title')
                 ->orderBy('company_financial_blocks.acronym')
-                ->with(['Supply', 'CompanyFinancialBlock', 'CompanyEstablishmentEntry', 'CompanyEstablishmentDepartmentEntry', 'CompanyEstablishmentExit', 'CompanyEstablishmentDepartmentExit'])
-                ->select('inventory_warehouse_histories.*')
+                ->with(['Consumable', 'CompanyFinancialBlock', 'CompanyEstablishmentEntry', 'CompanyEstablishmentDepartmentEntry', 'CompanyEstablishmentExit', 'CompanyEstablishmentDepartmentExit'])
+                ->select('inventory_warehouse_center_histories.*')
                 ->limit(20)
                 ->get();
     
             //Log do Sistema
             Logger::show($db->title);
     
-            return view('inventory.inventory_warehouse.inventory_warehouse_entry',[
+            return view('inventory.inventory_warehouse_center.inventory_warehouse_center_entry',[
                 'db'=>$db,
-                'dbSupplies'=>$dbSupplies,
+                'dbConsumables'=>$dbConsumables,
                 'dbFinancialBlocks'=>$dbFinancialBlocks,
                 'dbInventories'=>$dbInventories,
             ]);
             
         }        
 
-        return redirect()->route('inventory_warehouses.index')->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_warehouse_centers.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -285,27 +285,27 @@ class InventoryWarehouseCenterController extends Controller
         $data['user_id'] = Auth::user()->id;
 
         //Verificando se existe estoque para realizar a saída
-        $InventoryQuantitySupply = InventoryWarehouseCenter::where('establishment_department_id',$data['establishment_department_entry_id'])
-            ->where('supply_id', $data['supply_id'])
+        $InventoryQuantityConsumable = InventoryWarehouseCenter::where('establishment_department_id',$data['department_entry_id'])
+            ->where('consumable_id', $data['consumable_id'])
             ->where('financial_block_id', $data['financial_block_id'])
             ->first();
 
-        if ($InventoryQuantitySupply->quantity < $data['quantity']) {
+        if ($InventoryQuantityConsumable->quantity < $data['quantity']) {
             return redirect()->back()->with('error','Quantidade informada para saída não compatível com a quantidade no estoque atual');
         }
 
         $dbHistory = InventoryWarehouseCenterHistory::create($data);
 
         //Vinculando Almoxarifado que Recebe o Produto
-        $dbEstablishmentDepartment = CompanyEstablishmentDepartment::find($data['establishment_department_exit_id']);
-        $dbHistory->establishment_department_exit_id = $dbEstablishmentDepartment->id;
+        $dbEstablishmentDepartment = CompanyEstablishmentDepartment::find($data['department_exit_id']);
+        $dbHistory->department_exit_id = $dbEstablishmentDepartment->id;
         $dbHistory->establishment_exit_id = $dbEstablishmentDepartment->establishment_id;
         $dbHistory->save();
 
         //Quantidade do Estoque Geral
             //Buscando Cadastro
-                $db = InventoryWarehouseCenter::where('supply_id',$data['supply_id'])
-                    ->where('establishment_department_id',$data['establishment_department_entry_id'])
+                $db = InventoryWarehouseCenter::where('consumable_id',$data['consumable_id'])
+                    ->where('establishment_department_id',$data['department_entry_id'])
                     ->where('financial_block_id',$data['financial_block_id'])
                     ->first();
 
@@ -315,8 +315,8 @@ class InventoryWarehouseCenterController extends Controller
                     $db = InventoryWarehouseCenter::create([
                         'quantity'=>0,
                         'establishment_id'=>$data['establishment_id'],
-                        'establishment_department_id'=>$data['establishment_department_entry_id'],
-                        'supply_id'=>$data['supply_id'],
+                        'establishment_department_id'=>$data['department_entry_id'],
+                        'consumable_id'=>$data['consumable_id'],
                         'financial_block_id'=>$data['financial_block_id'],
                     ]);
                 }
@@ -327,8 +327,8 @@ class InventoryWarehouseCenterController extends Controller
 
         //Quantidade por Ordem de Fornecimento e Nota Fiscal
             //Buscando Cadastro
-                $dbEntry = InventoryWarehouseCenterEntry::where('supply_id',$data['supply_id'])
-                    ->where('establishment_department_id',$data['establishment_department_entry_id'])
+                $dbEntry = InventoryWarehouseCenterEntry::where('consumable_id',$data['consumable_id'])
+                    ->where('establishment_department_id',$data['department_entry_id'])
                     ->where('financial_block_id',$data['financial_block_id'])
                     ->where('supply_order',$data['supply_order'])
                     ->where('invoice',$data['invoice'])
@@ -342,9 +342,9 @@ class InventoryWarehouseCenterController extends Controller
                         'supply_order'=>$data['supply_order'],
                         'supply_company'=>$data['supply_company'],
                         'quantity'=>0,
-                        'supply_id'=>$data['supply_id'],
+                        'consumable_id'=>$data['consumable_id'],
                         'establishment_id'=>$data['establishment_id'],
-                        'establishment_department_id'=>$data['establishment_department_entry_id'],
+                        'establishment_department_id'=>$data['department_entry_id'],
                         'financial_block_id'=>$data['financial_block_id'],
                     ]);
                 }
@@ -365,39 +365,39 @@ class InventoryWarehouseCenterController extends Controller
         $dbEstablishmentDepartment = CompanyEstablishmentDepartment::find($id);
 
         //Proteção de Acesso somente para setores com liberação de almoxarifado central
-        if (!$dbEstablishmentDepartment->has_inventory_warehouse) {
+        if (!$dbEstablishmentDepartment->has_inventory_warehouse_center) {
             //Log do Sistema
             Logger::error('Centro de Distribuição não liberado para este departamento');
 
-            return redirect()->route('inventory_warehouses.index')->with('error','Centro de Distribuição não liberado para este departamento');
+            return redirect()->route('inventory_warehouse_centers.index')->with('error','Centro de Distribuição não liberado para este departamento');
         } 
 
         if ($dbEstablishmentDepartment->id) {
         
             $query = InventoryWarehouseCenterHistory::query();
-            $db = $query->where('establishment_department_entry_id',$id)->orderBy('created_at','DESC')->paginate(40);
-            $dbSupplies = Supply::select()->orderBy('title')->get();
+            $db = $query->where('department_entry_id',$id)->orderBy('created_at','DESC')->paginate(40);
+            $dbConsumables = Consumable::select()->orderBy('title')->get();
 
             //Pesquisar Dados
             $search = $request->all();
-            if (isset($search['searchSupply']) || isset($search['searchDate']) || isset($search['searchMovement'])) {                
+            if (isset($search['searchConsumable']) || isset($search['searchDate']) || isset($search['searchMovement'])) {                
                 if (!empty($search['searchDate'])) { $query->where('date', $search['searchDate']);}    
                 if (!empty($search['searchMovement'])) { $query->where('movement', $search['searchMovement']);}   
-                if (!empty($search['searchSupply'])) { $query->where('supply_id', $search['searchSupply']);}
+                if (!empty($search['searchConsumable'])) { $query->where('consumable_id', $search['searchConsumable']);}
                 $db = $query->orderBy('quantity')->paginate(40);
             }
     
             //Log do Sistema
             Logger::access();
     
-            return view('inventory.inventory_warehouse.inventory_warehouse_history',[
+            return view('inventory.inventory_warehouse_center.inventory_warehouse_center_history',[
                 'search'=>$search,
                 'db'=>$db,
-                'dbSupplies'=>$dbSupplies,
+                'dbConsumables'=>$dbConsumables,
                 'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
             ]);
         }        
 
-        return redirect()->route('inventory_warehouses.index')->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_warehouse_centers.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 }

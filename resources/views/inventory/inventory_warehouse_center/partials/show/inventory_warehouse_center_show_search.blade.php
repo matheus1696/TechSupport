@@ -1,15 +1,15 @@
 <!-- Search -->
 <x-search.formSearch>
     
-    <x-search.selectSearch label="Suprimentos" id="searchSupply" class="flex-1">
-        @foreach ($dbSupplies as $dbSupply)
+    <x-search.selectSearch label="Suprimentos" id="searchConsumable" class="flex-1">
+        @foreach ($dbConsumables as $dbConsumable)
             <option 
-                value="{{$dbSupply->id}}"
-                @isset($search['searchSupply'])
-                    @if($dbSupply->id == $search['searchSupply']) selected @endif
+                value="{{$dbConsumable->id}}"
+                @isset($search['searchConsumable'])
+                    @if($dbConsumable->id == $search['searchConsumable']) selected @endif
                 @endisset
             >
-                {{$dbSupply->title}}
+                {{$dbConsumable->title}}
             </option>
         @endforeach
     </x-search.selectSearch>

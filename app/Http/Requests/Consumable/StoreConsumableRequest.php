@@ -24,7 +24,6 @@ class StoreConsumableRequest extends FormRequest
         return [
             'code' => 'required|unique:consumables',
             'title' => 'required',
-            'description' => 'nullable|min:20',
             'consumable_classification_id' => 'required',
             'consumable_unit_id' => 'required',
             'consumable_type_id' => 'required',

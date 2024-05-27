@@ -5,7 +5,7 @@ namespace App\Models\Inventory;
 use App\Models\Company\CompanyEstablishment;
 use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyFinancialBlock;
-use App\Models\Supply\Supply;
+use App\Models\Consumable\Consumable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,14 +21,14 @@ class InventoryWarehouseCenterEntry extends Model
         'quantity',
         'quantity_minimum',
         'quantity_maximum',
-        'supply_id',
+        'consumable_id',
         'financial_block_id',
         'establishment_id',
         'establishment_department_id',
     ];
 
-    public function Supply(){
-        return $this->belongsTo(Supply::class,'supply_id','id');
+    public function Consumable(){
+        return $this->belongsTo(Consumable::class,'consumable_id','id');
     }
 
     public function CompanyFinancialBlock(){

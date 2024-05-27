@@ -28,7 +28,6 @@ class UpdateConsumableRequest extends FormRequest
                 Rule::unique('consumables')->ignore($this->consumable),
             ],
             'title' => 'required',
-            'description' => 'nullable|min:20',
             'consumable_classification_id' => 'required',
             'consumable_unit_id' => 'required',
             'consumable_type_id' => 'required',

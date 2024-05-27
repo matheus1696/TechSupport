@@ -32,7 +32,7 @@
                 <x-table.td>{{$item->supply_order}}</x-table.td>
                 <x-table.td>{{$item->supply_company}}</x-table.td>
                 <x-table.td>{{$item->CompanyFinancialBlock->acronym}}</x-table.td>
-                <x-table.td>{{$item->Supply->title}}</x-table.td>
+                <x-table.td>{{$item->Consumable->title}}</x-table.td>
                 <x-table.td>{{$item->quantity}}</x-table.td>
             </x-table.tr>
         @endforeach

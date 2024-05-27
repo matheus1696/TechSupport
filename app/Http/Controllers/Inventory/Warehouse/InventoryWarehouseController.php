@@ -9,7 +9,7 @@ use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Inventory\InventoryWarehouse;
 use App\Models\Inventory\InventoryWarehouseCenterHistory;
 use App\Models\Inventory\InventoryWarehouseHistory;
-use App\Models\Supply\Supply;
+use App\Models\Consumable\Consumable;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +21,7 @@ class InventoryWarehouseController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['permission:sysadmin|admin|inventory_supply']);
+        $this->middleware(['permission:sysadmin|admin|inventory_warehouse']);
     }
 
     /**
@@ -31,7 +31,7 @@ class InventoryWarehouseController extends Controller
     {
         //Listagem de Dados
         $query = CompanyEstablishmentDepartment::query();
-        $db = $query->where('has_inventory_supply',TRUE)->orderBy('department')->paginate(20);
+        $db = $query->where('has_inventory_warehouse',TRUE)->orderBy('department')->paginate(20);
         $dbEstablishments = CompanyEstablishment::all();
 
         //Pesquisar Dados
@@ -39,14 +39,14 @@ class InventoryWarehouseController extends Controller
         if (isset($search['searchSector']) || isset($search['searchEstablishment'])) {
             if (!empty($search['searchSector'])) { $query->where('filter','LIKE','%'.strtolower($search['searchSector']).'%');}    
             if (!empty($search['searchEstablishment'])) { $query->where('establishment_id', $search['searchEstablishment']);}
-            $query ->where('has_inventory_supply',TRUE);
+            $query ->where('has_inventory_warehouse',TRUE);
             $db = $query->orderBy('department')->paginate(20);
         }
 
         //Log do Sistema
         Logger::access();
 
-        return view('inventory.inventory_supply.inventory_supply_index',[
+        return view('inventory.inventory_warehouse.inventory_warehouse_index',[
             'search'=>$search,
             'db'=>$db,
             'dbEstablishments'=>$dbEstablishments,
@@ -70,29 +70,29 @@ class InventoryWarehouseController extends Controller
     {
         $db = CompanyEstablishmentDepartment::find($id);
 
-        if (!$db->has_inventory_supply) {
+        if (!$db->has_inventory_warehouse) {
             //Log do Sistema
             Logger::error($db->title);
 
-            return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
+            return redirect()->route('inventory_warehouses.index')->with('error','Estoque não liberado para este departamento');
         }        
 
         if ($db->establishment_id) {
 
-            $dbSupplies = Supply::all();
+            $dbConsumables = Consumable::all();
             $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)->get();
     
             //Log do Sistema
             Logger::show($db->title);
     
-            return view('inventory.inventory_supply.inventory_supply_show',[
+            return view('inventory.inventory_warehouse.inventory_warehouse_show',[
                 'db'=>$db,
-                'dbSupplies'=>$dbSupplies,
+                'dbConsumables'=>$dbConsumables,
                 'dbInventories'=>$dbInventories,
             ]);
         }        
 
-        return redirect()->route('inventory_supplies.index')->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_warehouses.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -117,17 +117,17 @@ class InventoryWarehouseController extends Controller
     {
         $db = CompanyEstablishmentDepartment::find($id);       
 
-        if (!$db->has_inventory_supply) {
+        if (!$db->has_inventory_warehouse) {
 
             //Log do Sistema
             Logger::error($db->title);
 
-            return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
+            return redirect()->route('inventory_warehouses.index')->with('error','Estoque não liberado para este departamento');
         }        
 
         if ($db->establishment_id) {
             
-            $dbSupplies = Supply::all();
+            $dbConsumables = Consumable::all();
             $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)->get();
             $dbInventoryHistories = InventoryWarehouseCenterHistory::where('establishment_department_exit_id', $id)
                 ->where('pending', FALSE)
@@ -137,16 +137,16 @@ class InventoryWarehouseController extends Controller
             //Log do Sistema
             Logger::show($db->title);
     
-            return view('inventory.inventory_supply.inventory_supply_request',[
+            return view('inventory.inventory_warehouse.inventory_warehouse_request',[
                 'db'=>$db,
-                'dbSupplies'=>$dbSupplies,
+                'dbConsumables'=>$dbConsumables,
                 'dbInventories'=>$dbInventories,
                 'dbInventoryHistories'=>$dbInventoryHistories,
             ]);
 
         }        
 
-        return redirect()->route('inventory_supplies.index')->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_warehouses.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -156,29 +156,29 @@ class InventoryWarehouseController extends Controller
     {
         $db = CompanyEstablishmentDepartment::find($id);      
 
-        if (!$db->has_inventory_supply) {
+        if (!$db->has_inventory_warehouse) {
             //Log do Sistema
             Logger::error($db->title);
 
-            return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
+            return redirect()->route('inventory_warehouses.index')->with('error','Estoque não liberado para este departamento');
         }        
 
         if ($db->establishment_id) {
 
-            $dbSupplies = Supply::all();
+            $dbConsumables = Consumable::all();
             $dbInventoryHistories = InventoryWarehouseHistory::where('loose',TRUE)->orderBy('created_at')->limit(20)->get();
 
             //Log do Sistema
             Logger::show($db->title);
 
-            return view('inventory.inventory_supply.inventory_supply_create',[
+            return view('inventory.inventory_warehouse.inventory_warehouse_create',[
                 'db'=>$db,
-                'dbSupplies'=>$dbSupplies,
+                'dbConsumables'=>$dbConsumables,
                 'dbInventoryHistories'=>$dbInventoryHistories,
             ]);
         }        
 
-        return redirect()->route('inventory_supplies.index')->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_warehouses.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 
     /**
@@ -273,11 +273,11 @@ class InventoryWarehouseController extends Controller
         //Listagem de Dados
         $dbEstablishmentDepartment = CompanyEstablishmentDepartment::find($id);
 
-        if (!$dbEstablishmentDepartment->has_inventory_supply) {
+        if (!$dbEstablishmentDepartment->has_inventory_warehouse) {
             //Log do Sistema
             Logger::error($dbEstablishmentDepartment->title);
 
-            return redirect()->route('inventory_supplies.index')->with('error','Estoque não liberado para este departamento');
+            return redirect()->route('inventory_warehouses.index')->with('error','Estoque não liberado para este departamento');
         }       
 
         if ($dbEstablishmentDepartment->establishment_id) {
@@ -286,7 +286,7 @@ class InventoryWarehouseController extends Controller
             ->orderBy('created_at','DESC')
             ->paginate(40);
     
-            $dbSupplies = Supply::select()->orderBy('title')->get();
+            $dbConsumables = Consumable::select()->orderBy('title')->get();
 
             //Pesquisar Dados
             $search = $request->all();
@@ -301,15 +301,15 @@ class InventoryWarehouseController extends Controller
             //Log do Sistema
             Logger::access();
     
-            return view('inventory.inventory_supply.inventory_supply_history',[
+            return view('inventory.inventory_warehouse.inventory_warehouse_history',[
                 'search'=>$search,
                 'db'=>$db,
-                'dbSupplies'=>$dbSupplies,
+                'dbConsumables'=>$dbConsumables,
                 'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
             ]);
             
         }        
 
-        return redirect()->route('inventory_supplies.index')->with('error','Usuário sem permissão de acessar esse estoque');
+        return redirect()->route('inventory_warehouses.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }
 }

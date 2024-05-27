@@ -22,20 +22,12 @@ class CompanyEstablishmentDepartmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-        return redirect()->route('login');
-    }
+    public function index(){ return redirect()->route('login');}
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-        return redirect()->route('login');
-    }
+    public function create(){ return redirect()->route('login');}
 
     /**
      * Store a newly created resource in storage.
@@ -59,11 +51,7 @@ class CompanyEstablishmentDepartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-        return redirect()->route('login');
-    }
+    public function show(){ return redirect()->route('login');}
 
     /**
      * Show the form for editing the specified resource.
@@ -140,7 +128,11 @@ class CompanyEstablishmentDepartmentController extends Controller
     public function hasInventory(Request $request, string $id)
     {
         //Dados dos Formulários
-        $data = $request->only('has_inventory_supply','has_inventory_pharmacy','has_inventory_warehouse');
+        $data = $request->only('has_inventory_warehouse','has_inventory_warehouse_center','has_inventory_pharmacy','has_inventory_pharmacy_center');
+
+        if (count($data) == 0) {
+            return redirect()->back()->with('error','Informação não encontrada.');
+        }
 
         //Salvando Dados
         $db = CompanyEstablishmentDepartment::find($id);

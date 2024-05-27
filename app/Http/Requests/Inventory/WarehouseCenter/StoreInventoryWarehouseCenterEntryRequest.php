@@ -28,10 +28,10 @@ class StoreInventoryWarehouseCenterEntryRequest extends FormRequest
             'supply_company' => 'required|min:1',
             'date' => 'required',
             'quantity' => 'required',
-            'supply_id' => 'required',
+            'consumable_id' => 'required',
             'financial_block_id' => 'required',
             'establishment_entry_id' => 'required',
-            'establishment_department_entry_id' => 'required',
+            'department_entry_id' => 'required',
         ];
     }
 }
