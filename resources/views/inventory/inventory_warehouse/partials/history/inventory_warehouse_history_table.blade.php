@@ -22,7 +22,7 @@
                         <i class="px-2 text-red-500 rotate-45 fas fa-long-arrow-alt-down"></i>
                     @endif
                 </x-table.td>
-                <x-table.td>{{$item->Supply->title}}</x-table.td>
+                <x-table.td>{{$item->Consumable->title}}</x-table.td>
                 <x-table.td>{{$item->quantity}}</x-table.td>
                 <x-table.td>{{$item->User->name}}</x-table.td>
             </x-table.tr>

@@ -14,7 +14,7 @@
         @foreach ($dbInventoryHistories as $dbInventoryHistory)
             <x-table.tr>
                 <x-table.td>{{date('d/m/Y',strtotime($dbInventoryHistory->date))}}</x-table.td>
-                <x-table.td>{{$dbInventoryHistory->Supply->title}}</x-table.td>   
+                <x-table.td>{{$dbInventoryHistory->Consumable->title}}</x-table.td>   
                 <x-table.td>
                     @if (strtotime($dbInventoryHistory->date) < strtotime(date('Y-m-d')))                    
                         Atrasados
@@ -32,9 +32,9 @@
                             <input name="supply_company" value="{{$dbInventoryHistory->supply_company}}" hidden>
                             <input name="movement" value="Entrada" hidden>
                             <input name="quantity" value="{{$dbInventoryHistory->quantity}}" hidden>
-                            <input name="supply_id" value="{{$dbInventoryHistory->supply_id}}" hidden>
+                            <input name="consumable_id" value="{{$dbInventoryHistory->consumable_id}}" hidden>
                             <input name="establishment_id" value="{{$dbInventoryHistory->establishment_exit_id}}" hidden>
-                            <input name="establishment_department_id" value="{{$dbInventoryHistory->establishment_department_exit_id}}" hidden>
+                            <input name="establishment_department_id" value="{{$dbInventoryHistory->department_exit_id}}" hidden>
                         </x-button.buttonStatus> 
                     @else
                         <x-button.buttonStatus condition="False" name="has_inventory_warehouse" route="{{route('inventory_warehouses.entryStore')}}" title="Indicar Recebimento" method="create">
@@ -44,9 +44,9 @@
                             <input name="supply_company" value="{{$dbInventoryHistory->supply_company}}" hidden>
                             <input name="movement" value="Entrada" hidden>
                             <input name="quantity" value="{{$dbInventoryHistory->quantity}}" hidden>
-                            <input name="supply_id" value="{{$dbInventoryHistory->supply_id}}" hidden>
+                            <input name="consumable_id" value="{{$dbInventoryHistory->consumable_id}}" hidden>
                             <input name="establishment_id" value="{{$dbInventoryHistory->establishment_exit_id}}" hidden>
-                            <input name="establishment_department_id" value="{{$dbInventoryHistory->establishment_department_exit_id}}" hidden>
+                            <input name="establishment_department_id" value="{{$dbInventoryHistory->department_exit_id}}" hidden>
                         </x-button.buttonStatus>                    
                     @endif
                 </x-table.td> 

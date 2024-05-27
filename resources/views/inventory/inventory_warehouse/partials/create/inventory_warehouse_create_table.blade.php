@@ -25,7 +25,7 @@
                         <i class="px-2 text-red-500 rotate-45 fas fa-long-arrow-alt-down"></i>
                     @endif
                 </x-table.td>
-                <x-table.td>{{$dbInventoryHistory->Supply->title}}</x-table.td>
+                <x-table.td>{{$dbInventoryHistory->Consumable->title}}</x-table.td>
                 <x-table.td>{{$dbInventoryHistory->quantity}}</x-table.td>
                 <x-table.td>{{$dbInventoryHistory->User->name}}</x-table.td>
             </x-table.tr>

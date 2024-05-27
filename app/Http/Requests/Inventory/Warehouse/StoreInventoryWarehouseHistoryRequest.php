@@ -24,7 +24,7 @@ class StoreInventoryWarehouseHistoryRequest extends FormRequest
         return [
             //
             'quantity' => 'required',
-            'supply_id' => 'required',
+            'consumable_id' => 'required',
             'establishment_id' => 'required',
             'establishment_department_id' => 'required',
         ];

@@ -19,17 +19,17 @@
 
     </x-search.selectSearch>
 
-    <x-search.selectSearch label="Suprimentos" id="searchSupply" class="flex-1">
-        @foreach ($dbSupplies as $dbSupply)
+    <x-search.selectSearch label="Suprimentos" id="searchConsumable" class="flex-1">
+        @foreach ($dbConsumables as $dbConsumable)
             @foreach ($db as $item)
-                @if ($dbSupply->id == $item->supply_id)
+                @if ($dbConsumable->id == $item->consumable_id)
                     <option 
-                        value="{{$dbSupply->id}}"
-                        @isset($search['searchSupply'])
-                            @if($dbSupply->id == $search['searchSupply']) selected @endif
+                        value="{{$dbConsumable->id}}"
+                        @isset($search['searchConsumable'])
+                            @if($dbConsumable->id == $search['searchConsumable']) selected @endif
                         @endisset
                     >
-                        {{$dbSupply->title}}
+                        {{$dbConsumable->title}}
                         @break
                     </option>
                 @endif

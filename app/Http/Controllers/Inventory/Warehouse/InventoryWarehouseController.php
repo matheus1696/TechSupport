@@ -129,7 +129,7 @@ class InventoryWarehouseController extends Controller
             
             $dbConsumables = Consumable::all();
             $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)->get();
-            $dbInventoryHistories = InventoryWarehouseCenterHistory::where('establishment_department_exit_id', $id)
+            $dbInventoryHistories = InventoryWarehouseCenterHistory::where('department_exit_id', $id)
                 ->where('pending', FALSE)
                 ->orderBy('date')
                 ->paginate(20);
@@ -166,7 +166,10 @@ class InventoryWarehouseController extends Controller
         if ($db->establishment_id) {
 
             $dbConsumables = Consumable::all();
-            $dbInventoryHistories = InventoryWarehouseHistory::where('loose',TRUE)->orderBy('created_at')->limit(20)->get();
+            $dbInventoryHistories = InventoryWarehouseHistory::where('loose',TRUE)
+                ->where('establishment_department_id',$id)->orderBy('created_at')
+                ->limit(20)
+                ->get();
 
             //Log do Sistema
             Logger::show($db->title);
@@ -194,7 +197,7 @@ class InventoryWarehouseController extends Controller
 
         InventoryWarehouseHistory::create($data);
 
-        $db = InventoryWarehouse::where('supply_id',$data['supply_id'])
+        $db = InventoryWarehouse::where('consumable_id',$data['consumable_id'])
             ->where('establishment_department_id',$data['establishment_department_id'])
             ->first();
 
@@ -203,7 +206,7 @@ class InventoryWarehouseController extends Controller
                 'quantity'=>0,
                 'establishment_id'=>$data['establishment_id'],
                 'establishment_department_id'=>$data['establishment_department_id'],
-                'supply_id'=>$data['supply_id'],
+                'consumable_id'=>$data['consumable_id'],
             ]);
         }
         
@@ -233,11 +236,11 @@ class InventoryWarehouseController extends Controller
         $data['user_id'] = Auth::user()->id;
         
         /* //Verificando se existe estoque para realizar a saída
-        $InventoryQuantitySupply = InventoryWarehouse::where('establishment_department_id',$data['establishment_department_id'])
-            ->where('supply_id', $data['supply_id'])
+        $InventoryQuantityConsumable = InventoryWarehouse::where('establishment_department_id',$data['establishment_department_id'])
+            ->where('consumable_id', $data['consumable_id'])
             ->first();
 
-        if ($InventoryQuantitySupply->quantity < $data['quantity']) {
+        if ($InventoryQuantityConsumable->quantity < $data['quantity']) {
             return redirect()->back()
                 ->with('error','Quantidade informada para saída não compatível com a quantidade no estoque atual');
         }
@@ -245,7 +248,7 @@ class InventoryWarehouseController extends Controller
 
         InventoryWarehouseHistory::create($data);
 
-        $db = InventoryWarehouse::where('supply_id',$data['supply_id'])
+        $db = InventoryWarehouse::where('consumable_id',$data['consumable_id'])
             ->where('establishment_department_id',$data['establishment_department_id'])
             ->first();
 
@@ -254,7 +257,7 @@ class InventoryWarehouseController extends Controller
                 'quantity'=>0,
                 'establishment_id'=>$data['establishment_id'],
                 'establishment_department_id'=>$data['establishment_department_id'],
-                'supply_id'=>$data['supply_id'],
+                'consumable_id'=>$data['consumable_id'],
             ]);
         }
 
@@ -280,23 +283,22 @@ class InventoryWarehouseController extends Controller
             return redirect()->route('inventory_warehouses.index')->with('error','Estoque não liberado para este departamento');
         }       
 
-        if ($dbEstablishmentDepartment->establishment_id) {
-
-            $db = InventoryWarehouseHistory::where('establishment_department_id',$id)
-            ->orderBy('created_at','DESC')
-            ->paginate(40);
+        if ($dbEstablishmentDepartment->establishment_id) {            
     
             $dbConsumables = Consumable::select()->orderBy('title')->get();
 
+            $query = InventoryWarehouseHistory::query(); 
+            $query->where('establishment_department_id',$id);
+
             //Pesquisar Dados
             $search = $request->all();
-            if (isset($search['searchSupply']) || isset($search['searchDate']) || isset($search['searchMovement'])) {                
-                $query = InventoryWarehouseCenterHistory::query();                
+            if (isset($search['searchConsumable']) || isset($search['searchDate']) || isset($search['searchMovement'])) { 
                 if (!empty($search['searchDate'])) { $query->where('date', $search['searchDate']);}    
                 if (!empty($search['searchMovement'])) { $query->where('movement', $search['searchMovement']);}   
-                if (!empty($search['searchSupply'])) { $query->where('supply_id', $search['searchSupply']);}
-                $db = $query->orderBy('quantity')->paginate(40);
+                if (!empty($search['searchConsumable'])) { $query->where('consumable_id', $search['searchConsumable']);}                
             }
+
+            $db = $query->orderBy('created_at','DESC')->paginate(40);
     
             //Log do Sistema
             Logger::access();
