@@ -15,7 +15,7 @@ return [
     */
 
     'title' => '',
-    'title_prefix' => 'TechSupport',
+    'title_prefix' => 'InfoSaúde',
     'title_postfix' => '',
 
     /*
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>Tech</b>Support',
-    'logo_img' => 'assets/img/gest360_logo.png',
+    'logo' => '<b>Info</b>Saúde',
+    'logo_img' => 'assets/img/logo.png',
     'logo_img_class' => 'brand-image img-circle',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'TechSupport',
+    'logo_img_alt' => 'InfoSaúde',
 
     /*
     |--------------------------------------------------------------------------
