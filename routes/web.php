@@ -31,6 +31,7 @@ use App\Http\Controllers\Inventory\Pharmacy\InventoryPharmacyController;
 use App\Http\Controllers\Inventory\Pharmacy\InventoryPharmacyPermissionController;
 use App\Http\Controllers\Inventory\PharmacyCenter\InventoryPharmacyCenterController;
 use App\Http\Controllers\Inventory\PharmacyCenter\InventoryPharmacyCenterPermissionController;
+use App\Http\Controllers\Inventory\Warehouse\InventoryWarehouseOrderController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Public\ContactListsController;
 

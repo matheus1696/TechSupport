@@ -24,31 +24,19 @@
                 </x-table.td>
                 <x-table.td>{{$dbInventoryHistory->quantity}}</x-table.td>                                 
                 <x-table.td>
-                    @if (strtotime($dbInventoryHistory->date) < strtotime(date('Y-m-d')))                    
-                        <x-button.buttonStatus condition="False" name="has_inventory_warehouse" route="{{route('inventory_warehouses.entryStore')}}" title="Indicar Recebimento" btnColor="yellow" method="create">
+                    <x-button.minButtonModalInfo id="InventoryWarehouseEntryStoreModel_{{$dbInventoryHistory->id}}" icon="" btnTitle="Indicar Recebimento" title="Descrição do Produto no Estoque: {{$dbInventoryHistory->Consumable->title}}">
+                        <x-form.form method="create" route="{{route('inventory_warehouses.entryStore')}}" title="Confirmar Recebimento">
                             <input name="inventary_history" value="{{$dbInventoryHistory->id}}" hidden>
-                            <input name="invoice" value="{{$dbInventoryHistory->invoice}}" hidden>
-                            <input name="supply_order" value="{{$dbInventoryHistory->supply_order}}" hidden>
-                            <input name="supply_company" value="{{$dbInventoryHistory->supply_company}}" hidden>
-                            <input name="movement" value="Entrada" hidden>
-                            <input name="quantity" value="{{$dbInventoryHistory->quantity}}" hidden>
-                            <input name="consumable_id" value="{{$dbInventoryHistory->consumable_id}}" hidden>
-                            <input name="establishment_id" value="{{$dbInventoryHistory->establishment_exit_id}}" hidden>
-                            <input name="establishment_department_id" value="{{$dbInventoryHistory->department_exit_id}}" hidden>
-                        </x-button.buttonStatus> 
-                    @else
-                        <x-button.buttonStatus condition="False" name="has_inventory_warehouse" route="{{route('inventory_warehouses.entryStore')}}" title="Indicar Recebimento" method="create">
-                            <input name="inventary_history" value="{{$dbInventoryHistory->id}}" hidden>
-                            <input name="invoice" value="{{$dbInventoryHistory->invoice}}" hidden>
-                            <input name="supply_order" value="{{$dbInventoryHistory->supply_order}}" hidden>
-                            <input name="supply_company" value="{{$dbInventoryHistory->supply_company}}" hidden>
-                            <input name="movement" value="Entrada" hidden>
-                            <input name="quantity" value="{{$dbInventoryHistory->quantity}}" hidden>
-                            <input name="consumable_id" value="{{$dbInventoryHistory->consumable_id}}" hidden>
-                            <input name="establishment_id" value="{{$dbInventoryHistory->establishment_exit_id}}" hidden>
-                            <input name="establishment_department_id" value="{{$dbInventoryHistory->department_exit_id}}" hidden>
-                        </x-button.buttonStatus>                    
-                    @endif
+                            <x-form.input col="3" label="Nota Fiscal" name="invoice" id="invoice" value="{{$dbInventoryHistory->invoice}}" disabled="disabled"/>
+                            <x-form.input col="3" label="Ordem de Fornecimento" name="supply_order" id="supply_order" value="{{$dbInventoryHistory->supply_order}}" disabled="disabled"/>
+                            <x-form.input col="6" label="Fornecedor" name="supply_company" id="supply_company" value="{{$dbInventoryHistory->supply_company}}" disabled="disabled"/>
+                            <x-form.input col="6" label="Suprimento" name="consumable_id" id="consumable_id" value="{{$dbInventoryHistory->Consumable->title}}" disabled="disabled"/>
+                            <x-form.input col="3" label="Movimento" name="movement" id="movement" value="Entrada" disabled="disabled"/>
+                            <x-form.input col="3" label="Quantidade" name="quantity" id="quantity" value="{{$dbInventoryHistory->quantity}}" disabled="disabled"/>
+                            <x-form.input col="6" label="Estabelecimento Recebedor" name="establishment_id" id="establishment_id" value="{{$dbInventoryHistory->CompanyEstablishmentExit->establishment_exit_id}}" disabled="disabled"/>
+                            <x-form.input col="6" label="Departamento Recebedor" name="establishment_department_id" id="establishment_department_id" value="{{$dbInventoryHistory->CompanyEstablishmentDepartmentExit->department_exit_id}}" disabled="disabled"/>                          
+                        </x-form.form>
+                    </x-button.minButtonModalInfo>
                 </x-table.td> 
             </x-table.tr>
         @endforeach

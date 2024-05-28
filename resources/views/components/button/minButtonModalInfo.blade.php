@@ -7,14 +7,14 @@
         type="button"
     >
         <i class="{{$icon ?? "fas fa-eye"}}"></i>
-        @isset($btnTitle) <span>{{$btnTitle}}</span> @endisset
+        @isset($btnTitle) <span class="font-semibold">{{$btnTitle}}</span> @endisset
     </button>
 
     <div id="modalInfo_{{$id}}" class="modal fade"  role="dialog" aria-labelledby="modalLabelInfo_{{$id}}" aria-hidden="true">
         <div class="text-left modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-lg font-semibold" id="modalLabelInfo_{{$id}}">{{$title}}</h5>
+                    <h5 class="text-lg font-semibold modal-title" id="modalLabelInfo_{{$id}}">{{$title}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
