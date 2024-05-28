@@ -4,7 +4,7 @@
     @slot('header')
         <x-header 
             title="Permissões: {{ $db->CompanyEstablishment->title}} - {{ $db->department }}" 
-            routeBack="{{ route('pharmacy_permissions.index') }}"
+            routeBack="{{ route('{!!$route!!}s.index') }}"
         />
     @endslot
 
@@ -13,7 +13,7 @@
 
         <x-conteiner>
             <div>
-                <x-form.form method="create" route="{{route('pharmacy_permissions.store')}}">
+                <x-form.form method="create" route="{{route('{!!$route!!}s.store')}}">
                     <input type="hidden" name="establishment_department_id" value="{{$db->id}}">
                 
                     <x-form.select col="12" label="Usuário" id="user_id" name="user_id">
@@ -44,7 +44,7 @@
                             <x-table.td>{{$dbLinkedUser->User->name}}</x-table.td>
                             <x-table.td>{{$dbLinkedUser->User->email}}</x-table.td>
                             <x-table.td>
-                                <x-button.minButtonDelete route="{{route('pharmacy_permissions.destroy',['pharmacy_permission'=>$dbLinkedUser->id])}}" />
+                                <x-button.minButtonDelete route="{{route('{!!$route!!}s.destroy',['{!!$route!!}'=>$dbLinkedUser->id])}}" />
                             </x-table.td>
                         </x-table.tr>
                     @endforeach

@@ -24,6 +24,8 @@ class InventoryWarehouseCenterPermissionController extends Controller
      */
     public function index()
     {
+        $route = 'warehouse_center_permission';
+        
         //Listando Dados
         $title = 'Centro de Distribuições';
         $db = CompanyEstablishmentDepartment::where('has_inventory_warehouse_center',TRUE)->get();
@@ -32,7 +34,7 @@ class InventoryWarehouseCenterPermissionController extends Controller
         //Log do Sistema
         Logger::access();
 
-        return view('inventory.inventory_permission.inventory_permission_index', compact('title','db','dbUsers'));
+        return view('inventory.inventory_permission.inventory_permission_index', compact('title','route','db','dbUsers'));
     }
 
     /**
@@ -65,6 +67,8 @@ class InventoryWarehouseCenterPermissionController extends Controller
      */
     public function show(string $id)
     {
+        $route = 'warehouse_center_permission';
+
         //Listando Dados
         $db = CompanyEstablishmentDepartment::find($id);
 
@@ -75,7 +79,7 @@ class InventoryWarehouseCenterPermissionController extends Controller
             //Log do Sistema
             Logger::show($db->title);
 
-            return view('inventory.inventory_permission.inventory_permission_show', compact('db','dbUsers','dbLinkedUsers'));
+            return view('inventory.inventory_permission.inventory_permission_show', compact('route','db','dbUsers','dbLinkedUsers'));
         }        
 
         return redirect()->route('home')->with('error','Departamento sem liberação para o estoque da farmácia');
