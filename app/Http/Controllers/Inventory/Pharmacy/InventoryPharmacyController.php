@@ -156,7 +156,7 @@ class InventoryPharmacyController extends Controller
             
             $dbMedication = Medication::all();
             $dbInventories = InventoryPharmacy::where('establishment_department_id', $id)->get();
-            $dbInventoryHistories = InventoryPharmacyCenterHistory::where('establishment_department_exit_id', $id)
+            $dbInventoryHistories = InventoryPharmacyCenterHistory::where('department_exit_id', $id)
                 ->where('pending', FALSE)
                 ->orderBy('date')
                 ->paginate(20);

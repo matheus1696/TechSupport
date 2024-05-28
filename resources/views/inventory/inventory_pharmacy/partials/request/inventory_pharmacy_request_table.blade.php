@@ -34,7 +34,7 @@
                             <input name="quantity" value="{{$dbInventoryHistory->quantity}}" hidden>
                             <input name="medication_id" value="{{$dbInventoryHistory->medication_id}}" hidden>
                             <input name="establishment_id" value="{{$dbInventoryHistory->establishment_exit_id}}" hidden>
-                            <input name="establishment_department_id" value="{{$dbInventoryHistory->establishment_department_exit_id}}" hidden>
+                            <input name="establishment_department_id" value="{{$dbInventoryHistory->department_exit_id}}" hidden>
                         </x-button.buttonStatus> 
                     @else
                         <x-button.buttonStatus condition="False" name="has_inventory_supply" route="{{route('inventory_pharmacies.entryStore')}}" title="Indicar Recebimento" method="create">
@@ -46,7 +46,7 @@
                             <input name="quantity" value="{{$dbInventoryHistory->quantity}}" hidden>
                             <input name="medication_id" value="{{$dbInventoryHistory->medication_id}}" hidden>
                             <input name="establishment_id" value="{{$dbInventoryHistory->establishment_exit_id}}" hidden>
-                            <input name="establishment_department_id" value="{{$dbInventoryHistory->establishment_department_exit_id}}" hidden>
+                            <input name="establishment_department_id" value="{{$dbInventoryHistory->department_exit_id}}" hidden>
                         </x-button.buttonStatus>                    
                     @endif
                 </x-table.td> 
