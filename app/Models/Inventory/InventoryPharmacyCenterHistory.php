@@ -29,9 +29,9 @@ class InventoryPharmacyCenterHistory extends Model
         'medication_id',
         'financial_block_id',
         'establishment_entry_id',
-        'establishment_department_entry_id',
+        'department_entry_id',
         'establishment_exit_id',
-        'establishment_department_exit_id',
+        'department_exit_id',
         'user_id'
     ];
 
@@ -52,7 +52,7 @@ class InventoryPharmacyCenterHistory extends Model
     }
 
     public function CompanyEstablishmentDepartmentEntry(){
-        return $this->belongsTo(CompanyEstablishmentDepartment::class,'establishment_department_entry_id','id');
+        return $this->belongsTo(CompanyEstablishmentDepartment::class,'department_entry_id','id');
     }
 
     public function CompanyEstablishmentExit(){
@@ -60,6 +60,6 @@ class InventoryPharmacyCenterHistory extends Model
     }
 
     public function CompanyEstablishmentDepartmentExit(){
-        return $this->belongsTo(CompanyEstablishmentDepartment::class,'establishment_department_exit_id','id');
+        return $this->belongsTo(CompanyEstablishmentDepartment::class,'department_exit_id','id');
     }
 }

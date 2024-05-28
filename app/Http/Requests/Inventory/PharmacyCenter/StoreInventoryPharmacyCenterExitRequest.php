@@ -30,7 +30,7 @@ class StoreInventoryPharmacyCenterExitRequest extends FormRequest
             'quantity' => 'required',
             'medication_id' => 'required',
             'financial_block_id' => 'required',
-            'establishment_department_exit_id' => 'required',
+            'department_exit_id' => 'required',
         ];
     }
 }

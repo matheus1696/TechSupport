@@ -27,11 +27,13 @@ class StoreInventoryPharmacyCenterEntryRequest extends FormRequest
             'supply_order' => 'required|min:8',
             'supply_company' => 'required|min:1',
             'date' => 'required',
+            'batch' => 'required',
+            'due_date' => 'required',
             'quantity' => 'required',
             'medication_id' => 'required',
             'financial_block_id' => 'required',
             'establishment_entry_id' => 'required',
-            'establishment_department_entry_id' => 'required',
+            'department_entry_id' => 'required',
         ];
     }
 }

@@ -64,7 +64,7 @@
 
                                                                                 <x-form.form method="create" route="{{route('inventory_pharmacy_centers.exitStore')}}">
 
-                                                                                        <input type="hidden" name="establishment_department_entry_id" value="{{$dbInventoryEntry->establishment_department_id}}">
+                                                                                        <input type="hidden" name="department_entry_id" value="{{$dbInventoryEntry->establishment_department_id}}">
                                                                                         <input type="hidden" name="establishment_entry_id" value="{{$dbInventoryEntry->establishment_id}}">
                                                                                         <input type="hidden" name="financial_block_id" value="{{$dbInventoryEntry->financial_block_id}}">
                                                                                         <input type="hidden" name="medication_id" value="{{$dbInventoryEntry->medication_id}}">
@@ -80,7 +80,7 @@
 
                                                                                         <x-form.input col="6" label="Produto" name="disabled" id="disabled" value="{{$dbInventoryEntry->Medication->title}}" disabled="disabled"/>
 
-                                                                                        <x-form.select col="6" label="Estabelecimento Recebedor" name="establishment_department_exit_id" id="establishment_department_exit_id_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}">
+                                                                                        <x-form.select col="6" label="Estabelecimento Recebedor" name="department_exit_id" id="department_exit_id_{{$dbInventoryEntry->id}}_{{$dbInventoryEntry->invoice}}">
                                                                                             @foreach ($dbEstablishmentDepartments as $dbEstablishmentDepartment)
                                                                                                 <option value="{{$dbEstablishmentDepartment->id}}">
                                                                                                     {{$dbEstablishmentDepartment->CompanyEstablishment->title}} - 

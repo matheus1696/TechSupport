@@ -356,7 +356,7 @@ return [
                     'text'    => 'CAF',
                     'classes' => 'btn-sm',
                     'route'   => 'inventory_pharmacy_centers.index',
-                    'icon'    => 'fas fa-truck-loading pr-2',
+                    'icon'    => 'fas fa-capsules pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin','inventory_pharmacy_center']
                 ],
