@@ -391,7 +391,7 @@ return [
 
                 //Dados dos Usuários e Permissões dos Módulos
                 [
-                    'text'    => 'Usuários',
+                    'text'    => 'Dados dos Usuários',
                     'classes' => 'btn-sm',
                     'route'   => 'users.index',
                     'icon'    => 'fas fa-users pr-2',
@@ -399,45 +399,57 @@ return [
                     'can'     => ['sysadmin','admin'],
                 ],
 
-                //Permissões de Acesso aos Estoques
+                //Permissões Específicas
                 [
-                    'text'    => 'Permissões Estoques',
+                    'text'    => 'Permissões Específicas',
                     'classes' => 'btn-sm',
                     'icon'    => 'fas fa-user-lock pr-2',
-                    'icon_color' => 'info',
+                    'icon_color' => 'teal',
                     'can'     => ['sysadmin','admin'],
                     'submenu' => [
+
+                        //Permissões de Acesso aos Estoques
                         [
-                            'text'    => 'Almoxarifado',
+                            'text'    => 'Estoques',
                             'classes' => 'btn-sm',
-                            'route'   => 'warehouse_permissions.index',
-                            'icon'    => 'fas fa-cubes pr-2',
-                            'icon_color' => 'teal',
+                            'icon'    => 'fas fa-user-lock pr-2',
+                            'icon_color' => 'info',
                             'can'     => ['sysadmin','admin'],
-                        ],
-                        [
-                            'text'    => 'Farmácia',
-                            'classes' => 'btn-sm',
-                            'route'   => 'pharmacy_permissions.index',
-                            'icon'    => 'fas fa-capsules pr-2',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                        [
-                            'text'    => 'Almoxarifado Central',
-                            'classes' => 'btn-sm',
-                            'route'   => 'home',
-                            'route'   => 'warehouse_center_permissions.index',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
-                        ],
-                        [
-                            'text'    => 'CAF',
-                            'classes' => 'btn-sm',
-                            'route'   => 'pharmacy_center_permissions.index',
-                            'icon'    => 'fas fa-capsules pr-2',
-                            'icon_color' => 'teal',
-                            'can'     => ['sysadmin','admin'],
+                            'submenu' => [
+                                [
+                                    'text'    => 'Almoxarifado',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'warehouse_permissions.index',
+                                    'icon'    => 'fas fa-cubes pr-2',
+                                    'icon_color' => 'info',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                                [
+                                    'text'    => 'Almoxarifado Central',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'home',
+                                    'route'   => 'warehouse_center_permissions.index',
+                                    'icon'    => 'fas fa-truck pr-2',
+                                    'icon_color' => 'info',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                                [
+                                    'text'    => 'Farmácia',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'pharmacy_permissions.index',
+                                    'icon'    => 'fas fa-capsules pr-2',
+                                    'icon_color' => 'info',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                                [
+                                    'text'    => 'CAF',
+                                    'classes' => 'btn-sm',
+                                    'route'   => 'pharmacy_center_permissions.index',
+                                    'icon'    => 'fas fa-capsules pr-2',
+                                    'icon_color' => 'info',
+                                    'can'     => ['sysadmin','admin'],
+                                ],
+                            ]
                         ],
                     ]
                 ],

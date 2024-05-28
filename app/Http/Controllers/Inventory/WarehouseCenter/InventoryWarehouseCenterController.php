@@ -12,6 +12,7 @@ use App\Models\Consumable\Consumable;
 use App\Models\Inventory\InventoryWarehouseCenter;
 use App\Models\Inventory\InventoryWarehouseCenterEntry;
 use App\Models\Inventory\InventoryWarehouseCenterHistory;
+use App\Models\Inventory\InventoryWarehouseCenterPermission;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,7 +82,12 @@ class InventoryWarehouseCenterController extends Controller
             return redirect()->route('inventory_warehouse_centers.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        if ($db->establishment_id) {           
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryWarehouseCenterPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {           
 
             // Recupera todos os dados dos produtos e do bloco de financiamento
             $dbConsumables = Consumable::select()->orderBy('title')->get();
@@ -241,7 +247,12 @@ class InventoryWarehouseCenterController extends Controller
             return redirect()->route('inventory_warehouse_centers.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        if ($db->establishment_id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryWarehouseCenterPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
             $dbConsumables = Consumable::select()->orderBy('title')->get();;
             $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();;
             $dbInventories = InventoryWarehouseCenterHistory::where('inventory_warehouse_center_histories.department_entry_id', $id)
@@ -370,9 +381,14 @@ class InventoryWarehouseCenterController extends Controller
             Logger::error('Centro de Distribuição não liberado para este departamento');
 
             return redirect()->route('inventory_warehouse_centers.index')->with('error','Centro de Distribuição não liberado para este departamento');
-        } 
+        }
 
-        if ($dbEstablishmentDepartment->id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryWarehouseCenterPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$dbEstablishmentDepartment->establishment_department_id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
         
             $query = InventoryWarehouseCenterHistory::query();
             $db = $query->where('department_entry_id',$id)->orderBy('created_at','DESC')->paginate(40);

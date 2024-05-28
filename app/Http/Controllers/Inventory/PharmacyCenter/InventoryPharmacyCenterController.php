@@ -11,6 +11,7 @@ use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Company\CompanyFinancialBlock;
 use App\Models\Inventory\InventoryPharmacyCenterEntry;
 use App\Models\Inventory\InventoryPharmacyCenterHistory;
+use App\Models\Inventory\InventoryPharmacyCenterPermission;
 use App\Models\Medication\Medication;
 use App\Services\Logger;
 use Illuminate\Http\Request;
@@ -80,7 +81,12 @@ class InventoryPharmacyCenterController extends Controller
             return redirect()->route('inventory_pharmacy_centers.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        if ($db->establishment_id) {           
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryPharmacyCenterPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {           
 
             // Recupera todos os produtos e bloco de financiamentos
             $dbMedications = Medication::select()->orderBy('title')->get();
@@ -242,7 +248,12 @@ class InventoryPharmacyCenterController extends Controller
             return redirect()->route('inventory_pharmacy_centers.index')->with('error','Centro de Distribuição não liberado para este departamento');
         }
 
-        if ($db->establishment_id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryPharmacyCenterPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
 
             $dbMedications = Medication::select()->orderBy('title')->get();;
             $dbFinancialBlocks = CompanyFinancialBlock::select()->orderBy('title')->get();;
@@ -365,11 +376,7 @@ class InventoryPharmacyCenterController extends Controller
     {
         //Listagem de Dados
         $dbEstablishmentDepartment = InventoryPharmacyCenterHistory::where('department_entry_id',$id)
-        ->first();
-        
-        $db = InventoryPharmacyCenterHistory::where('department_entry_id',$id)
-        ->orderBy('created_at','DESC')
-        ->paginate(40);        
+        ->first();       
 
         if ($dbEstablishmentDepartment->has_inventory_pharmacy_center) {
             //Log do Sistema
@@ -378,38 +385,40 @@ class InventoryPharmacyCenterController extends Controller
             return redirect()->route('inventory_pharmacy_centers.index')->with('error','Central de Abastecimento Farmacêutico não liberado para este departamento');
         }
 
-        if ($dbEstablishmentDepartment->id) {
-            
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryPharmacyCenterPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$dbEstablishmentDepartment->establishment_department_id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
+
             $dbMedications = Medication::select()->orderBy('title')->get();
+
+            $query = InventoryPharmacyCenterHistory::query();
+            $query->where('department_entry_id',$id)
+            ->orderBy('created_at','DESC')
+            ->paginate(40);
 
             //Pesquisar Dados
             $search = $request->all();
-            
             if (isset($search['searchMedication']) || isset($search['searchDate'])) {
-    
-                $query = InventoryPharmacyCenterHistory::query();   
-    
-                if (!empty($search['searchMedication'])) {
-                    $query->where('medication_id', $search['searchMedication']);
-                }        
-    
-                if (!empty($search['searchDate'])) {
-                    $query->where('date', $search['searchDate']);
-                }        
-    
-                $db = $query->orderBy('quantity')->paginate(40);
+
+                if (!empty($search['searchMedication'])) {$query->where('medication_id', $search['searchMedication']);}
+                if (!empty($search['searchDate'])) {$query->where('date', $search['searchDate']);}
             }
-    
+
+            $db = $query->paginate(40);
+
             //Log do Sistema
             Logger::access();
-    
+
             return view('inventory.inventory_pharmacy_center.inventory_pharmacy_center_history',[
                 'search'=>$search,
                 'db'=>$db,
                 'dbMedications'=>$dbMedications,
                 'dbEstablishmentDepartment'=>$dbEstablishmentDepartment,
             ]);
-        }        
+        }
 
         return redirect()->route('inventory_pharmacy_centers.index')->with('error','Usuário sem permissão de acessar esse estoque');
     }

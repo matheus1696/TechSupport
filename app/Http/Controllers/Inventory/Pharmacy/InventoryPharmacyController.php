@@ -10,6 +10,7 @@ use App\Models\Company\CompanyEstablishmentDepartment;
 use App\Models\Inventory\InventoryPharmacy;
 use App\Models\Inventory\InventoryPharmacyCenterHistory;
 use App\Models\Inventory\InventoryPharmacyHistory;
+use App\Models\Inventory\InventoryPharmacyPermission;
 use App\Models\Medication\Medication;
 use App\Services\Logger;
 use Illuminate\Http\Request;
@@ -91,9 +92,14 @@ class InventoryPharmacyController extends Controller
             Logger::error($db->title);
 
             return redirect()->route('inventory_pharmacies.index')->with('error','Estoque não liberado para este departamento');
-        }        
+        }
 
-        if ($db->establishment_id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryPharmacyPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
 
             $dbMedication = Medication::all();
             $dbInventories = InventoryPharmacy::where('establishment_department_id', $id)->get();
@@ -152,7 +158,12 @@ class InventoryPharmacyController extends Controller
             return redirect()->route('inventory_pharmacies.index')->with('error','Estoque não liberado para este departamento');
         }        
 
-        if ($db->establishment_id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryPharmacyPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
             
             $dbMedication = Medication::all();
             $dbInventories = InventoryPharmacy::where('establishment_department_id', $id)->get();
@@ -189,9 +200,14 @@ class InventoryPharmacyController extends Controller
             Logger::error($db->title);
 
             return redirect()->route('inventory_pharmacies.index')->with('error','Estoque não liberado para este departamento');
-        }        
+        }              
 
-        if ($db->establishment_id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryPharmacyPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
 
             $dbMedication = Medication::all();
             $dbInventoryHistories = InventoryPharmacyHistory::where('loose',TRUE)->orderBy('created_at')->limit(20)->get();
@@ -315,7 +331,12 @@ class InventoryPharmacyController extends Controller
             return redirect()->route('inventory_pharmacies.index')->with('error','Estoque não liberado para este departamento');
         }       
 
-        if ($dbEstablishmentDepartment->establishment_id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryPharmacyPermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$dbEstablishmentDepartment->establishment_department_id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
 
             $db = InventoryPharmacyHistory::where('establishment_department_id',$id)
             ->orderBy('created_at','DESC')

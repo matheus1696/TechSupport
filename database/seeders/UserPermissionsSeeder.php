@@ -20,5 +20,9 @@ class UserPermissionsSeeder extends Seeder
         UserPermissions::create(['name'=>'inventory_warehouse_center','guard_name'=>'web']);
         UserPermissions::create(['name'=>'inventory_pharmacy','guard_name'=>'web']);
         UserPermissions::create(['name'=>'inventory_pharmacy_center','guard_name'=>'web']);
+        UserPermissions::create(['name'=>'inventory_warehouse_permission','guard_name'=>'web']);
+        UserPermissions::create(['name'=>'inventory_warehouse_center_permission','guard_name'=>'web']);
+        UserPermissions::create(['name'=>'inventory_pharmacy_permission','guard_name'=>'web']);
+        UserPermissions::create(['name'=>'inventory_pharmacy_center_permission','guard_name'=>'web']);
     }
 }

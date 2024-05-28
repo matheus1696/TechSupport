@@ -11,6 +11,14 @@ use App\Services\Logger;
 
 class InventoryPharmacyPermissionController extends Controller
 {
+    /*
+     * Controller access permission resource.
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:sysadmin|admin|inventory_pharmacy_permission']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -30,10 +38,7 @@ class InventoryPharmacyPermissionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create(){ return redirect()->route('login'); }
 
     /**
      * Store a newly created resource in storage.
@@ -41,10 +46,18 @@ class InventoryPharmacyPermissionController extends Controller
     public function store(StoreInventoryPharmacyPermissionRequest $request)
     {
         $data = $request->all();
+
+        $validadeInventoryPermission = InventoryPharmacyPermission::where('user_id',$data['user_id'])
+            ->where('establishment_department_id',$data['establishment_department_id'])
+            ->first();
+
+        if ($validadeInventoryPermission) {
+            return redirect()->back()->with('error','Usuário com vinculação existente ao estoque');
+        }
             
         InventoryPharmacyPermission::create($data);
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Usuário vinculado ao ao estoque');
     }
 
     /**
@@ -54,30 +67,29 @@ class InventoryPharmacyPermissionController extends Controller
     {
         //Listando Dados
         $db = CompanyEstablishmentDepartment::find($id);
-        $dbUsers = User::select()->orderBy('name')->get();
-        $dbLinkedUsers = InventoryPharmacyPermission::where('establishment_department_id',$id)->get();
 
-        //Log do Sistema
-        Logger::show($db->title);
+        if ($db->has_inventory_pharmacy) {
+            $dbUsers = User::select()->orderBy('name')->get();
+            $dbLinkedUsers = InventoryPharmacyPermission::where('establishment_department_id',$id)->get();
 
-        return view('inventory.inventory_permission.inventory_permission_show', compact('db','dbUsers','dbLinkedUsers'));
+            //Log do Sistema
+            Logger::show($db->title);
+
+            return view('inventory.inventory_permission.inventory_permission_show', compact('db','dbUsers','dbLinkedUsers'));
+        }        
+
+        return redirect()->route('home')->with('error','Departamento sem liberação para o estoque da farmácia');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InventoryPharmacyPermission $inventoryPharmacyPermission)
-    {
-        //
-    }
+    public function edit(){ return redirect()->route('login'); }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update()
-    {
-        //
-    }
+    public function update(){ return redirect()->route('login'); }
 
     /**
      * Remove the specified resource from storage.
@@ -85,8 +97,13 @@ class InventoryPharmacyPermissionController extends Controller
     public function destroy(string $id)
     {
         $dbUsers = InventoryPharmacyPermission::find($id);
-        $dbUsers->delete();
 
-        return redirect()->back()->with('success','Usuário desvinculado com sucesso');
+        if ($dbUsers) {
+            $dbUsers->delete();
+
+            return redirect()->back()->with('success','Usuário desvinculado com sucesso');
+        }
+
+        return redirect()->route('home')->with('error','Permissão inexistente');
     }
 }

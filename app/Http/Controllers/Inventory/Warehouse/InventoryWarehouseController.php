@@ -10,6 +10,7 @@ use App\Models\Inventory\InventoryWarehouse;
 use App\Models\Inventory\InventoryWarehouseCenterHistory;
 use App\Models\Inventory\InventoryWarehouseHistory;
 use App\Models\Consumable\Consumable;
+use App\Models\Inventory\InventoryWarehousePermission;
 use App\Services\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,9 +76,14 @@ class InventoryWarehouseController extends Controller
             Logger::error($db->title);
 
             return redirect()->route('inventory_warehouses.index')->with('error','Estoque não liberado para este departamento');
-        }        
+        }
 
-        if ($db->establishment_id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryWarehousePermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
 
             $dbConsumables = Consumable::all();
             $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)->get();
@@ -123,9 +129,14 @@ class InventoryWarehouseController extends Controller
             Logger::error($db->title);
 
             return redirect()->route('inventory_warehouses.index')->with('error','Estoque não liberado para este departamento');
-        }        
+        }
 
-        if ($db->establishment_id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryWarehousePermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
             
             $dbConsumables = Consumable::all();
             $dbInventories = InventoryWarehouse::where('establishment_department_id', $id)->get();
@@ -161,9 +172,14 @@ class InventoryWarehouseController extends Controller
             Logger::error($db->title);
 
             return redirect()->route('inventory_warehouses.index')->with('error','Estoque não liberado para este departamento');
-        }        
+        }
 
-        if ($db->establishment_id) {
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryWarehousePermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$db->id)
+            ->first();
+
+        if ($validadeInventoryPermission) {
 
             $dbConsumables = Consumable::all();
             $dbInventoryHistories = InventoryWarehouseHistory::where('loose',TRUE)
@@ -281,9 +297,14 @@ class InventoryWarehouseController extends Controller
             Logger::error($dbEstablishmentDepartment->title);
 
             return redirect()->route('inventory_warehouses.index')->with('error','Estoque não liberado para este departamento');
-        }       
+        }
 
-        if ($dbEstablishmentDepartment->establishment_id) {            
+        //Verificação de Permissão para o estoque
+        $validadeInventoryPermission = InventoryWarehousePermission::where('user_id',Auth::user()->id)
+            ->where('establishment_department_id',$dbEstablishmentDepartment->establishment_department_id)
+            ->first();
+
+        if ($validadeInventoryPermission) {           
     
             $dbConsumables = Consumable::select()->orderBy('title')->get();
 
