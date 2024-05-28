@@ -306,7 +306,7 @@ return [
         [
             'text'    => 'Estoques',
             'classes' => 'btn-sm',
-            'icon'    => 'fas fa-boxes pr-2',
+            'icon'    => 'fas fa-dolly pr-2',
             'can'     => ['sysadmin','admin','inventory_pharmacy','inventory_warehouse'],
             'submenu' => [
 
@@ -315,7 +315,7 @@ return [
                     'text'    => 'Almoxarifado',
                     'classes' => 'btn-sm',
                     'route'   => 'inventory_warehouses.index',
-                    'icon'    => 'fas fa-cubes pr-2',
+                    'icon'    => 'fas fa-boxes pr-2',
                     'icon_color' => 'info',
                     'can'     => ['sysadmin','admin','inventory_warehouse']
                 ],

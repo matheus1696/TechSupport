@@ -301,7 +301,7 @@ class InventoryWarehouseController extends Controller
 
         //Verificação de Permissão para o estoque
         $validadeInventoryPermission = InventoryWarehousePermission::where('user_id',Auth::user()->id)
-            ->where('establishment_department_id',$dbEstablishmentDepartment->establishment_department_id)
+            ->where('establishment_department_id',$dbEstablishmentDepartment->id)
             ->first();
 
         if ($validadeInventoryPermission) {           

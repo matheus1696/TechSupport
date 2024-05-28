@@ -321,8 +321,7 @@ class InventoryPharmacyController extends Controller
     public function history(Request $request,string $id)
     {
         //Listagem de Dados
-        $dbEstablishmentDepartment = InventoryPharmacyHistory::where('establishment_department_id',$id)
-        ->first();
+        $dbEstablishmentDepartment = CompanyEstablishmentDepartment::find($id);
 
         if (!$dbEstablishmentDepartment->CompanyEstablishmentDepartment->has_inventory_pharmacy) {
             //Log do Sistema
@@ -333,7 +332,7 @@ class InventoryPharmacyController extends Controller
 
         //Verificação de Permissão para o estoque
         $validadeInventoryPermission = InventoryPharmacyPermission::where('user_id',Auth::user()->id)
-            ->where('establishment_department_id',$dbEstablishmentDepartment->establishment_department_id)
+            ->where('establishment_department_id',$dbEstablishmentDepartment->id)
             ->first();
 
         if ($validadeInventoryPermission) {
