@@ -24,9 +24,13 @@ use App\Http\Controllers\Admin\Region\RegionCountryController;
 use App\Http\Controllers\Admin\Region\RegionStateController;
 use App\Http\Controllers\Admin\User\UsersController;
 use App\Http\Controllers\Inventory\Warehouse\InventoryWarehouseController;
+use App\Http\Controllers\Inventory\Warehouse\InventoryWarehousePermissionController;
 use App\Http\Controllers\Inventory\WarehouseCenter\InventoryWarehouseCenterController;
+use App\Http\Controllers\Inventory\WarehouseCenter\InventoryWarehouseCenterPermissionController;
 use App\Http\Controllers\Inventory\Pharmacy\InventoryPharmacyController;
+use App\Http\Controllers\Inventory\Pharmacy\InventoryPharmacyPermissionController;
 use App\Http\Controllers\Inventory\PharmacyCenter\InventoryPharmacyCenterController;
+use App\Http\Controllers\Inventory\PharmacyCenter\InventoryPharmacyCenterPermissionController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Public\ContactListsController;
 
@@ -137,6 +141,7 @@ Route::middleware('auth')->group(function () {
             Route::get('inventory_pharmacies/history/{inventory_pharmacy}',[InventoryPharmacyController::class,'history'])->name('inventory_pharmacies.history');
             Route::get('inventory_pharmacies/request/{inventory_pharmacy}',[InventoryPharmacyController::class,'request'])->name('inventory_pharmacies.request');
             Route::resource('inventory_pharmacies', InventoryPharmacyController::class);
+            Route::resource('pharmacy_permissions', InventoryPharmacyPermissionController::class);
             
             //Rotas de Inventário/Estoque de Centro de Distribuições            
             Route::get('inventory_pharmacy_centers/entry/{inventory_pharmacy_center}',[InventoryPharmacyCenterController::class,'entryShow'])->name('inventory_pharmacy_centers.entryShow');
@@ -145,6 +150,7 @@ Route::middleware('auth')->group(function () {
             Route::post('inventory_pharmacy_centers/exit',[InventoryPharmacyCenterController::class,'exitStore'])->name('inventory_pharmacy_centers.exitStore');
             Route::get('inventory_pharmacy_centers/history/{inventory_pharmacy_center}',[InventoryPharmacyCenterController::class,'history'])->name('inventory_pharmacy_centers.history');
             Route::resource('inventory_pharmacy_centers', InventoryPharmacyCenterController::class);
+            Route::resource('pharmacy_center_permissions', InventoryPharmacyCenterPermissionController::class);
     
             //Rotas de Inventário/Estoque de Produtos        
             Route::post('inventory_warehouses/exit',[InventoryWarehouseController::class,'exitStore'])->name('inventory_warehouses.exitStore');           
@@ -153,6 +159,7 @@ Route::middleware('auth')->group(function () {
             Route::get('inventory_warehouses/history/{inventory_warehouse}',[InventoryWarehouseController::class,'history'])->name('inventory_warehouses.history');
             Route::get('inventory_warehouses/request/{inventory_warehouse}',[InventoryWarehouseController::class,'request'])->name('inventory_warehouses.request');
             Route::resource('inventory_warehouses', InventoryWarehouseController::class);
+            Route::resource('warehouse_permissions', InventoryWarehousePermissionController::class);
             
             //Rotas de Inventário/Estoque de Centro de Distribuições            
             Route::get('inventory_warehouse_centers/entry/{inventory_warehouse_center}',[InventoryWarehouseCenterController::class,'entryShow'])->name('inventory_warehouse_centers.entryShow');
@@ -161,6 +168,7 @@ Route::middleware('auth')->group(function () {
             Route::post('inventory_warehouse_centers/exit',[InventoryWarehouseCenterController::class,'exitStore'])->name('inventory_warehouse_centers.exitStore');
             Route::get('inventory_warehouse_centers/history/{inventory_warehouse_center}',[InventoryWarehouseCenterController::class,'history'])->name('inventory_warehouse_centers.history');
             Route::resource('inventory_warehouse_centers', InventoryWarehouseCenterController::class);
+            Route::resource('warehouse_center_permissions', InventoryWarehouseCenterPermissionController::class);
         }); 
 
     });
